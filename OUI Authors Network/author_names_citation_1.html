@@ -1,0 +1,444 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 1000px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 100%;
+                 height: 1000px;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "maroon", "id": "abrate, graziano", "label": "abrate, graziano", "shape": "dot", "size": 3, "title": ["abrate, graziano", 3]}, {"color": "maroon", "id": "baima, gabriele", "label": "baima, gabriele", "shape": "dot", "size": 3, "title": ["baima, gabriele", 3]}, {"color": "teal", "id": "amft, andr\u00e9", "label": "amft, andr\u00e9", "shape": "dot", "size": 4, "title": ["amft, andr\u00e9", 4]}, {"color": "teal", "id": "diener, kathleen", "label": "diener, kathleen", "shape": "dot", "size": 4, "title": ["diener, kathleen", 4]}, {"color": "teal", "id": "l\u00fcttgens, dirk", "label": "l\u00fcttgens, dirk", "shape": "dot", "size": 4, "title": ["l\u00fcttgens, dirk", 4]}, {"color": "teal", "id": "piller, frank t.", "label": "piller, frank t.", "shape": "dot", "size": 6, "title": ["piller, frank t.", 6]}, {"color": "gold", "id": "antorini, yun mi", "label": "antorini, yun mi", "shape": "dot", "size": 3, "title": ["antorini, yun mi", 3]}, {"color": "gold", "id": "jensen, morten berg", "label": "jensen, morten berg", "shape": "dot", "size": 2, "title": ["jensen, morten berg", 2]}, {"color": "gold", "id": "mu\u00f1iz, albert m.", "label": "mu\u00f1iz, albert m.", "shape": "dot", "size": 1, "title": ["mu\u00f1iz, albert m.", 1]}, {"color": "orange", "id": "baldwin, carliss", "label": "baldwin, carliss", "shape": "dot", "size": 2, "title": ["baldwin, carliss", 2]}, {"color": "orange", "id": "hienerth, christoph", "label": "hienerth, christoph", "shape": "dot", "size": 3, "title": ["hienerth, christoph", 3]}, {"color": "orange", "id": "von hippel, eric", "label": "von hippel, eric", "shape": "dot", "size": 20, "title": ["von hippel, eric", 20]}, {"color": "green", "id": "bilgram, volker", "label": "bilgram, volker", "shape": "dot", "size": 3, "title": ["bilgram, volker", 3]}, {"color": "green", "id": "gutstein, adele", "label": "gutstein, adele", "shape": "dot", "size": 2, "title": ["gutstein, adele", 2]}, {"color": "green", "id": "marchuk, anna", "label": "marchuk, anna", "shape": "dot", "size": 2, "title": ["marchuk, anna", 2]}, {"color": "yellow", "id": "bj\u00f6rk, jennie", "label": "bj\u00f6rk, jennie", "shape": "dot", "size": 3, "title": ["bj\u00f6rk, jennie", 3]}, {"color": "yellow", "id": "magnusson, mats", "label": "magnusson, mats", "shape": "dot", "size": 3, "title": ["magnusson, mats", 3]}, {"color": "brown", "id": "block, j\u00f6rn h.", "label": "block, j\u00f6rn h.", "shape": "dot", "size": 3, "title": ["block, j\u00f6rn h.", 3]}, {"color": "brown", "id": "henkel, joachim", "label": "henkel, joachim", "shape": "dot", "size": 4, "title": ["henkel, joachim", 4]}, {"color": "brown", "id": "schweisfurth, tim g.", "label": "schweisfurth, tim g.", "shape": "dot", "size": 4, "title": ["schweisfurth, tim g.", 4]}, {"color": "brown", "id": "stiegler, annika", "label": "stiegler, annika", "shape": "dot", "size": 3, "title": ["stiegler, annika", 3]}, {"color": "blue", "id": "blohm, ivo", "label": "blohm, ivo", "shape": "dot", "size": 3, "title": ["blohm, ivo", 3]}, {"color": "blue", "id": "bretschneider, ulrich", "label": "bretschneider, ulrich", "shape": "dot", "size": 3, "title": ["bretschneider, ulrich", 3]}, {"color": "blue", "id": "krcmar, helmut", "label": "krcmar, helmut", "shape": "dot", "size": 3, "title": ["krcmar, helmut", 3]}, {"color": "blue", "id": "marco, jan leimeister", "label": "marco, jan leimeister", "shape": "dot", "size": 3, "title": ["marco, jan leimeister", 3]}, {"color": "purple", "id": "bortoluzzi, guido", "label": "bortoluzzi, guido", "shape": "dot", "size": 2, "title": ["bortoluzzi, guido", 2]}, {"color": "purple", "id": "yordanova, zornitsa", "label": "yordanova, zornitsa", "shape": "dot", "size": 4, "title": ["yordanova, zornitsa", 4]}, {"color": "pink", "id": "bradonjic, philip", "label": "bradonjic, philip", "shape": "dot", "size": 2, "title": ["bradonjic, philip", 2]}, {"color": "pink", "id": "franke, nikolaus", "label": "franke, nikolaus", "shape": "dot", "size": 6, "title": ["franke, nikolaus", 6]}, {"color": "pink", "id": "l\u00fcthje, christian", "label": "l\u00fcthje, christian", "shape": "dot", "size": 5, "title": ["l\u00fcthje, christian", 5]}, {"color": "green", "id": "brem, alexander", "label": "brem, alexander", "shape": "dot", "size": 6, "title": ["brem, alexander", 6]}, {"color": "green", "id": "gladysz, bartosz", "label": "gladysz, bartosz", "shape": "dot", "size": 2, "title": ["gladysz, bartosz", 2]}, {"color": "cyan", "id": "chandra, yanto", "label": "chandra, yanto", "shape": "dot", "size": 1, "title": ["chandra, yanto", 1]}, {"color": "cyan", "id": "leenders, mark a.a.m.", "label": "leenders, mark a.a.m.", "shape": "dot", "size": 3, "title": ["leenders, mark a.a.m.", 3]}, {"color": "orange", "id": "chen, jin", "label": "chen, jin", "shape": "dot", "size": 3, "title": ["chen, jin", 3]}, {"color": "orange", "id": "de jong, jeroen p.j.", "label": "de jong, jeroen p.j.", "shape": "dot", "size": 10, "title": ["de jong, jeroen p.j.", 10]}, {"color": "orange", "id": "su, yu shan", "label": "su, yu shan", "shape": "dot", "size": 3, "title": ["su, yu shan", 3]}, {"color": "red", "id": "dahl, darren w.", "label": "dahl, darren w.", "shape": "dot", "size": 2, "title": ["dahl, darren w.", 2]}, {"color": "red", "id": "fuchs, christoph", "label": "fuchs, christoph", "shape": "dot", "size": 2, "title": ["fuchs, christoph", 2]}, {"color": "red", "id": "schreier, martin", "label": "schreier, martin", "shape": "dot", "size": 6, "title": ["schreier, martin", 6]}, {"color": "orange", "id": "flowers, stephen", "label": "flowers, stephen", "shape": "dot", "size": 2, "title": ["flowers, stephen", 2]}, {"color": "orange", "id": "gault, fred", "label": "gault, fred", "shape": "dot", "size": 4, "title": ["gault, fred", 4]}, {"color": "orange", "id": "gillert, nils lennart", "label": "gillert, nils lennart", "shape": "dot", "size": 4, "title": ["gillert, nils lennart", 4]}, {"color": "orange", "id": "kuusisto, jari", "label": "kuusisto, jari", "shape": "dot", "size": 5, "title": ["kuusisto, jari", 5]}, {"color": "brown", "id": "raasch, christina", "label": "raasch, christina", "shape": "dot", "size": 8, "title": ["raasch, christina", 8]}, {"color": "orange", "id": "stock, ruth m.", "label": "stock, ruth m.", "shape": "dot", "size": 2, "title": ["stock, ruth m.", 2]}, {"color": "pink", "id": "ebbing, tobias", "label": "ebbing, tobias", "shape": "dot", "size": 1, "title": ["ebbing, tobias", 1]}, {"color": "green", "id": "ernst, markus", "label": "ernst, markus", "shape": "dot", "size": 1, "title": ["ernst, markus", 1]}, {"color": "purple", "id": "escobar, octavio", "label": "escobar, octavio", "shape": "dot", "size": 6, "title": ["escobar, octavio", 6]}, {"color": "purple", "id": "khvatova, tatiana", "label": "khvatova, tatiana", "shape": "dot", "size": 3, "title": ["khvatova, tatiana", 3]}, {"color": "purple", "id": "maalaoui, adnane", "label": "maalaoui, adnane", "shape": "dot", "size": 3, "title": ["maalaoui, adnane", 3]}, {"color": "purple", "id": "schiavone, francesco", "label": "schiavone, francesco", "shape": "dot", "size": 3, "title": ["schiavone, francesco", 3]}, {"color": "purple", "id": "villasalero, manuel", "label": "villasalero, manuel", "shape": "dot", "size": 3, "title": ["villasalero, manuel", 3]}, {"color": "pink", "id": "keinz, peter", "label": "keinz, peter", "shape": "dot", "size": 2, "title": ["keinz, peter", 2]}, {"color": "pink", "id": "klausberger, katharina", "label": "klausberger, katharina", "shape": "dot", "size": 2, "title": ["klausberger, katharina", 2]}, {"color": "indigo", "id": "fursov, konstantin", "label": "fursov, konstantin", "shape": "dot", "size": 3, "title": ["fursov, konstantin", 3]}, {"color": "indigo", "id": "linton, jonathan", "label": "linton, jonathan", "shape": "dot", "size": 1, "title": ["linton, jonathan", 1]}, {"color": "indigo", "id": "nefedova, alena", "label": "nefedova, alena", "shape": "dot", "size": 2, "title": ["nefedova, alena", 2]}, {"color": "indigo", "id": "thurner, thomas", "label": "thurner, thomas", "shape": "dot", "size": 2, "title": ["thurner, thomas", 2]}, {"color": "magenta", "id": "f\u00fcller, johann", "label": "f\u00fcller, johann", "shape": "dot", "size": 5, "title": ["f\u00fcller, johann", 5]}, {"color": "magenta", "id": "jawecki, gregor", "label": "jawecki, gregor", "shape": "dot", "size": 3, "title": ["jawecki, gregor", 3]}, {"color": "magenta", "id": "matzler, kurt", "label": "matzler, kurt", "shape": "dot", "size": 3, "title": ["matzler, kurt", 3]}, {"color": "magenta", "id": "m\u00fchlbacher, hans", "label": "m\u00fchlbacher, hans", "shape": "dot", "size": 3, "title": ["m\u00fchlbacher, hans", 3]}, {"color": "magenta", "id": "schroll, roland", "label": "schroll, roland", "shape": "dot", "size": 2, "title": ["schroll, roland", 2]}, {"color": "purple", "id": "ghasemzadeh, khatereh", "label": "ghasemzadeh, khatereh", "shape": "dot", "size": 4, "title": ["ghasemzadeh, khatereh", 4]}, {"color": "lime", "id": "hakkarainen, louna", "label": "hakkarainen, louna", "shape": "dot", "size": 4, "title": ["hakkarainen, louna", 4]}, {"color": "lime", "id": "heiskanen, eva", "label": "heiskanen, eva", "shape": "dot", "size": 4, "title": ["heiskanen, eva", 4]}, {"color": "lime", "id": "helminen, pia", "label": "helminen, pia", "shape": "dot", "size": 5, "title": ["helminen, pia", 5]}, {"color": "lime", "id": "freeman, stephanie", "label": "freeman, stephanie", "shape": "dot", "size": 5, "title": ["freeman, stephanie", 5]}, {"color": "lime", "id": "johnson, mikael", "label": "johnson, mikael", "shape": "dot", "size": 7, "title": ["johnson, mikael", 7]}, {"color": "lime", "id": "juntunen, jouni k.", "label": "juntunen, jouni k.", "shape": "dot", "size": 5, "title": ["juntunen, jouni k.", 5]}, {"color": "lime", "id": "m\u00e4kinen, samuli", "label": "m\u00e4kinen, samuli", "shape": "dot", "size": 5, "title": ["m\u00e4kinen, samuli", 5]}, {"color": "brown", "id": "hippel, eric von", "label": "hippel, eric von", "shape": "dot", "size": 1, "title": ["hippel, eric von", 1]}, {"color": "brown", "id": "herstatt, cornelius", "label": "herstatt, cornelius", "shape": "dot", "size": 7, "title": ["herstatt, cornelius", 7]}, {"color": "brown", "id": "lock, phillip", "label": "lock, phillip", "shape": "dot", "size": 2, "title": ["lock, phillip", 2]}, {"color": "orange", "id": "berg jensen, morten", "label": "berg jensen, morten", "shape": "dot", "size": 2, "title": ["berg jensen, morten", 2]}, {"color": "lime", "id": "hyysalo, sampsa", "label": "hyysalo, sampsa", "shape": "dot", "size": 10, "title": ["hyysalo, sampsa", 10]}, {"color": "lime", "id": "repo, petteri", "label": "repo, petteri", "shape": "dot", "size": 4, "title": ["repo, petteri", 4]}, {"color": "lime", "id": "timonen, p\u00e4ivi", "label": "timonen, p\u00e4ivi", "shape": "dot", "size": 4, "title": ["timonen, p\u00e4ivi", 4]}, {"color": "lime", "id": "usenyuk, svetlana", "label": "usenyuk, svetlana", "shape": "dot", "size": 1, "title": ["usenyuk, svetlana", 1]}, {"color": "brown", "id": "janzik, lars", "label": "janzik, lars", "shape": "dot", "size": 1, "title": ["janzik, lars", 1]}, {"color": "lime", "id": "kristensson, per", "label": "kristensson, per", "shape": "dot", "size": 2, "title": ["kristensson, per", 2]}, {"color": "teal", "id": "kleer, robin", "label": "kleer, robin", "shape": "dot", "size": 1, "title": ["kleer, robin", 1]}, {"color": "orange", "id": "kuusisto, arja", "label": "kuusisto, arja", "shape": "dot", "size": 1, "title": ["kuusisto, arja", 1]}, {"color": "orange", "id": "lakhani, karim r.", "label": "lakhani, karim r.", "shape": "dot", "size": 2, "title": ["lakhani, karim r.", 2]}, {"color": "cyan", "id": "cong, ling mei", "label": "cong, ling mei", "shape": "dot", "size": 2, "title": ["cong, ling mei", 2]}, {"color": "brown", "id": "lehnen, jens", "label": "lehnen, jens", "shape": "dot", "size": 2, "title": ["lehnen, jens", 2]}, {"color": "brown", "id": "schmidt, tobias sebastian", "label": "schmidt, tobias sebastian", "shape": "dot", "size": 2, "title": ["schmidt, tobias sebastian", 2]}, {"color": "maroon", "id": "menozzi, anna", "label": "menozzi, anna", "shape": "dot", "size": 3, "title": ["menozzi, anna", 3]}, {"color": "orange", "id": "mulhuijzen, max", "label": "mulhuijzen, max", "shape": "dot", "size": 1, "title": ["mulhuijzen, max", 1]}, {"color": "red", "id": "nishikawa, hidehiko", "label": "nishikawa, hidehiko", "shape": "dot", "size": 2, "title": ["nishikawa, hidehiko", 2]}, {"color": "red", "id": "ogawa, susumu", "label": "ogawa, susumu", "shape": "dot", "size": 3, "title": ["ogawa, susumu", 3]}, {"color": "gold", "id": "n\u00f8rskov, sladjana", "label": "n\u00f8rskov, sladjana", "shape": "dot", "size": 2, "title": ["n\u00f8rskov, sladjana", 2]}, {"color": "red", "id": "oberhauser, stefan", "label": "oberhauser, stefan", "shape": "dot", "size": 2, "title": ["oberhauser, stefan", 2]}, {"color": "red", "id": "pr\u00fcgl, reinhard", "label": "pr\u00fcgl, reinhard", "shape": "dot", "size": 2, "title": ["pr\u00fcgl, reinhard", 2]}, {"color": "red", "id": "pongtanalert, kritinee", "label": "pongtanalert, kritinee", "shape": "dot", "size": 1, "title": ["pongtanalert, kritinee", 1]}, {"color": "orange", "id": "oliveira, pedro", "label": "oliveira, pedro", "shape": "dot", "size": 3, "title": ["oliveira, pedro", 3]}, {"color": "orange", "id": "veloso, francisco", "label": "veloso, francisco", "shape": "dot", "size": 2, "title": ["veloso, francisco", 2]}, {"color": "maroon", "id": "pera, rebecca", "label": "pera, rebecca", "shape": "dot", "size": 3, "title": ["pera, rebecca", 3]}, {"color": "teal", "id": "pollok, patrick", "label": "pollok, patrick", "shape": "dot", "size": 4, "title": ["pollok, patrick", 4]}, {"color": "yellow", "id": "sandstr\u00f6m, gunilla \u00f6lundh", "label": "sandstr\u00f6m, gunilla \u00f6lundh", "shape": "dot", "size": 3, "title": ["sandstr\u00f6m, gunilla \u00f6lundh", 3]}, {"color": "green", "id": "schulz, stefanie", "label": "schulz, stefanie", "shape": "dot", "size": 2, "title": ["schulz, stefanie", 2]}, {"color": "orange", "id": "stock, ruth maria", "label": "stock, ruth maria", "shape": "dot", "size": 2, "title": ["stock, ruth maria", 2]}, {"color": "lime", "id": "trischler, jakob", "label": "trischler, jakob", "shape": "dot", "size": 2, "title": ["trischler, jakob", 2]}, {"color": "orange", "id": "van der boor, paul", "label": "van der boor, paul", "shape": "dot", "size": 2, "title": ["van der boor, paul", 2]}, {"color": "orange", "id": "kaulartz, sandro", "label": "kaulartz, sandro", "shape": "dot", "size": 1, "title": ["kaulartz, sandro", 1]}, {"color": "yellow", "id": "wadell, carl", "label": "wadell, carl", "shape": "dot", "size": 3, "title": ["wadell, carl", 3]}, {"color": "brown", "id": "wellner, konstantin", "label": "wellner, konstantin", "shape": "dot", "size": 1, "title": ["wellner, konstantin", 1]}, {"color": "orange", "id": "west, joel", "label": "west, joel", "shape": "dot", "size": 1, "title": ["west, joel", 1]}, {"color": "cyan", "id": "zhou, michael", "label": "zhou, michael", "shape": "dot", "size": 2, "title": ["zhou, michael", 2]}]);
+                  edges = new vis.DataSet([{"color": "silver", "from": "abrate, graziano", "symbol": "diamond", "title": 5, "to": "baima, gabriele", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "abrate, graziano", "symbol": "square", "title": 5, "to": "menozzi, anna", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "abrate, graziano", "symbol": "circle", "title": 5, "to": "pera, rebecca", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "baima, gabriele", "symbol": "diamond", "title": 5, "to": "menozzi, anna", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "baima, gabriele", "symbol": "triangle-up", "title": 5, "to": "pera, rebecca", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "amft, andr\u00e9", "symbol": "circle", "title": 16, "to": "diener, kathleen", "value": 8.0, "width": 5.333333333333333}, {"color": "silver", "from": "amft, andr\u00e9", "symbol": "triangle-up", "title": 16, "to": "l\u00fcttgens, dirk", "value": 8.0, "width": 5.333333333333333}, {"color": "silver", "from": "amft, andr\u00e9", "symbol": "circle", "title": 16, "to": "piller, frank t.", "value": 8.0, "width": 5.333333333333333}, {"color": "silver", "from": "amft, andr\u00e9", "symbol": "diamond", "title": 16, "to": "pollok, patrick", "value": 8.0, "width": 5.333333333333333}, {"color": "silver", "from": "diener, kathleen", "symbol": "triangle-up", "title": 16, "to": "l\u00fcttgens, dirk", "value": 8.0, "width": 5.333333333333333}, {"color": "silver", "from": "diener, kathleen", "symbol": "circle", "title": 16, "to": "piller, frank t.", "value": 8.0, "width": 5.333333333333333}, {"color": "silver", "from": "diener, kathleen", "symbol": "circle", "title": 16, "to": "pollok, patrick", "value": 8.0, "width": 5.333333333333333}, {"color": "silver", "from": "l\u00fcttgens, dirk", "symbol": "triangle-up", "title": 16, "to": "piller, frank t.", "value": 8.0, "width": 5.333333333333333}, {"color": "silver", "from": "l\u00fcttgens, dirk", "symbol": "triangle-up", "title": 16, "to": "pollok, patrick", "value": 8.0, "width": 5.333333333333333}, {"color": "silver", "from": "piller, frank t.", "symbol": "diamond", "title": 2, "to": "franke, nikolaus", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "piller, frank t.", "symbol": "triangle-up", "title": 10, "to": "kleer, robin", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "piller, frank t.", "symbol": "square", "title": 16, "to": "pollok, patrick", "value": 8.0, "width": 5.333333333333333}, {"color": "silver", "from": "antorini, yun mi", "symbol": "square", "title": 7, "to": "jensen, morten berg", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "antorini, yun mi", "symbol": "circle", "title": 5, "to": "mu\u00f1iz, albert m.", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "antorini, yun mi", "symbol": "square", "title": 7, "to": "n\u00f8rskov, sladjana", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "jensen, morten berg", "symbol": "diamond", "title": 7, "to": "n\u00f8rskov, sladjana", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "baldwin, carliss", "symbol": "cross", "title": 10, "to": "hienerth, christoph", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "baldwin, carliss", "symbol": "triangle-up", "title": 24, "to": "von hippel, eric", "value": 12.0, "width": 8.0}, {"color": "silver", "from": "hienerth, christoph", "symbol": "triangle-up", "title": 12, "to": "berg jensen, morten", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "hienerth, christoph", "symbol": "triangle-up", "title": 22, "to": "von hippel, eric", "value": 11.0, "width": 7.333333333333333}, {"color": "silver", "from": "von hippel, eric", "symbol": "square", "title": 7, "to": "chen, jin", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "von hippel, eric", "symbol": "triangle-up", "title": 15, "to": "de jong, jeroen p.j.", "value": 7.5, "width": 5.0}, {"color": "silver", "from": "von hippel, eric", "symbol": "circle", "title": 3, "to": "franke, nikolaus", "value": 1.5, "width": 1.0}, {"color": "silver", "from": "von hippel, eric", "symbol": "diamond", "title": 12, "to": "f\u00fcller, johann", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "von hippel, eric", "symbol": "square", "title": 5, "to": "herstatt, cornelius", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "von hippel, eric", "symbol": "circle", "title": 1, "to": "lakhani, karim r.", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "von hippel, eric", "symbol": "circle", "title": 5, "to": "l\u00fcthje, christian", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "von hippel, eric", "symbol": "circle", "title": 8, "to": "oliveira, pedro", "value": 4.0, "width": 2.6666666666666665}, {"color": "silver", "from": "von hippel, eric", "symbol": "diamond", "title": 12, "to": "schroll, roland", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "von hippel, eric", "symbol": "cross", "title": 10, "to": "stock, ruth maria", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "von hippel, eric", "symbol": "square", "title": 7, "to": "su, yu shan", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "von hippel, eric", "symbol": "square", "title": 12, "to": "berg jensen, morten", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "von hippel, eric", "symbol": "square", "title": 15, "to": "flowers, stephen", "value": 7.5, "width": 5.0}, {"color": "silver", "from": "von hippel, eric", "symbol": "triangle-up", "title": 7, "to": "gault, fred", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "von hippel, eric", "symbol": "cross", "title": 10, "to": "gillert, nils lennart", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "von hippel, eric", "symbol": "triangle-up", "title": 10, "to": "kaulartz, sandro", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "von hippel, eric", "symbol": "square", "title": 7, "to": "kuusisto, jari", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "von hippel, eric", "symbol": "diamond", "title": 7, "to": "raasch, christina", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "bilgram, volker", "symbol": "cross", "title": 14, "to": "gutstein, adele", "value": 7.0, "width": 4.666666666666667}, {"color": "silver", "from": "bilgram, volker", "symbol": "triangle-up", "title": 15, "to": "marchuk, anna", "value": 7.5, "width": 5.0}, {"color": "silver", "from": "bilgram, volker", "symbol": "cross", "title": 41, "to": "brem, alexander", "value": 20.5, "width": 13.666666666666666}, {"color": "silver", "from": "gutstein, adele", "symbol": "cross", "title": 6, "to": "brem, alexander", "value": 3.0, "width": 2.0}, {"color": "silver", "from": "marchuk, anna", "symbol": "cross", "title": 15, "to": "brem, alexander", "value": 7.5, "width": 5.0}, {"color": "silver", "from": "bj\u00f6rk, jennie", "symbol": "diamond", "title": 8, "to": "magnusson, mats", "value": 4.0, "width": 2.6666666666666665}, {"color": "silver", "from": "bj\u00f6rk, jennie", "symbol": "cross", "title": 8, "to": "sandstr\u00f6m, gunilla \u00f6lundh", "value": 4.0, "width": 2.6666666666666665}, {"color": "silver", "from": "bj\u00f6rk, jennie", "symbol": "square", "title": 8, "to": "wadell, carl", "value": 4.0, "width": 2.6666666666666665}, {"color": "silver", "from": "magnusson, mats", "symbol": "circle", "title": 8, "to": "sandstr\u00f6m, gunilla \u00f6lundh", "value": 4.0, "width": 2.6666666666666665}, {"color": "silver", "from": "magnusson, mats", "symbol": "square", "title": 8, "to": "wadell, carl", "value": 4.0, "width": 2.6666666666666665}, {"color": "silver", "from": "block, j\u00f6rn h.", "symbol": "cross", "title": 13, "to": "henkel, joachim", "value": 6.5, "width": 4.333333333333333}, {"color": "silver", "from": "block, j\u00f6rn h.", "symbol": "cross", "title": 13, "to": "schweisfurth, tim g.", "value": 6.5, "width": 4.333333333333333}, {"color": "silver", "from": "block, j\u00f6rn h.", "symbol": "circle", "title": 13, "to": "stiegler, annika", "value": 6.5, "width": 4.333333333333333}, {"color": "silver", "from": "henkel, joachim", "symbol": "cross", "title": 6, "to": "hippel, eric von", "value": 3.0, "width": 2.0}, {"color": "silver", "from": "henkel, joachim", "symbol": "triangle-up", "title": 13, "to": "schweisfurth, tim g.", "value": 6.5, "width": 4.333333333333333}, {"color": "silver", "from": "henkel, joachim", "symbol": "square", "title": 13, "to": "stiegler, annika", "value": 6.5, "width": 4.333333333333333}, {"color": "silver", "from": "schweisfurth, tim g.", "symbol": "diamond", "title": 20, "to": "raasch, christina", "value": 10.0, "width": 6.666666666666667}, {"color": "silver", "from": "schweisfurth, tim g.", "symbol": "diamond", "title": 13, "to": "stiegler, annika", "value": 6.5, "width": 4.333333333333333}, {"color": "silver", "from": "blohm, ivo", "symbol": "diamond", "title": 5, "to": "bretschneider, ulrich", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "blohm, ivo", "symbol": "diamond", "title": 5, "to": "krcmar, helmut", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "blohm, ivo", "symbol": "square", "title": 5, "to": "marco, jan leimeister", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "bretschneider, ulrich", "symbol": "square", "title": 5, "to": "krcmar, helmut", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "bretschneider, ulrich", "symbol": "square", "title": 5, "to": "marco, jan leimeister", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "krcmar, helmut", "symbol": "cross", "title": 5, "to": "marco, jan leimeister", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "bortoluzzi, guido", "symbol": "square", "title": 17, "to": "yordanova, zornitsa", "value": 8.5, "width": 5.666666666666667}, {"color": "silver", "from": "bortoluzzi, guido", "symbol": "square", "title": 17, "to": "ghasemzadeh, khatereh", "value": 8.5, "width": 5.666666666666667}, {"color": "silver", "from": "yordanova, zornitsa", "symbol": "square", "title": 10, "to": "escobar, octavio", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "yordanova, zornitsa", "symbol": "triangle-up", "title": 27, "to": "ghasemzadeh, khatereh", "value": 13.5, "width": 9.0}, {"color": "silver", "from": "yordanova, zornitsa", "symbol": "diamond", "title": 10, "to": "villasalero, manuel", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "bradonjic, philip", "symbol": "diamond", "title": 13, "to": "franke, nikolaus", "value": 6.5, "width": 4.333333333333333}, {"color": "silver", "from": "bradonjic, philip", "symbol": "diamond", "title": 13, "to": "l\u00fcthje, christian", "value": 6.5, "width": 4.333333333333333}, {"color": "silver", "from": "franke, nikolaus", "symbol": "square", "title": 11, "to": "keinz, peter", "value": 5.5, "width": 3.6666666666666665}, {"color": "silver", "from": "franke, nikolaus", "symbol": "cross", "title": 11, "to": "klausberger, katharina", "value": 5.5, "width": 3.6666666666666665}, {"color": "silver", "from": "franke, nikolaus", "symbol": "triangle-up", "title": 13, "to": "l\u00fcthje, christian", "value": 6.5, "width": 4.333333333333333}, {"color": "silver", "from": "l\u00fcthje, christian", "symbol": "diamond", "title": 14, "to": "ebbing, tobias", "value": 7.0, "width": 4.666666666666667}, {"color": "silver", "from": "l\u00fcthje, christian", "symbol": "cross", "title": 9, "to": "herstatt, cornelius", "value": 4.5, "width": 3.0}, {"color": "silver", "from": "brem, alexander", "symbol": "cross", "title": 7, "to": "gladysz, bartosz", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "brem, alexander", "symbol": "circle", "title": 10, "to": "ernst, markus", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "brem, alexander", "symbol": "circle", "title": 7, "to": "schulz, stefanie", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "gladysz, bartosz", "symbol": "cross", "title": 7, "to": "schulz, stefanie", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "chandra, yanto", "symbol": "diamond", "title": 7, "to": "leenders, mark a.a.m.", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "leenders, mark a.a.m.", "symbol": "square", "title": 6, "to": "cong, ling mei", "value": 3.0, "width": 2.0}, {"color": "silver", "from": "leenders, mark a.a.m.", "symbol": "diamond", "title": 6, "to": "zhou, michael", "value": 3.0, "width": 2.0}, {"color": "silver", "from": "chen, jin", "symbol": "triangle-up", "title": 7, "to": "de jong, jeroen p.j.", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "chen, jin", "symbol": "triangle-up", "title": 7, "to": "su, yu shan", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "cross", "title": 25, "to": "flowers, stephen", "value": 12.5, "width": 8.333333333333334}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "square", "title": 7, "to": "gault, fred", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "triangle-up", "title": 11, "to": "gillert, nils lennart", "value": 5.5, "width": 3.6666666666666665}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "circle", "title": 7, "to": "kuusisto, jari", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "triangle-up", "title": 7, "to": "raasch, christina", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "triangle-up", "title": 11, "to": "stock, ruth m.", "value": 5.5, "width": 3.6666666666666665}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "square", "title": 11, "to": "mulhuijzen, max", "value": 5.5, "width": 3.6666666666666665}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "circle", "title": 7, "to": "su, yu shan", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "dahl, darren w.", "symbol": "diamond", "title": 8, "to": "fuchs, christoph", "value": 4.0, "width": 2.6666666666666665}, {"color": "silver", "from": "dahl, darren w.", "symbol": "circle", "title": 8, "to": "schreier, martin", "value": 4.0, "width": 2.6666666666666665}, {"color": "silver", "from": "fuchs, christoph", "symbol": "circle", "title": 6, "to": "schreier, martin", "value": 3.0, "width": 2.0}, {"color": "silver", "from": "schreier, martin", "symbol": "diamond", "title": 6, "to": "nishikawa, hidehiko", "value": 3.0, "width": 2.0}, {"color": "silver", "from": "schreier, martin", "symbol": "square", "title": 5, "to": "oberhauser, stefan", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "schreier, martin", "symbol": "cross", "title": 6, "to": "ogawa, susumu", "value": 3.0, "width": 2.0}, {"color": "silver", "from": "schreier, martin", "symbol": "circle", "title": 5, "to": "pr\u00fcgl, reinhard", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "gault, fred", "symbol": "square", "title": 7, "to": "kuusisto, jari", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "gault, fred", "symbol": "cross", "title": 7, "to": "raasch, christina", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "gillert, nils lennart", "symbol": "cross", "title": 11, "to": "stock, ruth m.", "value": 5.5, "width": 3.6666666666666665}, {"color": "silver", "from": "gillert, nils lennart", "symbol": "circle", "title": 10, "to": "stock, ruth maria", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "kuusisto, jari", "symbol": "square", "title": 8, "to": "kuusisto, arja", "value": 4.0, "width": 2.6666666666666665}, {"color": "silver", "from": "kuusisto, jari", "symbol": "diamond", "title": 7, "to": "raasch, christina", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "raasch, christina", "symbol": "diamond", "title": 10, "to": "janzik, lars", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "raasch, christina", "symbol": "square", "title": 12, "to": "herstatt, cornelius", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "raasch, christina", "symbol": "circle", "title": 12, "to": "lock, phillip", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "escobar, octavio", "symbol": "diamond", "title": 7, "to": "khvatova, tatiana", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "escobar, octavio", "symbol": "diamond", "title": 7, "to": "maalaoui, adnane", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "escobar, octavio", "symbol": "cross", "title": 7, "to": "schiavone, francesco", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "escobar, octavio", "symbol": "cross", "title": 10, "to": "villasalero, manuel", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "escobar, octavio", "symbol": "square", "title": 10, "to": "ghasemzadeh, khatereh", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "khvatova, tatiana", "symbol": "triangle-up", "title": 7, "to": "maalaoui, adnane", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "khvatova, tatiana", "symbol": "cross", "title": 7, "to": "schiavone, francesco", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "maalaoui, adnane", "symbol": "triangle-up", "title": 7, "to": "schiavone, francesco", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "villasalero, manuel", "symbol": "diamond", "title": 10, "to": "ghasemzadeh, khatereh", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "keinz, peter", "symbol": "diamond", "title": 11, "to": "klausberger, katharina", "value": 5.5, "width": 3.6666666666666665}, {"color": "silver", "from": "fursov, konstantin", "symbol": "cross", "title": 14, "to": "linton, jonathan", "value": 7.0, "width": 4.666666666666667}, {"color": "silver", "from": "fursov, konstantin", "symbol": "triangle-up", "title": 15, "to": "nefedova, alena", "value": 7.5, "width": 5.0}, {"color": "silver", "from": "fursov, konstantin", "symbol": "square", "title": 15, "to": "thurner, thomas", "value": 7.5, "width": 5.0}, {"color": "silver", "from": "nefedova, alena", "symbol": "triangle-up", "title": 15, "to": "thurner, thomas", "value": 7.5, "width": 5.0}, {"color": "silver", "from": "f\u00fcller, johann", "symbol": "diamond", "title": 11, "to": "jawecki, gregor", "value": 5.5, "width": 3.6666666666666665}, {"color": "silver", "from": "f\u00fcller, johann", "symbol": "square", "title": 11, "to": "matzler, kurt", "value": 5.5, "width": 3.6666666666666665}, {"color": "silver", "from": "f\u00fcller, johann", "symbol": "diamond", "title": 11, "to": "m\u00fchlbacher, hans", "value": 5.5, "width": 3.6666666666666665}, {"color": "silver", "from": "f\u00fcller, johann", "symbol": "square", "title": 12, "to": "schroll, roland", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "jawecki, gregor", "symbol": "square", "title": 11, "to": "matzler, kurt", "value": 5.5, "width": 3.6666666666666665}, {"color": "silver", "from": "jawecki, gregor", "symbol": "circle", "title": 11, "to": "m\u00fchlbacher, hans", "value": 5.5, "width": 3.6666666666666665}, {"color": "silver", "from": "matzler, kurt", "symbol": "diamond", "title": 11, "to": "m\u00fchlbacher, hans", "value": 5.5, "width": 3.6666666666666665}, {"color": "silver", "from": "hakkarainen, louna", "symbol": "square", "title": 5, "to": "heiskanen, eva", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "hakkarainen, louna", "symbol": "triangle-up", "title": 5, "to": "hyysalo, sampsa", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "hakkarainen, louna", "symbol": "cross", "title": 5, "to": "repo, petteri", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "hakkarainen, louna", "symbol": "triangle-up", "title": 5, "to": "timonen, p\u00e4ivi", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "heiskanen, eva", "symbol": "square", "title": 5, "to": "hyysalo, sampsa", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "heiskanen, eva", "symbol": "circle", "title": 5, "to": "repo, petteri", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "heiskanen, eva", "symbol": "diamond", "title": 5, "to": "timonen, p\u00e4ivi", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "helminen, pia", "symbol": "triangle-up", "title": 12, "to": "freeman, stephanie", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "helminen, pia", "symbol": "triangle-up", "title": 12, "to": "johnson, mikael", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "helminen, pia", "symbol": "square", "title": 12, "to": "juntunen, jouni k.", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "helminen, pia", "symbol": "triangle-up", "title": 12, "to": "m\u00e4kinen, samuli", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "helminen, pia", "symbol": "triangle-up", "title": 12, "to": "hyysalo, sampsa", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "freeman, stephanie", "symbol": "cross", "title": 12, "to": "hyysalo, sampsa", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "freeman, stephanie", "symbol": "square", "title": 12, "to": "johnson, mikael", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "freeman, stephanie", "symbol": "square", "title": 12, "to": "juntunen, jouni k.", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "freeman, stephanie", "symbol": "triangle-up", "title": 12, "to": "m\u00e4kinen, samuli", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "johnson, mikael", "symbol": "circle", "title": 21, "to": "hyysalo, sampsa", "value": 10.5, "width": 7.0}, {"color": "silver", "from": "johnson, mikael", "symbol": "square", "title": 21, "to": "juntunen, jouni k.", "value": 10.5, "width": 7.0}, {"color": "silver", "from": "johnson, mikael", "symbol": "triangle-up", "title": 17, "to": "kristensson, per", "value": 8.5, "width": 5.666666666666667}, {"color": "silver", "from": "johnson, mikael", "symbol": "cross", "title": 12, "to": "m\u00e4kinen, samuli", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "johnson, mikael", "symbol": "square", "title": 17, "to": "trischler, jakob", "value": 8.5, "width": 5.666666666666667}, {"color": "silver", "from": "juntunen, jouni k.", "symbol": "square", "title": 21, "to": "hyysalo, sampsa", "value": 10.5, "width": 7.0}, {"color": "silver", "from": "juntunen, jouni k.", "symbol": "cross", "title": 12, "to": "m\u00e4kinen, samuli", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "m\u00e4kinen, samuli", "symbol": "circle", "title": 12, "to": "hyysalo, sampsa", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "circle", "title": 12, "to": "lock, phillip", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "diamond", "title": 7, "to": "lehnen, jens", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "triangle-up", "title": 7, "to": "schmidt, tobias sebastian", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "diamond", "title": 12, "to": "wellner, konstantin", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "hyysalo, sampsa", "symbol": "cross", "title": 5, "to": "repo, petteri", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "hyysalo, sampsa", "symbol": "circle", "title": 5, "to": "timonen, p\u00e4ivi", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "hyysalo, sampsa", "symbol": "triangle-up", "title": 6, "to": "usenyuk, svetlana", "value": 3.0, "width": 2.0}, {"color": "silver", "from": "repo, petteri", "symbol": "diamond", "title": 5, "to": "timonen, p\u00e4ivi", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "kristensson, per", "symbol": "circle", "title": 17, "to": "trischler, jakob", "value": 8.5, "width": 5.666666666666667}, {"color": "silver", "from": "lakhani, karim r.", "symbol": "cross", "title": 5, "to": "west, joel", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "cong, ling mei", "symbol": "diamond", "title": 6, "to": "zhou, michael", "value": 3.0, "width": 2.0}, {"color": "silver", "from": "lehnen, jens", "symbol": "triangle-up", "title": 7, "to": "schmidt, tobias sebastian", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "menozzi, anna", "symbol": "cross", "title": 5, "to": "pera, rebecca", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "nishikawa, hidehiko", "symbol": "square", "title": 6, "to": "ogawa, susumu", "value": 3.0, "width": 2.0}, {"color": "silver", "from": "ogawa, susumu", "symbol": "cross", "title": 15, "to": "pongtanalert, kritinee", "value": 7.5, "width": 5.0}, {"color": "silver", "from": "oberhauser, stefan", "symbol": "diamond", "title": 5, "to": "pr\u00fcgl, reinhard", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "oliveira, pedro", "symbol": "triangle-up", "title": 9, "to": "veloso, francisco", "value": 4.5, "width": 3.0}, {"color": "silver", "from": "oliveira, pedro", "symbol": "diamond", "title": 9, "to": "van der boor, paul", "value": 4.5, "width": 3.0}, {"color": "silver", "from": "veloso, francisco", "symbol": "cross", "title": 9, "to": "van der boor, paul", "value": 4.5, "width": 3.0}, {"color": "silver", "from": "sandstr\u00f6m, gunilla \u00f6lundh", "symbol": "square", "title": 8, "to": "wadell, carl", "value": 4.0, "width": 2.6666666666666665}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

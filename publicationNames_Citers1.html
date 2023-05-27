@@ -1,0 +1,349 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 1000px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "maroon", "id": "decision support systems", "label": "decision support systems", "shape": "dot", "size": 13, "title": ["decision support systems", 13]}, {"color": "maroon", "id": "european journal of innovation management", "label": "european journal of innovation management", "shape": "dot", "size": 13, "title": ["european journal of innovation management", 13]}, {"color": "maroon", "id": "industrial marketing management", "label": "industrial marketing management", "shape": "dot", "size": 13, "title": ["industrial marketing management", 13]}, {"color": "maroon", "id": "international journal of innovation and technology management", "label": "international journal of innovation and technology management", "shape": "dot", "size": 13, "title": ["international journal of innovation and technology management", 13]}, {"color": "maroon", "id": "international journal of innovation management", "label": "international journal of innovation management", "shape": "dot", "size": 13, "title": ["international journal of innovation management", 13]}, {"color": "maroon", "id": "international journal of technology management", "label": "international journal of technology management", "shape": "dot", "size": 13, "title": ["international journal of technology management", 13]}, {"color": "maroon", "id": "journal of business research", "label": "journal of business research", "shape": "dot", "size": 13, "title": ["journal of business research", 13]}, {"color": "maroon", "id": "journal of cleaner production", "label": "journal of cleaner production", "shape": "dot", "size": 13, "title": ["journal of cleaner production", 13]}, {"color": "maroon", "id": "journal of engineering and technology management - jet-m", "label": "journal of engineering and technology management - jet-m", "shape": "dot", "size": 13, "title": ["journal of engineering and technology management - jet-m", 13]}, {"color": "maroon", "id": "management science", "label": "management science", "shape": "dot", "size": 13, "title": ["management science", 13]}, {"color": "maroon", "id": "organization science", "label": "organization science", "shape": "dot", "size": 13, "title": ["organization science", 13]}, {"color": "maroon", "id": "research policy", "label": "research policy", "shape": "dot", "size": 13, "title": ["research policy", 13]}, {"color": "maroon", "id": "technological forecasting and social change", "label": "technological forecasting and social change", "shape": "dot", "size": 13, "title": ["technological forecasting and social change", 13]}, {"color": "maroon", "id": "technovation", "label": "technovation", "shape": "dot", "size": 13, "title": ["technovation", 13]}]);
+                  edges = new vis.DataSet([{"color": "silver", "from": "decision support systems", "symbol": "circle", "title": 12, "to": "european journal of innovation management", "value": 6.0, "width": 4.0}, {"color": "silver", "from": "decision support systems", "symbol": "circle", "title": 10, "to": "industrial marketing management", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "decision support systems", "symbol": "diamond", "title": 17, "to": "international journal of innovation and technology management", "value": 8.5, "width": 5.666666666666667}, {"color": "silver", "from": "decision support systems", "symbol": "triangle-up", "title": 55, "to": "international journal of innovation management", "value": 27.5, "width": 18.333333333333332}, {"color": "silver", "from": "decision support systems", "symbol": "diamond", "title": 13, "to": "international journal of technology management", "value": 6.5, "width": 4.333333333333333}, {"color": "silver", "from": "decision support systems", "symbol": "circle", "title": 7, "to": "journal of business research", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "decision support systems", "symbol": "diamond", "title": 5, "to": "journal of cleaner production", "value": 2.5, "width": 1.6666666666666667}, {"color": "silver", "from": "decision support systems", "symbol": "circle", "title": 22, "to": "journal of engineering and technology management - jet-m", "value": 11.0, "width": 7.333333333333333}, {"color": "silver", "from": "decision support systems", "symbol": "square", "title": 17, "to": "management science", "value": 8.5, "width": 5.666666666666667}, {"color": "silver", "from": "decision support systems", "symbol": "cross", "title": 14, "to": "organization science", "value": 7.0, "width": 4.666666666666667}, {"color": "silver", "from": "decision support systems", "symbol": "cross", "title": 103, "to": "research policy", "value": 51.5, "width": 34.333333333333336}, {"color": "silver", "from": "decision support systems", "symbol": "triangle-up", "title": 28, "to": "technological forecasting and social change", "value": 14.0, "width": 9.333333333333334}, {"color": "silver", "from": "decision support systems", "symbol": "triangle-up", "title": 30, "to": "technovation", "value": 15.0, "width": 10.0}, {"color": "silver", "from": "european journal of innovation management", "symbol": "circle", "title": 56, "to": "industrial marketing management", "value": 28.0, "width": 18.666666666666668}, {"color": "silver", "from": "european journal of innovation management", "symbol": "square", "title": 68, "to": "international journal of innovation and technology management", "value": 34.0, "width": 22.666666666666668}, {"color": "silver", "from": "european journal of innovation management", "symbol": "circle", "title": 77, "to": "international journal of innovation management", "value": 38.5, "width": 25.666666666666668}, {"color": "silver", "from": "european journal of innovation management", "symbol": "cross", "title": 21, "to": "international journal of technology management", "value": 10.5, "width": 7.0}, {"color": "silver", "from": "european journal of innovation management", "symbol": "triangle-up", "title": 103, "to": "journal of business research", "value": 51.5, "width": 34.333333333333336}, {"color": "silver", "from": "european journal of innovation management", "symbol": "circle", "title": 98, "to": "journal of cleaner production", "value": 49.0, "width": 32.666666666666664}, {"color": "silver", "from": "european journal of innovation management", "symbol": "diamond", "title": 16, "to": "journal of engineering and technology management - jet-m", "value": 8.0, "width": 5.333333333333333}, {"color": "silver", "from": "european journal of innovation management", "symbol": "cross", "title": 18, "to": "management science", "value": 9.0, "width": 6.0}, {"color": "silver", "from": "european journal of innovation management", "symbol": "circle", "title": 27, "to": "organization science", "value": 13.5, "width": 9.0}, {"color": "silver", "from": "european journal of innovation management", "symbol": "circle", "title": 493, "to": "research policy", "value": 246.5, "width": 164.33333333333334}, {"color": "silver", "from": "european journal of innovation management", "symbol": "cross", "title": 106, "to": "technological forecasting and social change", "value": 53.0, "width": 35.333333333333336}, {"color": "silver", "from": "european journal of innovation management", "symbol": "circle", "title": 99, "to": "technovation", "value": 49.5, "width": 33.0}, {"color": "silver", "from": "industrial marketing management", "symbol": "triangle-up", "title": 46, "to": "international journal of innovation and technology management", "value": 23.0, "width": 15.333333333333334}, {"color": "silver", "from": "industrial marketing management", "symbol": "cross", "title": 49, "to": "international journal of innovation management", "value": 24.5, "width": 16.333333333333332}, {"color": "silver", "from": "industrial marketing management", "symbol": "triangle-up", "title": 33, "to": "international journal of technology management", "value": 16.5, "width": 11.0}, {"color": "silver", "from": "industrial marketing management", "symbol": "cross", "title": 40, "to": "journal of business research", "value": 20.0, "width": 13.333333333333334}, {"color": "silver", "from": "industrial marketing management", "symbol": "cross", "title": 51, "to": "journal of cleaner production", "value": 25.5, "width": 17.0}, {"color": "silver", "from": "industrial marketing management", "symbol": "diamond", "title": 30, "to": "journal of engineering and technology management - jet-m", "value": 15.0, "width": 10.0}, {"color": "silver", "from": "industrial marketing management", "symbol": "square", "title": 10, "to": "management science", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "industrial marketing management", "symbol": "square", "title": 19, "to": "organization science", "value": 9.5, "width": 6.333333333333333}, {"color": "silver", "from": "industrial marketing management", "symbol": "square", "title": 266, "to": "research policy", "value": 133.0, "width": 88.66666666666667}, {"color": "silver", "from": "industrial marketing management", "symbol": "square", "title": 66, "to": "technological forecasting and social change", "value": 33.0, "width": 22.0}, {"color": "silver", "from": "industrial marketing management", "symbol": "diamond", "title": 61, "to": "technovation", "value": 30.5, "width": 20.333333333333332}, {"color": "silver", "from": "international journal of innovation and technology management", "symbol": "cross", "title": 104, "to": "international journal of innovation management", "value": 52.0, "width": 34.666666666666664}, {"color": "silver", "from": "international journal of innovation and technology management", "symbol": "square", "title": 47, "to": "international journal of technology management", "value": 23.5, "width": 15.666666666666666}, {"color": "silver", "from": "international journal of innovation and technology management", "symbol": "diamond", "title": 65, "to": "journal of business research", "value": 32.5, "width": 21.666666666666668}, {"color": "silver", "from": "international journal of innovation and technology management", "symbol": "square", "title": 47, "to": "journal of cleaner production", "value": 23.5, "width": 15.666666666666666}, {"color": "silver", "from": "international journal of innovation and technology management", "symbol": "square", "title": 53, "to": "journal of engineering and technology management - jet-m", "value": 26.5, "width": 17.666666666666668}, {"color": "silver", "from": "international journal of innovation and technology management", "symbol": "square", "title": 13, "to": "management science", "value": 6.5, "width": 4.333333333333333}, {"color": "silver", "from": "international journal of innovation and technology management", "symbol": "triangle-up", "title": 40, "to": "organization science", "value": 20.0, "width": 13.333333333333334}, {"color": "silver", "from": "international journal of innovation and technology management", "symbol": "circle", "title": 343, "to": "research policy", "value": 171.5, "width": 114.33333333333333}, {"color": "silver", "from": "international journal of innovation and technology management", "symbol": "square", "title": 85, "to": "technological forecasting and social change", "value": 42.5, "width": 28.333333333333332}, {"color": "silver", "from": "international journal of innovation and technology management", "symbol": "triangle-up", "title": 84, "to": "technovation", "value": 42.0, "width": 28.0}, {"color": "silver", "from": "international journal of innovation management", "symbol": "diamond", "title": 88, "to": "international journal of technology management", "value": 44.0, "width": 29.333333333333332}, {"color": "silver", "from": "international journal of innovation management", "symbol": "square", "title": 49, "to": "journal of business research", "value": 24.5, "width": 16.333333333333332}, {"color": "silver", "from": "international journal of innovation management", "symbol": "square", "title": 17, "to": "journal of cleaner production", "value": 8.5, "width": 5.666666666666667}, {"color": "silver", "from": "international journal of innovation management", "symbol": "circle", "title": 99, "to": "journal of engineering and technology management - jet-m", "value": 49.5, "width": 33.0}, {"color": "silver", "from": "international journal of innovation management", "symbol": "triangle-up", "title": 64, "to": "management science", "value": 32.0, "width": 21.333333333333332}, {"color": "silver", "from": "international journal of innovation management", "symbol": "square", "title": 83, "to": "organization science", "value": 41.5, "width": 27.666666666666668}, {"color": "silver", "from": "international journal of innovation management", "symbol": "cross", "title": 626, "to": "research policy", "value": 313.0, "width": 208.66666666666666}, {"color": "silver", "from": "international journal of innovation management", "symbol": "circle", "title": 161, "to": "technological forecasting and social change", "value": 80.5, "width": 53.666666666666664}, {"color": "silver", "from": "international journal of innovation management", "symbol": "square", "title": 133, "to": "technovation", "value": 66.5, "width": 44.333333333333336}, {"color": "silver", "from": "international journal of technology management", "symbol": "triangle-up", "title": 19, "to": "journal of business research", "value": 9.5, "width": 6.333333333333333}, {"color": "silver", "from": "international journal of technology management", "symbol": "cross", "title": 3, "to": "journal of cleaner production", "value": 1.5, "width": 1.0}, {"color": "silver", "from": "international journal of technology management", "symbol": "circle", "title": 52, "to": "journal of engineering and technology management - jet-m", "value": 26.0, "width": 17.333333333333332}, {"color": "silver", "from": "international journal of technology management", "symbol": "diamond", "title": 23, "to": "management science", "value": 11.5, "width": 7.666666666666667}, {"color": "silver", "from": "international journal of technology management", "symbol": "circle", "title": 32, "to": "organization science", "value": 16.0, "width": 10.666666666666666}, {"color": "silver", "from": "international journal of technology management", "symbol": "cross", "title": 228, "to": "research policy", "value": 114.0, "width": 76.0}, {"color": "silver", "from": "international journal of technology management", "symbol": "triangle-up", "title": 68, "to": "technological forecasting and social change", "value": 34.0, "width": 22.666666666666668}, {"color": "silver", "from": "international journal of technology management", "symbol": "square", "title": 47, "to": "technovation", "value": 23.5, "width": 15.666666666666666}, {"color": "silver", "from": "journal of business research", "symbol": "triangle-up", "title": 77, "to": "journal of cleaner production", "value": 38.5, "width": 25.666666666666668}, {"color": "silver", "from": "journal of business research", "symbol": "circle", "title": 23, "to": "journal of engineering and technology management - jet-m", "value": 11.5, "width": 7.666666666666667}, {"color": "silver", "from": "journal of business research", "symbol": "diamond", "title": 15, "to": "management science", "value": 7.5, "width": 5.0}, {"color": "silver", "from": "journal of business research", "symbol": "cross", "title": 24, "to": "organization science", "value": 12.0, "width": 8.0}, {"color": "silver", "from": "journal of business research", "symbol": "circle", "title": 352, "to": "research policy", "value": 176.0, "width": 117.33333333333333}, {"color": "silver", "from": "journal of business research", "symbol": "cross", "title": 84, "to": "technological forecasting and social change", "value": 42.0, "width": 28.0}, {"color": "silver", "from": "journal of business research", "symbol": "square", "title": 79, "to": "technovation", "value": 39.5, "width": 26.333333333333332}, {"color": "silver", "from": "journal of cleaner production", "symbol": "square", "title": 10, "to": "journal of engineering and technology management - jet-m", "value": 5.0, "width": 3.3333333333333335}, {"color": "silver", "from": "journal of cleaner production", "symbol": "diamond", "title": 8, "to": "management science", "value": 4.0, "width": 2.6666666666666665}, {"color": "silver", "from": "journal of cleaner production", "symbol": "diamond", "title": 11, "to": "organization science", "value": 5.5, "width": 3.6666666666666665}, {"color": "silver", "from": "journal of cleaner production", "symbol": "diamond", "title": 336, "to": "research policy", "value": 168.0, "width": 112.0}, {"color": "silver", "from": "journal of cleaner production", "symbol": "triangle-up", "title": 74, "to": "technological forecasting and social change", "value": 37.0, "width": 24.666666666666668}, {"color": "silver", "from": "journal of cleaner production", "symbol": "diamond", "title": 76, "to": "technovation", "value": 38.0, "width": 25.333333333333332}, {"color": "silver", "from": "journal of engineering and technology management - jet-m", "symbol": "cross", "title": 23, "to": "management science", "value": 11.5, "width": 7.666666666666667}, {"color": "silver", "from": "journal of engineering and technology management - jet-m", "symbol": "cross", "title": 33, "to": "organization science", "value": 16.5, "width": 11.0}, {"color": "silver", "from": "journal of engineering and technology management - jet-m", "symbol": "diamond", "title": 230, "to": "research policy", "value": 115.0, "width": 76.66666666666667}, {"color": "silver", "from": "journal of engineering and technology management - jet-m", "symbol": "diamond", "title": 78, "to": "technological forecasting and social change", "value": 39.0, "width": 26.0}, {"color": "silver", "from": "journal of engineering and technology management - jet-m", "symbol": "triangle-up", "title": 49, "to": "technovation", "value": 24.5, "width": 16.333333333333332}, {"color": "silver", "from": "management science", "symbol": "square", "title": 38, "to": "organization science", "value": 19.0, "width": 12.666666666666666}, {"color": "silver", "from": "management science", "symbol": "circle", "title": 223, "to": "research policy", "value": 111.5, "width": 74.33333333333333}, {"color": "silver", "from": "management science", "symbol": "circle", "title": 48, "to": "technological forecasting and social change", "value": 24.0, "width": 16.0}, {"color": "silver", "from": "management science", "symbol": "circle", "title": 28, "to": "technovation", "value": 14.0, "width": 9.333333333333334}, {"color": "silver", "from": "organization science", "symbol": "diamond", "title": 280, "to": "research policy", "value": 140.0, "width": 93.33333333333333}, {"color": "silver", "from": "organization science", "symbol": "square", "title": 68, "to": "technological forecasting and social change", "value": 34.0, "width": 22.666666666666668}, {"color": "silver", "from": "organization science", "symbol": "cross", "title": 37, "to": "technovation", "value": 18.5, "width": 12.333333333333334}, {"color": "silver", "from": "research policy", "symbol": "circle", "title": 670, "to": "technological forecasting and social change", "value": 335.0, "width": 223.33333333333334}, {"color": "silver", "from": "research policy", "symbol": "square", "title": 437, "to": "technovation", "value": 218.5, "width": 145.66666666666666}, {"color": "silver", "from": "technological forecasting and social change", "symbol": "cross", "title": 107, "to": "technovation", "value": 53.5, "width": 35.666666666666664}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

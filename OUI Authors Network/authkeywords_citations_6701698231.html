@@ -1,0 +1,349 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 1000px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "maroon", "id": "adoption", "label": "adoption", "shape": "dot", "size": 5, "title": ["adoption", 5]}, {"color": "teal", "id": "consumer innovation", "label": "consumer innovation", "shape": "dot", "size": 23, "title": ["consumer innovation", 23]}, {"color": "gold", "id": "diffusion", "label": "diffusion", "shape": "dot", "size": 13, "title": ["diffusion", 13]}, {"color": "maroon", "id": "free innovation", "label": "free innovation", "shape": "dot", "size": 12, "title": ["free innovation", 12]}, {"color": "maroon", "id": "market failure", "label": "market failure", "shape": "dot", "size": 5, "title": ["market failure", 5]}, {"color": "green", "id": "user innovation", "label": "user innovation", "shape": "dot", "size": 82, "title": ["user innovation", 82]}, {"color": "yellow", "id": "behavioral innovation", "label": "behavioral innovation", "shape": "dot", "size": 5, "title": ["behavioral innovation", 5]}, {"color": "yellow", "id": "feminist economics", "label": "feminist economics", "shape": "dot", "size": 5, "title": ["feminist economics", 5]}, {"color": "yellow", "id": "household sector innovation", "label": "household sector innovation", "shape": "dot", "size": 11, "title": ["household sector innovation", 11]}, {"color": "yellow", "id": "innovation diffusion", "label": "innovation diffusion", "shape": "dot", "size": 5, "title": ["innovation diffusion", 5]}, {"color": "yellow", "id": "technique innovation", "label": "technique innovation", "shape": "dot", "size": 5, "title": ["technique innovation", 5]}, {"color": "green", "id": "biases", "label": "biases", "shape": "dot", "size": 4, "title": ["biases", 4]}, {"color": "green", "id": "decision-makers", "label": "decision-makers", "shape": "dot", "size": 4, "title": ["decision-makers", 4]}, {"color": "green", "id": "sources of innovation", "label": "sources of innovation", "shape": "dot", "size": 4, "title": ["sources of innovation", 4]}, {"color": "green", "id": "theory practice gap", "label": "theory practice gap", "shape": "dot", "size": 4, "title": ["theory practice gap", 4]}, {"color": "red", "id": "collaboration", "label": "collaboration", "shape": "dot", "size": 5, "title": ["collaboration", 5]}, {"color": "red", "id": "commercial diffusion", "label": "commercial diffusion", "shape": "dot", "size": 5, "title": ["commercial diffusion", 5]}, {"color": "red", "id": "innovation policy", "label": "innovation policy", "shape": "dot", "size": 9, "title": ["innovation policy", 9]}, {"color": "red", "id": "makerspaces", "label": "makerspaces", "shape": "dot", "size": 5, "title": ["makerspaces", 5]}, {"color": "teal", "id": "community innovation", "label": "community innovation", "shape": "dot", "size": 5, "title": ["community innovation", 5]}, {"color": "teal", "id": "daily practices", "label": "daily practices", "shape": "dot", "size": 5, "title": ["daily practices", 5]}, {"color": "teal", "id": "innovation behavior", "label": "innovation behavior", "shape": "dot", "size": 5, "title": ["innovation behavior", 5]}, {"color": "teal", "id": "russia", "label": "russia", "shape": "dot", "size": 5, "title": ["russia", 5]}, {"color": "purple", "id": "computer games", "label": "computer games", "shape": "dot", "size": 5, "title": ["computer games", 5]}, {"color": "purple", "id": "consumer innovators", "label": "consumer innovators", "shape": "dot", "size": 5, "title": ["consumer innovators", 5]}, {"color": "purple", "id": "innovation", "label": "innovation", "shape": "dot", "size": 5, "title": ["innovation", 5]}, {"color": "purple", "id": "marketplaces", "label": "marketplaces", "shape": "dot", "size": 5, "title": ["marketplaces", 5]}, {"color": "purple", "id": "pricing", "label": "pricing", "shape": "dot", "size": 5, "title": ["pricing", 5]}, {"color": "teal", "id": "diffusion of innovation", "label": "diffusion of innovation", "shape": "dot", "size": 5, "title": ["diffusion of innovation", 5]}, {"color": "maroon", "id": "measurement", "label": "measurement", "shape": "dot", "size": 3, "title": ["measurement", 3]}, {"color": "yellow", "id": "need-solution pairs", "label": "need-solution pairs", "shape": "dot", "size": 4, "title": ["need-solution pairs", 4]}, {"color": "teal", "id": "online innovation communities", "label": "online innovation communities", "shape": "dot", "size": 5, "title": ["online innovation communities", 5]}, {"color": "pink", "id": "open innovation", "label": "open innovation", "shape": "dot", "size": 13, "title": ["open innovation", 13]}, {"color": "gold", "id": "personality", "label": "personality", "shape": "dot", "size": 4, "title": ["personality", 4]}, {"color": "yellow", "id": "problem-solving", "label": "problem-solving", "shape": "dot", "size": 4, "title": ["problem-solving", 4]}, {"color": "gold", "id": "product solution", "label": "product solution", "shape": "dot", "size": 4, "title": ["product solution", 4]}, {"color": "teal", "id": "renewable energy", "label": "renewable energy", "shape": "dot", "size": 5, "title": ["renewable energy", 5]}, {"color": "orange", "id": "cooperation", "label": "cooperation", "shape": "dot", "size": 4, "title": ["cooperation", 4]}, {"color": "orange", "id": "front end", "label": "front end", "shape": "dot", "size": 4, "title": ["front end", 4]}, {"color": "orange", "id": "lead user", "label": "lead user", "shape": "dot", "size": 8, "title": ["lead user", 8]}, {"color": "orange", "id": "user-manufacturer interaction", "label": "user-manufacturer interaction", "shape": "dot", "size": 4, "title": ["user-manufacturer interaction", 4]}, {"color": "orange", "id": "creativity", "label": "creativity", "shape": "dot", "size": 5, "title": ["creativity", 5]}, {"color": "orange", "id": "embedded lead user", "label": "embedded lead user", "shape": "dot", "size": 5, "title": ["embedded lead user", 5]}, {"color": "orange", "id": "idea quality", "label": "idea quality", "shape": "dot", "size": 5, "title": ["idea quality", 5]}, {"color": "orange", "id": "internal lead user", "label": "internal lead user", "shape": "dot", "size": 5, "title": ["internal lead user", 5]}, {"color": "blue", "id": "crowdfunding platform", "label": "crowdfunding platform", "shape": "dot", "size": 5, "title": ["crowdfunding platform", 5]}, {"color": "blue", "id": "human capital", "label": "human capital", "shape": "dot", "size": 5, "title": ["human capital", 5]}, {"color": "blue", "id": "self-determination theory", "label": "self-determination theory", "shape": "dot", "size": 5, "title": ["self-determination theory", 5]}, {"color": "blue", "id": "social capital", "label": "social capital", "shape": "dot", "size": 5, "title": ["social capital", 5]}, {"color": "blue", "id": "user entrepreneurship", "label": "user entrepreneurship", "shape": "dot", "size": 8, "title": ["user entrepreneurship", 8]}, {"color": "gold", "id": "innovation ecosystem", "label": "innovation ecosystem", "shape": "dot", "size": 4, "title": ["innovation ecosystem", 4]}, {"color": "gold", "id": "knowledge transfer", "label": "knowledge transfer", "shape": "dot", "size": 4, "title": ["knowledge transfer", 4]}, {"color": "gold", "id": "product development", "label": "product development", "shape": "dot", "size": 4, "title": ["product development", 4]}, {"color": "gold", "id": "service ecosystem", "label": "service ecosystem", "shape": "dot", "size": 4, "title": ["service ecosystem", 4]}, {"color": "gold", "id": "small firms", "label": "small firms", "shape": "dot", "size": 4, "title": ["small firms", 4]}, {"color": "gold", "id": "sustainability", "label": "sustainability", "shape": "dot", "size": 4, "title": ["sustainability", 4]}, {"color": "red", "id": "do-it-yourself", "label": "do-it-yourself", "shape": "dot", "size": 7, "title": ["do-it-yourself", 7]}, {"color": "red", "id": "enabling technology", "label": "enabling technology", "shape": "dot", "size": 5, "title": ["enabling technology", 5]}, {"color": "red", "id": "product innovation", "label": "product innovation", "shape": "dot", "size": 5, "title": ["product innovation", 5]}, {"color": "red", "id": "prosumption", "label": "prosumption", "shape": "dot", "size": 3, "title": ["prosumption", 3]}, {"color": "red", "id": "social innovation", "label": "social innovation", "shape": "dot", "size": 5, "title": ["social innovation", 5]}, {"color": "green", "id": "efficiency measurement", "label": "efficiency measurement", "shape": "dot", "size": 2, "title": ["efficiency measurement", 2]}, {"color": "green", "id": "industry development", "label": "industry development", "shape": "dot", "size": 2, "title": ["industry development", 2]}, {"color": "blue", "id": "end user entrepreneur", "label": "end user entrepreneur", "shape": "dot", "size": 4, "title": ["end user entrepreneur", 4]}, {"color": "blue", "id": "entrepreneurial consumer", "label": "entrepreneurial consumer", "shape": "dot", "size": 4, "title": ["entrepreneurial consumer", 4]}, {"color": "blue", "id": "entrepreneurship process", "label": "entrepreneurship process", "shape": "dot", "size": 4, "title": ["entrepreneurship process", 4]}, {"color": "pink", "id": "end-users", "label": "end-users", "shape": "dot", "size": 5, "title": ["end-users", 5]}, {"color": "pink", "id": "policy", "label": "policy", "shape": "dot", "size": 5, "title": ["policy", 5]}, {"color": "pink", "id": "policymakers", "label": "policymakers", "shape": "dot", "size": 5, "title": ["policymakers", 5]}, {"color": "pink", "id": "sustainable innovation", "label": "sustainable innovation", "shape": "dot", "size": 5, "title": ["sustainable innovation", 5]}, {"color": "green", "id": "firm-user collaboration", "label": "firm-user collaboration", "shape": "dot", "size": 4, "title": ["firm-user collaboration", 4]}, {"color": "green", "id": "innovation management", "label": "innovation management", "shape": "dot", "size": 4, "title": ["innovation management", 4]}, {"color": "green", "id": "innovation strategy", "label": "innovation strategy", "shape": "dot", "size": 4, "title": ["innovation strategy", 4]}, {"color": "green", "id": "review", "label": "review", "shape": "dot", "size": 4, "title": ["review", 4]}, {"color": "maroon", "id": "household sector", "label": "household sector", "shape": "dot", "size": 6, "title": ["household sector", 6]}, {"color": "maroon", "id": "information processing", "label": "information processing", "shape": "dot", "size": 6, "title": ["information processing", 6]}, {"color": "maroon", "id": "knowledge diversity", "label": "knowledge diversity", "shape": "dot", "size": 6, "title": ["knowledge diversity", 6]}, {"color": "maroon", "id": "shared mental models jel: l20, l67, o30, o31", "label": "shared mental models jel: l20, l67, o30, o31", "shape": "dot", "size": 6, "title": ["shared mental models jel: l20, l67, o30, o31", 6]}, {"color": "maroon", "id": "team creativity", "label": "team creativity", "shape": "dot", "size": 6, "title": ["team creativity", 6]}, {"color": "pink", "id": "improvisation", "label": "improvisation", "shape": "dot", "size": 5, "title": ["improvisation", 5]}, {"color": "pink", "id": "knowledge acquisition", "label": "knowledge acquisition", "shape": "dot", "size": 5, "title": ["knowledge acquisition", 5]}, {"color": "pink", "id": "knowledge utilization", "label": "knowledge utilization", "shape": "dot", "size": 5, "title": ["knowledge utilization", 5]}, {"color": "pink", "id": "user generated content", "label": "user generated content", "shape": "dot", "size": 5, "title": ["user generated content", 5]}]);
+                  edges = new vis.DataSet([{"color": "silver", "from": "adoption", "symbol": "square", "title": 1, "to": "consumer innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "adoption", "symbol": "triangle-up", "title": 1, "to": "diffusion", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "adoption", "symbol": "circle", "title": 1, "to": "free innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "adoption", "symbol": "circle", "title": 1, "to": "market failure", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "adoption", "symbol": "triangle-up", "title": 1, "to": "user innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "square", "title": 1, "to": "collaboration", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "diamond", "title": 1, "to": "commercial diffusion", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "cross", "title": 1, "to": "community innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "circle", "title": 1, "to": "daily practices", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "triangle-up", "title": 2, "to": "diffusion", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "consumer innovation", "symbol": "cross", "title": 1, "to": "diffusion of innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "diamond", "title": 2, "to": "free innovation", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "consumer innovation", "symbol": "circle", "title": 1, "to": "household sector innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "square", "title": 1, "to": "innovation behavior", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "circle", "title": 1, "to": "innovation policy", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "circle", "title": 1, "to": "makerspaces", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "diamond", "title": 1, "to": "market failure", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "cross", "title": 1, "to": "measurement", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "triangle-up", "title": 1, "to": "need-solution pairs", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "cross", "title": 1, "to": "online innovation communities", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "diamond", "title": 1, "to": "open innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "cross", "title": 1, "to": "personality", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "diamond", "title": 1, "to": "problem-solving", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "triangle-up", "title": 1, "to": "product solution", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "triangle-up", "title": 1, "to": "renewable energy", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "cross", "title": 1, "to": "russia", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovation", "symbol": "cross", "title": 7, "to": "user innovation", "value": 3.5, "width": 2.3333333333333335}, {"color": "silver", "from": "diffusion", "symbol": "triangle-up", "title": 1, "to": "free innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "diffusion", "symbol": "triangle-up", "title": 1, "to": "innovation ecosystem", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "diffusion", "symbol": "square", "title": 1, "to": "knowledge transfer", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "diffusion", "symbol": "cross", "title": 1, "to": "market failure", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "diffusion", "symbol": "circle", "title": 1, "to": "personality", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "diffusion", "symbol": "circle", "title": 1, "to": "product development", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "diffusion", "symbol": "triangle-up", "title": 1, "to": "product solution", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "diffusion", "symbol": "square", "title": 1, "to": "service ecosystem", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "diffusion", "symbol": "circle", "title": 1, "to": "small firms", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "diffusion", "symbol": "circle", "title": 1, "to": "sustainability", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "diffusion", "symbol": "square", "title": 4, "to": "user innovation", "value": 2.0, "width": 1.3333333333333333}, {"color": "silver", "from": "free innovation", "symbol": "circle", "title": 1, "to": "household sector", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "free innovation", "symbol": "square", "title": 1, "to": "household sector innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "free innovation", "symbol": "diamond", "title": 1, "to": "information processing", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "free innovation", "symbol": "circle", "title": 1, "to": "knowledge diversity", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "free innovation", "symbol": "triangle-up", "title": 1, "to": "market failure", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "free innovation", "symbol": "square", "title": 1, "to": "measurement", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "free innovation", "symbol": "triangle-up", "title": 1, "to": "shared mental models jel: l20, l67, o30, o31", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "free innovation", "symbol": "circle", "title": 1, "to": "team creativity", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "free innovation", "symbol": "circle", "title": 4, "to": "user innovation", "value": 2.0, "width": 1.3333333333333333}, {"color": "silver", "from": "market failure", "symbol": "triangle-up", "title": 1, "to": "user innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": 1, "to": "behavioral innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": 1, "to": "biases", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "collaboration", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 1, "to": "commercial diffusion", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": 1, "to": "community innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "computer games", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 1, "to": "consumer innovators", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "cooperation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": 1, "to": "creativity", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": 1, "to": "crowdfunding platform", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "daily practices", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "decision-makers", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": 1, "to": "diffusion of innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 2, "to": "do-it-yourself", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "efficiency measurement", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": 1, "to": "embedded lead user", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "enabling technology", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": 1, "to": "end user entrepreneur", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "end-users", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "entrepreneurial consumer", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": 1, "to": "entrepreneurship process", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "feminist economics", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 1, "to": "firm-user collaboration", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "front end", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": 1, "to": "household sector", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": 4, "to": "household sector innovation", "value": 2.0, "width": 1.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": 1, "to": "human capital", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "idea quality", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 1, "to": "improvisation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "industry development", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "information processing", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "innovation behavior", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": 1, "to": "innovation diffusion", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "innovation ecosystem", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "innovation management", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 2, "to": "innovation policy", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 1, "to": "innovation strategy", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 1, "to": "internal lead user", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "knowledge acquisition", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "knowledge diversity", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "knowledge transfer", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "knowledge utilization", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 2, "to": "lead user", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 1, "to": "makerspaces", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 1, "to": "marketplaces", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": 1, "to": "measurement", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": 1, "to": "need-solution pairs", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "online innovation communities", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 3, "to": "open innovation", "value": 1.5, "width": 1.0}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": 1, "to": "personality", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "policy", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": 1, "to": "policymakers", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "pricing", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": 1, "to": "problem-solving", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 1, "to": "product development", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": 1, "to": "product innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 1, "to": "product solution", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": 1, "to": "prosumption", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "renewable energy", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "review", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": 1, "to": "russia", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 1, "to": "self-determination theory", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 1, "to": "service ecosystem", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "shared mental models jel: l20, l67, o30, o31", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "small firms", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "social capital", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "social innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": 1, "to": "sources of innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": 1, "to": "sustainability", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": 1, "to": "sustainable innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "team creativity", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": 1, "to": "technique innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": 1, "to": "theory practice gap", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 2, "to": "user entrepreneurship", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": 1, "to": "user generated content", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": 1, "to": "user-manufacturer interaction", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "behavioral innovation", "symbol": "cross", "title": 1, "to": "feminist economics", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "behavioral innovation", "symbol": "triangle-up", "title": 1, "to": "household sector innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "behavioral innovation", "symbol": "triangle-up", "title": 1, "to": "innovation diffusion", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "behavioral innovation", "symbol": "square", "title": 1, "to": "technique innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "feminist economics", "symbol": "diamond", "title": 1, "to": "household sector innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "feminist economics", "symbol": "cross", "title": 1, "to": "innovation diffusion", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "feminist economics", "symbol": "cross", "title": 1, "to": "technique innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "household sector innovation", "symbol": "cross", "title": 1, "to": "do-it-yourself", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "household sector innovation", "symbol": "cross", "title": 1, "to": "innovation diffusion", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "household sector innovation", "symbol": "square", "title": 1, "to": "need-solution pairs", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "household sector innovation", "symbol": "circle", "title": 1, "to": "problem-solving", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "household sector innovation", "symbol": "cross", "title": 1, "to": "prosumption", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "household sector innovation", "symbol": "triangle-up", "title": 1, "to": "technique innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation diffusion", "symbol": "cross", "title": 1, "to": "technique innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "biases", "symbol": "diamond", "title": 1, "to": "decision-makers", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "biases", "symbol": "triangle-up", "title": 1, "to": "sources of innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "biases", "symbol": "triangle-up", "title": 1, "to": "theory practice gap", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "decision-makers", "symbol": "cross", "title": 1, "to": "sources of innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "decision-makers", "symbol": "square", "title": 1, "to": "theory practice gap", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "sources of innovation", "symbol": "circle", "title": 1, "to": "theory practice gap", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "collaboration", "symbol": "cross", "title": 1, "to": "commercial diffusion", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "collaboration", "symbol": "diamond", "title": 1, "to": "innovation policy", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "collaboration", "symbol": "cross", "title": 1, "to": "makerspaces", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "commercial diffusion", "symbol": "triangle-up", "title": 1, "to": "innovation policy", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "commercial diffusion", "symbol": "square", "title": 1, "to": "makerspaces", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation policy", "symbol": "square", "title": 1, "to": "do-it-yourself", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation policy", "symbol": "diamond", "title": 1, "to": "enabling technology", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation policy", "symbol": "square", "title": 1, "to": "makerspaces", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation policy", "symbol": "triangle-up", "title": 1, "to": "product innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation policy", "symbol": "cross", "title": 1, "to": "social innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "community innovation", "symbol": "square", "title": 1, "to": "daily practices", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "community innovation", "symbol": "diamond", "title": 1, "to": "innovation behavior", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "community innovation", "symbol": "diamond", "title": 1, "to": "russia", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "daily practices", "symbol": "triangle-up", "title": 1, "to": "innovation behavior", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "daily practices", "symbol": "triangle-up", "title": 1, "to": "russia", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation behavior", "symbol": "cross", "title": 1, "to": "russia", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "computer games", "symbol": "cross", "title": 1, "to": "consumer innovators", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "computer games", "symbol": "square", "title": 1, "to": "innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "computer games", "symbol": "diamond", "title": 1, "to": "marketplaces", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "computer games", "symbol": "diamond", "title": 1, "to": "pricing", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovators", "symbol": "circle", "title": 1, "to": "innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovators", "symbol": "square", "title": 1, "to": "marketplaces", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "consumer innovators", "symbol": "square", "title": 1, "to": "pricing", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation", "symbol": "circle", "title": 1, "to": "marketplaces", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation", "symbol": "diamond", "title": 1, "to": "pricing", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "marketplaces", "symbol": "square", "title": 1, "to": "pricing", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "diffusion of innovation", "symbol": "cross", "title": 1, "to": "online innovation communities", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "diffusion of innovation", "symbol": "cross", "title": 1, "to": "open innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "diffusion of innovation", "symbol": "triangle-up", "title": 1, "to": "renewable energy", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "need-solution pairs", "symbol": "diamond", "title": 1, "to": "problem-solving", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "online innovation communities", "symbol": "circle", "title": 1, "to": "open innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "online innovation communities", "symbol": "square", "title": 1, "to": "renewable energy", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "open innovation", "symbol": "diamond", "title": 1, "to": "end-users", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "open innovation", "symbol": "triangle-up", "title": 1, "to": "improvisation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "open innovation", "symbol": "cross", "title": 1, "to": "knowledge acquisition", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "open innovation", "symbol": "cross", "title": 1, "to": "knowledge utilization", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "open innovation", "symbol": "cross", "title": 1, "to": "policy", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "open innovation", "symbol": "circle", "title": 1, "to": "policymakers", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "open innovation", "symbol": "cross", "title": 1, "to": "renewable energy", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "open innovation", "symbol": "diamond", "title": 1, "to": "sustainable innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "open innovation", "symbol": "circle", "title": 1, "to": "user generated content", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "personality", "symbol": "circle", "title": 1, "to": "product solution", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "cooperation", "symbol": "square", "title": 1, "to": "front end", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "cooperation", "symbol": "diamond", "title": 1, "to": "lead user", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "cooperation", "symbol": "circle", "title": 1, "to": "user-manufacturer interaction", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "front end", "symbol": "cross", "title": 1, "to": "lead user", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "front end", "symbol": "cross", "title": 1, "to": "user-manufacturer interaction", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": 1, "to": "creativity", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "lead user", "symbol": "diamond", "title": 1, "to": "embedded lead user", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "lead user", "symbol": "square", "title": 1, "to": "idea quality", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": 1, "to": "internal lead user", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "lead user", "symbol": "cross", "title": 1, "to": "user-manufacturer interaction", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "creativity", "symbol": "circle", "title": 1, "to": "embedded lead user", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "creativity", "symbol": "square", "title": 1, "to": "idea quality", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "creativity", "symbol": "diamond", "title": 1, "to": "internal lead user", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "embedded lead user", "symbol": "circle", "title": 1, "to": "idea quality", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "embedded lead user", "symbol": "triangle-up", "title": 1, "to": "internal lead user", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "idea quality", "symbol": "cross", "title": 1, "to": "internal lead user", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "crowdfunding platform", "symbol": "triangle-up", "title": 1, "to": "human capital", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "crowdfunding platform", "symbol": "square", "title": 1, "to": "self-determination theory", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "crowdfunding platform", "symbol": "circle", "title": 1, "to": "social capital", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "crowdfunding platform", "symbol": "cross", "title": 1, "to": "user entrepreneurship", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "human capital", "symbol": "cross", "title": 1, "to": "self-determination theory", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "human capital", "symbol": "cross", "title": 1, "to": "social capital", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "human capital", "symbol": "circle", "title": 1, "to": "user entrepreneurship", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "self-determination theory", "symbol": "triangle-up", "title": 1, "to": "social capital", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "self-determination theory", "symbol": "circle", "title": 1, "to": "user entrepreneurship", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "social capital", "symbol": "cross", "title": 1, "to": "user entrepreneurship", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user entrepreneurship", "symbol": "cross", "title": 1, "to": "end user entrepreneur", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user entrepreneurship", "symbol": "cross", "title": 1, "to": "entrepreneurial consumer", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user entrepreneurship", "symbol": "circle", "title": 1, "to": "entrepreneurship process", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation ecosystem", "symbol": "square", "title": 1, "to": "service ecosystem", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation ecosystem", "symbol": "diamond", "title": 1, "to": "sustainability", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "knowledge transfer", "symbol": "diamond", "title": 1, "to": "product development", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "knowledge transfer", "symbol": "diamond", "title": 1, "to": "small firms", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "product development", "symbol": "cross", "title": 1, "to": "small firms", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "service ecosystem", "symbol": "cross", "title": 1, "to": "sustainability", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "do-it-yourself", "symbol": "triangle-up", "title": 1, "to": "enabling technology", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "do-it-yourself", "symbol": "cross", "title": 1, "to": "product innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "do-it-yourself", "symbol": "diamond", "title": 1, "to": "prosumption", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "do-it-yourself", "symbol": "square", "title": 1, "to": "social innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "enabling technology", "symbol": "circle", "title": 1, "to": "product innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "enabling technology", "symbol": "circle", "title": 1, "to": "social innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "product innovation", "symbol": "square", "title": 1, "to": "social innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "efficiency measurement", "symbol": "cross", "title": 1, "to": "industry development", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "end user entrepreneur", "symbol": "triangle-up", "title": 1, "to": "entrepreneurial consumer", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "end user entrepreneur", "symbol": "cross", "title": 1, "to": "entrepreneurship process", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "entrepreneurial consumer", "symbol": "circle", "title": 1, "to": "entrepreneurship process", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "end-users", "symbol": "cross", "title": 1, "to": "policy", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "end-users", "symbol": "circle", "title": 1, "to": "policymakers", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "end-users", "symbol": "circle", "title": 1, "to": "sustainable innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "policy", "symbol": "triangle-up", "title": 1, "to": "policymakers", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "policy", "symbol": "diamond", "title": 1, "to": "sustainable innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "policymakers", "symbol": "square", "title": 1, "to": "sustainable innovation", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "firm-user collaboration", "symbol": "circle", "title": 1, "to": "innovation management", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "firm-user collaboration", "symbol": "cross", "title": 1, "to": "innovation strategy", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "firm-user collaboration", "symbol": "circle", "title": 1, "to": "review", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation management", "symbol": "diamond", "title": 1, "to": "innovation strategy", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation management", "symbol": "circle", "title": 1, "to": "review", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation strategy", "symbol": "circle", "title": 1, "to": "review", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "household sector", "symbol": "circle", "title": 1, "to": "information processing", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "household sector", "symbol": "square", "title": 1, "to": "knowledge diversity", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "household sector", "symbol": "square", "title": 1, "to": "shared mental models jel: l20, l67, o30, o31", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "household sector", "symbol": "circle", "title": 1, "to": "team creativity", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "information processing", "symbol": "circle", "title": 1, "to": "knowledge diversity", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "information processing", "symbol": "diamond", "title": 1, "to": "shared mental models jel: l20, l67, o30, o31", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "information processing", "symbol": "square", "title": 1, "to": "team creativity", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "knowledge diversity", "symbol": "square", "title": 1, "to": "shared mental models jel: l20, l67, o30, o31", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "knowledge diversity", "symbol": "circle", "title": 1, "to": "team creativity", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "shared mental models jel: l20, l67, o30, o31", "symbol": "diamond", "title": 1, "to": "team creativity", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "improvisation", "symbol": "cross", "title": 1, "to": "knowledge acquisition", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "improvisation", "symbol": "triangle-up", "title": 1, "to": "knowledge utilization", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "improvisation", "symbol": "diamond", "title": 1, "to": "user generated content", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "knowledge acquisition", "symbol": "triangle-up", "title": 1, "to": "knowledge utilization", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "knowledge acquisition", "symbol": "circle", "title": 1, "to": "user generated content", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "knowledge utilization", "symbol": "diamond", "title": 1, "to": "user generated content", "value": 0.5, "width": 0.3333333333333333}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
