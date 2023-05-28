@@ -4,6 +4,7 @@ import altair as alt
 import pandas as pd
 import os
 import pickle
+import openpyxl
 
 author_df = pd.read_excel(r'Village Elders_id.xlsx', sheet_name='Scopus ID DB')
 
