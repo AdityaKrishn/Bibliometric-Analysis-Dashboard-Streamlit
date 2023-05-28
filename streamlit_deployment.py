@@ -1,3 +1,12 @@
+import subprocess
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+# Example usage:
+install('openpyxl')
+
 import streamlit as st
 import streamlit.components.v1 as components
 import altair as alt
