@@ -103,7 +103,7 @@ with st.container():
 
         st.subheader("Co-authorship Network of OUI Elders")
         try:
-            path = '/tmp'
+            path = '/OUI Authors Network'
             HtmlFile1 = open(f'{path}/author_names.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
         except:
             path = 'Scopus Iteration'
@@ -115,7 +115,7 @@ with st.container():
 with st.container():   
         st.subheader("Co-authorship Network of OUI Elders Citers")     
         try:
-            path = '/tmp'
+            path = '/OUI Authors Network'
             HtmlFile2 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
             
         except:
@@ -130,7 +130,7 @@ with st.container():
         
         st.subheader("Co-occurrence Keyword Network of OUI Elder Papers")
         try:
-            path = '/tmp'
+            path = '/OUI Authors Network'
             HtmlFile3 = open(f'{path}/authkeywords_OUI_Elders.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
         except:
             path = 'Scopus Iteration'
@@ -142,7 +142,7 @@ with st.container():
 with st.container():   
         st.subheader("Co-occurrence Keyword Network of OUI Elders Citers Papers")    
         try:
-            path = '/tmp'
+            path = '/OUI Authors Network'
             HtmlFile4 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
         except:
             path = '/Scopus Iteration'
@@ -154,7 +154,7 @@ with st.container():
 with st.container():   
         st.subheader("Bibliographic coupling of Journals of OUI Elders Citers Papers")    
         try:
-            path = '/tmp'
+            path = '/OUI Authors Network'
             HtmlFile5 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
         except:
             path = '/Scopus Iteration'
