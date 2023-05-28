@@ -109,7 +109,7 @@ with st.container():
             path = 'Scopus Iteration'
             # HtmlFile1 = open(os.getcwd()+r"\Scopus Iteration\author_names.html", 'r')
 
-            HtmlFile1 = open(os.getcwd()+r"OUI Authors Network/author_names_OUI_" + option + r".html", 'r')
+            HtmlFile1 = open(os.getcwd()+r"/OUI Authors Network/author_names_OUI_" + option + r".html", 'r')
         components.html(HtmlFile1.read(), height=700)
 
 with st.container():   
@@ -122,7 +122,7 @@ with st.container():
             path = '/Scopus Iteration'
             # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
         
-            HtmlFile2 = open(os.getcwd()+r"OUI Authors Network/author_names_citation_" + option + r".html", 'r')
+            HtmlFile2 = open(os.getcwd()+r"/OUI Authors Network/author_names_citation_" + option + r".html", 'r')
         components.html(HtmlFile2.read(), height=700)
 
 
@@ -136,7 +136,7 @@ with st.container():
             path = 'Scopus Iteration'
             # HtmlFile3 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_OUI_Elders.html", 'r')
             
-            HtmlFile3 = open(os.getcwd()+r"OUI Authors Network/authkeywords_OUI_" + option + r".html", 'r')
+            HtmlFile3 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_OUI_" + option + r".html", 'r')
         components.html(HtmlFile3.read(), height=700)
 
 with st.container():   
@@ -148,7 +148,7 @@ with st.container():
             path = '/Scopus Iteration'
             # HtmlFile4 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_citers.html", 'r')
           
-            HtmlFile4 = open(os.getcwd()+r"OUI Authors Network/authkeywords_citations_" + option + r".html", 'r')
+            HtmlFile4 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_citations_" + option + r".html", 'r')
         components.html(HtmlFile4.read(), height=700)
 
 with st.container():   
