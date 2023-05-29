@@ -163,4 +163,14 @@ with st.container():
             HtmlFile5 = open(r"publicationNames_Citers1.html", 'r')
         components.html(HtmlFile5.read(), height=700)
 
-
+with st.container():   
+        st.subheader("Topic Modelling of OUI Elders Citers Papers abstracts")   
+        try:
+            path = '/tmp'
+            HtmlFile6 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
+        except:
+            path = '/Scopus Iteration'
+            # HtmlFile4 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_citers.html", 'r')
+          
+            HtmlFile6 = open(os.getcwd()+r"\Scopus Iteration\LDA10.html", 'r')
+        components.html(HtmlFile6.read(), height=750)
