@@ -172,5 +172,5 @@ with st.container():
             path = '/Scopus Iteration'
             # HtmlFile4 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_citers.html", 'r')
           
-            HtmlFile6 = open(os.getcwd()+r"\Scopus Iteration\LDA10.html", 'r')
+            HtmlFile6 = open(r"LDA10.html", 'r')
         components.html(HtmlFile6.read(), height=750)
