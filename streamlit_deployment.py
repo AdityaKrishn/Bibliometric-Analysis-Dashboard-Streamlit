@@ -80,10 +80,10 @@ files = [int(i) for i in files]
 author_names = author_df[author_df['Value'].isin(files)]['Full Name'].tolist()
 
 
-option = st.selectbox('Select the OUI elder to view the network', author_names)
+options = st.selectbox('Select the OUI elder to view the network', author_names)
 
 #select the exact name from the array
-author_name = author_names[0]
+author_name = str(options)
 
 st.write('You selected:', author_name)
 
@@ -126,6 +126,20 @@ with st.container():
         components.html(HtmlFile2.read(), height=700)
 
 
+with st.container():   
+        st.subheader("Co-authorship Network of combined OUI Elders and their Citers")     
+        try:
+            path = '/OUI Authors Network'
+            HtmlFile2 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
+            
+        except:
+            path = '/Scopus Iteration'
+            # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
+        
+            HtmlFile3 = open(os.getcwd()+r"/OUI Authors Network/author_names_combined_" + option + r".html", 'r')
+        components.html(HtmlFile3.read(), height=700)
+
+
 with st.container():
         
         st.subheader("Co-occurrence Keyword Network of OUI Elder Papers")
@@ -136,8 +150,8 @@ with st.container():
             path = 'Scopus Iteration'
             # HtmlFile3 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_OUI_Elders.html", 'r')
             
-            HtmlFile3 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_OUI_" + option + r".html", 'r')
-        components.html(HtmlFile3.read(), height=700)
+            HtmlFile4 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_OUI_" + option + r".html", 'r')
+        components.html(HtmlFile4.read(), height=700)
 
 with st.container():   
         st.subheader("Co-occurrence Keyword Network of OUI Elders Citers Papers")    
@@ -148,20 +162,33 @@ with st.container():
             path = '/Scopus Iteration'
             # HtmlFile4 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_citers.html", 'r')
           
-            HtmlFile4 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_citations_" + option + r".html", 'r')
-        components.html(HtmlFile4.read(), height=700)
+            HtmlFile5 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_citations_" + option + r".html", 'r')
+        components.html(HtmlFile5.read(), height=700)
+
 
 with st.container():   
-        st.subheader("Bibliographic coupling of Journals of OUI Elders Citers Papers")    
+        st.subheader("Co-occurrence Keyword Network of combined OUI Elders and their Citers")    
         try:
             path = '/OUI Authors Network'
-            HtmlFile5 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
+            HtmlFile4 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
         except:
             path = '/Scopus Iteration'
             # HtmlFile4 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_citers.html", 'r')
           
-            HtmlFile5 = open(r"publicationNames_Citers1.html", 'r')
-        components.html(HtmlFile5.read(), height=700)
+            HtmlFile6 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_combined_" + option + r".html", 'r')
+        components.html(HtmlFile6.read(), height=700)
+
+# with st.container():   
+#         st.subheader("Bibliographic coupling of Journals of OUI Elders Citers Papers")    
+#         try:
+#             path = '/OUI Authors Network'
+#             HtmlFile5 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
+#         except:
+#             path = '/Scopus Iteration'
+#             # HtmlFile4 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_citers.html", 'r')
+          
+#             HtmlFile5 = open(r"publicationNames_Citers1.html", 'r')
+#         components.html(HtmlFile5.read(), height=700)
 
 with st.container():   
         st.subheader("Topic Modelling of OUI Elders Citers Papers abstracts")   
