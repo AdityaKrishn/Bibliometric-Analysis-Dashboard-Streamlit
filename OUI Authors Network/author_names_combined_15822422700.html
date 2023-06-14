@@ -1,0 +1,349 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 1000px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "teal", "id": "afuah, allan", "label": "afuah, allan", "shape": "dot", "size": 2, "title": ["afuah, allan", 2]}, {"color": "teal", "id": "bastian, bettina", "label": "bastian, bettina", "shape": "dot", "size": 2, "title": ["bastian, bettina", 2]}, {"color": "gold", "id": "arai, yasuhiro", "label": "arai, yasuhiro", "shape": "dot", "size": 1, "title": ["arai, yasuhiro", 1]}, {"color": "gold", "id": "kinukawa, shinya", "label": "kinukawa, shinya", "shape": "dot", "size": 1, "title": ["kinukawa, shinya", 1]}, {"color": "green", "id": "bilgram, volker", "label": "bilgram, volker", "shape": "dot", "size": 3, "title": ["bilgram, volker", 3]}, {"color": "green", "id": "gutstein, adele", "label": "gutstein, adele", "shape": "dot", "size": 2, "title": ["gutstein, adele", 2]}, {"color": "green", "id": "marchuk, anna", "label": "marchuk, anna", "shape": "dot", "size": 2, "title": ["marchuk, anna", 2]}, {"color": "pink", "id": "block, j\u00f6rn h.", "label": "block, j\u00f6rn h.", "shape": "dot", "size": 3, "title": ["block, j\u00f6rn h.", 3]}, {"color": "pink", "id": "henkel, joachim", "label": "henkel, joachim", "shape": "dot", "size": 4, "title": ["henkel, joachim", 4]}, {"color": "pink", "id": "schweisfurth, tim g.", "label": "schweisfurth, tim g.", "shape": "dot", "size": 3, "title": ["schweisfurth, tim g.", 3]}, {"color": "pink", "id": "stiegler, annika", "label": "stiegler, annika", "shape": "dot", "size": 3, "title": ["stiegler, annika", 3]}, {"color": "teal", "id": "bogers, marcel", "label": "bogers, marcel", "shape": "dot", "size": 3, "title": ["bogers, marcel", 3]}, {"color": "teal", "id": "west, joel", "label": "west, joel", "shape": "dot", "size": 1, "title": ["west, joel", 1]}, {"color": "lime", "id": "bortoluzzi, guido", "label": "bortoluzzi, guido", "shape": "dot", "size": 2, "title": ["bortoluzzi, guido", 2]}, {"color": "lime", "id": "yordanova, zornitsa", "label": "yordanova, zornitsa", "shape": "dot", "size": 2, "title": ["yordanova, zornitsa", 2]}, {"color": "green", "id": "brem, alexander", "label": "brem, alexander", "shape": "dot", "size": 3, "title": ["brem, alexander", 3]}, {"color": "silver", "id": "b\u00e4ckstr\u00f6m, izabelle", "label": "b\u00e4ckstr\u00f6m, izabelle", "shape": "dot", "size": 1, "title": ["b\u00e4ckstr\u00f6m, izabelle", 1]}, {"color": "silver", "id": "bengtsson, lars", "label": "bengtsson, lars", "shape": "dot", "size": 1, "title": ["bengtsson, lars", 1]}, {"color": "crimson", "id": "dahlander, linus", "label": "dahlander, linus", "shape": "dot", "size": 1, "title": ["dahlander, linus", 1]}, {"color": "crimson", "id": "piezunka, henning", "label": "piezunka, henning", "shape": "dot", "size": 1, "title": ["piezunka, henning", 1]}, {"color": "red", "id": "fritzsche, albrecht", "label": "fritzsche, albrecht", "shape": "dot", "size": 2, "title": ["fritzsche, albrecht", 2]}, {"color": "red", "id": "moeslein, kathrin m.", "label": "moeslein, kathrin m.", "shape": "dot", "size": 2, "title": ["moeslein, kathrin m.", 2]}, {"color": "magenta", "id": "fursov, konstantin", "label": "fursov, konstantin", "shape": "dot", "size": 1, "title": ["fursov, konstantin", 1]}, {"color": "magenta", "id": "linton, jonathan", "label": "linton, jonathan", "shape": "dot", "size": 1, "title": ["linton, jonathan", 1]}, {"color": "lime", "id": "ghasemzadeh, khatereh", "label": "ghasemzadeh, khatereh", "shape": "dot", "size": 2, "title": ["ghasemzadeh, khatereh", 2]}, {"color": "navy", "id": "giachetti, claudio", "label": "giachetti, claudio", "shape": "dot", "size": 2, "title": ["giachetti, claudio", 2]}, {"color": "navy", "id": "de gennaro, pamela", "label": "de gennaro, pamela", "shape": "dot", "size": 2, "title": ["de gennaro, pamela", 2]}, {"color": "black", "id": "harrison, debbie", "label": "harrison, debbie", "shape": "dot", "size": 1, "title": ["harrison, debbie", 1]}, {"color": "black", "id": "waluszewski, alexandra", "label": "waluszewski, alexandra", "shape": "dot", "size": 1, "title": ["waluszewski, alexandra", 1]}, {"color": "grey", "id": "hassan, salah s.", "label": "hassan, salah s.", "shape": "dot", "size": 2, "title": ["hassan, salah s.", 2]}, {"color": "grey", "id": "mourad, maha", "label": "mourad, maha", "shape": "dot", "size": 2, "title": ["mourad, maha", 2]}, {"color": "grey", "id": "tolba, ahmed h.", "label": "tolba, ahmed h.", "shape": "dot", "size": 2, "title": ["tolba, ahmed h.", 2]}, {"color": "pink", "id": "hippel, eric von", "label": "hippel, eric von", "shape": "dot", "size": 1, "title": ["hippel, eric von", 1]}, {"color": "maroon", "id": "jeong, yujin", "label": "jeong, yujin", "shape": "dot", "size": 3, "title": ["jeong, yujin", 3]}, {"color": "maroon", "id": "lee, keeeun", "label": "lee, keeeun", "shape": "dot", "size": 3, "title": ["lee, keeeun", 3]}, {"color": "maroon", "id": "lee, sungjoo", "label": "lee, sungjoo", "shape": "dot", "size": 3, "title": ["lee, sungjoo", 3]}, {"color": "orange", "id": "koch, stefan", "label": "koch, stefan", "shape": "dot", "size": 2, "title": ["koch, stefan", 2]}, {"color": "orange", "id": "bierbamer, michael", "label": "bierbamer, michael", "shape": "dot", "size": 1, "title": ["bierbamer, michael", 1]}, {"color": "orange", "id": "guceri-ucar, gozem", "label": "guceri-ucar, gozem", "shape": "dot", "size": 1, "title": ["guceri-ucar, gozem", 1]}, {"color": "navy", "id": "marchi, gianluca", "label": "marchi, gianluca", "shape": "dot", "size": 2, "title": ["marchi, gianluca", 2]}, {"color": "yellow", "id": "mendon\u00e7a, joana", "label": "mendon\u00e7a, joana", "shape": "dot", "size": 1, "title": ["mendon\u00e7a, joana", 1]}, {"color": "yellow", "id": "reis, anabela", "label": "reis, anabela", "shape": "dot", "size": 1, "title": ["reis, anabela", 1]}, {"color": "red", "id": "naik, hari suman", "label": "naik, hari suman", "shape": "dot", "size": 2, "title": ["naik, hari suman", 2]}, {"color": "blue", "id": "nielsen, kristian roed", "label": "nielsen, kristian roed", "shape": "dot", "size": 2, "title": ["nielsen, kristian roed", 2]}, {"color": "blue", "id": "reisch, lucia a.", "label": "reisch, lucia a.", "shape": "dot", "size": 2, "title": ["reisch, lucia a.", 2]}, {"color": "blue", "id": "th\u00f8gersen, john", "label": "th\u00f8gersen, john", "shape": "dot", "size": 2, "title": ["th\u00f8gersen, john", 2]}, {"color": "purple", "id": "oliveira, pedro", "label": "oliveira, pedro", "shape": "dot", "size": 2, "title": ["oliveira, pedro", 2]}, {"color": "purple", "id": "veloso, francisco", "label": "veloso, francisco", "shape": "dot", "size": 2, "title": ["veloso, francisco", 2]}, {"color": "brown", "id": "peine, alexander", "label": "peine, alexander", "shape": "dot", "size": 1, "title": ["peine, alexander", 1]}, {"color": "brown", "id": "herrmann, andrea m.", "label": "herrmann, andrea m.", "shape": "dot", "size": 1, "title": ["herrmann, andrea m.", 1]}, {"color": "indigo", "id": "pongtanalert, kritinee", "label": "pongtanalert, kritinee", "shape": "dot", "size": 1, "title": ["pongtanalert, kritinee", 1]}, {"color": "indigo", "id": "ogawa, susumu", "label": "ogawa, susumu", "shape": "dot", "size": 1, "title": ["ogawa, susumu", 1]}, {"color": "cyan", "id": "svensson, peter o.", "label": "svensson, peter o.", "shape": "dot", "size": 1, "title": ["svensson, peter o.", 1]}, {"color": "cyan", "id": "hartmann, rasmus koss", "label": "hartmann, rasmus koss", "shape": "dot", "size": 1, "title": ["hartmann, rasmus koss", 1]}, {"color": "purple", "id": "van der boor, paul", "label": "van der boor, paul", "shape": "dot", "size": 2, "title": ["van der boor, paul", 2]}, {"color": "olive", "id": "wang, yonggui", "label": "wang, yonggui", "shape": "dot", "size": 1, "title": ["wang, yonggui", 1]}, {"color": "olive", "id": "li, dahui", "label": "li, dahui", "shape": "dot", "size": 1, "title": ["li, dahui", 1]}, {"color": "maroon", "id": "yoon, byungun", "label": "yoon, byungun", "shape": "dot", "size": 3, "title": ["yoon, byungun", 3]}]);
+                  edges = new vis.DataSet([{"color": "silver", "from": "afuah, allan", "symbol": "diamond", "title": 2, "to": "bastian, bettina", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "afuah, allan", "symbol": "square", "title": 2, "to": "bogers, marcel", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "bastian, bettina", "symbol": "triangle-up", "title": 2, "to": "bogers, marcel", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "arai, yasuhiro", "symbol": "cross", "title": 1, "to": "kinukawa, shinya", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "bilgram, volker", "symbol": "diamond", "title": 1, "to": "gutstein, adele", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "bilgram, volker", "symbol": "diamond", "title": 1, "to": "marchuk, anna", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "bilgram, volker", "symbol": "cross", "title": 2, "to": "brem, alexander", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "gutstein, adele", "symbol": "cross", "title": 1, "to": "brem, alexander", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "marchuk, anna", "symbol": "cross", "title": 1, "to": "brem, alexander", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "block, j\u00f6rn h.", "symbol": "square", "title": 1, "to": "henkel, joachim", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "block, j\u00f6rn h.", "symbol": "square", "title": 1, "to": "schweisfurth, tim g.", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "block, j\u00f6rn h.", "symbol": "cross", "title": 1, "to": "stiegler, annika", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "henkel, joachim", "symbol": "circle", "title": 1, "to": "hippel, eric von", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "henkel, joachim", "symbol": "cross", "title": 1, "to": "schweisfurth, tim g.", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "henkel, joachim", "symbol": "cross", "title": 1, "to": "stiegler, annika", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "schweisfurth, tim g.", "symbol": "circle", "title": 1, "to": "stiegler, annika", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "bogers, marcel", "symbol": "cross", "title": 3, "to": "west, joel", "value": 1.5, "width": 1.0}, {"color": "silver", "from": "bortoluzzi, guido", "symbol": "circle", "title": 2, "to": "yordanova, zornitsa", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "bortoluzzi, guido", "symbol": "circle", "title": 2, "to": "ghasemzadeh, khatereh", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "yordanova, zornitsa", "symbol": "cross", "title": 2, "to": "ghasemzadeh, khatereh", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "b\u00e4ckstr\u00f6m, izabelle", "symbol": "square", "title": 1, "to": "bengtsson, lars", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "dahlander, linus", "symbol": "circle", "title": 2, "to": "piezunka, henning", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "fritzsche, albrecht", "symbol": "square", "title": 1, "to": "moeslein, kathrin m.", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "fritzsche, albrecht", "symbol": "square", "title": 1, "to": "naik, hari suman", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "moeslein, kathrin m.", "symbol": "circle", "title": 1, "to": "naik, hari suman", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "fursov, konstantin", "symbol": "cross", "title": 2, "to": "linton, jonathan", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "giachetti, claudio", "symbol": "circle", "title": 1, "to": "de gennaro, pamela", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "giachetti, claudio", "symbol": "diamond", "title": 1, "to": "marchi, gianluca", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "de gennaro, pamela", "symbol": "cross", "title": 1, "to": "marchi, gianluca", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "harrison, debbie", "symbol": "diamond", "title": 1, "to": "waluszewski, alexandra", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "hassan, salah s.", "symbol": "square", "title": 1, "to": "mourad, maha", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "hassan, salah s.", "symbol": "square", "title": 1, "to": "tolba, ahmed h.", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "mourad, maha", "symbol": "circle", "title": 1, "to": "tolba, ahmed h.", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "jeong, yujin", "symbol": "square", "title": 1, "to": "lee, keeeun", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "jeong, yujin", "symbol": "circle", "title": 1, "to": "lee, sungjoo", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "jeong, yujin", "symbol": "cross", "title": 1, "to": "yoon, byungun", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "lee, keeeun", "symbol": "triangle-up", "title": 1, "to": "lee, sungjoo", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "lee, keeeun", "symbol": "circle", "title": 1, "to": "yoon, byungun", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "lee, sungjoo", "symbol": "square", "title": 1, "to": "yoon, byungun", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "koch, stefan", "symbol": "cross", "title": 2, "to": "bierbamer, michael", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "koch, stefan", "symbol": "cross", "title": 2, "to": "guceri-ucar, gozem", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "mendon\u00e7a, joana", "symbol": "triangle-up", "title": 1, "to": "reis, anabela", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "nielsen, kristian roed", "symbol": "triangle-up", "title": 1, "to": "reisch, lucia a.", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "nielsen, kristian roed", "symbol": "triangle-up", "title": 1, "to": "th\u00f8gersen, john", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "reisch, lucia a.", "symbol": "cross", "title": 1, "to": "th\u00f8gersen, john", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "oliveira, pedro", "symbol": "diamond", "title": 1, "to": "veloso, francisco", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "oliveira, pedro", "symbol": "circle", "title": 1, "to": "van der boor, paul", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "veloso, francisco", "symbol": "diamond", "title": 1, "to": "van der boor, paul", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "peine, alexander", "symbol": "cross", "title": 4, "to": "herrmann, andrea m.", "value": 2.0, "width": 1.3333333333333333}, {"color": "silver", "from": "pongtanalert, kritinee", "symbol": "diamond", "title": 1, "to": "ogawa, susumu", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "svensson, peter o.", "symbol": "triangle-up", "title": 2, "to": "hartmann, rasmus koss", "value": 1.0, "width": 0.6666666666666666}, {"color": "silver", "from": "wang, yonggui", "symbol": "circle", "title": 1, "to": "li, dahui", "value": 0.5, "width": 0.3333333333333333}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
