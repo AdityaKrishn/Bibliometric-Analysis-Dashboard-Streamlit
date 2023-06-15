@@ -111,6 +111,15 @@ with st.container():
 
             HtmlFile1 = open(os.getcwd()+r"/OUI Authors Network/author_names_OUI_" + option + r".html", 'r')
         components.html(HtmlFile1.read(), height=700)
+        try:
+            df_html1 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_OUI_' + option + r'.html_communities.csv')
+            df_html1 = df_html1.reindex(sorted(df_html1.columns), axis=1)
+            df_html1.columns = ['community ' + str(col) for col in df_html1.columns]
+            df_html1 = df_html1.dropna(how='all')
+            df_html1 = df_html1.fillna('')
+            st.dataframe(df_html1, hide_index=True)
+        except:
+            print(sys.exc_info()[0])
 
 with st.container():   
         st.subheader("Co-authorship Network of OUI Elders Citers")     
@@ -124,13 +133,21 @@ with st.container():
         
             HtmlFile2 = open(os.getcwd()+r"/OUI Authors Network/author_names_citation_" + option + r".html", 'r')
         components.html(HtmlFile2.read(), height=700)
-
+        try:
+            df_html2 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_citation_' + option + r'.html_communities.csv')
+            df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+            df_html2.columns = ['community ' + str(col) for col in df_html2.columns]
+            df_html2 = df_html2.dropna(how='all')
+            df_html2 = df_html2.fillna('')
+            st.dataframe(df_html2, hide_index=True)
+        except:
+            print(sys.exc_info()[0])
 
 with st.container():   
         st.subheader("Co-authorship Network of combined OUI Elders and their Citers")     
         try:
             path = '/OUI Authors Network'
-            HtmlFile2 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
+            HtmlFile3 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
             
         except:
             path = '/Scopus Iteration'
@@ -138,45 +155,79 @@ with st.container():
         
             HtmlFile3 = open(os.getcwd()+r"/OUI Authors Network/author_names_combined_" + option + r".html", 'r')
         components.html(HtmlFile3.read(), height=700)
-
+        try:
+            df_html3 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_citation_' + option + r'.html_communities.csv')
+            df_html3 = df_html3.reindex(sorted(df_html3.columns), axis=1)
+            df_html3.columns = ['community ' + str(col) for col in df_html3.columns]
+            df_html3 = df_html3.dropna(how='all')
+            df_html3 = df_html3.fillna('')
+            st.dataframe(df_html3, hide_index=True)
+        except:
+            print(sys.exc_info()[0])
 
 with st.container():
         
         st.subheader("Co-occurrence Keyword Network of OUI Elder Papers")
         try:
             path = '/OUI Authors Network'
-            HtmlFile3 = open(f'{path}/authkeywords_OUI_Elders.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
+            HtmlFile4 = open(f'{path}/authkeywords_OUI_Elders.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
         except:
             path = 'Scopus Iteration'
             # HtmlFile3 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_OUI_Elders.html", 'r')
             
             HtmlFile4 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_OUI_" + option + r".html", 'r')
         components.html(HtmlFile4.read(), height=700)
+        try:
+            df_html4 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_citation_' + option + r'.html_communities.csv')
+            df_html4 = df_html4.reindex(sorted(df_html4.columns), axis=1)
+            df_html4.columns = ['community ' + str(col) for col in df_html4.columns]
+            df_html4 = df_html4.dropna(how='all')
+            df_html4 = df_html4.fillna('')
+            st.dataframe(df_html4, hide_index=True)
+        except:
+            print(sys.exc_info()[0])
 
 with st.container():   
         st.subheader("Co-occurrence Keyword Network of OUI Elders Citers Papers")    
         try:
             path = '/OUI Authors Network'
-            HtmlFile4 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
+            HtmlFile5 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
         except:
             path = '/Scopus Iteration'
             # HtmlFile4 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_citers.html", 'r')
           
             HtmlFile5 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_citations_" + option + r".html", 'r')
         components.html(HtmlFile5.read(), height=700)
-
+        try:
+            df_html5 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_citation_' + option + r'.html_communities.csv')
+            df_html5 = df_html5.reindex(sorted(df_html5.columns), axis=1)
+            df_html5.columns = ['community ' + str(col) for col in df_html5.columns]
+            df_html5 = df_html5.dropna(how='all')
+            df_html5 = df_html5.fillna('')
+            st.dataframe(df_html5, hide_index=True)
+        except:
+            print(sys.exc_info()[0])
 
 with st.container():   
         st.subheader("Co-occurrence Keyword Network of combined OUI Elders and their Citers")    
         try:
             path = '/OUI Authors Network'
-            HtmlFile4 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
+            HtmlFile6 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
         except:
             path = '/Scopus Iteration'
             # HtmlFile4 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_citers.html", 'r')
           
             HtmlFile6 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_combined_" + option + r".html", 'r')
         components.html(HtmlFile6.read(), height=700)
+        try:
+            df_html6 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_citation_' + option + r'.html_communities.csv')
+            df_html6 = df_html6.reindex(sorted(df_html6.columns), axis=1)
+            df_html6.columns = ['community ' + str(col) for col in df_html6.columns]
+            df_html6 = df_html6.dropna(how='all')
+            df_html6 = df_html6.fillna('')
+            st.dataframe(df_html6, hide_index=True)
+        except:
+            print(sys.exc_info()[0])
 
 # with st.container():   
 #         st.subheader("Bibliographic coupling of Journals of OUI Elders Citers Papers")    
