@@ -1,23 +1,22 @@
-maroon,teal,gold,orange,green,yellow,blue,purple,red
-3d community,user innovation,acquisition mechanism,articulation,case study,commercial diffusion,combinatory search,cooperation,crowdfunding
-3d printing,behavioral innovation,crowdsourcing,domestication,continuous interaction,consumer innovation,implicit referrals,front end,crowdfunding platform
-collaboration,feminist economics,idea competitions,script,fan innovation,innovation policy,inexact referrals,lead user,entrepreneurship
-diffusion,household sector innovation,innovation contests,use knowledge,social presence,makerspaces,intermediate referrals,user-manufacturer interaction,innovation
-ideal types,innovation diffusion,innovation tournaments,,,community innovation,lead users,creativity,latent dirichlet allocation
-user entrepreneurship,technique innovation,intelligence,,,daily practices,network search,embedded lead user,topic modelling
-innovation ecosystem,co-creation,open innovation,,,innovation behavior,pyramiding,idea quality,user communities
-service ecosystem,knowledge,public relations,,,russia,rare research subjects,internal lead user,user entrepreneur
-sustainability,sources of innovation,distributed innovation,,,diffusion of innovation,,netnography,human capital
-end user entrepreneur,theory,product development,,,online innovation communities,,social media,self-determination theory
-entrepreneurial consumer,entry strategy,user generated content (ugc),,,renewable energy,,elu,social capital
-entrepreneurship process,nascent industries,end-users,,,do-it-yourself,,employee participation,
-lead user theory,pre-entry experience,policy,,,enabling technology,,sustainability innovation,
-smes,product portfolio,policymakers,,,product innovation,,sustainable development,
-,facilitation,sustainable innovation,,,social innovation,,lead user method,
-,healthcare,improvisation,,,,,lead user workshop,
-,organisational support mechanisms,knowledge acquisition,,,,,user involvement,
-,public hospital,knowledge utilization,,,,,,
-,firm-user collaboration,user generated content,,,,,,
-,innovation management,market entry strategy,,,,,,
-,innovation strategy,user-designed products,,,,,,
-,review,,,,,,,
+maroon,teal,gold,orange,green,red,blue,purple,yellow
+3d community,user innovation,acquisition mechanism,behavioral innovation,case study,commercial diffusion,combinatory search,cooperation,crowdfunding
+3d printing,articulation,crowdsourcing,feminist economics,continuous interaction,consumer innovation,implicit referrals,front end,crowdfunding platform
+collaboration,domestication,idea competitions,household sector innovation,fan innovation,innovation policy,inexact referrals,lead user,entrepreneurship
+diffusion,script,innovation contests,innovation diffusion,social presence,makerspaces,intermediate referrals,user-manufacturer interaction,innovation
+ideal types,use knowledge,innovation tournaments,technique innovation,,community innovation,lead users,creativity,latent dirichlet allocation
+user entrepreneurship,co-creation,intelligence,,,daily practices,network search,embedded lead user,topic modelling
+innovation ecosystem,knowledge,open innovation,,,innovation behavior,pyramiding,idea quality,user communities
+service ecosystem,sources of innovation,public relations,,,russia,rare research subjects,internal lead user,user entrepreneur
+sustainability,theory,distributed innovation,,,diffusion of innovation,,netnography,human capital
+end user entrepreneur,entry strategy,product development,,,online innovation communities,,social media,self-determination theory
+entrepreneurial consumer,nascent industries,user generated content (ugc),,,renewable energy,,elu,social capital
+entrepreneurship process,pre-entry experience,end-users,,,do-it-yourself,,employee participation,
+lead user theory,product portfolio,policy,,,enabling technology,,sustainability innovation,
+smes,facilitation,policymakers,,,product innovation,,sustainable development,
+,healthcare,sustainable innovation,,,social innovation,,lead user method,
+,organisational support mechanisms,improvisation,,,,,lead user workshop,
+,public hospital,knowledge acquisition,,,,,user involvement,
+,firm-user collaboration,knowledge utilization,,,,,,
+,innovation management,user generated content,,,,,,
+,innovation strategy,market entry strategy,,,,,,
+,review,user-designed products,,,,,,

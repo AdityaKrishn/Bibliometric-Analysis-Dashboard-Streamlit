@@ -1,9 +1,9 @@
-maroon,gold,yellow,red,teal,pink,green,orange,blue,purple
-3d printing,acquisition mechanism,case study,chinese high technology industries,clinicians,innovation,user communities,cooperation,direct and indirect effects,innovation measurement
-digital remixing,crowdsourcing,companies,industry characteristics,healthcare,co-creation,crowdfunding,front end,education,patents
-motivation,idea competitions,comparative study,sources of tpp innovation,makerspaces,customer integration,crowdfunding platform,lead user,gender,sectoral systems
-online communities,innovation contests,innovation management,,collaboration,idea generation,entrepreneurship,user-manufacturer interaction,personality,semiconductor industry
-user innovation,innovation tournaments,innovation policy,,commercial diffusion,knowledge,user entrepreneur,creativity,survey data,
+maroon,teal,gold,orange,green,yellow,blue,purple,pink,red
+3d printing,acquisition mechanism,case study,chinese high technology industries,clinicians,innovation,user communities,cooperation,diffusion,direct and indirect effects
+digital remixing,crowdsourcing,companies,industry characteristics,healthcare,co-creation,crowdfunding,front end,innovation ecosystem,education
+motivation,idea competitions,comparative study,sources of tpp innovation,makerspaces,customer integration,crowdfunding platform,lead user,service ecosystem,gender
+online communities,innovation contests,innovation management,,collaboration,idea generation,entrepreneurship,user-manufacturer interaction,sustainability,personality
+user innovation,innovation tournaments,innovation policy,,commercial diffusion,knowledge,user entrepreneur,creativity,,survey data
 articulation,intelligence,marketing research,,consumer innovation,market performance,human capital,embedded lead user,,
 domestication,open innovation,participatory design,,community innovation,new product development,self-determination theory,idea quality,,
 script,public relations,user centred design,,daily practices,product design,social capital,internal lead user,,
@@ -20,11 +20,11 @@ user community,user generated content,firm-user collaboration,,,,,,,
 developing countries,innovation rareness,innovation strategy,,,,,,,
 mobile banking services,user innovation community,review,,,,,,,
 technology diffusion,user innovation evaluation,,,,,,,,
-diffusion,market entry strategy,,,,,,,,
-innovation ecosystem,user-designed products,,,,,,,,
-service ecosystem,,,,,,,,,
-sustainability,,,,,,,,,
-financial software innovation,,,,,,,,,
-impulse response function (irf) analysis,,,,,,,,,
+financial software innovation,market entry strategy,,,,,,,,
+impulse response function (irf) analysis,user-designed products,,,,,,,,
 knowledge sourcing,,,,,,,,,
 vector autoregressive (var) model,,,,,,,,,
+innovation measurement,,,,,,,,,
+patents,,,,,,,,,
+sectoral systems,,,,,,,,,
+semiconductor industry,,,,,,,,,
