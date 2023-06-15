@@ -1,15 +1,14 @@
-teal,orange,maroon,gold,green
-"baldwin, carliss","chen, jin","füller, johann","herstatt, cornelius","morrison, pamela d."
-"hienerth, christoph","de jong, jeroen p.j.","schroll, roland","lüthje, christian","roberts, john h."
-"von hippel, eric","su, yu shan",,,
-"franke, nikolaus","flowers, stephen",,,
-"schreier, martin","gault, fred",,,
-"berg jensen, morten","kuusisto, jari",,,
-"lakhani, karim r.","raasch, christina",,,
-"oliveira, pedro","gambardella, alfonso",,,
-"stock, ruth maria",,,,
-"gillert, nils lennart",,,,
-"euchner, jim",,,,
-"katz, ralph",,,,
-"kaulartz, sandro",,,,
-"paradiso, joseph a.",,,,
+maroon,teal,orange,green,gold
+"baldwin, carliss","von hippel, eric","chen, jin","morrison, pamela d.","stock, ruth maria"
+"hienerth, christoph","franke, nikolaus","de jong, jeroen p.j.","roberts, john h.","gillert, nils lennart"
+"berg jensen, morten","schreier, martin","su, yu shan",,
+,"füller, johann","flowers, stephen",,
+,"schroll, roland","gault, fred",,
+,"herstatt, cornelius","kuusisto, jari",,
+,"lakhani, karim r.","raasch, christina",,
+,"lüthje, christian","gambardella, alfonso",,
+,"oliveira, pedro",,,
+,"euchner, jim",,,
+,"katz, ralph",,,
+,"kaulartz, sandro",,,
+,"paradiso, joseph a.",,,

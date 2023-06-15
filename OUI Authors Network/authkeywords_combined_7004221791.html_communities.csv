@@ -1,23 +1,27 @@
-maroon,teal,gold,cyan,green,yellow,red,blue,purple,pink,brown,indigo,magenta,orange
-3d printing,co-creation,mass customisation,user innovation,acquisition mechanism,attention,case study,clinicians,knowledge,combinatory search,community innovation,construal level theory,customer-active paradigm,free innovation
-additive manufacturing,automotive industry,platforms,behavioral innovation,crowdsourcing,ideation,continuous interaction,healthcare,sources of innovation,implicit referrals,consumer innovation,mobile data services,literature review,household sector
-digital remixing,embedded toolkits,toolkits,feminist economics,idea competitions,openness,fan innovation,innovation,theory,inexact referrals,daily practices,potential and actual user innovators,user toolkits for innovation,information processing
-localization of manufacturing,new product development,configuration,household sector innovation,innovation contests,social media,social presence,innovation policy,corporate entrepreneurship,intermediate referrals,innovation behavior,user innovation theory,,knowledge diversity
-market structure,postponement,personalisation,innovation diffusion,innovation tournaments,success bias,,makerspaces,corporate venture,lead users,russia,user service innovation,,"shared mental models jel: l20, l67, o30, o31"
-motivation,customer integration,user co-design,technique innovation,intelligence,suggestions,,post-adoptive behavior,fuzzy front end,network search,,,,team creativity
-online communities,customization toolkits,cooperation,cocreation,open innovation,,,software engineers,lead user theory,pyramiding,,,,
-prosumer,handicraft,front end,fashion,public relations,,,technology artifacts,empirical study,rare research subjects,,,,
-application markets,idea generation,lead user,luxury brands,collaboration,,,,financial services,innovation diffusion process,,,,
-business model,leading edge status,user-manufacturer interaction,social comparison,r&amp;d,,,,mass customization,opinion leadership,,,,
-release strategy,market performance,lead user method,community-based innovation,software development,,,,,source of innovation,,,,
-smartphone operating systems,personalization,lead user workshop,consumer innovator,elu,,,,,,,,,
-netnography,product design,online brand community,consumer innovators,embedded lead user,,,,,,,,,
-flow,product development,open innovation accelerator,user communities,employee participation,,,,,,,,,
-web 2.0,social networking service,user involvement,user community,sustainability innovation,,,,,,,,,
-,user design,video game industry,firm-user collaboration,sustainable development,,,,,,,,,
-,user-generated products,strategy,innovation management,fitness club concepts,,,,,,,,,
-,learning strategies,strategy evolution,innovation strategy,innovation methods,,,,,,,,,
-,,,review,method comparison,,,,,,,,,
-,,,reasoned action,open evaluation,,,,,,,,,
-,,,user innovator,private-collective innovation,,,,,,,,,
-,,,,rewards,,,,,,,,,
+maroon,teal,gold,orange,green,yellow,red,blue,purple,pink,indigo,brown
+3d printing,co-creation,mass customisation,user innovation,acquisition mechanism,case study,clinicians,knowledge,combinatory search,construal level theory,customer-active paradigm,free innovation
+additive manufacturing,crowdsourcing,platforms,behavioral innovation,idea competitions,continuous interaction,healthcare,sources of innovation,implicit referrals,mobile data services,literature review,household sector
+digital remixing,automotive industry,toolkits,feminist economics,innovation contests,fan innovation,innovation,theory,inexact referrals,potential and actual user innovators,user toolkits for innovation,information processing
+localization of manufacturing,embedded toolkits,configuration,household sector innovation,innovation tournaments,social presence,innovation policy,corporate entrepreneurship,intermediate referrals,user innovation theory,,knowledge diversity
+market structure,new product development,personalisation,innovation diffusion,intelligence,,makerspaces,corporate venture,lead users,user service innovation,,"shared mental models jel: l20, l67, o30, o31"
+motivation,postponement,user co-design,technique innovation,open innovation,,post-adoptive behavior,fuzzy front end,network search,,,team creativity
+online communities,customer integration,cooperation,cocreation,public relations,,software engineers,lead user theory,pyramiding,,,
+prosumer,customization toolkits,front end,fashion,attention,,technology artifacts,empirical study,rare research subjects,,,
+application markets,handicraft,lead user,luxury brands,ideation,,,financial services,innovation diffusion process,,,
+business model,idea generation,user-manufacturer interaction,social comparison,openness,,,mass customization,opinion leadership,,,
+release strategy,leading edge status,lead user method,community innovation,social media,,,,source of innovation,,,
+smartphone operating systems,market performance,lead user workshop,consumer innovation,success bias,,,,,,,
+netnography,personalization,online brand community,daily practices,suggestions,,,,,,,
+flow,product design,open innovation accelerator,innovation behavior,elu,,,,,,,
+web 2.0,product development,user involvement,russia,embedded lead user,,,,,,,
+,social networking service,video game industry,community-based innovation,employee participation,,,,,,,
+,user design,strategy,consumer innovator,sustainability innovation,,,,,,,
+,user-generated products,strategy evolution,consumer innovators,sustainable development,,,,,,,
+,collaboration,,user communities,fitness club concepts,,,,,,,
+,r&amp;d,,user community,innovation methods,,,,,,,
+,software development,,firm-user collaboration,method comparison,,,,,,,
+,learning strategies,,innovation management,open evaluation,,,,,,,
+,,,innovation strategy,private-collective innovation,,,,,,,
+,,,review,rewards,,,,,,,
+,,,reasoned action,,,,,,,,
+,,,user innovator,,,,,,,,

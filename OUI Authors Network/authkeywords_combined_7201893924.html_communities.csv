@@ -1,9 +1,9 @@
-maroon,cyan,orange,green,yellow,red,blue,purple,pink,brown,indigo,teal,gold
-3d community,collaboration,diffusion,user innovation,business model innovation,business models,canon,co-innovation,open innovation,product architecture,combinatory search,firm-user collaboration,high-technology
-3d printing,clinicians,biography of artifacts,agent-based social simulation,dynamic capability,compatibility,critical management studies,crowdsourcing,digital health,cooperation,implicit referrals,innovation management,patents
-ideal types,healthcare,bricolage,community,supply chain business model,complementarity,critical performativity,online collaboration platform,digital transformation,front end,inexact referrals,innovation strategy,semiconductors
-user entrepreneurship,innovation policy,configuration,articulation,tea supply chain,open source,critique,social media,e-healthcare,lead user,intermediate referrals,review,technology management
-co-creation,makerspaces,innofusion,domestication,user-driven innovation,value capture,subversive functionalism,crowdfunding,telemedicine,user-manufacturer interaction,lead users,,
+teal,cyan,orange,green,yellow,red,blue,purple,pink,brown,indigo,maroon,gold
+3d community,collaboration,diffusion,user innovation,business model innovation,business models,canon,co-innovation,open innovation,product architecture,combinatory search,direct and indirect effects,ownership
+3d printing,clinicians,biography of artifacts,agent-based social simulation,dynamic capability,compatibility,critical management studies,crowdsourcing,digital health,cooperation,implicit referrals,education,platform
+ideal types,healthcare,bricolage,community,supply chain business model,complementarity,critical performativity,online collaboration platform,digital transformation,front end,inexact referrals,gender,second life
+user entrepreneurship,innovation policy,configuration,articulation,tea supply chain,open source,critique,social media,e-healthcare,lead user,intermediate referrals,personality,virtual world
+co-creation,makerspaces,innofusion,domestication,user-driven innovation,value capture,subversive functionalism,crowdfunding,telemedicine,user-manufacturer interaction,lead users,survey data,
 mass customisation,commercial diffusion,innovation,script,,value creation,,crowdfunding platform,user-centered design,innovation process,network search,,
 platforms,consumer innovation,peer production,use knowledge,,collaborative innovation,,entrepreneurship,end-users,key user,pyramiding,,
 knowledge,diffusion of innovation,user practices,communities,,modularity,,latent dirichlet allocation,policy,modularisation,rare research subjects,,
@@ -17,13 +17,8 @@ entrepreneurship process,public hospital,integration,living lab,,reasoned action
 ,,sustainable,developing countries,,,,patents and intellectual property rights,user innovation community,,,,
 ,,user,mobile banking services,,,,technology and innovation management,user innovation evaluation,,,,
 ,,innovation ecosystem,technology diffusion,,,,,,,,,
-,,service ecosystem,direct and indirect effects,,,,,,,,,
-,,sustainability,education,,,,,,,,,
-,,,gender,,,,,,,,,
-,,,personality,,,,,,,,,
-,,,survey data,,,,,,,,,
-,,,economics of is,,,,,,,,,
-,,,it policy and management,,,,,,,,,
+,,service ecosystem,economics of is,,,,,,,,,
+,,sustainability,it policy and management,,,,,,,,,
 ,,,open source software,,,,,,,,,
 ,,,productivity of it,,,,,,,,,
 ,,,technology strategy,,,,,,,,,
@@ -35,7 +30,11 @@ entrepreneurship process,public hospital,integration,living lab,,reasoned action
 ,,,impulse response function (irf) analysis,,,,,,,,,
 ,,,knowledge sourcing,,,,,,,,,
 ,,,vector autoregressive (var) model,,,,,,,,,
-,,,ownership,,,,,,,,,
-,,,platform,,,,,,,,,
-,,,second life,,,,,,,,,
-,,,virtual world,,,,,,,,,
+,,,firm-user collaboration,,,,,,,,,
+,,,innovation management,,,,,,,,,
+,,,innovation strategy,,,,,,,,,
+,,,review,,,,,,,,,
+,,,high-technology,,,,,,,,,
+,,,patents,,,,,,,,,
+,,,semiconductors,,,,,,,,,
+,,,technology management,,,,,,,,,
