@@ -1,29 +1,28 @@
-maroon,teal,gold,orange,green,yellow,red,purple,brown,indigo,cyan,magenta,blue,pink
-3d printing,digital remixing,user innovation,and phrases: online user innovation communities,attention,boundary management,brand community,knowledge,community-based innovation,construal level theory,customer-active paradigm,differential game,integrated model,lead user method
-innovation diffusion theory,motivation,agent-based social simulation,co-creation,ideation,communities,lead users,sources of innovation,consumer innovator,mobile data services,literature review,firm-sponsored online user innovation communities,super-network,lead user workshop
-online innovation communities,online communities,community,crowdsourcing,open innovation,dilemma,willingness to share,theory,consumer innovators,potential and actual user innovators,user toolkits for innovation,heterogeneous product users,user innovation knowledge,user involvement
-remixing,communication,articulation,employee innovativeness,openness,firm-community collaboration,combinatory search,corporate entrepreneurship,user communities,user innovation theory,,incentive reward,,toolkits
-user-generated content,lead user,domestication,online ideation,social media,paradox,implicit referrals,corporate venture,user community,user service innovation,,product improvement,,video game industry
-consumer innovation,toolkit,script,customer integration,success bias,systems theory,inexact referrals,fuzzy front end,crowdfunding,,,,,strategy
-diffusion of innovation,web 2.0,use knowledge,customization toolkits,suggestions,tensions,intermediate referrals,lead user theory,crowdfunding platform,,,,,strategy evolution
-renewable energy,cooperation,canon,idea generation,digital innovation,clinicians,network search,,entrepreneurship,,,,,
-,front end,critical management studies,leading edge status,online user innovation communities,healthcare,pyramiding,,user entrepreneur,,,,,
-,user-manufacturer interaction,critical performativity,market performance,user contribution,innovation,rare research subjects,,human capital,,,,,
-,creativity,critique,new product development,user feedback,innovation policy,knowledge structure,,self-determination theory,,,,,
-,embedded lead user,subversive functionalism,personalization,distributed innovation,makerspaces,online user innovation,,social capital,,,,,
-,idea quality,cocreation,social networking service,knowledge sharing,collaboration,supernetwork,,user entrepreneurship,,,,,
-,internal lead user,codestruction,user design,performance of oss projects,network,,,evolutionary approaches,,,,,
-,netnography,creative consumers,user-generated products,product development,online,,,spinouts,,,,,
-,flow,video games,,user generated content (ugc),users,,,strategy and firm performance,,,,,
-,online brand community,direct and indirect effects,,innovation rareness,corporate venture capital,,,knowledge-based view,,,,,
-,sticky information,education,,user innovation community,technology entrepreneurship,,,patents and intellectual property rights,,,,,
-,,gender,,user innovation evaluation,facilitation,,,technology and innovation management,,,,,
-,,personality,,interaction,organisational support mechanisms,,,user characteristics,,,,,
-,,survey data,,networks,public hospital,,,reasoned action,,,,,
-,,discourse,,,post-adoptive behavior,,,user innovator,,,,,
-,,open source software development,,,software engineers,,,second life,,,,,
-,,textuality,,,technology artifacts,,,virtual world,,,,,
-,,entry strategy,,,,,,,,,,,
+orange,teal,gold,blue,green,yellow,red,purple,indigo,pink,cyan,magenta,maroon,brown
+3d printing,digital remixing,user innovation,attention,boundary management,brand community,canon,knowledge,communication,user communities,construal level theory,customer-active paradigm,differential game,integrated model
+innovation diffusion theory,motivation,agent-based social simulation,ideation,communities,lead users,critical management studies,sources of innovation,lead user,crowdfunding,mobile data services,literature review,firm-sponsored online user innovation communities,super-network
+online innovation communities,online communities,community,open innovation,dilemma,willingness to share,critical performativity,theory,toolkit,crowdfunding platform,potential and actual user innovators,user toolkits for innovation,heterogeneous product users,user innovation knowledge
+remixing,and phrases: online user innovation communities,articulation,openness,firm-community collaboration,combinatory search,critique,corporate entrepreneurship,web 2.0,entrepreneurship,user innovation theory,,incentive reward,
+user-generated content,co-creation,domestication,social media,paradox,implicit referrals,subversive functionalism,corporate venture,cooperation,user entrepreneur,user service innovation,,product improvement,
+consumer innovation,crowdsourcing,script,success bias,systems theory,inexact referrals,,fuzzy front end,front end,human capital,,,,
+diffusion of innovation,employee innovativeness,use knowledge,suggestions,tensions,intermediate referrals,,lead user theory,user-manufacturer interaction,self-determination theory,,,,
+renewable energy,online ideation,cocreation,digital innovation,clinicians,network search,,,creativity,social capital,,,,
+,customer integration,codestruction,online user innovation communities,healthcare,pyramiding,,,embedded lead user,user entrepreneurship,,,,
+,customization toolkits,creative consumers,user contribution,innovation,rare research subjects,,,idea quality,evolutionary approaches,,,,
+,idea generation,video games,user feedback,innovation policy,knowledge structure,,,internal lead user,spinouts,,,,
+,leading edge status,community-based innovation,distributed innovation,makerspaces,online user innovation,,,flow,strategy and firm performance,,,,
+,market performance,consumer innovator,knowledge sharing,collaboration,supernetwork,,,lead user method,knowledge-based view,,,,
+,new product development,consumer innovators,performance of oss projects,network,,,,lead user workshop,patents and intellectual property rights,,,,
+,personalization,user community,product development,online,,,,online brand community,technology and innovation management,,,,
+,social networking service,direct and indirect effects,user generated content (ugc),users,,,,sticky information,second life,,,,
+,user design,education,innovation rareness,corporate venture capital,,,,user involvement,virtual world,,,,
+,user-generated products,gender,user innovation community,technology entrepreneurship,,,,toolkits,,,,,
+,netnography,personality,user innovation evaluation,facilitation,,,,video game industry,,,,,
+,,survey data,interaction,organisational support mechanisms,,,,strategy,,,,,
+,,discourse,networks,public hospital,,,,strategy evolution,,,,,
+,,open source software development,,post-adoptive behavior,,,,,,,,,
+,,textuality,,software engineers,,,,,,,,,
+,,entry strategy,,technology artifacts,,,,,,,,,
 ,,nascent industries,,,,,,,,,,,
 ,,pre-entry experience,,,,,,,,,,,
 ,,product portfolio,,,,,,,,,,,
@@ -35,3 +34,6 @@ renewable energy,cooperation,canon,idea generation,digital innovation,clinicians
 ,,open source,,,,,,,,,,,
 ,,problem solving,,,,,,,,,,,
 ,,software development,,,,,,,,,,,
+,,user characteristics,,,,,,,,,,,
+,,reasoned action,,,,,,,,,,,
+,,user innovator,,,,,,,,,,,

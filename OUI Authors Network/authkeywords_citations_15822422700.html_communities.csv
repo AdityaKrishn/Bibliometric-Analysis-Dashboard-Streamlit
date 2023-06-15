@@ -1,20 +1,22 @@
-maroon,teal,gold,orange,cyan,green,red,purple,indigo,yellow,pink,blue,brown,magenta
-3d community,user innovation,application markets,articulation,asymmetric equilibria,attention,canon,clinicians,co-creation,creativity,customer-perceived value,direct and indirect effects,firm-user collaboration,innovation diffusion process
-3d printing,community-based innovation,business model,domestication,compatibility choice,ideation,critical management studies,healthcare,customization toolkits,embedded lead user,opinion mining,education,innovation management,lead users
-collaboration,consumer innovator,motivation,script,network effects,openness,critical performativity,innovation,knowledge,idea quality,structural equation model,gender,innovation strategy,opinion leadership
-diffusion,user community,release strategy,use knowledge,open innovation,social media,critique,innovation policy,leading edge status,internal lead user,technology assessment,personality,review,source of innovation
-ideal types,copyright,smartphone operating systems,,open standards,success bias,subversive functionalism,makerspaces,personalization,lead user,technology strategy,survey data,,toolkits
-user entrepreneurship,derivative work,,,open-source software,suggestions,,do-it-yourself,social networking service,lead user method,economics of is,,,video game industry
-,dōjinshi,,,openness choice,,,enabling technology,sources of innovation,lead user workshop,it policy and management,,,
-,crowdfunding,,,spillovers,,,product innovation,theory,online brand community,open source software,,,
-,crowdfunding platform,,,consumer policy,,,social innovation,,user involvement,productivity of it,,,
-,crowdsourcing,,,moab model,,,facilitation,,,,,,
-,entrepreneurship,,,sustainable innovation,,,organisational support mechanisms,,,,,,
-,user communities,,,user,,,public hospital,,,,,,
-,user entrepreneur,,,end-users,,,,,,,,,
-,developing countries,,,policy,,,,,,,,,
-,mobile banking services,,,policymakers,,,,,,,,,
-,technology diffusion,,,,,,,,,,,,
-,interaction,,,,,,,,,,,,
-,networks,,,,,,,,,,,,
-,product development,,,,,,,,,,,,
+maroon,purple,gold,orange,green,red,blue,indigo,cyan,yellow,pink,teal,brown
+3d community,user innovation,application markets,asymmetric equilibria,attention,canon,clinicians,co-creation,creativity,crowdfunding,customer-perceived value,direct and indirect effects,innovation diffusion process
+3d printing,articulation,business model,compatibility choice,ideation,critical management studies,healthcare,customization toolkits,embedded lead user,crowdfunding platform,opinion mining,education,lead users
+collaboration,domestication,motivation,network effects,openness,critical performativity,innovation,knowledge,idea quality,crowdsourcing,structural equation model,gender,opinion leadership
+diffusion,script,release strategy,open innovation,social media,critique,innovation policy,leading edge status,internal lead user,entrepreneurship,technology assessment,personality,source of innovation
+ideal types,use knowledge,smartphone operating systems,open standards,success bias,subversive functionalism,makerspaces,personalization,lead user,user communities,technology strategy,survey data,toolkits
+user entrepreneurship,community-based innovation,,open-source software,suggestions,,do-it-yourself,social networking service,lead user method,user entrepreneur,economics of is,,video game industry
+,consumer innovator,,openness choice,,,enabling technology,sources of innovation,lead user workshop,,it policy and management,,
+,user community,,spillovers,,,product innovation,theory,online brand community,,open source software,,
+,copyright,,consumer policy,,,social innovation,,user involvement,,productivity of it,,
+,derivative work,,moab model,,,facilitation,,,,,,
+,dōjinshi,,sustainable innovation,,,organisational support mechanisms,,,,,,
+,developing countries,,user,,,public hospital,,,,,,
+,mobile banking services,,end-users,,,,,,,,,
+,technology diffusion,,policy,,,,,,,,,
+,firm-user collaboration,,policymakers,,,,,,,,,
+,innovation management,,,,,,,,,,,
+,innovation strategy,,,,,,,,,,,
+,review,,,,,,,,,,,
+,interaction,,,,,,,,,,,
+,networks,,,,,,,,,,,
+,product development,,,,,,,,,,,
