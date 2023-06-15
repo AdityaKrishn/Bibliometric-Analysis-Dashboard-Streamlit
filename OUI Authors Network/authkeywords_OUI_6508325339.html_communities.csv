@@ -1,17 +1,22 @@
-maroon,teal,orange,gold
-age,user innovation,innovation management,crowdsourcing
-determinants,agile project management,collaboration,collective invention
-lead user,agile/stage-gate hybrid,dynamics,commons-based peer production
-product knowledge,new product development,entrepreneurship,comparative analysis
-silver market,scrum,open source software,distributed innovation
-technical expertise,stage-gate process,organizational aspects,free revealing of information
-use experience,case study,organizations,innovation models
-innovation in consumer markets,drivers,research and development management,open source
-innovation process,dynamic analysis,technology management,user innovation networks
-radical innovation,impediments,user-generated content,
-service innovations,user communities,virtual groups,
-service lead user,local information,,
-user integration,sticky information,,
-property rights theory,locus of innovation,,
-separation of ownership and control,sources of innovation,,
-user innovation barrier,,,
+maroon,teal,gold,orange,green
+age,agile project management,innovation management,case study,crowdsourcing
+determinants,agile/stage-gate hybrid,collaboration,drivers,collective invention
+lead user,new product development,dynamics,dynamic analysis,commons-based peer production
+product knowledge,scrum,entrepreneurship,impediments,comparative analysis
+silver market,stage-gate process,open source software,user communities,distributed innovation
+technical expertise,,organizational aspects,,free revealing of information
+use experience,,organizations,,innovation models
+user innovation,,research and development management,,open source
+innovation in consumer markets,,technology management,,user innovation networks
+innovation process,,user-generated content,,
+radical innovation,,virtual groups,,
+service innovations,,,,
+service lead user,,,,
+user integration,,,,
+local information,,,,
+sticky information,,,,
+locus of innovation,,,,
+sources of innovation,,,,
+property rights theory,,,,
+separation of ownership and control,,,,
+user innovation barrier,,,,

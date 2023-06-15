@@ -156,7 +156,7 @@ with st.container():
             HtmlFile3 = open(os.getcwd()+r"/OUI Authors Network/author_names_combined_" + option + r".html", 'r')
         components.html(HtmlFile3.read(), height=700)
         try:
-            df_html3 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_citation_' + option + r'.html_communities.csv')
+            df_html3 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_combined_' + option + r'.html_communities.csv')
             # df_html3 = df_html3.reindex(sorted(df_html3.columns), axis=1)
             df_html3.columns = ['community ' + str(col) for col in df_html3.columns]
             df_html3 = df_html3.dropna(how='all')
@@ -178,7 +178,7 @@ with st.container():
             HtmlFile4 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_OUI_" + option + r".html", 'r')
         components.html(HtmlFile4.read(), height=700)
         try:
-            df_html4 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_citation_' + option + r'.html_communities.csv')
+            df_html4 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/authkeywords_OUI_' + option + r'.html_communities.csv')
             # df_html4 = df_html4.reindex(sorted(df_html4.columns), axis=1)
             df_html4.columns = ['community ' + str(col) for col in df_html4.columns]
             df_html4 = df_html4.dropna(how='all')
@@ -199,7 +199,7 @@ with st.container():
             HtmlFile5 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_citations_" + option + r".html", 'r')
         components.html(HtmlFile5.read(), height=700)
         try:
-            df_html5 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_citation_' + option + r'.html_communities.csv')
+            df_html5 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/authkeywords_citations_' + option + r'.html_communities.csv')
             # df_html5 = df_html5.reindex(sorted(df_html5.columns), axis=1)
             df_html5.columns = ['community ' + str(col) for col in df_html5.columns]
             df_html5 = df_html5.dropna(how='all')
@@ -220,7 +220,7 @@ with st.container():
             HtmlFile6 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_combined_" + option + r".html", 'r')
         components.html(HtmlFile6.read(), height=700)
         try:
-            df_html6 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_citation_' + option + r'.html_communities.csv')
+            df_html6 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/authkeywords_combined_' + option + r'.html_communities.csv')
             # df_html6 = df_html6.reindex(sorted(df_html6.columns), axis=1)
             df_html6.columns = ['community ' + str(col) for col in df_html6.columns]
             df_html6 = df_html6.dropna(how='all')

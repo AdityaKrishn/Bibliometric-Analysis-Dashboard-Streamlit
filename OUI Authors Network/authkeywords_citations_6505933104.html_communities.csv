@@ -1,32 +1,31 @@
-maroon,teal,gold,brown,green,yellow,red,blue,purple,pink,indigo,cyan,magenta,lime,orange
-absorptive capacity,adoption,diffusion,user innovation,articulation,behavioral innovation,china and the west,chinese high technology industries,clinicians,community innovation,creativity,crowdfunding,end user entrepreneur,financial software innovation,innovation measurement
-online community,lead users,biography of artifacts,agent-based social simulation,domestication,feminist economics,comparative cases,industry characteristics,healthcare,consumer innovation,embedded lead user,crowdfunding platform,entrepreneurial consumer,impulse response function (irf) analysis,patents
-open innovation,new products,bricolage,community,script,household sector innovation,knowledge sharing,sources of tpp innovation,innovation policy,daily practices,idea quality,crowdsourcing,entrepreneurship process,knowledge sourcing,sectoral systems
-organizational adoption,opinion leadership,configuration,co-creation,use knowledge,innovation diffusion,open source software projects,,makerspaces,innovation behavior,internal lead user,entrepreneurship,user entrepreneurship,vector autoregressive (var) model,semiconductor industry
-sources of innovation,combinatory search,innofusion,handicraft,,technique innovation,,,do-it-yourself,russia,lead user,user communities,ownership,,
-user innovation communities,implicit referrals,innovation,knowledge,,,,,enabling technology,,social media,user entrepreneur,platform,,
-digital health,inexact referrals,peer production,product development,,,,,product innovation,,,evolutionary approaches,second life,,
-digital transformation,intermediate referrals,user practices,theory,,,,,social innovation,,,spinouts,virtual world,,
-e-healthcare,network search,corporate venture capital,community-based innovation,,,,,facilitation,,,strategy and firm performance,,,
-telemedicine,pyramiding,new product development,consumer innovator,,,,,organisational support mechanisms,,,knowledge-based view,,,
-user-centered design,rare research subjects,technology entrepreneurship,user community,,,,,public hospital,,,patents and intellectual property rights,,,
-external knowledge,,innovation ecosystem,creative consumer,,,,,,,,technology and innovation management,,,
-innovation performance,,service ecosystem,living lab,,,,,,,,,,,
-interaction methods,,sustainability,radical innovation,,,,,,,,,,,
-user involvement,,role of users,role theory,,,,,,,,,,,
+maroon,teal,gold,pink,green,yellow,red,blue,purple,brown,indigo,cyan,magenta,lime,orange
+absorptive capacity,adoption,diffusion,user innovation,behavioral innovation,china and the west,chinese high technology industries,clinicians,community innovation,creative consumer,creativity,crowdfunding,end user entrepreneur,flow,incorporated users
+online community,lead users,biography of artifacts,agent-based social simulation,feminist economics,comparative cases,industry characteristics,healthcare,consumer innovation,living lab,embedded lead user,crowdfunding platform,entrepreneurial consumer,motivation,medical technology
+open innovation,new products,bricolage,community,household sector innovation,knowledge sharing,sources of tpp innovation,innovation policy,daily practices,radical innovation,idea quality,crowdsourcing,entrepreneurship process,online communities,roles in innovation
+organizational adoption,opinion leadership,configuration,articulation,innovation diffusion,open source software projects,,makerspaces,innovation behavior,role theory,internal lead user,entrepreneurship,user entrepreneurship,web 2.0,social network analysis
+sources of innovation,combinatory search,innofusion,domestication,technique innovation,,,do-it-yourself,russia,,lead user,user communities,ownership,netnography,
+user innovation communities,implicit referrals,innovation,script,,,,enabling technology,,,social media,user entrepreneur,platform,,
+digital health,inexact referrals,peer production,use knowledge,,,,product innovation,,,,evolutionary approaches,second life,,
+digital transformation,intermediate referrals,user practices,co-creation,,,,social innovation,,,,spinouts,virtual world,,
+e-healthcare,network search,corporate venture capital,handicraft,,,,facilitation,,,,strategy and firm performance,,,
+telemedicine,pyramiding,new product development,knowledge,,,,organisational support mechanisms,,,,knowledge-based view,,,
+user-centered design,rare research subjects,technology entrepreneurship,product development,,,,public hospital,,,,patents and intellectual property rights,,,
+external knowledge,,innovation ecosystem,theory,,,,,,,,technology and innovation management,,,
+innovation performance,,service ecosystem,community-based innovation,,,,,,,,,,,
+interaction methods,,sustainability,consumer innovator,,,,,,,,,,,
+user involvement,,role of users,user community,,,,,,,,,,,
 improvisation,,,developing countries,,,,,,,,,,,
 knowledge acquisition,,,mobile banking services,,,,,,,,,,,
 knowledge utilization,,,technology diffusion,,,,,,,,,,,
-user generated content,,,flow,,,,,,,,,,,
-,,,motivation,,,,,,,,,,,
-,,,online communities,,,,,,,,,,,
-,,,web 2.0,,,,,,,,,,,
-,,,incorporated users,,,,,,,,,,,
-,,,medical technology,,,,,,,,,,,
-,,,roles in innovation,,,,,,,,,,,
-,,,social network analysis,,,,,,,,,,,
+user generated content,,,financial software innovation,,,,,,,,,,,
+,,,impulse response function (irf) analysis,,,,,,,,,,,
+,,,knowledge sourcing,,,,,,,,,,,
+,,,vector autoregressive (var) model,,,,,,,,,,,
+,,,innovation measurement,,,,,,,,,,,
+,,,patents,,,,,,,,,,,
+,,,sectoral systems,,,,,,,,,,,
+,,,semiconductor industry,,,,,,,,,,,
 ,,,interaction,,,,,,,,,,,
 ,,,networks,,,,,,,,,,,
-,,,netnography,,,,,,,,,,,
 ,,,reasoned action,,,,,,,,,,,
 ,,,user innovator,,,,,,,,,,,

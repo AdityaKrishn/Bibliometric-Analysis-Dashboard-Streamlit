@@ -283,7 +283,7 @@ function highlightFilter(filter) {
 
                   // parsing and collecting nodes and edges from the python
                   nodes = new vis.DataSet([{"color": "maroon", "id": "innovation", "label": "innovation", "shape": "dot", "size": 2, "title": ["innovation", 2]}, {"color": "maroon", "id": "user characteristics", "label": "user characteristics", "shape": "dot", "size": 2, "title": ["user characteristics", 2]}, {"color": "maroon", "id": "user community", "label": "user community", "shape": "dot", "size": 2, "title": ["user community", 2]}]);
-                  edges = new vis.DataSet([{"color": "silver", "from": "innovation", "symbol": "diamond", "title": 1, "to": "user characteristics", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation", "symbol": "square", "title": 1, "to": "user community", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user characteristics", "symbol": "circle", "title": 1, "to": "user community", "value": 0.5, "width": 0.3333333333333333}]);
+                  edges = new vis.DataSet([{"color": "silver", "from": "innovation", "symbol": "circle", "title": 1, "to": "user characteristics", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "innovation", "symbol": "square", "title": 1, "to": "user community", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "user characteristics", "symbol": "circle", "title": 1, "to": "user community", "value": 0.5, "width": 0.3333333333333333}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
