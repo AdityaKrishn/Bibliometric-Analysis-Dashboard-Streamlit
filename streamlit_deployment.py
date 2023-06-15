@@ -41,20 +41,20 @@ with st.container():
 
 with st.container():
 
-    st.subheader("Top 5 authors by number of papers listed in OUI Elder's publications")
-    st.table(dict['top_authors'])
+    st.subheader("Top 10 authors by number of papers listed in OUI Elder's publications")
+    st.dataframe(dict['top_authors'], hide_index=True)
 
-    st.subheader("Top 5 citers by number of papers listed in OUI Elder's citations")
-    st.table(dict['top_citers'])
+    st.subheader("Top 10 citers by number of papers listed in OUI Elder's citations")
+    st.dataframe(dict['top_citers'], hide_index=True)
 
 with st.container():
      #create bar chart for top 30 keywords in author_keywords and citers_keywords in two columns
     col1, col2 = st.columns(2, gap="large")
     with col1:
-        st.subheader("Top 30 keywords in OUI Elders' publications")
+        st.subheader("Top 10 keywords in OUI Elders' publications")
         st.bar_chart(data = dict['author_keywords'], x = 'keyword', y = 'count')
     with col2:
-        st.subheader("Top 30 keywords in OUI Elders' citers publications")
+        st.subheader("Top 10 keywords in OUI Elders' citers publications")
         st.bar_chart(data = dict['citers_keywords'], x = 'keyword', y = 'count')
 
 with st.container():
