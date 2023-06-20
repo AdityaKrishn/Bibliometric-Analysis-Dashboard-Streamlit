@@ -1,41 +1,46 @@
-teal,gold,orange,maroon,yellow,red,blue,purple,pink,brown,indigo,cyan,green,magenta
-3d community,user entrepreneurship,user innovation,co-creation,behavioral innovation,innovation,boundary management,case study,clinicians,collective intelligence,combinatory search,communication,competitiveness,diffusion of innovation
-3d printing,community-based innovation,agent-based social simulation,customization toolkits,feminist economics,categorisation of open innovation,communities,continuous interaction,healthcare,human powered boats,implicit referrals,lead user,development,online innovation communities
-collaboration,consumer innovator,community,handicraft,household sector innovation,conceptualisation of open innovation,dilemma,fan innovation,innovation policy,modularity,inexact referrals,toolkit,empirical analysis,renewable energy
-diffusion,consumer innovators,articulation,knowledge,innovation diffusion,future of open innovation,firm-community collaboration,social presence,makerspaces,open manufacturing,intermediate referrals,web 2.0,free,innovation toolkit
-ideal types,user communities,domestication,leading edge status,technique innovation,living lab,paradox,,commercial diffusion,open source,lead users,cooperation,integration,lag-user
-digital remixing,crowdfunding,script,personalization,,living laboratory,systems theory,,consumer innovation,product architecture,network search,front end,open,laggard
-mass customisation,crowdfunding platform,use knowledge,product development,,open innovation,tensions,,community innovation,user community,pyramiding,user-manufacturer interaction,revealing,new product development method
-motivation,crowdsourcing,canon,social networking service,,physically assistive,dominant design,,daily practices,front loading,rare research subjects,lead user method,sustainable,resistance to innovation
-online communities,entrepreneurship,critical management studies,sources of innovation,,service,industry evolution,,innovation behavior,problem solving,innovation diffusion process,lead user workshop,user,simplicity
-platforms,user entrepreneur,critical performativity,theory,,service robot,real options,,russia,software development,opinion leadership,user involvement,consumer policy,small-scale energy technology
-biography of artifacts,human capital,critique,,,social robot,,,do-it-yourself,reasoned action,source of innovation,,moab model,user-innovation
-bricolage,self-determination theory,subversive functionalism,,,socially assistive,,,enabling technology,user innovator,knowledge structure,,sustainable innovation,
-configuration,social capital,cocreation,,,creative consumer,,,product innovation,,online user innovation,,,
-innofusion,end user entrepreneur,codestruction,,,radical innovation,,,social innovation,,supernetwork,,,
-peer production,entrepreneurial consumer,creative consumers,,,role theory,,,facilitation,,,,,
-user practices,entrepreneurship process,video games,,,digital health,,,organisational support mechanisms,,,,,
-innovation ecosystem,evolutionary approaches,efficiency measurement,,,digital transformation,,,public hospital,,,,,
-service ecosystem,spinouts,industry development,,,e-healthcare,,,,,,,,
-sustainability,strategy and firm performance,entry strategy,,,telemedicine,,,,,,,,
-,knowledge-based view,nascent industries,,,user-centered design,,,,,,,,
-,patents and intellectual property rights,pre-entry experience,,,innovation contests,,,,,,,,
-,technology and innovation management,product portfolio,,,open evaluation,,,,,,,,
-,lead user theory,financial software innovation,,,innovation rareness,,,,,,,,
-,smes,impulse response function (irf) analysis,,,user innovation community,,,,,,,,
-,ownership,knowledge sourcing,,,user innovation evaluation,,,,,,,,
-,platform,vector autoregressive (var) model,,,,,,,,,,,
-,second life,firm-user collaboration,,,,,,,,,,,
-,virtual world,innovation management,,,,,,,,,,,
-,,innovation strategy,,,,,,,,,,,
-,,review,,,,,,,,,,,
-,,high-technology,,,,,,,,,,,
-,,patents,,,,,,,,,,,
-,,semiconductors,,,,,,,,,,,
-,,technology management,,,,,,,,,,,
-,,idea quality,,,,,,,,,,,
-,,meta-analysis,,,,,,,,,,,
-,,moderating effects,,,,,,,,,,,
-,,innovation measurement,,,,,,,,,,,
-,,sectoral systems,,,,,,,,,,,
-,,semiconductor industry,,,,,,,,,,,
+teal,gold,orange,green,yellow,red,blue,purple,pink,brown,indigo,cyan,maroon
+3d community,user innovation,co-creation,innovation,boundary management,case study,clinicians,collective intelligence,combinatory search,communication,community-based innovation,competitiveness,diffusion of innovation
+3d printing,agent-based social simulation,mass customisation,categorisation of open innovation,communities,continuous interaction,healthcare,human powered boats,implicit referrals,lead user,consumer innovator,development,online innovation communities
+collaboration,community,platforms,conceptualisation of open innovation,dilemma,fan innovation,innovation policy,modularity,inexact referrals,toolkit,consumer innovators,empirical analysis,renewable energy
+diffusion,articulation,customization toolkits,future of open innovation,firm-community collaboration,social presence,makerspaces,open manufacturing,intermediate referrals,web 2.0,user communities,free,innovation toolkit
+ideal types,domestication,handicraft,living lab,paradox,,commercial diffusion,open source,lead users,cooperation,crowdfunding,integration,lag-user
+user entrepreneurship,script,knowledge,living laboratory,systems theory,,consumer innovation,product architecture,network search,front end,crowdfunding platform,open,laggard
+digital remixing,use knowledge,leading edge status,open innovation,tensions,,community innovation,user community,pyramiding,user-manufacturer interaction,crowdsourcing,revealing,new product development method
+motivation,behavioral innovation,personalization,physically assistive,dominant design,,daily practices,front loading,rare research subjects,lead user method,entrepreneurship,sustainable,resistance to innovation
+online communities,feminist economics,product development,service,industry evolution,,innovation behavior,problem solving,innovation diffusion process,lead user workshop,user entrepreneur,user,simplicity
+biography of artifacts,household sector innovation,social networking service,service robot,real options,,russia,software development,opinion leadership,user involvement,human capital,consumer policy,small-scale energy technology
+bricolage,innovation diffusion,sources of innovation,social robot,,,do-it-yourself,reasoned action,source of innovation,,self-determination theory,moab model,user-innovation
+configuration,technique innovation,theory,socially assistive,,,enabling technology,user innovator,knowledge structure,,social capital,sustainable innovation,
+innofusion,canon,,creative consumer,,,product innovation,,online user innovation,,evolutionary approaches,,
+peer production,critical management studies,,radical innovation,,,social innovation,,supernetwork,,spinouts,,
+user practices,critical performativity,,role theory,,,facilitation,,,,strategy and firm performance,,
+innovation ecosystem,critique,,digital health,,,organisational support mechanisms,,,,knowledge-based view,,
+service ecosystem,subversive functionalism,,digital transformation,,,public hospital,,,,patents and intellectual property rights,,
+sustainability,cocreation,,e-healthcare,,,,,,,technology and innovation management,,
+end user entrepreneur,codestruction,,telemedicine,,,,,,,,,
+entrepreneurial consumer,creative consumers,,user-centered design,,,,,,,,,
+entrepreneurship process,video games,,innovation contests,,,,,,,,,
+lead user theory,efficiency measurement,,open evaluation,,,,,,,,,
+smes,industry development,,innovation rareness,,,,,,,,,
+ownership,entry strategy,,user innovation community,,,,,,,,,
+platform,nascent industries,,user innovation evaluation,,,,,,,,,
+second life,pre-entry experience,,,,,,,,,,,
+virtual world,product portfolio,,,,,,,,,,,
+,financial software innovation,,,,,,,,,,,
+,impulse response function (irf) analysis,,,,,,,,,,,
+,knowledge sourcing,,,,,,,,,,,
+,vector autoregressive (var) model,,,,,,,,,,,
+,firm-user collaboration,,,,,,,,,,,
+,innovation management,,,,,,,,,,,
+,innovation strategy,,,,,,,,,,,
+,review,,,,,,,,,,,
+,high-technology,,,,,,,,,,,
+,patents,,,,,,,,,,,
+,semiconductors,,,,,,,,,,,
+,technology management,,,,,,,,,,,
+,idea quality,,,,,,,,,,,
+,meta-analysis,,,,,,,,,,,
+,moderating effects,,,,,,,,,,,
+,innovation measurement,,,,,,,,,,,
+,sectoral systems,,,,,,,,,,,
+,semiconductor industry,,,,,,,,,,,

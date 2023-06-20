@@ -1,31 +1,27 @@
-maroon,teal,gold,orange,red,yellow,purple,blue,pink,brown,indigo,green
-3d printing,acquisition mechanism,articulation,behavioral innovation,case study,chinese high technology industries,clinicians,innovation,cooperation,diffusion,direct and indirect effects,innovation measurement
-digital remixing,crowdsourcing,domestication,feminist economics,companies,industry characteristics,healthcare,co-creation,front end,innovation ecosystem,education,patents
-motivation,idea competitions,script,household sector innovation,comparative study,sources of tpp innovation,makerspaces,customer integration,lead user,service ecosystem,gender,sectoral systems
-online communities,innovation contests,use knowledge,innovation diffusion,innovation management,,collaboration,idea generation,user-manufacturer interaction,sustainability,personality,semiconductor industry
-user innovation,innovation tournaments,,technique innovation,innovation policy,,commercial diffusion,knowledge,creativity,,survey data,
-community-based innovation,intelligence,,,marketing research,,consumer innovation,market performance,embedded lead user,,,
-consumer innovator,open innovation,,,participatory design,,community innovation,new product development,idea quality,,,
-consumer innovators,public relations,,,user centred design,,daily practices,product design,internal lead user,,,
-user communities,netnography,,,user driven innovation,,innovation behavior,sources of innovation,,,,
-user community,social media,,,user involvement,,russia,theory,,,,
-crowdfunding,end-users,,,do-it-yourself,,diffusion of innovation,user design,,,,
-crowdfunding platform,policy,,,enabling technology,,online innovation communities,user-generated products,,,,
-entrepreneurship,policymakers,,,product innovation,,renewable energy,corporate venture capital,,,,
-user entrepreneur,sustainable innovation,,,social innovation,,,technology entrepreneurship,,,,
-human capital,improvisation,,,external knowledge,,,learning strategies,,,,
-self-determination theory,knowledge acquisition,,,innovation performance,,,,,,,
-social capital,knowledge utilization,,,interaction methods,,,,,,,
-user entrepreneurship,user generated content,,,firm-user collaboration,,,,,,,
-developing countries,innovation rareness,,,innovation strategy,,,,,,,
-mobile banking services,user innovation community,,,review,,,,,,,
-technology diffusion,user innovation evaluation,,,,,,,,,,
-end user entrepreneur,market entry strategy,,,,,,,,,,
-entrepreneurial consumer,user-designed products,,,,,,,,,,
-entrepreneurship process,,,,,,,,,,,
-financial software innovation,,,,,,,,,,,
-impulse response function (irf) analysis,,,,,,,,,,,
-knowledge sourcing,,,,,,,,,,,
-vector autoregressive (var) model,,,,,,,,,,,
-lead user theory,,,,,,,,,,,
-smes,,,,,,,,,,,
+maroon,teal,gold,orange,green,red,blue,purple,yellow
+3d printing,user innovation,acquisition mechanism,case study,clinicians,user communities,cooperation,direct and indirect effects,innovation measurement
+digital remixing,articulation,crowdsourcing,companies,healthcare,crowdfunding,front end,education,patents
+motivation,domestication,idea competitions,comparative study,innovation,crowdfunding platform,lead user,gender,sectoral systems
+online communities,script,innovation contests,innovation management,makerspaces,entrepreneurship,user-manufacturer interaction,personality,semiconductor industry
+,use knowledge,innovation tournaments,innovation policy,collaboration,user entrepreneur,creativity,survey data,
+,behavioral innovation,intelligence,marketing research,commercial diffusion,human capital,embedded lead user,,
+,feminist economics,open innovation,participatory design,consumer innovation,self-determination theory,idea quality,,
+,household sector innovation,public relations,user centred design,community innovation,social capital,internal lead user,,
+,innovation diffusion,netnography,user driven innovation,daily practices,user entrepreneurship,,,
+,technique innovation,social media,user involvement,innovation behavior,end user entrepreneur,,,
+,co-creation,end-users,do-it-yourself,russia,entrepreneurial consumer,,,
+,knowledge,policy,enabling technology,diffusion of innovation,entrepreneurship process,,,
+,sources of innovation,policymakers,product innovation,online innovation communities,,,,
+,theory,sustainable innovation,social innovation,renewable energy,,,,
+,community-based innovation,improvisation,external knowledge,,,,,
+,consumer innovator,knowledge acquisition,innovation performance,,,,,
+,consumer innovators,knowledge utilization,interaction methods,,,,,
+,user community,user generated content,firm-user collaboration,,,,,
+,developing countries,innovation rareness,innovation strategy,,,,,
+,mobile banking services,user innovation community,review,,,,,
+,technology diffusion,user innovation evaluation,,,,,,
+,diffusion,market entry strategy,,,,,,
+,innovation ecosystem,user-designed products,,,,,,
+,service ecosystem,,,,,,,
+,sustainability,,,,,,,
+,new product development,,,,,,,

@@ -1,38 +1,33 @@
-blue,teal,gold,orange,green,yellow,red,purple,pink,brown,indigo,cyan,magenta,lime,olive,navy,maroon
-3d printing,user innovation,behavioral innovation,boundary management,brand community,case study,makerspaces,community-based innovation,construal level theory,consumer policy,cooperation,creative consumer,degree centrality,design autonomy,evolutionary approaches,high-technology,integrated model
-co-creation,articulation,feminist economics,communities,lead users,companies,collaboration,consumer innovator,mobile data services,moab model,front end,living lab,innovation networks,lead userness,knowledge-based view,patents,super-network
-mass customisation,domestication,household sector innovation,dilemma,willingness to share,comparative study,commercial diffusion,consumer innovators,potential and actual user innovators,open innovation,lead user,radical innovation,k-core embeddedness,mobile phone platform,patents and intellectual property rights,semiconductors,user innovation knowledge
-platforms,script,innovation diffusion,firm-community collaboration,knowledge structure,continuous interaction,consumer innovation,user communities,user innovation theory,sustainable innovation,user-manufacturer interaction,role theory,user innovation contribution,three-way interaction,technology and innovation management,technology management,
-clinicians,use knowledge,technique innovation,paradox,online user innovation,fan innovation,community innovation,user community,user service innovation,user,creativity,,,toolkit support,,innovation measurement,
-healthcare,cocreation,,systems theory,supernetwork,innovation management,daily practices,crowdfunding,,diffusion of innovation,embedded lead user,,,,,sectoral systems,
-innovation,codestruction,,tensions,,innovation policy,innovation behavior,crowdfunding platform,,innovation toolkit,idea quality,,,,,semiconductor industry,
-customization toolkits,creative consumers,,,,marketing research,russia,crowdsourcing,,lag-user,internal lead user,,,,,,
-knowledge,video games,,,,participatory design,,entrepreneurship,,laggard,meta-analysis,,,,,,
-leading edge status,customer integration,,,,social presence,,user entrepreneur,,new product development method,moderating effects,,,,,,
-personalization,learning strategies,,,,user centred design,,human capital,,resistance to innovation,lead user method,,,,,,
-product design,new product development,,,,user driven innovation,,self-determination theory,,simplicity,lead user workshop,,,,,,
-social networking service,diffusion,,,,user involvement,,social capital,,digital health,social media,,,,,,
-sources of innovation,innovation ecosystem,,,,do-it-yourself,,user entrepreneurship,,digital transformation,sticky information,,,,,,
-theory,service ecosystem,,,,enabling technology,,end user entrepreneur,,e-healthcare,,,,,,,
-user design,sustainability,,,,product innovation,,entrepreneurial consumer,,telemedicine,,,,,,,
-corporate entrepreneurship,direct and indirect effects,,,,social innovation,,entrepreneurship process,,user-centered design,,,,,,,
-corporate venture,education,,,,firm-user collaboration,,smes,,external knowledge,,,,,,,
-fuzzy front end,gender,,,,innovation strategy,,,,innovation performance,,,,,,,
-lead user theory,personality,,,,review,,,,interaction methods,,,,,,,
-facilitation,survey data,,,,,,,,innovation contests,,,,,,,
-organisational support mechanisms,discourse,,,,,,,,open evaluation,,,,,,,
-public hospital,open source software development,,,,,,,,innovation rareness,,,,,,,
-,textuality,,,,,,,,user innovation community,,,,,,,
-,front loading,,,,,,,,user innovation evaluation,,,,,,,
-,open source,,,,,,,,market entry strategy,,,,,,,
-,problem solving,,,,,,,,user-designed products,,,,,,,
-,software development,,,,,,,,,,,,,,,
+maroon,teal,gold,orange,green,yellow,purple,pink,brown,indigo,cyan,magenta,lime,olive,navy,red,blue
+3d printing,user innovation,behavioral innovation,boundary management,case study,clinicians,cocreation,construal level theory,consumer policy,cooperation,creative consumer,design autonomy,diffusion,direct and indirect effects,evolutionary approaches,front loading,high-technology
+co-creation,articulation,feminist economics,communities,companies,healthcare,codestruction,mobile data services,moab model,front end,living lab,lead userness,innovation ecosystem,education,knowledge-based view,open source,patents
+mass customisation,domestication,household sector innovation,dilemma,comparative study,innovation,creative consumers,potential and actual user innovators,open innovation,lead user,radical innovation,mobile phone platform,service ecosystem,gender,patents and intellectual property rights,problem solving,semiconductors
+platforms,script,innovation diffusion,firm-community collaboration,continuous interaction,makerspaces,video games,user innovation theory,sustainable innovation,user-manufacturer interaction,role theory,three-way interaction,sustainability,personality,technology and innovation management,software development,technology management
+customization toolkits,use knowledge,technique innovation,paradox,fan innovation,collaboration,,user service innovation,user,creativity,,toolkit support,,survey data,,,innovation measurement
+knowledge,brand community,,systems theory,innovation management,commercial diffusion,,,diffusion of innovation,embedded lead user,,,,,,,sectoral systems
+leading edge status,lead users,,tensions,innovation policy,consumer innovation,,,innovation toolkit,idea quality,,,,,,,semiconductor industry
+personalization,willingness to share,,,marketing research,community innovation,,,lag-user,internal lead user,,,,,,,
+social networking service,community-based innovation,,,participatory design,daily practices,,,laggard,meta-analysis,,,,,,,
+sources of innovation,consumer innovator,,,social presence,innovation behavior,,,new product development method,moderating effects,,,,,,,
+theory,consumer innovators,,,user centred design,russia,,,resistance to innovation,lead user method,,,,,,,
+corporate entrepreneurship,user communities,,,user driven innovation,facilitation,,,simplicity,lead user workshop,,,,,,,
+corporate venture,user community,,,user involvement,organisational support mechanisms,,,digital health,social media,,,,,,,
+fuzzy front end,crowdfunding,,,do-it-yourself,public hospital,,,digital transformation,sticky information,,,,,,,
+lead user theory,crowdfunding platform,,,enabling technology,,,,e-healthcare,,,,,,,,
+,crowdsourcing,,,product innovation,,,,telemedicine,,,,,,,,
+,entrepreneurship,,,social innovation,,,,user-centered design,,,,,,,,
+,user entrepreneur,,,firm-user collaboration,,,,external knowledge,,,,,,,,
+,human capital,,,innovation strategy,,,,innovation performance,,,,,,,,
+,self-determination theory,,,review,,,,interaction methods,,,,,,,,
+,social capital,,,,,,,innovation rareness,,,,,,,,
+,user entrepreneurship,,,,,,,user innovation community,,,,,,,,
+,end user entrepreneur,,,,,,,user innovation evaluation,,,,,,,,
+,entrepreneurial consumer,,,,,,,market entry strategy,,,,,,,,
+,entrepreneurship process,,,,,,,user-designed products,,,,,,,,
 ,incorporated users,,,,,,,,,,,,,,,
 ,medical technology,,,,,,,,,,,,,,,
 ,roles in innovation,,,,,,,,,,,,,,,
 ,social network analysis,,,,,,,,,,,,,,,
-,moderation,,,,,,,,,,,,,,,
-,organisational context,,,,,,,,,,,,,,,
-,radical innovation performance,,,,,,,,,,,,,,,
+,new product development,,,,,,,,,,,,,,,
 ,online community,,,,,,,,,,,,,,,
 ,role of users,,,,,,,,,,,,,,,

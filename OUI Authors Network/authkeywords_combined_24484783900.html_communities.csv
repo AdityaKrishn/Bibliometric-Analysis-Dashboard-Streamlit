@@ -1,12 +1,13 @@
-blue,teal,orange,green,yellow,red,maroon,gold
-behavioral innovation,user innovation,business model innovation,collaboration,consumer innovation,open innovation,cooperation,crowdfunding platform
-feminist economics,diffusion,dynamic capability,commercial diffusion,community innovation,end-users,front end,human capital
-household sector innovation,innovation ecosystem,supply chain business model,innovation policy,daily practices,policy,lead user,self-determination theory
-innovation diffusion,service ecosystem,tea supply chain,makerspaces,innovation behavior,policymakers,user-manufacturer interaction,social capital
-technique innovation,sustainability,user-driven innovation,general value,russia,sustainable innovation,creativity,user entrepreneurship
-finland,firm-user collaboration,customer integration,market failure,diffusion of innovation,improvisation,embedded lead user,end user entrepreneur
-firm-level,innovation management,management tool,peer-to-peer diffusion,online innovation communities,knowledge acquisition,idea quality,entrepreneurial consumer
-innovation transfer,innovation strategy,new service development,do-it-yourself,renewable energy,knowledge utilization,internal lead user,entrepreneurship process
-survey,review,,enabling technology,,user generated content,,
-,,,product innovation,,,,
-,,,social innovation,,,,
+maroon,gold,orange,green,blue,teal,yellow,red
+behavioral innovation,user innovation,business model innovation,collaboration,innovation policy,diffusion of innovation,cooperation,crowdfunding platform
+feminist economics,diffusion,dynamic capability,commercial diffusion,do-it-yourself,online innovation communities,front end,human capital
+household sector innovation,innovation ecosystem,supply chain business model,consumer innovation,enabling technology,open innovation,lead user,self-determination theory
+innovation diffusion,service ecosystem,tea supply chain,makerspaces,product innovation,renewable energy,user-manufacturer interaction,social capital
+technique innovation,sustainability,user-driven innovation,general value,social innovation,end-users,creativity,user entrepreneurship
+finland,firm-user collaboration,customer integration,market failure,,policy,embedded lead user,end user entrepreneur
+firm-level,innovation management,management tool,peer-to-peer diffusion,,policymakers,idea quality,entrepreneurial consumer
+innovation transfer,innovation strategy,new service development,community innovation,,sustainable innovation,internal lead user,entrepreneurship process
+survey,review,,daily practices,,improvisation,,
+,,,innovation behavior,,knowledge acquisition,,
+,,,russia,,knowledge utilization,,
+,,,,,user generated content,,
