@@ -114,7 +114,7 @@ with st.container():
         try:
             df_html1 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_OUI_' + option + r'.html_communities.csv')
             # df_html1 = df_html1.reindex(sorted(df_html1.columns), axis=1)
-            df_html1.columns = ['community ' + str(col) for col in df_html1.columns]
+            df_html1.columns = ['cluster ' + str(col) for col in df_html1.columns]
             df_html1 = df_html1.dropna(how='all')
             df_html1 = df_html1.fillna('')
             st.dataframe(df_html1, hide_index=True)
