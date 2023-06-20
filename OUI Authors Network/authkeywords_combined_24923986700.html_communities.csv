@@ -1,28 +1,26 @@
-maroon,teal,gold,orange,green,red,purple,yellow,blue
-3d community,user innovation,acquisition mechanism,open innovation,boundary spanner,commercial diffusion,combinatory search,complementarities,cooperation
-3d printing,articulation,crowdsourcing,benefits,identification,consumer innovation,implicit referrals,division of innovative labor,front end
-collaboration,domestication,idea competitions,community-based innovation,innovation,innovation policy,inexact referrals,externalities,lead user
-diffusion,script,innovation contests,consistency,job satisfaction,makerspaces,intermediate referrals,social welfare,user-manufacturer interaction
-ideal types,use knowledge,innovation tournaments,contingency factors,case study,general value,lead users,user innovation paradigm,creativity
-user entrepreneurship,behavioral innovation,intelligence,costs,continuous interaction,market failure,network search,user-producer interactions,embedded lead user
-crowdfunding platform,feminist economics,public relations,innovation effect,drivers,peer-to-peer diffusion,pyramiding,,idea quality
-human capital,household sector innovation,collective invention,innovation management,dynamic analysis,community innovation,rare research subjects,,internal lead user
-self-determination theory,innovation diffusion,commons-based peer production,manufacturer strategy,fan innovation,daily practices,,,netnography
-social capital,technique innovation,comparative analysis,marketing effect,impediments,innovation behavior,,,social media
-innovation ecosystem,co-creation,distributed innovation,end-users,social presence,russia,,,elu
-service ecosystem,knowledge,free revealing of information,policy,user communities,diffusion of innovation,,,employee participation
-sustainability,sources of innovation,innovation models,policymakers,crowdfunding,online innovation communities,,,sustainability innovation
-end user entrepreneur,theory,open source,sustainable innovation,entrepreneurship,renewable energy,,,sustainable development
-entrepreneurial consumer,embedded lead users,user innovation networks,firm-user collaboration,latent dirichlet allocation,do-it-yourself,,,lead user method
-entrepreneurship process,market information processing,product development,innovation strategy,topic modelling,enabling technology,,,lead user workshop
-lead user theory,organizational behavior,user generated content (ugc),review,user entrepreneur,product innovation,,,user involvement
-smes,organizational boundaries,,improvisation,,social innovation,,,
-,sticky knowledge,,knowledge acquisition,,,,,
-,entry strategy,,knowledge utilization,,,,,
-,nascent industries,,user generated content,,,,,
-,pre-entry experience,,market entry strategy,,,,,
-,product portfolio,,user-designed products,,,,,
-,facilitation,,,,,,,
-,healthcare,,,,,,,
-,organisational support mechanisms,,,,,,,
-,public hospital,,,,,,,
+maroon,teal,gold,orange,red,blue,purple,green,yellow
+acquisition mechanism,open innovation,user innovation,boundary spanner,collaboration,combinatory search,complementarities,cooperation,embedded lead users
+crowdsourcing,benefits,articulation,identification,commercial diffusion,implicit referrals,division of innovative labor,front end,market information processing
+idea competitions,community-based innovation,domestication,innovation,consumer innovation,inexact referrals,externalities,lead user,organizational behavior
+innovation contests,consistency,script,job satisfaction,innovation policy,intermediate referrals,social welfare,user-manufacturer interaction,organizational boundaries
+innovation tournaments,contingency factors,use knowledge,case study,makerspaces,lead users,user innovation paradigm,creativity,sticky knowledge
+intelligence,costs,behavioral innovation,continuous interaction,general value,network search,user-producer interactions,embedded lead user,
+public relations,innovation effect,feminist economics,drivers,market failure,pyramiding,,idea quality,
+collective invention,innovation management,household sector innovation,dynamic analysis,peer-to-peer diffusion,rare research subjects,,internal lead user,
+commons-based peer production,manufacturer strategy,innovation diffusion,fan innovation,community innovation,,,netnography,
+comparative analysis,marketing effect,technique innovation,impediments,daily practices,,,social media,
+distributed innovation,end-users,co-creation,social presence,innovation behavior,,,lead user method,
+free revealing of information,policy,knowledge,user communities,russia,,,lead user workshop,
+innovation models,policymakers,sources of innovation,crowdfunding,diffusion of innovation,,,user involvement,
+open source,sustainable innovation,theory,crowdfunding platform,online innovation communities,,,,
+user innovation networks,firm-user collaboration,diffusion,entrepreneurship,renewable energy,,,,
+product development,innovation strategy,innovation ecosystem,latent dirichlet allocation,do-it-yourself,,,,
+user generated content (ugc),review,service ecosystem,topic modelling,enabling technology,,,,
+,improvisation,sustainability,user entrepreneur,product innovation,,,,
+,knowledge acquisition,facilitation,human capital,social innovation,,,,
+,knowledge utilization,healthcare,self-determination theory,,,,,
+,user generated content,organisational support mechanisms,social capital,,,,,
+,market entry strategy,public hospital,user entrepreneurship,,,,,
+,user-designed products,,end user entrepreneur,,,,,
+,,,entrepreneurial consumer,,,,,
+,,,entrepreneurship process,,,,,

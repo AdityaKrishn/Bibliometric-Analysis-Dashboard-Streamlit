@@ -1,20 +1,22 @@
-red,teal,green,orange,gold,yellow,blue,purple,maroon,pink
-adoption,biases,brand value,case study,collaborative innovation,collective invention,communities,complementarities,configuration,free revealing
-consumer innovation,decision-makers,innovation communities,drivers,modularity,commons-based peer production,dominant design,division of innovative labor,customer integration,innovation diffusion
-diffusion,sources of innovation,product diffusion,dynamic analysis,open innovation,comparative analysis,industry evolution,externalities,mass customisation,innovation measurement
-free innovation,theory practice gap,user-generated brands,impediments,innovation,crowdsourcing,real options,social welfare,personalisation,innovation transfer
-market failure,,,user communities,lead user,distributed innovation,,user innovation paradigm,toolkits,
-user innovation,,,,user characteristics,free revealing of information,,user-producer interactions,user co-design,
-commercial diffusion,,,,innovation in consumer markets,innovation models,,,intrinsic motivation,
-general value,,,,innovation process,open source,,,open source software,
-peer-to-peer diffusion,,,,innovation management,user innovation networks,,,user support,
-household sector innovation,,,,new product development,,,,virtual community,
-measurement,,,,radical innovation,,,,need heterogeneity,
-personality,,,,use experience,,,,,
-product solution,,,,,,,,,
-research and development,,,,,,,,,
-product development,,,,,,,,,
-efficiency measurement,,,,,,,,,
-industry development,,,,,,,,,
-local information,,,,,,,,,
-sticky information,,,,,,,,,
+maroon,orange,green,blue,red,purple,teal,yellow,gold
+adoption,user innovation,biases,brand value,case study,collective invention,complementarities,configuration,free revealing
+consumer innovation,collaborative innovation,decision-makers,innovation communities,drivers,commons-based peer production,division of innovative labor,customer integration,innovation diffusion
+diffusion,modularity,sources of innovation,product diffusion,dynamic analysis,comparative analysis,externalities,mass customisation,innovation measurement
+free innovation,open innovation,theory practice gap,user-generated brands,impediments,crowdsourcing,social welfare,personalisation,innovation transfer
+market failure,communities,,,user communities,distributed innovation,user innovation paradigm,toolkits,
+commercial diffusion,dominant design,,,,free revealing of information,user-producer interactions,user co-design,
+general value,industry evolution,,,,innovation models,,intrinsic motivation,
+peer-to-peer diffusion,real options,,,,open source,,open source software,
+household sector innovation,innovation,,,,user innovation networks,,user support,
+measurement,efficiency measurement,,,,,,virtual community,
+personality,industry development,,,,,,need heterogeneity,
+product solution,lead user,,,,,,,
+research and development,user characteristics,,,,,,,
+product development,innovation in consumer markets,,,,,,,
+,innovation process,,,,,,,
+,innovation management,,,,,,,
+,new product development,,,,,,,
+,radical innovation,,,,,,,
+,use experience,,,,,,,
+,local information,,,,,,,
+,sticky information,,,,,,,

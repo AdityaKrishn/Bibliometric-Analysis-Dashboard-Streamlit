@@ -1,9 +1,9 @@
-teal,gold,maroon,blue,purple,brown,yellow,pink,red,orange,green,indigo
-3d printing,user innovation,biography of artifacts,business models,clinicians,combinatory search,open innovation,cooperation,crowdfunding,direct and indirect effects,end user entrepreneur,ownership
-co-creation,agent-based social simulation,bricolage,compatibility,healthcare,implicit referrals,digital health,front end,crowdfunding platform,education,entrepreneurial consumer,platform
-mass customisation,community,configuration,complementarity,innovation policy,inexact referrals,digital transformation,lead user,crowdsourcing,gender,entrepreneurship process,second life
-platforms,articulation,diffusion,open source,makerspaces,intermediate referrals,e-healthcare,user-manufacturer interaction,entrepreneurship,personality,user entrepreneurship,virtual world
-knowledge,domestication,innofusion,value capture,collaboration,lead users,telemedicine,external knowledge,latent dirichlet allocation,survey data,,
+maroon,gold,yellow,red,purple,brown,green,indigo,blue,teal,orange,pink
+3d printing,user innovation,biography of artifacts,business models,clinicians,combinatory search,open innovation,cooperation,crowdfunding,direct and indirect effects,economics of is,firm-user collaboration
+co-creation,agent-based social simulation,bricolage,compatibility,healthcare,implicit referrals,digital health,front end,crowdfunding platform,education,it policy and management,innovation management
+mass customisation,community,configuration,complementarity,innovation policy,inexact referrals,digital transformation,lead user,crowdsourcing,gender,open source software,innovation strategy
+platforms,articulation,diffusion,open source,makerspaces,intermediate referrals,e-healthcare,user-manufacturer interaction,entrepreneurship,personality,productivity of it,review
+knowledge,domestication,innofusion,value capture,collaboration,lead users,telemedicine,external knowledge,latent dirichlet allocation,survey data,technology strategy,
 sources of innovation,script,innovation,value creation,commercial diffusion,network search,user-centered design,innovation performance,topic modelling,,,
 theory,use knowledge,peer production,collective intelligence,consumer innovation,pyramiding,end-users,interaction methods,user communities,,,
 ,creative consumer,user practices,human powered boats,diffusion of innovation,rare research subjects,policy,user involvement,user entrepreneur,,,
@@ -13,16 +13,15 @@ theory,use knowledge,peer production,collective intelligence,consumer innovation
 ,developing countries,,user community,organisational support mechanisms,,user innovation community,,knowledge-based view,,,
 ,mobile banking services,,reasoned action,public hospital,,user innovation evaluation,,patents and intellectual property rights,,,
 ,technology diffusion,,user innovator,,,,,technology and innovation management,,,
-,economics of is,,,,,,,,,,
-,it policy and management,,,,,,,,,,
-,open source software,,,,,,,,,,
-,productivity of it,,,,,,,,,,
-,technology strategy,,,,,,,,,,
-,firm-user collaboration,,,,,,,,,,
-,innovation management,,,,,,,,,,
-,innovation strategy,,,,,,,,,,
-,review,,,,,,,,,,
+,end user entrepreneur,,,,,,,,,,
+,entrepreneurial consumer,,,,,,,,,,
+,entrepreneurship process,,,,,,,,,,
+,user entrepreneurship,,,,,,,,,,
 ,high-technology,,,,,,,,,,
 ,patents,,,,,,,,,,
 ,semiconductors,,,,,,,,,,
 ,technology management,,,,,,,,,,
+,ownership,,,,,,,,,,
+,platform,,,,,,,,,,
+,second life,,,,,,,,,,
+,virtual world,,,,,,,,,,
