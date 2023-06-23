@@ -1,10 +1,14 @@
-gold,teal,orange,maroon,green
-"baldwin, carliss","balka, kerstin","herstatt, cornelius","bradonjic, philip","chen, jin"
-"hienerth, christoph","raasch, christina","lüthje, christian","franke, nikolaus","de jong, jeroen p.j."
-"hippel, eric von","gault, fred","henkel, joachim","piller, frank t.","su, yu shan"
-"keinz, peter","kuusisto, jari","schweisfurth, tim g.","schreier, martin","flowers, stephen"
-"füller, johann","gambardella, alfonso","morrison, pamela d.","ihl, christoph","gillert, nils lennart"
-"schroll, roland","lock, phillip","stockstrom, christoph s.",,"stock, ruth maria"
-"berg jensen, morten","kuusisto, arja","tietz, robert",,
-"lettl, christopher",,,,
-"lakhani, karim r.",,,,
+teal,gold,maroon,orange
+"baldwin, carliss","hippel, eric von","balka, kerstin","bradonjic, philip"
+"hienerth, christoph","chen, jin","herstatt, cornelius","franke, nikolaus"
+"keinz, peter","de jong, jeroen p.j.","raasch, christina","lüthje, christian"
+"berg jensen, morten","su, yu shan","gambardella, alfonso","piller, frank t."
+"lettl, christopher","flowers, stephen","henkel, joachim","schreier, martin"
+,"gault, fred","schweisfurth, tim g.","ihl, christoph"
+,"gillert, nils lennart","lock, phillip","morrison, pamela d."
+,"kuusisto, jari",,"stockstrom, christoph s."
+,"stock, ruth maria",,"tietz, robert"
+,"füller, johann",,
+,"schroll, roland",,
+,"kuusisto, arja",,
+,"lakhani, karim r.",,

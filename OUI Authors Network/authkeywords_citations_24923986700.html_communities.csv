@@ -1,22 +1,23 @@
-maroon,teal,gold,orange,green,yellow,red,blue
-acquisition mechanism,user innovation,behavioral innovation,case study,collaboration,combinatory search,cooperation,crowdfunding
-crowdsourcing,articulation,feminist economics,continuous interaction,commercial diffusion,implicit referrals,front end,crowdfunding platform
-idea competitions,domestication,household sector innovation,fan innovation,consumer innovation,inexact referrals,lead user,entrepreneurship
-innovation contests,script,innovation diffusion,social presence,innovation policy,intermediate referrals,user-manufacturer interaction,innovation
-innovation tournaments,use knowledge,technique innovation,,makerspaces,lead users,creativity,latent dirichlet allocation
-intelligence,co-creation,,,community innovation,network search,embedded lead user,topic modelling
-open innovation,knowledge,,,daily practices,pyramiding,idea quality,user communities
-public relations,sources of innovation,,,innovation behavior,rare research subjects,internal lead user,user entrepreneur
-distributed innovation,theory,,,russia,,netnography,human capital
-product development,diffusion,,,diffusion of innovation,,social media,self-determination theory
-user generated content (ugc),innovation ecosystem,,,online innovation communities,,lead user method,social capital
-end-users,service ecosystem,,,renewable energy,,lead user workshop,user entrepreneurship
-policy,sustainability,,,do-it-yourself,,user involvement,end user entrepreneur
-policymakers,facilitation,,,enabling technology,,,entrepreneurial consumer
-sustainable innovation,healthcare,,,product innovation,,,entrepreneurship process
-improvisation,organisational support mechanisms,,,social innovation,,,
-knowledge acquisition,public hospital,,,,,,
-knowledge utilization,firm-user collaboration,,,,,,
-user generated content,innovation management,,,,,,
-market entry strategy,innovation strategy,,,,,,
-user-designed products,review,,,,,,
+maroon,teal,gold,orange,green,red,blue,purple,yellow
+3d community,user innovation,acquisition mechanism,case study,commercial diffusion,combinatory search,creativity,crowdfunding,facilitation
+3d printing,articulation,crowdsourcing,continuous interaction,consumer innovation,implicit referral,embedded lead user,crowdfunding platform,healthcare
+collaboration,domestication,idea competition,fan innovation,innovation policy,inexact referral,idea quality,entrepreneurship,organisational support mechanism
+diffusion,script,innovation contest,social presence,makerspace,intermediate referral,internal lead user,innovation,public hospital
+ideal type,use knowledge,innovation tournament,,community innovation,lead user,elu,latent dirichlet allocation,
+user entrepreneurship,behavioral innovation,intelligence,,daily practice,network search,employee participation,topic modelling,
+innovation ecosystem,feminist economic,open innovation,,innovation behavior,pyramiding,sustainability innovation,user community,
+service ecosystem,household sector innovation,public relation,,russium,rare research subject,sustainable development,user entrepreneur,
+sustainability,innovation diffusion,distributed innovation,,diffusion of innovation,cooperation,,human capital,
+end user entrepreneur,technique innovation,product development,,online innovation community,front end,,self-determination theory,
+entrepreneurial consumer,co-creation,user generated content (ugc),,renewable energy,user-manufacturer interaction,,social capital,
+entrepreneurship proces,knowledge,end-user,,do-it-yourself,netnography,,,
+lead user theory,sources of innovation,policy,,enabling technology,social medium,,,
+sme,theory,policymaker,,product innovation,lead user method,,,
+,entry strategy,sustainable innovation,,social innovation,lead user workshop,,,
+,nascent industry,improvisation,,,user involvement,,,
+,pre-entry experience,knowledge acquisition,,,,,,
+,product portfolio,knowledge utilization,,,,,,
+,firm-user collaboration,user generated content,,,,,,
+,innovation management,market entry strategy,,,,,,
+,innovation strategy,user-designed product,,,,,,
+,review,,,,,,,

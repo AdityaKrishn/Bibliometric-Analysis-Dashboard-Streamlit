@@ -1,15 +1,17 @@
-maroon,teal,gold,orange,green
-age,user innovation,agile project management,innovation management,crowdsourcing
-determinants,case study,agile/stage-gate hybrid,collaboration,collective invention
-lead user,drivers,new product development,dynamics,commons-based peer production
-product knowledge,dynamic analysis,scrum,entrepreneurship,comparative analysis
-silver market,impediments,stage-gate process,open source software,distributed innovation
-technical expertise,user communities,,organizational aspects,free revealing of information
-use experience,innovation in consumer markets,,organizations,innovation models
-radical innovation,innovation process,,research and development management,open source
-service innovations,local information,,technology management,user innovation networks
-service lead user,sticky information,,user-generated content,
-user integration,locus of innovation,,virtual groups,
-property rights theory,sources of innovation,,,
-separation of ownership and control,,,,
-user innovation barrier,,,,
+maroon,teal,orange,gold
+age,user innovation,innovation management,crowdsourcing
+determinant,agile project management,collaboration,collective invention
+lead user,agile/stage-gate hybrid,dynamic,commons-based peer production
+product knowledge,new product development,entrepreneurship,comparative analysi
+silver market,scrum,open source software,distributed innovation
+technical expertise,stage-gate proces,organization,free revealing of information
+use experience,case study,organizational aspect,innovation model
+innovation in consumer market,driver,research and development management,open source
+innovation proces,dynamic analysi,technology management,user innovation network
+radical innovation,impediment,user-generated content,
+service innovation,user community,virtual group,
+service lead user,local information,,
+user integration,sticky information,,
+property rights theory,locus of innovation,,
+separation of ownership and control,sources of innovation,,
+user innovation barrier,,,
