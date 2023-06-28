@@ -63,10 +63,10 @@ with st.container():
     col1, col2 = st.columns(2, gap="large")
     with col1:
         st.subheader("Papers published each year - OUI Elders' publications")
-        st.altair_chart(alt.Chart(dict['author_db_grouped']).mark_bar().encode(x=alt.X('cover_year', sort=None), y='counts'), use_container_width=True)
+        st.bar_chart(dict['author_db_grouped'], x = 'cover_year', y = 'counts')
     with col2:
         st.subheader("Papers published each year - OUI Elders' citers publications")
-        st.altair_chart(alt.Chart(dict['citation_db_grouped']).mark_bar().encode(x=alt.X('cover_year', sort=None), y='counts'), use_container_width=True)
+        st.bar_chart(dict['citation_db_grouped'], x = 'cover_year', y = 'counts')
 
 
 st.header("Network analysis of bibliographic data")  
