@@ -40,32 +40,33 @@ with st.container():
 
 
 with st.container():
-
-    st.subheader("Top 10 authors by number of papers listed in OUI Elder's publications")
-    st.dataframe(dict['top_authors'], hide_index=True)
-
-    st.subheader("Top 10 citers by number of papers listed in OUI Elder's citations")
-    st.dataframe(dict['top_citers'], hide_index=True)
+    col1, col2 = st.columns(2, gap="large")
+    with col1:
+        st.subheader("Top 10 authors by number of papers listed in OUI Elder's publications")
+        st.altair_chart(alt.Chart(dict['top_authors']).mark_bar().encode(x=alt.X('creator', sort=None), y='count'), use_container_width=True)
+    with col2:
+        st.subheader("Top 10 citers by number of papers listed in OUI Elder's citations")
+        st.altair_chart(alt.Chart(dict['top_citers']).mark_bar().encode(x=alt.X('creator', sort=None), y='count'), use_container_width=True)
 
 with st.container():
      #create bar chart for top 30 keywords in author_keywords and citers_keywords in two columns
     col1, col2 = st.columns(2, gap="large")
     with col1:
         st.subheader("Top 10 keywords in OUI Elders' publications")
-        st.bar_chart(data = dict['author_keywords'], x = 'keyword', y = 'count')
+        st.altair_chart(alt.Chart(dict['author_keywords']).mark_bar().encode(x=alt.X('keyword', sort=None), y='count'), use_container_width=True)
     with col2:
         st.subheader("Top 10 keywords in OUI Elders' citers publications")
-        st.bar_chart(data = dict['citers_keywords'], x = 'keyword', y = 'count')
+        st.altair_chart(alt.Chart(dict['citers_keywords']).mark_bar().encode(x=alt.X('keyword', sort=None), y='count'), use_container_width=True)
 
 with st.container():
      #create bar chart for top 30 keywords in author_keywords and citers_keywords in two columns
     col1, col2 = st.columns(2, gap="large")
     with col1:
         st.subheader("Papers published each year - OUI Elders' publications")
-        st.bar_chart(dict['author_db_grouped'], x = 'cover_year', y = 'counts')
+        st.altair_chart(alt.Chart(dict['author_db_grouped']).mark_bar().encode(x=alt.X('cover_year', sort=None), y='counts'), use_container_width=True)
     with col2:
         st.subheader("Papers published each year - OUI Elders' citers publications")
-        st.bar_chart(dict['citation_db_grouped'], x = 'cover_year', y = 'counts')
+        st.altair_chart(alt.Chart(dict['citation_db_grouped']).mark_bar().encode(x=alt.X('cover_year', sort=None), y='counts'), use_container_width=True)
 
 
 st.header("Network analysis of bibliographic data")  
