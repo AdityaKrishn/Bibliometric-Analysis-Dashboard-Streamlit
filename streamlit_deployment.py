@@ -272,10 +272,10 @@ with st.container():
         
     except:
         path = '/Scopus Iteration'
-        HtmlFile7 = open(r"/publicationJournalCocitation" + r".html", 'r')
+        HtmlFile7 = open(r"publicationJournalCocitation.html", 'r')
     components.html(HtmlFile7.read(), height=700)
     try:
-        df_html7 = pd.read_csv(r'/publicationJournalCocitation' + r'.html_communities.csv')
+        df_html7 = pd.read_csv(r'publicationJournalCocitation.html_communities.csv')
         # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
         df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
         df_html7 = df_html7.dropna(how='all')
@@ -294,10 +294,10 @@ with st.container():
         path = '/Scopus Iteration'
         # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
     
-        HtmlFile7 = open(r"/publicationJournalBibliographiccoupling" + r".html", 'r')
+        HtmlFile7 = open(r"publicationJournalBibliographiccoupling.html", 'r')
     components.html(HtmlFile7.read(), height=700)
     try:
-        df_html7 = pd.read_csv(r'/publicationJournalBibliographiccoupling' + r'.html_communities.csv')
+        df_html7 = pd.read_csv(r'publicationJournalBibliographiccoupling.html_communities.csv')
         # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
         df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
         df_html7 = df_html7.dropna(how='all')
