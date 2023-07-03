@@ -1,14 +1,13 @@
-maroon,orange,teal,gold
-"baldwin, carliss","von hippel, eric","balka, kerstin","bradonjic, philip"
-"hienerth, christoph","chen, jin","herstatt, cornelius","franke, nikolaus"
-"keinz, peter","de jong, jeroen p.j.","raasch, christina","piller, frank t."
-"berg jensen, morten","su, yu shan","lüthje, christian","schreier, martin"
-"lettl, christopher","flowers, stephen","gambardella, alfonso","ihl, christoph"
-,"gault, fred","henkel, joachim",
-,"gillert, nils lennart","schweisfurth, tim g.",
-,"kuusisto, jari","lock, phillip",
-,"stock, ruth maria","morrison, pamela d.",
-,"füller, johann","stockstrom, christoph s.",
-,"schroll, roland","tietz, robert",
-,"kuusisto, arja",,
-,"lakhani, karim r.",,
+maroon,teal,gold
+"baldwin, carliss","von hippel, eric","lüthje, christian"
+"hienerth, christoph","de jong, jeroen p.j.","henkel, joachim"
+"franke, nikolaus","flowers, stephen","schweisfurth, tim g."
+"keinz, peter","gault, fred","herstatt, cornelius"
+"piller, frank t.","gillert, nils lennart","morrison, pamela d."
+"lettl, christopher","kuusisto, jari","stockstrom, christoph s."
+"ihl, christoph","raasch, christina",
+,"stock, ruth maria",
+,"füller, johann",
+,"gambardella, alfonso",
+,"kuusisto, arja",
+,"lakhani, karim r.",

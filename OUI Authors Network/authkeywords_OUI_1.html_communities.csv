@@ -1,21 +1,11 @@
-red,teal,gold,orange,maroon,yellow,blue,purple,pink,green
-adoption,biase,brand value,case study,collaborative innovation,collective invention,community,complementarity,configuration,free revealing
-consumer innovation,decision-maker,innovation community,driver,modularity,commons-based peer production,dominant design,division of innovative labor,customer integration,innovation diffusion
-diffusion,sources of innovation,product diffusion,dynamic analysi,open innovation,comparative analysi,industry evolution,externality,mass customisation,innovation measurement
-free innovation,theory practice gap,user-generated brand,impediment,entrepreneurship,crowdsourcing,real option,social welfare,personalisation,innovation transfer
-market failure,,,user community,innovation,distributed innovation,,user innovation paradigm,toolkit,
-user innovation,,,,innovation management,free revealing of information,,user-producer interaction,user co-design,
-commercial diffusion,,,,radical innovation,innovation model,,,open source software,
-general value,,,,identification,open source,,,intrinsic motivation,
-peer-to-peer diffusion,,,,lead user,user innovation network,,,user support,
-household sector innovation,,,,user characteristic,,,,virtual community,
-measurement,,,,innovation in consumer market,,,,need heterogeneity,
-personality,,,,innovation proces,,,,,
-product solution,,,,new product development,,,,,
-research and development,,,,service innovation,,,,,
-product development,,,,use experience,,,,,
-efficiency measurement,,,,,,,,,
-industry development,,,,,,,,,
-local information,,,,,,,,,
-mass customization,,,,,,,,,
-sticky information,,,,,,,,,
+maroon,teal,gold,green,orange
+case study,consumer innovation,crowdsourcing,customer integration,radical innovation
+user community,diffusion,entrepreneurship,toolkit,lead user
+user innovation,free innovation,innovation management,product development,new product development
+innovation,household sector innovation,open innovation,local information,service innovation
+identification,market failure,open source,mass customization,use experience
+user characteristic,measurement,open source software,sticky information,
+innovation diffusion,,innovation community,,
+innovation transfer,,,,
+social welfare,,,,
+sources of innovation,,,,

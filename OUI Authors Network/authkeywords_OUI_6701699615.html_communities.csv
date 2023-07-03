@@ -1,13 +1,19 @@
-maroon,blue,orange,green,red,teal,yellow,gold
-brand value,user innovation,community,complementarity,consumer innovation,free revealing,heterogeneous market,intrinsic motivation
-innovation community,collaborative innovation,dominant design,division of innovative labor,diffusion,innovation diffusion,local information,open source software
-product diffusion,modularity,industry evolution,externality,household sector innovation,innovation measurement,mass customization,user support
-user-generated brand,open innovation,real option,social welfare,measurement,innovation transfer,specialization in problem solving,virtual community
-,commercial diffusion,,user innovation paradigm,need-solution pair,,sticky information,product development
-,general value,,user-producer interaction,personality,,task partitioning,toolkit
-,market failure,,,problem-solving,,,need heterogeneity
-,peer-to-peer diffusion,,,product solution,,,
-,efficiency measurement,,,research and development,,,
-,industry development,,,free innovation,,,
+teal,red,gold,orange,green,maroon,yellow,blue
+brand value,user innovation,commercial diffusion,community,complementarity,free revealing,heterogeneous market,intrinsic motivation
+innovation community,collaborative innovation,general value,dominant design,division of innovative labor,innovation diffusion,local information,open source software
+product diffusion,modularity,market failure,industry evolution,externality,innovation measurement,mass customization,user support
+user-generated brand,open innovation,peer-to-peer diffusion,real option,social welfare,innovation transfer,specialization in problem solving,virtual community
+,consumer innovation,,,user innovation paradigm,,sticky information,product development
+,diffusion,,,user-producer interaction,,task partitioning,toolkit
+,household sector innovation,,,,,,need heterogeneity
+,measurement,,,,,,
+,need-solution pair,,,,,,
+,personality,,,,,,
+,problem-solving,,,,,,
+,product solution,,,,,,
+,research and development,,,,,,
+,efficiency measurement,,,,,,
+,industry development,,,,,,
+,free innovation,,,,,,
 ,service development,,,,,,
 ,service innovation,,,,,,

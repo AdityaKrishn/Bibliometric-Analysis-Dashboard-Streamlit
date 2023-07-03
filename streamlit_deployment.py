@@ -252,14 +252,58 @@ else:
 #             HtmlFile5 = open(r"publicationNames_Citers1.html", 'r')
 #         components.html(HtmlFile5.read(), height=700)
 
-with st.container():   
-        st.subheader("Topic Modelling of OUI Elders Citers Papers abstracts")   
-        try:
-            path = '/tmp'
-            HtmlFile6 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
-        except:
-            path = '/Scopus Iteration'
-            # HtmlFile4 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_citers.html", 'r')
+# with st.container():   
+#         st.subheader("Topic Modelling of OUI Elders Citers Papers abstracts")   
+#         try:
+#             path = '/tmp'
+#             HtmlFile6 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
+#         except:
+#             path = '/Scopus Iteration'
+#             # HtmlFile4 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_citers.html", 'r')
           
-            HtmlFile6 = open(r"LDA10.html", 'r')
-        components.html(HtmlFile6.read(), height=750)
+#             HtmlFile6 = open(r"LDA10.html", 'r')
+#         components.html(HtmlFile6.read(), height=750)
+
+with st.container():   
+    st.subheader("Co-citation Network of Publication Journals")     
+    try:
+        path = '/OUI Authors Network'
+        HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
+        
+    except:
+        path = '/Scopus Iteration'
+        # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
+    
+        HtmlFile7 = open(os.getcwd()+r"/OUI Authors Network/publicationJournal_cocitation" + r".html", 'r')
+    components.html(HtmlFile7.read(), height=700)
+    try:
+        df_html7 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/publicationJournal_cocitation' + r'.html_communities.csv')
+        # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+        df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+        df_html7 = df_html7.dropna(how='all')
+        df_html7 = df_html7.fillna('')
+        st.dataframe(df_html7, hide_index=True)
+    except:
+        print(sys.exc_info()[0])
+
+with st.container():   
+    st.subheader("Co-citation Network of Publication Journals")     
+    try:
+        path = '/OUI Authors Network'
+        HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
+        
+    except:
+        path = '/Scopus Iteration'
+        # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
+    
+        HtmlFile7 = open(os.getcwd()+r"/OUI Authors Network/publicationJournal_cocitation_bibliographiccoupling" + r".html", 'r')
+    components.html(HtmlFile7.read(), height=700)
+    try:
+        df_html7 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/publicationJournal_cocitation_bibliographiccoupling' + r'.html_communities.csv')
+        # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+        df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+        df_html7 = df_html7.dropna(how='all')
+        df_html7 = df_html7.fillna('')
+        st.dataframe(df_html7, hide_index=True)
+    except:
+        print(sys.exc_info()[0])

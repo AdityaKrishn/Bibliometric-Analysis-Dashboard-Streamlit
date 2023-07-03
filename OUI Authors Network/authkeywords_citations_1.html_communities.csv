@@ -1,21 +1,18 @@
-teal,orange,blue,green,red,maroon,gold,yellow,purple
-3d printing,collaboration,diffusion,online innovation community,platform,case study,crowdsourcing,open innovation,combinatory search
-co-creation,clinician,user innovation,consumer innovation,user entrepreneurship,innovation management,customer integration,digital health,implicit referral
-digital remixing,healthcare,articulation,community innovation,human capital,innovation policy,user design,digital transformation,inexact referral
-motivation,innovation,domestication,daily practice,self-determination theory,user involvement,community-based innovation,e-healthcare,intermediate referral
-online community,makerspace,script,innovation behavior,social capital,do-it-yourself,consumer innovator,telemedicine,lead user
-customization toolkit,new product development,use knowledge,russium,end user entrepreneur,enabling technology,user community,user-centered design,network search
-knowledge,product development,behavioral innovation,diffusion of innovation,entrepreneurial consumer,product innovation,crowdfunding,improvisation,pyramiding
-leading edge statu,commercial diffusion,feminist economic,renewable energy,entrepreneurship proces,social innovation,crowdfunding platform,knowledge acquisition,rare research subject
-personalization,community,household sector innovation,,second life,firm-user collaboration,entrepreneurship,knowledge utilization,cooperation
-social networking service,idea competition,innovation diffusion,,virtual world,innovation strategy,user entrepreneur,user generated content,front end
-sources of innovation,network,technique innovation,,,review,innovation contest,innovation rarenes,user-manufacturer interaction
-theory,software development,business model,,,lead user method,open source software,user innovation community,creativity
-netnography,toolkit,open source,,,lead user workshop,learning strategy,user innovation evaluation,embedded lead user
-social medium,user,creative consumer,,,video game industry,evolutionary approach,sustainable innovation,idea quality
-web 2.0,facilitation,living lab,,,,reasoned action,,internal lead user
-lead user theory,organisational support mechanism,innovation ecosystem,,,,user innovator,,online brand community
-,public hospital,opinion leadership,,,,,,
-,post-adoptive behavior,service ecosystem,,,,,,
-,interaction,sustainability,,,,,,
-,,patent,,,,,,
+maroon,teal,gold,green,red,orange,yellow
+3d printing,co-creation,collaboration,motivation,online innovation community,user innovation,lead user
+diffusion,open source software,innovation policy,online community,product development,compatibility,case study
+platform,crowdsourcing,innovation,knowledge,consumer innovation,business model,innovation management
+user entrepreneurship,customer integration,community,sources of innovation,open innovation,open source,user involvement
+adoption,new product development,makerspace,netnography,diffusion of innovation,value creation,toolkit
+opinion leadership,user design,network,online user innovation community,renewable energy,cocreation,embedded lead user
+second life,user-generated product,user,social medium,living lab,creative consumer,idea quality
+virtual world,idea competition,healthcare,lead user theory,sustainability,community-based innovation,web 2.0
+,software development,post-adoptive behavior,user innovation community,distributed innovation,consumer innovator,lead user workshop
+,innovation contest,product innovation,user idea,knowledge sharing,user community,video game industry
+,,,,service,crowdfunding,
+,,,,literature review,crowdfunding platform,
+,,,,sustainable innovation,entrepreneurship,
+,,,,,evolutionary approach,
+,,,,,product architecture,
+,,,,,technology strategy,
+,,,,,patent,
