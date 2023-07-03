@@ -287,7 +287,7 @@ with st.container():
         print(sys.exc_info()[0])
 
 with st.container():   
-    st.subheader("Co-citation Network of Publication Journals")     
+    st.subheader("Bibliographic coupling Network of Publication Journals")     
     try:
         path = '/OUI Authors Network'
         HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
