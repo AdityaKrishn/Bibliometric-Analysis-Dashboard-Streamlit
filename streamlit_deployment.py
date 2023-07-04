@@ -70,8 +70,8 @@ with st.container():
 
 
 st.header("Network analysis of bibliographic data")  
-st.info("Select a graph visualisation type to view")
-st.text("")
+st.info("Select a graph visualisation type to view.\nThe graphs are interactive and can be zoomed in and out and dragged around.\nThe graphs are of three types: \n1. OUI Elders \n2. Citers of OUI Elder's papers \n3. Combination of both OUI Elders and their Citers")
+st.caption("Note: The graphs are made of a filtered set of user-innovation focussed research papers.")
 
 path = r'OUI Authors Network'
 files = os.listdir(path)
@@ -104,7 +104,7 @@ if option_3 == 'OUI Elders and their Citers combined':
 
     with st.container():   
             st.subheader("Co-occurrence Keyword Network of combined OUI Elders and their Citers") 
-            st.info("Scientific collaboration network is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")   
+            st.info("Scientific collaboration network(keyword type) is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")   
             try:
                 path = '/OUI Authors Network'
                 HtmlFile6 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
@@ -126,7 +126,7 @@ if option_3 == 'OUI Elders and their Citers combined':
 
     with st.container():   
             st.subheader("Co-authorship Network of combined OUI Elders and their Citers")
-            st.info("Scientific collaboration network is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)")     
+            st.info("Scientific collaboration network(author type) is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)")     
             try:
                 path = '/OUI Authors Network'
                 HtmlFile3 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
@@ -152,7 +152,7 @@ elif option_3 == 'OUI Elders':
     with st.container():
             
             st.subheader("Co-occurrence Keyword Network of OUI Elder Papers")
-            st.info("Scientific collaboration network is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")
+            st.info("Scientific collaboration network(keyword type) is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")
             try:
                 path = '/OUI Authors Network'
                 HtmlFile4 = open(f'{path}/authkeywords_OUI_Elders.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
@@ -175,7 +175,7 @@ elif option_3 == 'OUI Elders':
     with st.container():
 
             st.subheader("Co-authorship Network of OUI Elders")
-            st.info("Scientific collaboration network is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)")
+            st.info("Scientific collaboration network(author type) is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)")
             try:
                 path = '/OUI Authors Network'
                 HtmlFile1 = open(f'{path}/author_names.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
@@ -199,7 +199,7 @@ else:
 
     with st.container():   
             st.subheader("Co-occurrence Keyword Network of OUI Elders Citers Papers")
-            st.info("Scientific collaboration network is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")    
+            st.info("Scientific collaboration network(keyword type) is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")    
             try:
                 path = '/OUI Authors Network'
                 HtmlFile5 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
@@ -221,7 +221,7 @@ else:
 
     with st.container():   
             st.subheader("Co-authorship Network of OUI Elders Citers")    
-            st.info("Scientific collaboration network is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)") 
+            st.info("Scientific collaboration network(author type) is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)") 
             try:
                 path = '/OUI Authors Network'
                 HtmlFile2 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
