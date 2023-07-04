@@ -71,6 +71,7 @@ with st.container():
 
 st.header("Network analysis of bibliographic data")  
 st.info("Select a graph visualisation type to view")
+st.text("")
 
 path = r'OUI Authors Network'
 files = os.listdir(path)
@@ -102,7 +103,8 @@ option_3 = st.selectbox('Select the graph type', ['OUI Elders and their Citers c
 if option_3 == 'OUI Elders and their Citers combined':
 
     with st.container():   
-            st.subheader("Co-occurrence Keyword Network of combined OUI Elders and their Citers")    
+            st.subheader("Co-occurrence Keyword Network of combined OUI Elders and their Citers") 
+            st.info("Scientific collaboration network is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")   
             try:
                 path = '/OUI Authors Network'
                 HtmlFile6 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
@@ -123,7 +125,8 @@ if option_3 == 'OUI Elders and their Citers combined':
                 print(sys.exc_info()[0])
 
     with st.container():   
-            st.subheader("Co-authorship Network of combined OUI Elders and their Citers")     
+            st.subheader("Co-authorship Network of combined OUI Elders and their Citers")
+            st.info("Scientific collaboration network is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)")     
             try:
                 path = '/OUI Authors Network'
                 HtmlFile3 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
@@ -149,6 +152,7 @@ elif option_3 == 'OUI Elders':
     with st.container():
             
             st.subheader("Co-occurrence Keyword Network of OUI Elder Papers")
+            st.info("Scientific collaboration network is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")
             try:
                 path = '/OUI Authors Network'
                 HtmlFile4 = open(f'{path}/authkeywords_OUI_Elders.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
@@ -170,8 +174,8 @@ elif option_3 == 'OUI Elders':
 
     with st.container():
 
-
             st.subheader("Co-authorship Network of OUI Elders")
+            st.info("Scientific collaboration network is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)")
             try:
                 path = '/OUI Authors Network'
                 HtmlFile1 = open(f'{path}/author_names.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
@@ -194,7 +198,8 @@ elif option_3 == 'OUI Elders':
 else: 
 
     with st.container():   
-            st.subheader("Co-occurrence Keyword Network of OUI Elders Citers Papers")    
+            st.subheader("Co-occurrence Keyword Network of OUI Elders Citers Papers")
+            st.info("Scientific collaboration network is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")    
             try:
                 path = '/OUI Authors Network'
                 HtmlFile5 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
@@ -215,7 +220,8 @@ else:
                 print(sys.exc_info()[0])
 
     with st.container():   
-            st.subheader("Co-authorship Network of OUI Elders Citers")     
+            st.subheader("Co-authorship Network of OUI Elders Citers")    
+            st.info("Scientific collaboration network is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)") 
             try:
                 path = '/OUI Authors Network'
                 HtmlFile2 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
@@ -264,28 +270,29 @@ else:
 #             HtmlFile6 = open(r"LDA10.html", 'r')
 #         components.html(HtmlFile6.read(), height=750)
 
-with st.container():   
-    st.subheader("Co-citation Network of Publication Journals")     
-    try:
-        path = '/OUI Authors Network'
-        HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
+# with st.container():   
+#     st.subheader("Co-citation Network of Publication Journals")     
+#     try:
+#         path = '/OUI Authors Network'
+#         HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
         
-    except:
-        path = '/Scopus Iteration'
-        HtmlFile7 = open(r"publicationJournalCocitation.html", 'r')
-    components.html(HtmlFile7.read(), height=700)
-    try:
-        df_html7 = pd.read_csv(r'publicationJournalCocitation.html_communities.csv')
-        # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
-        df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
-        df_html7 = df_html7.dropna(how='all')
-        df_html7 = df_html7.fillna('')
-        st.dataframe(df_html7, hide_index=True)
-    except:
-        print(sys.exc_info()[0])
+#     except:
+#         path = '/Scopus Iteration'
+#         HtmlFile7 = open(r"publicationJournalCocitation.html", 'r')
+#     components.html(HtmlFile7.read(), height=700)
+#     try:
+#         df_html7 = pd.read_csv(r'publicationJournalCocitation.html_communities.csv')
+#         # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+#         df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+#         df_html7 = df_html7.dropna(how='all')
+#         df_html7 = df_html7.fillna('')
+#         st.dataframe(df_html7, hide_index=True)
+#     except:
+#         print(sys.exc_info()[0])
 
 with st.container():   
-    st.subheader("Bibliographic coupling Network of Publication Journals")     
+    st.subheader("Bibliographic coupling Network of Publication Journals")   
+    st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
     try:
         path = '/OUI Authors Network'
         HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
