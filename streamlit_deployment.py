@@ -70,7 +70,7 @@ with st.container():
 
 
 st.header("Network analysis of bibliographic data")  
-st.info("Select a graph visualisation type to view.\nThe graphs are interactive and can be zoomed in and out and dragged around.\nThe graphs are of three types: \n1. OUI Elders \n2. Citers of OUI Elder's papers \n3. Combination of both OUI Elders and their Citers")
+st.info("Select a graph visualisation type to view. \nThe graphs are interactive and can be zoomed in and out and dragged around. \nThe graphs are of three types: \n1. OUI Elders \n2. Citers of OUI Elder's papers \n3. Combination of both OUI Elders and their Citers")
 st.caption("Note: The graphs are made of a filtered set of user-innovation focussed research papers.")
 
 path = r'OUI Authors Network'
