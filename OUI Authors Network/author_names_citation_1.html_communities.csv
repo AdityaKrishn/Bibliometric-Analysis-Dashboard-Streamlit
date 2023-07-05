@@ -1,15 +1,15 @@
-maroon,red,gold,orange,green,yellow,black,pink,brown,indigo,cyan,magenta,crimson,navy,grey,coral,darkviolet,darkgreen,darkred,darkorange,silver,darkblue,darkcyan,teal,blue,purple,lime,olive
-"abrate, graziano","afuah, allan","antorini, yun mi","bilgram, volker","björk, jennie","blohm, ivo","bortoluzzi, guido","buganza, tommaso","cao, xinyan","chandra, yanto","chen, xiaohong","crocco, edoardo","dahl, darren w.","della santa, silvia","fursov, konstantin","gong, yu","hakkarainen, louna","haller, jörg b.a.","hamdi-kidar, linda","hopkins, michael m.","hossain, mokter","jeong, yujin","kankanhalli, atreyi","koch, stefan","liao, xiao","lin, jie","mathies, christine","oliveira, pedro"
-"baima, gabriele","bastian, bettina","jensen, morten berg","gutstein, adele","magnusson, mats","bretschneider, ulrich","yordanova, zornitsa","dell'era, claudio","fang, xiang","leenders, mark a.a.m.","probert, david","culasso, francesca","fuchs, christoph","marchi, gianluca","linton, jonathan","jia, fu","heiskanen, eva","möslein, kathrin m.","keinz, peter","miller, roger","leminen, seppo","lee, keeeun","kim, seung hyun","artmayr, philipp","xi, yunjiang","jiang, xiaoyan","de ruyter, ko","e cunha, miguel pina"
-"menozzi, anna","bogers, marcel","muñiz, albert m.","marchuk, anna","sandström, gunilla ölundh","krcmar, helmut","escobar, octavio","pellizzoni, elena","yang, yu","cong, ling mei","su, jun","giacosa, elisa","schreier, martin","tagliazucchi, giulia","nefedova, alena","shi, yangyan","helminen, pia","schneckenberg, dirk","le nagard, emmanuelle","nightingale, paul","westerlund, mika","lee, sungjoo","teo, hock hai","bierbamer, michael","ye, guangyu","wang, chao","patterson, paul g.","veloso, francisco"
-"pera, rebecca","mccarthy, ian p.","nørskov, sladjana","brem, alexander","wadell, carl","marco, jan leimeister","khvatova, tatiana","trabucchi, daniel","chai, ruirui","zhou, michael","zhou, yuan","yahiaoui, dorra","prandelli, emanuela","giachetti, claudio","thurner, thomas","zhang, yufang","freeman, stephanie","velamuri, vivek k.","vellera, cyrielle","tidd, joe","nyström, anna greta","yoon, byungun","ye, hua jonathan","guceri-ucar, gozem","yu, juan","zhou, lixin","piyathasanan, bhuminan","van der boor, paul"
-,"pitt, leyland",,"gladysz, bartosz",,,"maalaoui, adnane",,"liu, wei",,,,"nishikawa, hidehiko","de gennaro, pamela",,"sun, yanhua","johnson, mikael",,"vernette, eric",,"rajahonka, mervi",,"li, mingguo","inanc, duygu","zantow, kenneth",,,
-,"west, joel",,"ernst, markus",,,"schiavone, francesco",,,,,,"ogawa, susumu",,,,"juntunen, jouni k.",,,,"pacauskas, darius",,"ye, hua",,,,,
-,,,"schulz, stefanie",,,"villasalero, manuel",,,,,,"oberhauser, stefan",,,,"mäkinen, samuli",,,,"mäntymäki, matti",,,,,,,
-,,,,,,"ghasemzadeh, khatereh",,,,,,"prügl, reinhard",,,,"hyysalo, sampsa",,,,"rajala, risto",,,,,,,
-,,,,,,,,,,,,"pongtanalert, kritinee",,,,"repo, petteri",,,,,,,,,,,
-,,,,,,,,,,,,"pasquini, martina",,,,"timonen, päivi",,,,,,,,,,,
-,,,,,,,,,,,,"verona, gianmario",,,,"usenyuk, svetlana",,,,,,,,,,,
-,,,,,,,,,,,,,,,,"kristensson, per",,,,,,,,,,,
-,,,,,,,,,,,,,,,,"stewart, james",,,,,,,,,,,
-,,,,,,,,,,,,,,,,"trischler, jakob",,,,,,,,,,,
+gold,teal,purple,yellow,indigo,pink,brown,maroon,cyan,blue,orange,green,red
+"afuah, allan","bilgram, volker","bortoluzzi, guido","cao, xinyan","dahl, darren w.","della santa, silvia","gong, yu","hakkarainen, louna","hamdi-kidar, linda","hossain, mokter","kankanhalli, atreyi","koch, stefan","liao, xiao"
+"bastian, bettina","gutstein, adele","yordanova, zornitsa","fang, xiang","fuchs, christoph","marchi, gianluca","jia, fu","heiskanen, eva","keinz, peter","leminen, seppo","kim, seung hyun","artmayr, philipp","xi, yunjiang"
+"bogers, marcel","marchuk, anna","escobar, octavio","yang, yu","schreier, martin","tagliazucchi, giulia","shi, yangyan","helminen, pia","le nagard, emmanuelle","westerlund, mika","teo, hock hai","bierbamer, michael","ye, guangyu"
+"mccarthy, ian p.","brem, alexander","khvatova, tatiana","chai, ruirui","prandelli, emanuela","giachetti, claudio","zhang, yufang","freeman, stephanie","vellera, cyrielle","nyström, anna greta","ye, hua jonathan","guceri-ucar, gozem","yu, juan"
+"pitt, leyland","gladysz, bartosz","maalaoui, adnane","liu, wei","nishikawa, hidehiko","de gennaro, pamela","sun, yanhua","johnson, mikael","vernette, eric","rajahonka, mervi","li, mingguo","inanc, duygu","zantow, kenneth"
+"west, joel","ernst, markus","schiavone, francesco",,"ogawa, susumu",,,"juntunen, jouni k.",,"pacauskas, darius","ye, hua",,
+,"schulz, stefanie","villasalero, manuel",,"oberhauser, stefan",,,"mäkinen, samuli",,"mäntymäki, matti",,,
+,,"ghasemzadeh, khatereh",,"prügl, reinhard",,,"hyysalo, sampsa",,"rajala, risto",,,
+,,,,"pongtanalert, kritinee",,,"repo, petteri",,,,,
+,,,,"pasquini, martina",,,"timonen, päivi",,,,,
+,,,,"verona, gianmario",,,"usenyuk, svetlana",,,,,
+,,,,,,,"kristensson, per",,,,,
+,,,,,,,"stewart, james",,,,,
+,,,,,,,"trischler, jakob",,,,,
