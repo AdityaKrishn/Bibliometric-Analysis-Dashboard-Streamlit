@@ -282,8 +282,8 @@ function highlightFilter(filter) {
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": "maroon", "id": "haefliger, stefan", "label": "haefliger, stefan", "shape": "dot", "size": 2, "title": ["haefliger, stefan", 2]}, {"color": "maroon", "id": "j\u00e4ger, peter", "label": "j\u00e4ger, peter", "shape": "dot", "size": 2, "title": ["j\u00e4ger, peter", 2]}, {"color": "maroon", "id": "von krogh, georg", "label": "von krogh, georg", "shape": "dot", "size": 2, "title": ["von krogh, georg", 2]}]);
-                  edges = new vis.DataSet([{"color": "silver", "from": "haefliger, stefan", "symbol": "cross", "title": 1, "to": "j\u00e4ger, peter", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "haefliger, stefan", "symbol": "diamond", "title": 1, "to": "von krogh, georg", "value": 0.5, "width": 0.3333333333333333}, {"color": "silver", "from": "j\u00e4ger, peter", "symbol": "diamond", "title": 1, "to": "von krogh, georg", "value": 0.5, "width": 0.3333333333333333}]);
+                  nodes = new vis.DataSet([{"color": "maroon", "id": "haefliger, stefan", "label": "haefliger, stefan", "shape": "dot", "size": 1, "title": "1"}, {"color": "maroon", "id": "j\u00e4ger, peter", "label": "j\u00e4ger, peter", "shape": "dot", "size": 1, "title": "1"}, {"color": "maroon", "id": "von krogh, georg", "label": "von krogh, georg", "shape": "dot", "size": 1, "title": "1"}]);
+                  edges = new vis.DataSet([{"color": "silver", "from": "haefliger, stefan", "symbol": "square", "title": 1, "to": "j\u00e4ger, peter", "value": 1, "width": 1}, {"color": "silver", "from": "haefliger, stefan", "symbol": "circle", "title": 1, "to": "von krogh, georg", "value": 1, "width": 1}, {"color": "silver", "from": "j\u00e4ger, peter", "symbol": "diamond", "title": 1, "to": "von krogh, georg", "value": 1, "width": 1}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
