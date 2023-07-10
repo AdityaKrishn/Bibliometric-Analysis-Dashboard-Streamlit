@@ -1,13 +1,13 @@
-blue,gold,orange,green,yellow,maroon,teal,red
-brand value,commercial diffusion,community,complementarity,consumer innovation,free revealing,heterogeneous market,intrinsic motivation
-innovation community,general value,dominant design,division of innovative labor,diffusion,innovation diffusion,local information,open source software
-product diffusion,market failure,industry evolution,externality,household sector innovation,innovation measurement,mass customization,user support
-user innovation,peer-to-peer diffusion,real option,social welfare,measurement,innovation transfer,specialization in problem solving,virtual community
-user-generated brand,,,user innovation paradigm,need-solution pair,,sticky information,product development
-collaborative innovation,,,user-producer interaction,personality,,task partitioning,toolkit
-modularity,,,,problem-solving,,,need heterogeneity
-open innovation,,,,product solution,,,
-efficiency measurement,,,,research and development,,,
-industry development,,,,free innovation,,,
-service development,,,,,,,
-service innovation,,,,,,,
+maroon,teal,gold,green,yellow,orange,red,blue
+brand value,user innovation,commercial diffusion,complementarity,consumer innovation,free revealing,heterogeneous market,intrinsic motivation
+innovation community,collaborative innovation,general value,division of innovative labor,diffusion,innovation diffusion,local information,open source software
+product diffusion,modularity,market failure,externality,household sector innovation,innovation measurement,mass customization,user support
+user-generated brand,open innovation,peer-to-peer diffusion,social welfare,measurement,innovation transfer,specialization in problem solving,virtual community
+,community,,user innovation paradigm,need-solution pair,,sticky information,product development
+,dominant design,,user-producer interaction,personality,,task partitioning,toolkit
+,industry evolution,,,problem-solving,,,need heterogeneity
+,real option,,,product solution,,,
+,efficiency measurement,,,research and development,,,
+,industry development,,,free innovation,,,
+,service development,,,,,,
+,service innovation,,,,,,
