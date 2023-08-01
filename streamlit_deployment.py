@@ -6,6 +6,7 @@ def install(package):
 
 # Example usage:
 install('openpyxl')
+install('streamlit==1.9.0')
 
 import streamlit as st
 import streamlit.components.v1 as components
