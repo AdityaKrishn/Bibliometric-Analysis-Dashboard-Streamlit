@@ -6,7 +6,7 @@ def install(package):
 
 # Example usage:
 # install('streamlit==1.9.0')
-install('openpyxl')
+# install('openpyxl')
 
 
 import streamlit as st
@@ -15,9 +15,10 @@ import altair as alt
 import pandas as pd
 import os
 import pickle
-import openpyxl
+# import openpyxl
 
-author_df = pd.read_excel(r'Village Elders_id.xlsx', sheet_name='Scopus ID DB')
+# author_df = pd.read_excel(r'Village Elders_id.xlsx', sheet_name='Scopus ID DB')
+author_df = pd.read_csv(r'Village Elders_id.csv')
 
 
 #read the pickle file streamlit_data_prep into a dictionary
