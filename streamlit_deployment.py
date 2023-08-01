@@ -1,12 +1,12 @@
 import subprocess
 import sys
 
-# def install(package):
-#     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
-# # Example usage:
+# Example usage:
 # install('streamlit==1.9.0')
-# install('openpyxl')
+install('openpyxl')
 
 
 import streamlit as st
@@ -15,7 +15,7 @@ import altair as alt
 import pandas as pd
 import os
 import pickle
-# import openpyxl
+import openpyxl
 
 author_df = pd.read_excel(r'Village Elders_id.xlsx', sheet_name='Scopus ID DB')
 
