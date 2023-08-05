@@ -31,7 +31,7 @@ st.set_page_config(layout = "wide", page_title = "Scopus Dashboard", page_icon =
 
 # The main window
 
-st.title("Bibliometric Analysis of OUI Elders' Publications")
+st.title("Bibliometric Analysis of Open User Innovation(OUI) community Publications")
 st.info("Compare the publications of OUI Elders with the publications of other authors in the same field")
 
 
