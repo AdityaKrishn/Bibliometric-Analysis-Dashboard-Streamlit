@@ -31,8 +31,8 @@ st.set_page_config(layout = "wide", page_title = "Scopus Dashboard", page_icon =
 
 # The main window
 
-st.title("Bibliometric Analysis of Open User Innovation(OUI) community Publications")
-st.info("Compare the publications of OUI Elders with the publications of other authors in the same field")
+st.title("Bibliometric Analysis of Open User Innovation(OUI) Community Publications")
+st.info("Compare the publications of Open User Innovation Elders with the publications of their citers(authors who have cited their publications)")
 
 
 with st.container():
@@ -45,20 +45,20 @@ with st.container():
 with st.container():
     col1, col2 = st.columns(2, gap="large")
     with col1:
-        st.subheader("Top 10 authors by number of papers listed in OUI Elder's publications")
+        st.subheader("Top 15 authors by number of papers listed in OUI Elder's publications")
         st.altair_chart(alt.Chart(dict['top_authors']).mark_bar().encode(x=alt.X('creator', sort=None), y='count'), use_container_width=True)
     with col2:
-        st.subheader("Top 10 citers by number of papers listed in OUI Elder's citations")
+        st.subheader("Top 15 citers by number of papers listed in OUI Elder's citations")
         st.altair_chart(alt.Chart(dict['top_citers']).mark_bar().encode(x=alt.X('creator', sort=None), y='count'), use_container_width=True)
 
 with st.container():
      #create bar chart for top 30 keywords in author_keywords and citers_keywords in two columns
     col1, col2 = st.columns(2, gap="large")
     with col1:
-        st.subheader("Top 10 keywords in OUI Elders' publications")
+        st.subheader("Top 15 keywords in OUI Elders' publications")
         st.altair_chart(alt.Chart(dict['author_keywords']).mark_bar().encode(x=alt.X('keyword', sort=None), y='count'), use_container_width=True)
     with col2:
-        st.subheader("Top 10 keywords in OUI Elders' citers publications")
+        st.subheader("Top 15 keywords in OUI Elders' citers publications")
         st.altair_chart(alt.Chart(dict['citers_keywords']).mark_bar().encode(x=alt.X('keyword', sort=None), y='count'), use_container_width=True)
 
 with st.container():
@@ -73,8 +73,8 @@ with st.container():
 
 
 st.header("Network analysis of bibliographic data")  
-st.info("Select a graph visualisation type to view.  \nThe graphs are interactive and can be zoomed in and out and dragged around.  \nThe graphs are of three types: \n1. Open User Innovation(OUI) Elders \n2. Citers of OUI Elder's papers \n3. Combination of both OUI Elders and their Citers")
-st.caption("Note: The graphs are made of a filtered set of user-innovation focussed research papers.")
+st.info("Select a graph visualisation type to view.  \nThe graphs are interactive and can be zoomed in and out and dragged around.  \nThe graphs are of three types: \n1. Open User Innovation(OUI) Elders(publications authored or co-authored by the OUI Elders community) \n2. Citers of OUI Elder's papers(All authors who have cited the publications of OUI Elders) \n3. Combination of both OUI Elders' publications and their Citers' publications  \n\nNote: The graphs are made of a filtered set of user-innovation focussed research papers.")
+#st.caption("Note: The graphs are made of a filtered set of user-innovation focussed research papers.")
 
 path = r'OUI Authors Network'
 files = os.listdir(path)
@@ -101,9 +101,9 @@ scopus_id = scopus_id[0]
 #convert option to string
 option = str(scopus_id)
 
-option_3 = st.selectbox('Select the graph type', ['OUI Elders and their Citers combined','OUI Elders', 'OUI Elders Citers'])
+option_3 = st.selectbox('Select the graph type', ['Combination of OUI Elders and their Citers publications combined','OUI Elders publications only', 'OUI Elders Citers publications only'])
 
-if option_3 == 'OUI Elders and their Citers combined':
+if option_3 == 'Combination of OUI Elders and their Citers publications combined':
 
     with st.container():   
             st.subheader("Co-occurrence Keyword Network of combined OUI Elders and their Citers") 
@@ -150,7 +150,7 @@ if option_3 == 'OUI Elders and their Citers combined':
             except:
                 print(sys.exc_info()[0])
 
-elif option_3 == 'OUI Elders':
+elif option_3 == 'OUI Elders publications only':
 
     with st.container():
             
@@ -246,7 +246,54 @@ else:
                 print(sys.exc_info()[0])
 
 
+with st.container():   
+    st.subheader("Bibliographic coupling Network of Publication Journals")   
+    st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
+    try:
+        path = '/OUI Authors Network'
+        HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
+        
+    except:
+        path = '/Scopus Iteration'
+        # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
+        HtmlFile7 = open(os.getcwd()+r"/OUI Authors Network/publicationJournalBibliographiccoupling_" + option + r".html", 'r')   
+    components.html(HtmlFile7.read(), height=700)
+    try:
+        df_html7 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/publicationJournalBibliographiccoupling_' + option + r'.html_communities.csv')
+        # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+        df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+        df_html7 = df_html7.dropna(how='all')
+        df_html7 = df_html7.fillna('')
+        st.dataframe(df_html7, hide_index=True)
+    except:
+        print(sys.exc_info()[0])
 
+
+
+
+
+# with st.container():   
+#     st.subheader("Bibliographic coupling Network of Publication Journals")   
+#     st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
+#     try:
+#         path = '/OUI Authors Network'
+#         HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
+        
+#     except:
+#         path = '/Scopus Iteration'
+#         # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
+    
+#         HtmlFile7 = open(r"publicationJournalBibliographiccoupling.html", 'r')
+#     components.html(HtmlFile7.read(), height=700)
+#     try:
+#         df_html7 = pd.read_csv(r'publicationJournalBibliographiccoupling.html_communities.csv')
+#         # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+#         df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+#         df_html7 = df_html7.dropna(how='all')
+#         df_html7 = df_html7.fillna('')
+#         st.dataframe(df_html7, hide_index=True)
+#     except:
+#         print(sys.exc_info()[0])
 
 
 # with st.container():   
@@ -292,26 +339,3 @@ else:
 #         st.dataframe(df_html7, hide_index=True)
 #     except:
 #         print(sys.exc_info()[0])
-
-with st.container():   
-    st.subheader("Bibliographic coupling Network of Publication Journals")   
-    st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
-    try:
-        path = '/OUI Authors Network'
-        HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
-        
-    except:
-        path = '/Scopus Iteration'
-        # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
-    
-        HtmlFile7 = open(r"publicationJournalBibliographiccoupling.html", 'r')
-    components.html(HtmlFile7.read(), height=700)
-    try:
-        df_html7 = pd.read_csv(r'publicationJournalBibliographiccoupling.html_communities.csv')
-        # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
-        df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
-        df_html7 = df_html7.dropna(how='all')
-        df_html7 = df_html7.fillna('')
-        st.dataframe(df_html7, hide_index=True)
-    except:
-        print(sys.exc_info()[0])

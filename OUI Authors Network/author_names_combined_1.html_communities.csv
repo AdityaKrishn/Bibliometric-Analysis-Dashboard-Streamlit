@@ -1,23 +1,23 @@
-maroon,gold,pink,yellow,red,blue,indigo,cyan,olive,navy,brown,purple,magenta,lime,silver,black,teal,orange,green
-"afuah, allan","amft, andré","baldwin, carliss","von hippel, eric","herstatt, cornelius","bilgram, volker","bortoluzzi, guido","bradonjic, philip","cao, xinyan","dahl, darren w.","della santa, silvia","füller, johann","gong, yu","hakkarainen, louna","hossain, mokter","kankanhalli, atreyi","koch, stefan","liao, xiao","oliveira, pedro"
-"bastian, bettina","diener, kathleen","hienerth, christoph","balka, kerstin","block, jörn h.","gutstein, adele","yordanova, zornitsa","franke, nikolaus","fang, xiang","fuchs, christoph","marchi, gianluca","jawecki, gregor","jia, fu","heiskanen, eva","leminen, seppo","kim, seung hyun","artmayr, philipp","xi, yunjiang","e cunha, miguel pina"
-"bogers, marcel","lüttgens, dirk","keinz, peter","raasch, christina","henkel, joachim","marchuk, anna","escobar, octavio","lüthje, christian","yang, yu","schreier, martin","tagliazucchi, giulia","matzler, kurt","shi, yangyan","helminen, pia","westerlund, mika","teo, hock hai","bierbamer, michael","ye, guangyu","veloso, francisco"
-"mccarthy, ian p.","piller, frank t.","gemünden, hans georg","chen, jin","schweisfurth, tim g.","brem, alexander","khvatova, tatiana","ebbing, tobias","chai, ruirui","prandelli, emanuela","giachetti, claudio","mühlbacher, hans","zhang, yufang","freeman, stephanie","nyström, anna greta","ye, hua jonathan","guceri-ucar, gozem","yu, juan","van der boor, paul"
-"pitt, leyland","ihl, christoph","killen, catherine p.","de jong, jeroen p.j.","stiegler, annika","gladysz, bartosz","maalaoui, adnane","klausberger, katharina","liu, wei","nishikawa, hidehiko","de gennaro, pamela","schroll, roland","sun, yanhua","johnson, mikael","rajahonka, mervi","li, mingguo","inanc, duygu","zantow, kenneth",
-"west, joel","tarman, refik tarcan","sicotte, hélène","su, yu shan","braun, viktor","ernst, markus","schiavone, francesco","reinsberger, kathrin",,"ogawa, susumu",,,,"juntunen, jouni k.","pacauskas, darius","ye, hua",,,
-"felin, teppo","vossen, alexander","hamdi-kidar, linda","flowers, stephen","lehnen, jens","schulz, stefanie","villasalero, manuel","schirg, florian",,"oberhauser, stefan",,,,"mäkinen, samuli","mäntymäki, matti",,,,
-"lakhani, karim r.","kleer, robin","le nagard, emmanuelle","gault, fred","schmidt, tobias sebastian",,"ghasemzadeh, khatereh","goduscheit, rené chester",,"prügl, reinhard",,,,"hyysalo, sampsa","rajala, risto",,,,
-"tushman, michael l.","pollok, patrick","vellera, cyrielle","gillert, nils lennart","pieper, thorsten",,,"jørgensen, jacob høj",,"pongtanalert, kritinee",,,,"repo, petteri",,,,,
-,"steiner, frank","vernette, eric","kuusisto, jari","skiba, florian",,,"hinsch, mareike e.",,"pasquini, martina",,,,"timonen, päivi",,,,,
-,,"berg jensen, morten","stock, ruth maria","tietze, frank",,,"stockstrom, christoph s.",,"verona, gianmario",,,,"usenyuk, svetlana",,,,,
-,,"lettl, christopher","gambardella, alfonso","wellner, konstantin",,,"morrison, pamela d.",,,,,,"kristensson, per",,,,,
-,,,"gobble, maryanne m.","zaggl, michael a.",,,"roberts, john h.",,,,,,"stewart, james",,,,,
-,,,"euchner, jim",,,,"tietz, robert",,,,,,"trischler, jakob",,,,,
-,,,"lock, phillip",,,,,,,,,,,,,,,
-,,,"janzik, lars",,,,,,,,,,,,,,,
-,,,"kuusisto, arja",,,,,,,,,,,,,,,
-,,,"yli-viitala, pirjo",,,,,,,,,,,,,,,
-,,,"mulhuijzen, max",,,,,,,,,,,,,,,
-,,,"katz, ralph",,,,,,,,,,,,,,,
-,,,"kaulartz, sandro",,,,,,,,,,,,,,,
-,,,"paradiso, joseph a.",,,,,,,,,,,,,,,
+maroon,gold,cyan,silver,red,lime,indigo,pink,olive,brown,purple,orange,magenta,navy,teal,green,yellow,blue
+"afuah, allan","amft, andré","baldwin, carliss","von hippel, eric","herstatt, cornelius","bilgram, volker","bortoluzzi, guido","bradonjic, philip","cao, xinyan","dahl, darren w.","della santa, silvia","füller, johann","gong, yu","hakkarainen, louna","hossain, mokter","kankanhalli, atreyi","koch, stefan","liao, xiao"
+"bastian, bettina","diener, kathleen","hienerth, christoph","balka, kerstin","block, jörn h.","gutstein, adele","yordanova, zornitsa","franke, nikolaus","fang, xiang","fuchs, christoph","marchi, gianluca","jawecki, gregor","jia, fu","heiskanen, eva","leminen, seppo","kim, seung hyun","artmayr, philipp","xi, yunjiang"
+"bogers, marcel","lüttgens, dirk","keinz, peter","raasch, christina","henkel, joachim","marchuk, anna","escobar, octavio","lüthje, christian","yang, yu","schreier, martin","tagliazucchi, giulia","matzler, kurt","shi, yangyan","helminen, pia","westerlund, mika","teo, hock hai","bierbamer, michael","ye, guangyu"
+"mccarthy, ian p.","piller, frank t.","gemünden, hans georg","chen, jin","schweisfurth, tim g.","brem, alexander","khvatova, tatiana","ebbing, tobias","chai, ruirui","prandelli, emanuela","giachetti, claudio","mühlbacher, hans","zhang, yufang","freeman, stephanie","nyström, anna greta","ye, hua jonathan","guceri-ucar, gozem","yu, juan"
+"pitt, leyland","ihl, christoph","killen, catherine p.","de jong, jeroen p.j.","stiegler, annika","gladysz, bartosz","maalaoui, adnane","klausberger, katharina","liu, wei","nishikawa, hidehiko","de gennaro, pamela","schroll, roland","sun, yanhua","johnson, mikael","rajahonka, mervi","li, mingguo","inanc, duygu","zantow, kenneth"
+"west, joel","tarman, refik tarcan","sicotte, hélène","su, yu shan","braun, viktor","ernst, markus","schiavone, francesco","reinsberger, kathrin",,"ogawa, susumu",,"oliveira, pedro",,"juntunen, jouni k.","pacauskas, darius","ye, hua",,
+"felin, teppo","vossen, alexander","hamdi-kidar, linda","flowers, stephen","lehnen, jens","schulz, stefanie","villasalero, manuel","schirg, florian",,"oberhauser, stefan",,"e cunha, miguel pina",,"mäkinen, samuli","mäntymäki, matti",,,
+"lakhani, karim r.","kleer, robin","le nagard, emmanuelle","gault, fred","schmidt, tobias sebastian",,"ghasemzadeh, khatereh","goduscheit, rené chester",,"prügl, reinhard",,"veloso, francisco",,"hyysalo, sampsa","rajala, risto",,,
+"tushman, michael l.","pollok, patrick","vellera, cyrielle","gillert, nils lennart","morrison, pamela d.",,,"jørgensen, jacob høj",,"pongtanalert, kritinee",,"van der boor, paul",,"repo, petteri",,,,
+,"steiner, frank","vernette, eric","kuusisto, jari","roberts, john h.",,,"hinsch, mareike e.",,"pasquini, martina",,,,"timonen, päivi",,,,
+,,"berg jensen, morten","stock, ruth maria","pieper, thorsten",,,"stockstrom, christoph s.",,"verona, gianmario",,,,"usenyuk, svetlana",,,,
+,,"lettl, christopher","gambardella, alfonso","skiba, florian",,,,,,,,,"kristensson, per",,,,
+,,,"gobble, maryanne m.","tietz, robert",,,,,,,,,"stewart, james",,,,
+,,,"euchner, jim","tietze, frank",,,,,,,,,"trischler, jakob",,,,
+,,,"lock, phillip","wellner, konstantin",,,,,,,,,,,,,
+,,,"janzik, lars","zaggl, michael a.",,,,,,,,,,,,,
+,,,"kuusisto, arja",,,,,,,,,,,,,,
+,,,"yli-viitala, pirjo",,,,,,,,,,,,,,
+,,,"mulhuijzen, max",,,,,,,,,,,,,,
+,,,"katz, ralph",,,,,,,,,,,,,,
+,,,"kaulartz, sandro",,,,,,,,,,,,,,
+,,,"paradiso, joseph a.",,,,,,,,,,,,,,
