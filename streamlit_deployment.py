@@ -86,6 +86,8 @@ files = [i.split('_')[-1].split('.')[0] for i in files]
 files = [int(i) for i in files]
 author_names = author_df[author_df['Value'].isin(files)]['Full Name'].tolist()
 author_names = list(set(author_names))
+#sort the list alphabetically
+author_names.sort()
 
 options = st.selectbox('Select the OUI elder to view the network', author_names)
 
