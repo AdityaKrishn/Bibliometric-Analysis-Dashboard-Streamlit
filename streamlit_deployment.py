@@ -37,7 +37,9 @@ st.info("Compare the publications of Open User Innovation Elders with the public
 
 with st.container():
      col1, col2, col3 = st.columns(3)
-     col1.metric("Number of OUI Elders", dict['author_df.shape[0]'])
+     number_of_OUI_Elders = 27
+    #  col1.metric("Number of OUI Elders", dict['author_df.shape[0]'])
+     col1.metric("Number of OUI Elders", number_of_OUI_Elders)
      col2.metric("Total number of authors listed in OUI Elders publications", dict['authorss.__len__()'])
      col3.metric("Total number of authors listed in OUI Elders citations", dict['citerss.__len__()'])
 
@@ -246,32 +248,6 @@ else:
                 print(sys.exc_info()[0])
 
 
-with st.container():   
-    st.subheader("Bibliographic coupling Network of Publication Journals")   
-    st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
-    try:
-        path = '/OUI Authors Network'
-        HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
-        
-    except:
-        path = '/Scopus Iteration'
-        # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
-        HtmlFile7 = open(os.getcwd()+r"/OUI Authors Network/publicationJournalBibliographiccoupling_" + option + r".html", 'r')   
-    components.html(HtmlFile7.read(), height=700)
-    try:
-        df_html7 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/publicationJournalBibliographiccoupling_' + option + r'.html_communities.csv')
-        # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
-        df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
-        df_html7 = df_html7.dropna(how='all')
-        df_html7 = df_html7.fillna('')
-        st.dataframe(df_html7, hide_index=True)
-    except:
-        print(sys.exc_info()[0])
-
-
-
-
-
 # with st.container():   
 #     st.subheader("Bibliographic coupling Network of Publication Journals")   
 #     st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
@@ -282,11 +258,10 @@ with st.container():
 #     except:
 #         path = '/Scopus Iteration'
 #         # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
-    
-#         HtmlFile7 = open(r"publicationJournalBibliographiccoupling.html", 'r')
+#         HtmlFile7 = open(os.getcwd()+r"/OUI Authors Network/publicationJournalBibliographiccoupling_" + option + r".html", 'r')   
 #     components.html(HtmlFile7.read(), height=700)
 #     try:
-#         df_html7 = pd.read_csv(r'publicationJournalBibliographiccoupling.html_communities.csv')
+#         df_html7 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/publicationJournalBibliographiccoupling_' + option + r'.html_communities.csv')
 #         # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
 #         df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
 #         df_html7 = df_html7.dropna(how='all')
@@ -294,6 +269,33 @@ with st.container():
 #         st.dataframe(df_html7, hide_index=True)
 #     except:
 #         print(sys.exc_info()[0])
+
+
+
+
+
+with st.container():   
+    st.subheader("Bibliographic coupling Network of Publication Journals")   
+    st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
+    try:
+        path = '/OUI Authors Network'
+        HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
+        
+    except:
+        path = '/Scopus Iteration'
+        # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
+    
+        HtmlFile7 = open(r"publicationJournalBibliographiccoupling.html", 'r')
+    components.html(HtmlFile7.read(), height=700)
+    try:
+        df_html7 = pd.read_csv(r'publicationJournalBibliographiccoupling.html_communities.csv')
+        # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+        df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+        df_html7 = df_html7.dropna(how='all')
+        df_html7 = df_html7.fillna('')
+        st.dataframe(df_html7, hide_index=True)
+    except:
+        print(sys.exc_info()[0])
 
 
 # with st.container():   
