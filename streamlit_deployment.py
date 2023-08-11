@@ -279,6 +279,7 @@ else:
 with st.container():   
     st.subheader("Bibliographic coupling Network of Publication Journals")   
     st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
+    st.caption("Note: Due to lack of publication journals for OUI Elders sub-communities, the graph could only be created for a few OUI Elders and thus only the overall graph is presented.")
     try:
         path = '/OUI Authors Network'
         HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
