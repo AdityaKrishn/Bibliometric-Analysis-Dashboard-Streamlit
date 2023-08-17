@@ -273,7 +273,7 @@ else:
 #         print(sys.exc_info()[0])
 
 
-@st.cache_resource
+@st.cache_data(persist=True)
 def biblio():
     path = '/Scopus Iteration'
     HtmlFile7 = open(r"publicationJournalBibliographiccoupling.html", 'r')
@@ -292,11 +292,12 @@ with st.container():
     st.caption("Note: Due to lack of publication journals for OUI Elders sub-communities, the graph could only be created for a few OUI Elders and thus only the overall graph is presented.")
     HtmlFile7, df_html7 = biblio()
     try:
+        components.html(HtmlFile7.read(), height=700)
+        
+    except: 
         path = '/OUI Authors Network'
         HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
         
-    except: 
-        components.html(HtmlFile7.read(), height=700)
     try:
 
         st.dataframe(df_html7, hide_index=True)
