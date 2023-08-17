@@ -273,7 +273,7 @@ else:
 #         print(sys.exc_info()[0])
 
 
-@st.cache_resource
+@st.cache(persist=True, allow_output_mutation=True)
 def biblio_graph():
     path = '/Scopus Iteration'
     HtmlFile7 = open(r"publicationJournalBibliographiccoupling.html", 'r')
