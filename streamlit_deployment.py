@@ -250,63 +250,63 @@ else:
                 print(sys.exc_info()[0])
 
 
-# with st.container():   
-#     st.subheader("Bibliographic coupling Network of Publication Journals")   
-#     st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
-#     try:
-#         path = '/OUI Authors Network'
-#         HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
-        
-#     except:
-#         path = '/Scopus Iteration'
-#         # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
-#         HtmlFile7 = open(os.getcwd()+r"/OUI Authors Network/publicationJournalBibliographiccoupling_" + option + r".html", 'r')   
-#     components.html(HtmlFile7.read(), height=700)
-#     try:
-#         df_html7 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/publicationJournalBibliographiccoupling_' + option + r'.html_communities.csv')
-#         # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
-#         df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
-#         df_html7 = df_html7.dropna(how='all')
-#         df_html7 = df_html7.fillna('')
-#         st.dataframe(df_html7, hide_index=True)
-#     except:
-#         print(sys.exc_info()[0])
-
-
-@st.cache(allow_output_mutation=True)
-def biblio_graph():
-    path = '/Scopus Iteration'
-    HtmlFile7 = open(r"publicationJournalBibliographiccoupling.html", 'r')
-    return HtmlFile7
-     
-@st.cache_data
-def biblio_table():
-    df_html7 = pd.read_csv(r'publicationJournalBibliographiccoupling.html_communities.csv')
-    # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
-    df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
-    df_html7 = df_html7.dropna(how='all')
-    df_html7 = df_html7.fillna('')
-    return df_html7
-     
-
 with st.container():   
     st.subheader("Bibliographic coupling Network of Publication Journals")   
     st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
-    st.caption("Note: Due to lack of publication journals for OUI Elders sub-communities, the graph could only be created for a few OUI Elders and thus only the overall graph is presented.")
-    HtmlFile7 = biblio_graph()
-    df_html7 = biblio_table()
     try:
-        components.html(HtmlFile7.read(), height=700)
-        
-    except: 
         path = '/OUI Authors Network'
         HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
-
+        
+    except:
+        path = '/Scopus Iteration'
+        # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
+        HtmlFile7 = open(os.getcwd()+r"/OUI Authors Network/publicationJournalBibliographiccoupling_" + option + r".html", 'r')   
+    components.html(HtmlFile7.read(), height=700)
     try:
-
+        df_html7 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/publicationJournalBibliographiccoupling_' + option + r'.html_communities.csv')
+        # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+        df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+        df_html7 = df_html7.dropna(how='all')
+        df_html7 = df_html7.fillna('')
         st.dataframe(df_html7, hide_index=True)
     except:
         print(sys.exc_info()[0])
+
+
+# @st.cache(allow_output_mutation=True)
+# def biblio_graph():
+#     path = '/Scopus Iteration'
+#     HtmlFile7 = open(r"publicationJournalBibliographiccoupling.html", 'r')
+#     return HtmlFile7
+     
+# @st.cache_data
+# def biblio_table():
+#     df_html7 = pd.read_csv(r'publicationJournalBibliographiccoupling.html_communities.csv')
+#     # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+#     df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+#     df_html7 = df_html7.dropna(how='all')
+#     df_html7 = df_html7.fillna('')
+#     return df_html7
+     
+
+# with st.container():   
+#     st.subheader("Bibliographic coupling Network of Publication Journals")   
+#     st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
+#     st.caption("Note: Due to lack of publication journals for OUI Elders sub-communities, the graph could only be created for a few OUI Elders and thus only the overall graph is presented.")
+#     HtmlFile7 = biblio_graph()
+#     df_html7 = biblio_table()
+#     try:
+#         components.html(HtmlFile7.read(), height=700)
+        
+#     except: 
+#         path = '/OUI Authors Network'
+#         HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
+
+#     try:
+
+#         st.dataframe(df_html7, hide_index=True)
+#     except:
+#         print(sys.exc_info()[0])
 
 
 # with st.container():   
