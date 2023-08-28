@@ -287,7 +287,10 @@ top5_papers_citation_db = dict['top5_papers_citation_db']
 top5_papers_author_db['cover_year'] = top5_papers_author_db['cover_year'].astype(str)
 top5_papers_citation_db['cover_year'] = top5_papers_citation_db['cover_year'].astype(str)
 
-all_authors = ['All'] + sorted(top5_papers_author_db['creator'].unique().tolist())
+
+authors = list(set([item for sublist in top5_papers_author_db.author_names.tolist() for item in sublist]))
+authors = [x for x in authors if x != '']
+all_authors = ['All'] + sorted(authors)
 all_years = ['All'] + sorted(top5_papers_author_db['cover_year'].unique().tolist())
 all_journals = ['All'] + sorted(top5_papers_author_db['publicationName'].unique().tolist())
 author_keywords = list(set([item for sublist in top5_papers_author_db.authkeywords.tolist() for item in sublist]))
@@ -330,7 +333,9 @@ with st.container():
     st.dataframe(filtered_author_db, hide_index=True)
 
 
-all_authors = ['All'] + sorted(top5_papers_citation_db['creator'].unique().tolist())
+authors = list(set([item for sublist in top5_papers_citation_db.author_names.tolist() for item in sublist]))
+authors = [x for x in authors if x != '']
+all_authors = ['All'] + sorted(authors)
 all_years = ['All'] + sorted(top5_papers_citation_db['cover_year'].unique().tolist())
 all_journals = ['All'] + sorted(top5_papers_citation_db['publicationName'].unique().tolist())
 citation_keywords = list(set([item for sublist in top5_papers_citation_db.authkeywords.tolist() for item in sublist]))
