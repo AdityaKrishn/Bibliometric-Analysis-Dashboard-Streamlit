@@ -355,7 +355,7 @@ with st.container():
     with col4:
         keyword_filter2 = st.selectbox('Filter by Keyword', all_keywords, key='keyword_filter2')
 
-    if author_filter2 == 'All' and year_filter2 == 'All' and journal_filter1 == 'All' and keyword_filter1 == 'All':
+    if author_filter2 == 'All' and year_filter2 == 'All' and journal_filter2 == 'All' and keyword_filter2== 'All':
         filtered_citation_db = top5_papers_citation_db
     else:
         filtered_citation_db = filter_author_db(top5_papers_citation_db,author_filter2, year_filter2, journal_filter2, keyword_filter2)
