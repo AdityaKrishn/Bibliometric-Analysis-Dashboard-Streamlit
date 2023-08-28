@@ -106,6 +106,8 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
             filters_option1 = [ 5, 2, 1]   
             filter_option1 = st.selectbox('Select the filter option', filters_option1, key='filter_option1')
             filter_option1 = str(filter_option1)
+            st.info("The filter option is the minimum number of times a keyword should occur in the publications to be considered for the graph.")
+
             try:
                 path = '/Scopus Iteration'
                 HtmlFile6 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_combined_" + option +r"_"+filter_option1+ r".html", 'r')
@@ -120,7 +122,6 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
                 df_html6 = df_html6.fillna('')
                 st.dataframe(df_html6, hide_index=True)
             except:
-                st.text("Please select a different filter option")
                 print(sys.exc_info()[0])
 
     with st.container():   
@@ -128,7 +129,8 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
             st.info("Scientific collaboration network(author type) is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)")  
             filters_option2 = [5, 2, 1]   
             filter_option2 = st.selectbox('Select the filter option', filters_option2, key='filter_option2')
-            filter_option2 = str(filter_option2)   
+            filter_option2 = str(filter_option2)  
+            st.info("The filter option is the minimum number of publications an author should have to be added in the graph.") 
             try:
                 HtmlFile3 = open(os.getcwd()+r"/OUI Authors Network/author_names_combined_" + option +r"_"+filter_option2+ r".html", 'r')
                 components.html(HtmlFile3.read(), height=700)            
@@ -142,7 +144,7 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
                 df_html3 = df_html3.fillna('')
                 st.dataframe(df_html3, hide_index=True)
             except:
-                st.text("Please select a different filter option")
+
                 print(sys.exc_info()[0])
 
 elif option_3 == 'OUI Elders publications only':
@@ -154,6 +156,7 @@ elif option_3 == 'OUI Elders publications only':
             filters_option3 = [5, 2, 1]   
             filter_option3 = st.selectbox('Select the filter option', filters_option3, key='filter_option3')
             filter_option3 = str(filter_option3)
+            st.info("The filter option is the minimum number of times a keyword should occur in the publications to be considered for the graph.")
             try:
                 path = 'Scopus Iteration'
                 HtmlFile4 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_OUI_" + option +r"_"+filter_option3+ r".html", 'r')
@@ -168,7 +171,7 @@ elif option_3 == 'OUI Elders publications only':
                 df_html4 = df_html4.fillna('')
                 st.dataframe(df_html4, hide_index=True)
             except:
-                st.text("Please select a different filter option")
+
                 print(sys.exc_info()[0])
 
     with st.container():
@@ -178,6 +181,7 @@ elif option_3 == 'OUI Elders publications only':
             filters_option4 = [5, 2, 1]   
             filter_option4 = st.selectbox('Select the filter option', filters_option4, key='filter_option4')
             filter_option4 = str(filter_option4)
+            st.info("The filter option is the minimum number of publications an author should have to be added in the graph.") 
             try:
                 path = 'Scopus Iteration'
                 HtmlFile1 = open(os.getcwd()+r"/OUI Authors Network/author_names_OUI_" + option +r"_"+filter_option4+ r".html", 'r')
@@ -192,7 +196,7 @@ elif option_3 == 'OUI Elders publications only':
                 df_html1 = df_html1.fillna('')
                 st.dataframe(df_html1, hide_index=True)
             except:
-                st.text("Please select a different filter option")
+
                 print(sys.exc_info()[0])
 
 else: 
@@ -203,6 +207,7 @@ else:
             filters_option5 = [ 5, 2, 1]   
             filter_option5 = st.selectbox('Select the filter option', filters_option5, key='filter_option5')
             filter_option5 = str(filter_option5)
+            st.info("The filter option is the minimum number of times a keyword should occur in the publications to be considered for the graph.")
             try:
                 path = '/Scopus Iteration'
                 HtmlFile5 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_citations_" + option +r"_"+filter_option5+ r".html", 'r')
@@ -217,7 +222,7 @@ else:
                 df_html5 = df_html5.fillna('')
                 st.dataframe(df_html5, hide_index=True)
             except:
-                st.text("Please select a different filter option")
+
                 print(sys.exc_info()[0])
 
     with st.container():   
@@ -226,6 +231,7 @@ else:
             filters_option6 = [5, 2, 1]   
             filter_option6 = st.selectbox('Select the filter option', filters_option6, key='filter_option6')
             filter_option6 = str(filter_option6)
+            st.info("The filter option is the minimum number of publications an author should have to be added in the graph.") 
             try:
                 path = '/Scopus Iteration'
                 HtmlFile2 = open(os.getcwd()+r"/OUI Authors Network/author_names_citation_" + option +r"_"+filter_option6+ r".html", 'r')
@@ -241,7 +247,7 @@ else:
                 df_html2 = df_html2.fillna('')
                 st.dataframe(df_html2, hide_index=True)
             except:
-                st.text("Please select a different filter option")
+
                 print(sys.exc_info()[0])
 
 
@@ -268,8 +274,25 @@ with st.container():
         df_html7 = df_html7.fillna('')
         st.dataframe(df_html7, hide_index=True)
     except:
-        st.text("Please select a different filter option")
+
         print(sys.exc_info()[0])
+
+
+
+
+top5_papers_author_db = dict['top5_papers_author_db']
+top5_papers_citation_db = dict['top5_papers_citation_db']
+
+#create select boxes for Author name, year, journal, keywords to filter the above dataframes, also add All as an option to the select boxes and if all is selected, show all the data
+
+with st.container():
+    st.subheader("Below are the publication details of authored/co-authored by the OUI Elders")
+    st.dataframe(top5_papers_author_db, hide_index=True)
+
+
+with st.container():
+    st.subheader("Below are the publication details of authored/co-authored by the OUI Elder's Citers")
+    st.dataframe(top5_papers_citation_db, hide_index=True)
 
 
 # @st.cache(allow_output_mutation=True)
