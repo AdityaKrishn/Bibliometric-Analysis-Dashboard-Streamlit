@@ -1,31 +1,27 @@
-teal,gold,orange,green,yellow,red,maroon
-3d printing,collaboration,diffusion,motivation,user innovation,user-generated content,compatibility
-co-creation,innovation policy,online innovation community,online community,knowledge,open source software,business model
-mass customisation,innovation,adoption,lead user,cocreation,case study,complementarity
-platform,commercial diffusion,consumer innovation,user involvement,creative consumer,innovation management,open source
-user entrepreneurship,community,free innovation,open innovation,innovation ecosystem,marketing research,value creation
-customer integration,makerspace,market failure,product development,living lab,user community,social welfare
-new product development,network,opinion leadership,sources of innovation,radical innovation,crowdsourcing,innovation community
-user design,user,configuration,idea competition,sustainability,entrepreneurship,innovation proce
-user-generated product,do-it-yourself,diffusion of innovation,software development,evolutionary approach,technology management,product architecture
-user-driven innovation,product innovation,household sector innovation,toolkit,innovation network,community-based innovation,modularity
-second life,healthcare,measurement,distributed innovation,innovation diffusion,consumer innovator,
-virtual world,post-adoptive behavior,personality,innovation contest,service,crowdfunding,
-,sustainable innovation,problem-solving,netnography,service innovation,crowdfunding platform,
-,,renewable energy,online user innovation community,innovation measurement,user entrepreneur,
-,,education,social medium,innovation transfer,user characteristic,
-,,problem solving,strategy,patent,,
-,,social learning,knowledge sharing,lead user theory,,
-,,,embedded lead user,sticky information,,
-,,,idea quality,mass customization,,
-,,,external knowledge,literature review,,
-,,,identification,local information,,
-,,,innovation performance,technology strategy,,
-,,,pyramiding,,,
-,,,idea adoption,,,
-,,,web 2.0,,,
-,,,lead user workshop,,,
-,,,use experience,,,
-,,,video game industry,,,
-,,,user innovation community,,,
-,,,user idea,,,
+maroon,teal,yellow,orange,green,gold,red,blue
+3d printing,collaboration,diffusion,motivation,online innovation community,user innovation,user-generated content,lead user
+co-creation,innovation policy,adoption,online community,consumer innovation,compatibility,open source software,user involvement
+mass customisation,innovation,free innovation,sources of innovation,open innovation,business model,case study,toolkit
+platform,commercial diffusion,market failure,netnography,cocreation,complementarity,innovation management,strategy
+user entrepreneurship,community,opinion leadership,online user innovation community,creative consumer,open source,marketing research,embedded lead user
+customer integration,makerspace,configuration,social medium,idea competition,value creation,user community,idea quality
+knowledge,network,measurement,idea adoption,software development,product development,crowdsourcing,external knowledge
+new product development,user,personality,web 2.0,diffusion of innovation,innovation ecosystem,entrepreneurship,identification
+user design,healthcare,education,user innovation community,renewable energy,social welfare,technology management,innovation performance
+user-generated product,post-adoptive behavior,problem solving,user idea,living lab,household sector innovation,community-based innovation,pyramiding
+user-driven innovation,,social learning,,radical innovation,problem-solving,consumer innovator,lead user workshop
+lead user theory,,,,innovation contest,distributed innovation,crowdfunding,use experience
+second life,,,,sustainability,knowledge sharing,crowdfunding platform,video game industry
+virtual world,,,,innovation network,do-it-yourself,user entrepreneur,
+,,,,service,product innovation,evolutionary approach,
+,,,,service innovation,innovation diffusion,user characteristic,
+,,,,literature review,innovation community,technology strategy,
+,,,,sustainable innovation,innovation measurement,,
+,,,,,innovation transfer,,
+,,,,,patent,,
+,,,,,innovation proce,,
+,,,,,product architecture,,
+,,,,,sticky information,,
+,,,,,mass customization,,
+,,,,,local information,,
+,,,,,modularity,,

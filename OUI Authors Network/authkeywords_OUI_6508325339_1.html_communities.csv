@@ -1,16 +1,13 @@
-maroon,teal,gold,orange
-age,agile project management,innovation management,radical innovation
-determinant,agile/stage-gate hybrid,collaboration,service innovation
-lead user,new product development,crowdsourcing,service lead user
-product knowledge,scrum,dynamic,user integration
-silver market,stage-gate proces,entrepreneurship,
-technical expertise,,open source software,
-use experience,,organization,
-user innovation,,organizational aspect,
-innovation in consumer market,,research and development management,
-innovation proces,,technology management,
-locus of innovation,,user-generated content,
-sources of innovation,,virtual group,
-property rights theory,,,
-separation of ownership and control,,,
-user innovation barrier,,,
+gold,teal,maroon
+age,lead user,innovation management
+determinant,agile project management,collaboration
+product knowledge,agile/stage-gate hybrid,crowdsourcing
+silver market,new product development,dynamic
+technical expertise,scrum,entrepreneurship
+use experience,stage-gate proces,open source software
+user innovation,innovation in consumer market,organization
+locus of innovation,innovation proces,organizational aspect
+sources of innovation,radical innovation,research and development management
+property rights theory,service innovation,technology management
+separation of ownership and control,service lead user,user-generated content
+user innovation barrier,user integration,virtual group

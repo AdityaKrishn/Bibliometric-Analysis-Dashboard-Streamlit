@@ -1,12 +1,9 @@
-maroon,teal,gold,orange,green
-3d printing,user innovation,acquisition mechanism,configuration,free innovation
-additive manufacturing,automotive industry,crowdsourcing,customer integration,household sector
-localization of manufacturing,embedded toolkit,idea competition,mass customisation,information processing
-market structure,new product development,innovation contest,personalisation,knowledge diversity
-prosumer,postponement,innovation tournament,toolkit,team creativity
-,fitness club concept,intelligence,user co-design,
-,innovation method,open innovation,,
-,method comparison,public relation,,
-,private-collective innovation,,,
-,reward,,,
-,user community,,,
+maroon,teal,gold,orange,green,yellow
+3d printing,user innovation,acquisition mechanism,configuration,fitness club concept,free innovation
+additive manufacturing,automotive industry,crowdsourcing,customer integration,innovation method,household sector
+localization of manufacturing,embedded toolkit,idea competition,mass customisation,method comparison,information processing
+market structure,new product development,innovation contest,personalisation,,knowledge diversity
+prosumer,postponement,innovation tournament,toolkit,,team creativity
+,private-collective innovation,intelligence,user co-design,,
+,reward,open innovation,,,
+,user community,public relation,,,
