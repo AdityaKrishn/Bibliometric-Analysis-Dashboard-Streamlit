@@ -60,10 +60,10 @@ with st.container():
     col1, col2 = st.columns(2, gap="large")
     with col1:
         st.subheader("Papers published each year - OUI Elders' publications")
-        st.bar_chart(dict['author_db_grouped'], x = 'cover_year', y = 'counts')
+        st.bar_chart(dict['author_db_grouped'], x = 'year', y = 'counts')
     with col2:
         st.subheader("Papers published each year - OUI Elders' citers publications")
-        st.bar_chart(dict['citation_db_grouped'], x = 'cover_year', y = 'counts')
+        st.bar_chart(dict['citation_db_grouped'], x = 'year', y = 'counts')
 
 
 st.header("Network analysis of bibliographic data")  
@@ -283,16 +283,80 @@ with st.container():
 top5_papers_author_db = dict['top5_papers_author_db']
 top5_papers_citation_db = dict['top5_papers_citation_db']
 
+#change datatype of cover_year to string in both dataframes
+top5_papers_author_db['cover_year'] = top5_papers_author_db['cover_year'].astype(str)
+top5_papers_citation_db['cover_year'] = top5_papers_citation_db['cover_year'].astype(str)
+
+all_authors = ['All'] + sorted(top5_papers_author_db['creator'].unique().tolist())
+all_years = ['All'] + sorted(top5_papers_author_db['cover_year'].unique().tolist())
+all_journals = ['All'] + sorted(top5_papers_author_db['publicationName'].unique().tolist())
+author_keywords = list(set([item for sublist in top5_papers_author_db.authkeywords.tolist() for item in sublist]))
+author_keywords = [x for x in author_keywords if x != '']
+all_keywords = ['All'] + sorted(author_keywords)
+
+
 #create select boxes for Author name, year, journal, keywords to filter the above dataframes, also add All as an option to the select boxes and if all is selected, show all the data
 
-with st.container():
-    st.subheader("Below are the publication details of authored/co-authored by the OUI Elders")
-    st.dataframe(top5_papers_author_db, hide_index=True)
+def filter_author_db(author, year, journal, keyword):
+    df = top5_papers_author_db.copy()
+    if author != 'All':
+        df = df[df['author'] == author]
+    if year != 'All':
+        df = df[df['year'] == year]
+    if journal != 'All':
+        df = df[df['journal'] == journal]
+    if keyword != 'All':
+        df = df[df['authkeywords'].apply(lambda x: keyword in x)]
+    return df
 
 
 with st.container():
-    st.subheader("Below are the publication details of authored/co-authored by the OUI Elder's Citers")
-    st.dataframe(top5_papers_citation_db, hide_index=True)
+    st.subheader("Below are the details of publications authored/co-authored by the OUI Elders")
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        author_filter1 = st.selectbox('Filter by Author', all_authors, key='author_filter1')
+    with col2:
+        year_filter1 = st.selectbox('Filter by Year', all_years, key='year_filter1')
+    with col3:
+        journal_filter1 = st.selectbox('Filter by Journal', all_journals, key='journal_filter1')
+    with col4:
+        keyword_filter1 = st.selectbox('Filter by Keyword', all_keywords, key='keyword_filter1')
+
+    if author_filter1 == 'All' and year_filter1 == 'All' and journal_filter1 == 'All' and keyword_filter1 == 'All':
+        filtered_author_db = top5_papers_author_db
+    else:
+        filtered_author_db = filter_author_db(author_filter1, year_filter1, journal_filter1, keyword_filter1)
+    filtered_author_db = filtered_author_db.rename(columns={'cover_year': 'Year', 'citedby_count': 'Citations', 'authkeywords': 'Keywords', 'publicationName': 'Journal', 'author_names': 'Authors', 'affilname': 'Affiliations', 'title': 'Title', 'doi': 'DOI', 'description': 'Abstract'})
+    st.dataframe(filtered_author_db, hide_index=True)
+
+
+all_authors = ['All'] + sorted(top5_papers_citation_db['creator'].unique().tolist())
+all_years = ['All'] + sorted(top5_papers_citation_db['cover_year'].unique().tolist())
+all_journals = ['All'] + sorted(top5_papers_citation_db['publicationName'].unique().tolist())
+citation_keywords = list(set([item for sublist in top5_papers_citation_db.authkeywords.tolist() for item in sublist]))
+citation_keywords = [x for x in citation_keywords if x != '']
+all_keywords = ['All'] + sorted(citation_keywords)
+
+
+
+with st.container():
+    st.subheader("Below are the details of publications authored/co-authored by the OUI Elder's Citers")
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        author_filter2 = st.selectbox('Filter by Author', all_authors, key='author_filter2')
+    with col2:
+        year_filter2 = st.selectbox('Filter by Year', all_years, key='year_filter2')
+    with col3:
+        journal_filter2 = st.selectbox('Filter by Journal', all_journals, key='journal_filter2')
+    with col4:
+        keyword_filter2 = st.selectbox('Filter by Keyword', all_keywords, key='keyword_filter2')
+
+    if author_filter2 == 'All' and year_filter2 == 'All' and journal_filter1 == 'All' and keyword_filter1 == 'All':
+        filtered_citation_db = top5_papers_citation_db
+    else:
+        filtered_citation_db = filter_author_db(author_filter2, year_filter2, journal_filter2, keyword_filter2)
+    filtered_citation_db = filtered_citation_db.rename(columns={'cover_year': 'Year', 'citedby_count': 'Citations', 'authkeywords': 'Keywords', 'publicationName': 'Journal', 'author_names': 'Authors', 'affilname': 'Affiliations', 'title': 'Title', 'doi': 'DOI', 'description': 'Abstract'})
+    st.dataframe(filtered_citation_db, hide_index=True)
 
 
 # @st.cache(allow_output_mutation=True)
