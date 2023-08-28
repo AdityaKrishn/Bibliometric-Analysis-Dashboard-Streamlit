@@ -113,7 +113,7 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
                 HtmlFile6 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_combined_" + option +r"_"+filter_option1+ r".html", 'r')
                 components.html(HtmlFile6.read(), height=700)
             except:
-                st.text("Please select a different filter option")
+                st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
             try:
                 df_html6 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/authkeywords_combined_' + option +r"_"+filter_option1+ r'.html_communities.csv')
                 # df_html6 = df_html6.reindex(sorted(df_html6.columns), axis=1)
@@ -135,7 +135,7 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
                 HtmlFile3 = open(os.getcwd()+r"/OUI Authors Network/author_names_combined_" + option +r"_"+filter_option2+ r".html", 'r')
                 components.html(HtmlFile3.read(), height=700)            
             except:
-                st.text("Please select a different filter option")
+                st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
             try:
                 df_html3 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_combined_' + option +r"_"+filter_option2+ r'.html_communities.csv')
                 # df_html3 = df_html3.reindex(sorted(df_html3.columns), axis=1)
@@ -162,7 +162,7 @@ elif option_3 == 'OUI Elders publications only':
                 HtmlFile4 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_OUI_" + option +r"_"+filter_option3+ r".html", 'r')
                 components.html(HtmlFile4.read(), height=700)
             except:
-                st.text("Please select a different filter option")
+                st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
             try:
                 df_html4 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/authkeywords_OUI_' + option +r"_"+filter_option3+ r'.html_communities.csv')
                 # df_html4 = df_html4.reindex(sorted(df_html4.columns), axis=1)
@@ -187,7 +187,7 @@ elif option_3 == 'OUI Elders publications only':
                 HtmlFile1 = open(os.getcwd()+r"/OUI Authors Network/author_names_OUI_" + option +r"_"+filter_option4+ r".html", 'r')
                 components.html(HtmlFile1.read(), height=700)
             except:
-                st.text("Please select a different filter option")
+                st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
             try:
                 df_html1 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_OUI_' + option +r"_"+filter_option4+ r'.html_communities.csv')
                 # df_html1 = df_html1.reindex(sorted(df_html1.columns), axis=1)
@@ -213,7 +213,7 @@ else:
                 HtmlFile5 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_citations_" + option +r"_"+filter_option5+ r".html", 'r')
                 components.html(HtmlFile5.read(), height=700)
             except:
-                st.text("Please select a different filter option")
+                st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
             try:
                 df_html5 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/authkeywords_citations_' + option +r"_"+filter_option5+ r'.html_communities.csv')
                 # df_html5 = df_html5.reindex(sorted(df_html5.columns), axis=1)
@@ -238,7 +238,7 @@ else:
                 components.html(HtmlFile2.read(), height=700)
                 
             except:
-                st.text("Please select a different filter option")
+                st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
             try:
                 df_html2 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_citation_' + option +r"_"+filter_option6+ r'.html_communities.csv')
                 # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
@@ -257,6 +257,7 @@ with st.container():
     filters_option7 = [5, 2, 1]   
     filter_option7 = st.selectbox('Select the filter option', filters_option7, key='filter_option7')
     filter_option7 = str(filter_option7)
+    st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
     try:
         path = '/Scopus Iteration'
         # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
@@ -264,7 +265,7 @@ with st.container():
         components.html(HtmlFile7.read(), height=700) 
         
     except:
-        st.text("Please select a different filter option")
+        st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
         
     try:
         df_html7 = pd.read_csv(os.getcwd()+r'/publicationJournalBibliographiccoupling_' + filter_option7 + r'.html_communities.csv')
