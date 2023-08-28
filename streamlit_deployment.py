@@ -300,14 +300,13 @@ all_keywords = ['All'] + sorted(author_keywords)
 
 #create select boxes for Author name, year, journal, keywords to filter the above dataframes, also add All as an option to the select boxes and if all is selected, show all the data
 
-def filter_author_db(author, year, journal, keyword):
-    df = top5_papers_author_db.copy()
+def filter_author_db(df, author, year, journal, keyword):
     if author != 'All':
-        df = df[df['author'] == author]
+        df = df[df['author_names'].apply(lambda x: author in x)]
     if year != 'All':
-        df = df[df['year'] == year]
+        df = df[df['cover_year'] == year]
     if journal != 'All':
-        df = df[df['journal'] == journal]
+        df = df[df['publicationName'] == journal]
     if keyword != 'All':
         df = df[df['authkeywords'].apply(lambda x: keyword in x)]
     return df
@@ -328,7 +327,7 @@ with st.container():
     if author_filter1 == 'All' and year_filter1 == 'All' and journal_filter1 == 'All' and keyword_filter1 == 'All':
         filtered_author_db = top5_papers_author_db
     else:
-        filtered_author_db = filter_author_db(author_filter1, year_filter1, journal_filter1, keyword_filter1)
+        filtered_author_db = filter_author_db(top5_papers_author_db,author_filter1, year_filter1, journal_filter1, keyword_filter1)
     filtered_author_db = filtered_author_db.rename(columns={'cover_year': 'Year', 'citedby_count': 'Citations', 'authkeywords': 'Keywords', 'publicationName': 'Journal', 'author_names': 'Authors', 'affilname': 'Affiliations', 'title': 'Title', 'doi': 'DOI', 'description': 'Abstract'})
     st.dataframe(filtered_author_db, hide_index=True)
 
@@ -359,7 +358,7 @@ with st.container():
     if author_filter2 == 'All' and year_filter2 == 'All' and journal_filter1 == 'All' and keyword_filter1 == 'All':
         filtered_citation_db = top5_papers_citation_db
     else:
-        filtered_citation_db = filter_author_db(author_filter2, year_filter2, journal_filter2, keyword_filter2)
+        filtered_citation_db = filter_author_db(top5_papers_citation_db,author_filter2, year_filter2, journal_filter2, keyword_filter2)
     filtered_citation_db = filtered_citation_db.rename(columns={'cover_year': 'Year', 'citedby_count': 'Citations', 'authkeywords': 'Keywords', 'publicationName': 'Journal', 'author_names': 'Authors', 'affilname': 'Affiliations', 'title': 'Title', 'doi': 'DOI', 'description': 'Abstract'})
     st.dataframe(filtered_citation_db, hide_index=True)
 
