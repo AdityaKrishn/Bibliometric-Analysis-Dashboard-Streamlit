@@ -1,18 +1,21 @@
-maroon,yellow,teal,green,orange,gold
-3d printing,platform,user innovation,adoption,innovation,product development
-co-creation,sticky information,case study,compatibility,collaboration,open innovation
-motivation,lead user theory,innovation policy,diffusion,community,living lab
-online community,mass customization,user involvement,open source software,new product development,sustainability
-lead user,user entrepreneurship,cocreation,user design,software development,distributed innovation
-crowdsourcing,local information,creative consumer,complementarity,toolkit,knowledge sharing
-netnography,second life,commercial diffusion,open source,user,service
-social medium,virtual world,consumer innovation,innovation ecosystem,post-adoptive behavior,service innovation
-web 2.0,,diffusion of innovation,product architecture,,literature review
-,,household sector innovation,modularity,,user innovation community
-,,problem-solving,user community,,user idea
-,,renewable energy,,,
-,,entrepreneurship,,,
-,,evolutionary approach,,,
-,,innovation diffusion,,,
-,,innovation measurement,,,
-,,patent,,,
+orange,teal,gold,maroon,green
+3d printing,platform,adoption,case study,open innovation
+co-creation,user innovation,compatibility,innovation policy,living lab
+motivation,product development,diffusion,user involvement,sustainability
+online community,cocreation,complementarity,commercial diffusion,service
+lead user,creative consumer,open source,consumer innovation,service innovation
+open source software,distributed innovation,innovation ecosystem,diffusion of innovation,literature review
+crowdsourcing,knowledge sharing,product architecture,household sector innovation,user innovation community
+innovation,entrepreneurship,modularity,problem-solving,user idea
+user design,evolutionary approach,user community,renewable energy,
+collaboration,innovation diffusion,,,
+community,post-adoptive behavior,,,
+new product development,innovation measurement,,,
+software development,patent,,,
+toolkit,sticky information,,,
+user,lead user theory,,,
+netnography,mass customization,,,
+social medium,user entrepreneurship,,,
+web 2.0,local information,,,
+,second life,,,
+,virtual world,,,
