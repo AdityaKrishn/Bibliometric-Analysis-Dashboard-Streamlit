@@ -1,14 +1,6 @@
 # import subprocess
 import sys
 
-# def install(package):
-#     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-# Example usage:
-# install('streamlit==1.9.0')
-# install('openpyxl')
-
-
 import streamlit as st
 import streamlit.components.v1 as components
 import altair as alt
@@ -104,7 +96,6 @@ scopus_id = scopus_id[0]
 
 #convert option to string
 option = str(scopus_id)
-
 option_3 = st.selectbox('Select the graph type', ['Combination of OUI Elders and their Citers publications combined','OUI Elders publications only', 'OUI Elders Citers publications only'])
 
 if option_3 == 'Combination of OUI Elders and their Citers publications combined':
@@ -112,46 +103,46 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
     with st.container():   
             st.subheader("Co-occurrence Keyword Network of combined OUI Elders and their Citers") 
             st.info("Scientific collaboration network(keyword type) is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")   
+            filters_option1 = [10, 5, 2, 1]   
+            filter_option1 = st.selectbox('Select the filter option', filters_option1, key='filter_option1')
+            filter_option1 = str(filter_option1)
             try:
-                path = '/OUI Authors Network'
-                HtmlFile6 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
-            except:
                 path = '/Scopus Iteration'
-                # HtmlFile4 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_citers.html", 'r')
-            
-                HtmlFile6 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_combined_" + option + r".html", 'r')
-            components.html(HtmlFile6.read(), height=700)
+                HtmlFile6 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_combined_" + option +r"_"+filter_option1+ r".html", 'r')
+                components.html(HtmlFile6.read(), height=700)
+            except:
+                st.text("Please select a different filter option")
             try:
-                df_html6 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/authkeywords_combined_' + option + r'.html_communities.csv')
+                df_html6 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/authkeywords_combined_' + option +r"_"+filter_option1+ r'.html_communities.csv')
                 # df_html6 = df_html6.reindex(sorted(df_html6.columns), axis=1)
                 df_html6.columns = ['cluster ' + str(col) for col in df_html6.columns]
                 df_html6 = df_html6.dropna(how='all')
                 df_html6 = df_html6.fillna('')
                 st.dataframe(df_html6, hide_index=True)
             except:
+                st.text("Please select a different filter option")
                 print(sys.exc_info()[0])
 
     with st.container():   
             st.subheader("Co-authorship Network of combined OUI Elders and their Citers")
-            st.info("Scientific collaboration network(author type) is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)")     
+            st.info("Scientific collaboration network(author type) is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)")  
+            filters_option2 = [5, 2, 1]   
+            filter_option2 = st.selectbox('Select the filter option', filters_option2, key='filter_option2')
+            filter_option2 = str(filter_option2)   
             try:
-                path = '/OUI Authors Network'
-                HtmlFile3 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
-                
+                HtmlFile3 = open(os.getcwd()+r"/OUI Authors Network/author_names_combined_" + option +r"_"+filter_option2+ r".html", 'r')
+                components.html(HtmlFile3.read(), height=700)            
             except:
-                path = '/Scopus Iteration'
-                # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
-            
-                HtmlFile3 = open(os.getcwd()+r"/OUI Authors Network/author_names_combined_" + option + r".html", 'r')
-            components.html(HtmlFile3.read(), height=700)
+                st.text("Please select a different filter option")
             try:
-                df_html3 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_combined_' + option + r'.html_communities.csv')
+                df_html3 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_combined_' + option +r"_"+filter_option2+ r'.html_communities.csv')
                 # df_html3 = df_html3.reindex(sorted(df_html3.columns), axis=1)
                 df_html3.columns = ['cluster ' + str(col) for col in df_html3.columns]
                 df_html3 = df_html3.dropna(how='all')
                 df_html3 = df_html3.fillna('')
                 st.dataframe(df_html3, hide_index=True)
             except:
+                st.text("Please select a different filter option")
                 print(sys.exc_info()[0])
 
 elif option_3 == 'OUI Elders publications only':
@@ -160,46 +151,48 @@ elif option_3 == 'OUI Elders publications only':
             
             st.subheader("Co-occurrence Keyword Network of OUI Elder Papers")
             st.info("Scientific collaboration network(keyword type) is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")
+            filters_option3 = [10, 5, 2, 1]   
+            filter_option3 = st.selectbox('Select the filter option', filters_option3, key='filter_option3')
+            filter_option3 = str(filter_option3)
             try:
-                path = '/OUI Authors Network'
-                HtmlFile4 = open(f'{path}/authkeywords_OUI_Elders.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
-            except:
                 path = 'Scopus Iteration'
-                # HtmlFile3 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_OUI_Elders.html", 'r')
-                
-                HtmlFile4 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_OUI_" + option + r".html", 'r')
-            components.html(HtmlFile4.read(), height=700)
+                HtmlFile4 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_OUI_" + option +r"_"+filter_option3+ r".html", 'r')
+                components.html(HtmlFile4.read(), height=700)
+            except:
+                st.text("Please select a different filter option")
             try:
-                df_html4 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/authkeywords_OUI_' + option + r'.html_communities.csv')
+                df_html4 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/authkeywords_OUI_' + option +r"_"+filter_option3+ r'.html_communities.csv')
                 # df_html4 = df_html4.reindex(sorted(df_html4.columns), axis=1)
                 df_html4.columns = ['cluster ' + str(col) for col in df_html4.columns]
                 df_html4 = df_html4.dropna(how='all')
                 df_html4 = df_html4.fillna('')
                 st.dataframe(df_html4, hide_index=True)
             except:
+                st.text("Please select a different filter option")
                 print(sys.exc_info()[0])
 
     with st.container():
 
             st.subheader("Co-authorship Network of OUI Elders")
             st.info("Scientific collaboration network(author type) is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)")
+            filters_option4 = [5, 2, 1]   
+            filter_option4 = st.selectbox('Select the filter option', filters_option4, key='filter_option4')
+            filter_option4 = str(filter_option4)
             try:
-                path = '/OUI Authors Network'
-                HtmlFile1 = open(f'{path}/author_names.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
-            except:
                 path = 'Scopus Iteration'
-                # HtmlFile1 = open(os.getcwd()+r"\Scopus Iteration\author_names.html", 'r')
-
-                HtmlFile1 = open(os.getcwd()+r"/OUI Authors Network/author_names_OUI_" + option + r".html", 'r')
-            components.html(HtmlFile1.read(), height=700)
+                HtmlFile1 = open(os.getcwd()+r"/OUI Authors Network/author_names_OUI_" + option +r"_"+filter_option4+ r".html", 'r')
+                components.html(HtmlFile1.read(), height=700)
+            except:
+                st.text("Please select a different filter option")
             try:
-                df_html1 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_OUI_' + option + r'.html_communities.csv')
+                df_html1 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_OUI_' + option +r"_"+filter_option4+ r'.html_communities.csv')
                 # df_html1 = df_html1.reindex(sorted(df_html1.columns), axis=1)
                 df_html1.columns = ['cluster ' + str(col) for col in df_html1.columns]
                 df_html1 = df_html1.dropna(how='all')
                 df_html1 = df_html1.fillna('')
                 st.dataframe(df_html1, hide_index=True)
             except:
+                st.text("Please select a different filter option")
                 print(sys.exc_info()[0])
 
 else: 
@@ -207,69 +200,75 @@ else:
     with st.container():   
             st.subheader("Co-occurrence Keyword Network of OUI Elders Citers Papers")
             st.info("Scientific collaboration network(keyword type) is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")    
+            filters_option5 = [10, 5, 2, 1]   
+            filter_option5 = st.selectbox('Select the filter option', filters_option5, key='filter_option5')
+            filter_option5 = str(filter_option5)
             try:
-                path = '/OUI Authors Network'
-                HtmlFile5 = open(f'{path}/authkeywords_citers.html','r',encoding='utf-8')# Save and read graph as HTML file (locally)
-            except:
                 path = '/Scopus Iteration'
-                # HtmlFile4 = open(os.getcwd()+r"\Scopus Iteration\authkeywords_citers.html", 'r')
-            
-                HtmlFile5 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_citations_" + option + r".html", 'r')
-            components.html(HtmlFile5.read(), height=700)
+                HtmlFile5 = open(os.getcwd()+r"/OUI Authors Network/authkeywords_citations_" + option +r"_"+filter_option5+ r".html", 'r')
+                components.html(HtmlFile5.read(), height=700)
+            except:
+                st.text("Please select a different filter option")
             try:
-                df_html5 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/authkeywords_citations_' + option + r'.html_communities.csv')
+                df_html5 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/authkeywords_citations_' + option +r"_"+filter_option5+ r'.html_communities.csv')
                 # df_html5 = df_html5.reindex(sorted(df_html5.columns), axis=1)
                 df_html5.columns = ['cluster ' + str(col) for col in df_html5.columns]
                 df_html5 = df_html5.dropna(how='all')
                 df_html5 = df_html5.fillna('')
                 st.dataframe(df_html5, hide_index=True)
             except:
+                st.text("Please select a different filter option")
                 print(sys.exc_info()[0])
 
     with st.container():   
             st.subheader("Co-authorship Network of OUI Elders Citers")    
             st.info("Scientific collaboration network(author type) is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)") 
+            filters_option6 = [5, 2, 1]   
+            filter_option6 = st.selectbox('Select the filter option', filters_option6, key='filter_option6')
+            filter_option6 = str(filter_option6)
             try:
-                path = '/OUI Authors Network'
-                HtmlFile2 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
+                path = '/Scopus Iteration'
+                HtmlFile2 = open(os.getcwd()+r"/OUI Authors Network/author_names_citation_" + option +r"_"+filter_option6+ r".html", 'r')
+                components.html(HtmlFile2.read(), height=700)
                 
             except:
-                path = '/Scopus Iteration'
-                # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
-            
-                HtmlFile2 = open(os.getcwd()+r"/OUI Authors Network/author_names_citation_" + option + r".html", 'r')
-            components.html(HtmlFile2.read(), height=700)
+                st.text("Please select a different filter option")
             try:
-                df_html2 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_citation_' + option + r'.html_communities.csv')
+                df_html2 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_citation_' + option +r"_"+filter_option6+ r'.html_communities.csv')
                 # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
                 df_html2.columns = ['cluster ' + str(col) for col in df_html2.columns]
                 df_html2 = df_html2.dropna(how='all')
                 df_html2 = df_html2.fillna('')
                 st.dataframe(df_html2, hide_index=True)
             except:
+                st.text("Please select a different filter option")
                 print(sys.exc_info()[0])
 
 
 with st.container():   
     st.subheader("Bibliographic coupling Network of Publication Journals")   
     st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
+    filters_option7 = [5, 2, 1]   
+    filter_option7 = st.selectbox('Select the filter option', filters_option7, key='filter_option7')
+    filter_option7 = str(filter_option7)
     try:
-        path = '/OUI Authors Network'
-        HtmlFile7 = open(f'{path}/citers_names_with_all_ranking.html','r',encoding='utf-8')
-        
-    except:
         path = '/Scopus Iteration'
         # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
-        HtmlFile7 = open(os.getcwd()+r"/OUI Authors Network/publicationJournalBibliographiccoupling_" + option + r".html", 'r')   
-    components.html(HtmlFile7.read(), height=700)
+        HtmlFile7 = open(os.getcwd()+r"/OUI Authors Network/publicationJournalBibliographiccoupling_" + filter_option7 + r".html", 'r')  
+        components.html(HtmlFile7.read(), height=700) 
+        
+    except:
+        st.text("Please select a different filter option")
+        
     try:
-        df_html7 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/publicationJournalBibliographiccoupling_' + option + r'.html_communities.csv')
+        df_html7 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/publicationJournalBibliographiccoupling_' + filter_option7 + r'.html_communities.csv')
         # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
         df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
         df_html7 = df_html7.dropna(how='all')
         df_html7 = df_html7.fillna('')
         st.dataframe(df_html7, hide_index=True)
     except:
+        st.text("Please select a different filter option")
         print(sys.exc_info()[0])
 
 

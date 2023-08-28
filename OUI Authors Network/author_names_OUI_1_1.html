@@ -1,0 +1,349 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 1000px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "teal", "id": "amft, andr\u00e9", "label": "amft, andr\u00e9", "shape": "dot", "size": 2, "title": "amft, andr\u00e9 : 1"}, {"color": "teal", "id": "diener, kathleen", "label": "diener, kathleen", "shape": "dot", "size": 2, "title": "diener, kathleen : 1"}, {"color": "teal", "id": "l\u00fcttgens, dirk", "label": "l\u00fcttgens, dirk", "shape": "dot", "size": 2, "title": "l\u00fcttgens, dirk : 1"}, {"color": "teal", "id": "piller, frank t.", "label": "piller, frank t.", "shape": "dot", "size": 12, "title": "piller, frank t. : 6"}, {"color": "gold", "id": "baldwin, carliss", "label": "baldwin, carliss", "shape": "dot", "size": 4, "title": "baldwin, carliss : 2"}, {"color": "gold", "id": "hienerth, christoph", "label": "hienerth, christoph", "shape": "dot", "size": 14, "title": "hienerth, christoph : 7"}, {"color": "brown", "id": "von hippel, eric", "label": "von hippel, eric", "shape": "dot", "size": 54, "title": "von hippel, eric : 27"}, {"color": "brown", "id": "balka, kerstin", "label": "balka, kerstin", "shape": "dot", "size": 2, "title": "balka, kerstin : 1"}, {"color": "yellow", "id": "herstatt, cornelius", "label": "herstatt, cornelius", "shape": "dot", "size": 26, "title": "herstatt, cornelius : 13"}, {"color": "brown", "id": "raasch, christina", "label": "raasch, christina", "shape": "dot", "size": 18, "title": "raasch, christina : 9"}, {"color": "green", "id": "block, j\u00f6rn h.", "label": "block, j\u00f6rn h.", "shape": "dot", "size": 2, "title": "block, j\u00f6rn h. : 1"}, {"color": "green", "id": "henkel, joachim", "label": "henkel, joachim", "shape": "dot", "size": 4, "title": "henkel, joachim : 2"}, {"color": "green", "id": "schweisfurth, tim g.", "label": "schweisfurth, tim g.", "shape": "dot", "size": 12, "title": "schweisfurth, tim g. : 6"}, {"color": "green", "id": "stiegler, annika", "label": "stiegler, annika", "shape": "dot", "size": 2, "title": "stiegler, annika : 1"}, {"color": "blue", "id": "bradonjic, philip", "label": "bradonjic, philip", "shape": "dot", "size": 2, "title": "bradonjic, philip : 1"}, {"color": "blue", "id": "franke, nikolaus", "label": "franke, nikolaus", "shape": "dot", "size": 14, "title": "franke, nikolaus : 7"}, {"color": "blue", "id": "l\u00fcthje, christian", "label": "l\u00fcthje, christian", "shape": "dot", "size": 16, "title": "l\u00fcthje, christian : 8"}, {"color": "yellow", "id": "braun, viktor", "label": "braun, viktor", "shape": "dot", "size": 2, "title": "braun, viktor : 1"}, {"color": "brown", "id": "chen, jin", "label": "chen, jin", "shape": "dot", "size": 2, "title": "chen, jin : 1"}, {"color": "brown", "id": "de jong, jeroen p.j.", "label": "de jong, jeroen p.j.", "shape": "dot", "size": 4, "title": "de jong, jeroen p.j. : 2"}, {"color": "brown", "id": "su, yu shan", "label": "su, yu shan", "shape": "dot", "size": 2, "title": "su, yu shan : 1"}, {"color": "brown", "id": "flowers, stephen", "label": "flowers, stephen", "shape": "dot", "size": 4, "title": "flowers, stephen : 2"}, {"color": "brown", "id": "gault, fred", "label": "gault, fred", "shape": "dot", "size": 6, "title": "gault, fred : 3"}, {"color": "brown", "id": "gillert, nils lennart", "label": "gillert, nils lennart", "shape": "dot", "size": 4, "title": "gillert, nils lennart : 2"}, {"color": "brown", "id": "kuusisto, jari", "label": "kuusisto, jari", "shape": "dot", "size": 6, "title": "kuusisto, jari : 3"}, {"color": "brown", "id": "stock, ruth maria", "label": "stock, ruth maria", "shape": "dot", "size": 4, "title": "stock, ruth maria : 2"}, {"color": "blue", "id": "ebbing, tobias", "label": "ebbing, tobias", "shape": "dot", "size": 2, "title": "ebbing, tobias : 1"}, {"color": "orange", "id": "felin, teppo", "label": "felin, teppo", "shape": "dot", "size": 2, "title": "felin, teppo : 1"}, {"color": "orange", "id": "lakhani, karim r.", "label": "lakhani, karim r.", "shape": "dot", "size": 6, "title": "lakhani, karim r. : 3"}, {"color": "orange", "id": "tushman, michael l.", "label": "tushman, michael l.", "shape": "dot", "size": 2, "title": "tushman, michael l. : 1"}, {"color": "gold", "id": "keinz, peter", "label": "keinz, peter", "shape": "dot", "size": 6, "title": "keinz, peter : 3"}, {"color": "blue", "id": "klausberger, katharina", "label": "klausberger, katharina", "shape": "dot", "size": 2, "title": "klausberger, katharina : 1"}, {"color": "blue", "id": "reinsberger, kathrin", "label": "reinsberger, kathrin", "shape": "dot", "size": 2, "title": "reinsberger, kathrin : 1"}, {"color": "blue", "id": "schirg, florian", "label": "schirg, florian", "shape": "dot", "size": 2, "title": "schirg, florian : 1"}, {"color": "maroon", "id": "schreier, martin", "label": "schreier, martin", "shape": "dot", "size": 4, "title": "schreier, martin : 2"}, {"color": "red", "id": "f\u00fcller, johann", "label": "f\u00fcller, johann", "shape": "dot", "size": 6, "title": "f\u00fcller, johann : 3"}, {"color": "red", "id": "jawecki, gregor", "label": "jawecki, gregor", "shape": "dot", "size": 2, "title": "jawecki, gregor : 1"}, {"color": "red", "id": "matzler, kurt", "label": "matzler, kurt", "shape": "dot", "size": 2, "title": "matzler, kurt : 1"}, {"color": "red", "id": "m\u00fchlbacher, hans", "label": "m\u00fchlbacher, hans", "shape": "dot", "size": 2, "title": "m\u00fchlbacher, hans : 1"}, {"color": "red", "id": "schroll, roland", "label": "schroll, roland", "shape": "dot", "size": 2, "title": "schroll, roland : 1"}, {"color": "brown", "id": "gambardella, alfonso", "label": "gambardella, alfonso", "shape": "dot", "size": 4, "title": "gambardella, alfonso : 2"}, {"color": "gold", "id": "gem\u00fcnden, hans georg", "label": "gem\u00fcnden, hans georg", "shape": "dot", "size": 2, "title": "gem\u00fcnden, hans georg : 1"}, {"color": "gold", "id": "killen, catherine p.", "label": "killen, catherine p.", "shape": "dot", "size": 2, "title": "killen, catherine p. : 1"}, {"color": "gold", "id": "sicotte, h\u00e9l\u00e8ne", "label": "sicotte, h\u00e9l\u00e8ne", "shape": "dot", "size": 2, "title": "sicotte, h\u00e9l\u00e8ne : 1"}, {"color": "blue", "id": "goduscheit, ren\u00e9 chester", "label": "goduscheit, ren\u00e9 chester", "shape": "dot", "size": 2, "title": "goduscheit, ren\u00e9 chester : 1"}, {"color": "blue", "id": "j\u00f8rgensen, jacob h\u00f8j", "label": "j\u00f8rgensen, jacob h\u00f8j", "shape": "dot", "size": 2, "title": "j\u00f8rgensen, jacob h\u00f8j : 1"}, {"color": "purple", "id": "haefliger, stefan", "label": "haefliger, stefan", "shape": "dot", "size": 2, "title": "haefliger, stefan : 1"}, {"color": "purple", "id": "j\u00e4ger, peter", "label": "j\u00e4ger, peter", "shape": "dot", "size": 2, "title": "j\u00e4ger, peter : 1"}, {"color": "purple", "id": "von krogh, georg", "label": "von krogh, georg", "shape": "dot", "size": 2, "title": "von krogh, georg : 1"}, {"color": "brown", "id": "lock, phillip", "label": "lock, phillip", "shape": "dot", "size": 2, "title": "lock, phillip : 1"}, {"color": "gold", "id": "berg jensen, morten", "label": "berg jensen, morten", "shape": "dot", "size": 2, "title": "berg jensen, morten : 1"}, {"color": "gold", "id": "lettl, christopher", "label": "lettl, christopher", "shape": "dot", "size": 8, "title": "lettl, christopher : 4"}, {"color": "blue", "id": "hinsch, mareike e.", "label": "hinsch, mareike e.", "shape": "dot", "size": 2, "title": "hinsch, mareike e. : 1"}, {"color": "blue", "id": "stockstrom, christoph s.", "label": "stockstrom, christoph s.", "shape": "dot", "size": 4, "title": "stockstrom, christoph s. : 2"}, {"color": "pink", "id": "hopper, lydia m.", "label": "hopper, lydia m.", "shape": "dot", "size": 2, "title": "hopper, lydia m. : 1"}, {"color": "pink", "id": "torrance, andrew w.", "label": "torrance, andrew w.", "shape": "dot", "size": 2, "title": "torrance, andrew w. : 1"}, {"color": "teal", "id": "ihl, christoph", "label": "ihl, christoph", "shape": "dot", "size": 4, "title": "ihl, christoph : 2"}, {"color": "teal", "id": "tarman, refik tarcan", "label": "tarman, refik tarcan", "shape": "dot", "size": 2, "title": "tarman, refik tarcan : 1"}, {"color": "teal", "id": "vossen, alexander", "label": "vossen, alexander", "shape": "dot", "size": 2, "title": "vossen, alexander : 1"}, {"color": "indigo", "id": "jeppesen, lars bo", "label": "jeppesen, lars bo", "shape": "dot", "size": 2, "title": "jeppesen, lars bo : 1"}, {"color": "indigo", "id": "frederiksen, lars", "label": "frederiksen, lars", "shape": "dot", "size": 2, "title": "frederiksen, lars : 1"}, {"color": "teal", "id": "kleer, robin", "label": "kleer, robin", "shape": "dot", "size": 2, "title": "kleer, robin : 1"}, {"color": "maroon", "id": "kohlbacher, florian", "label": "kohlbacher, florian", "shape": "dot", "size": 2, "title": "kohlbacher, florian : 1"}, {"color": "maroon", "id": "ogawa, susumu", "label": "ogawa, susumu", "shape": "dot", "size": 8, "title": "ogawa, susumu : 4"}, {"color": "brown", "id": "kuusisto, arja", "label": "kuusisto, arja", "shape": "dot", "size": 4, "title": "kuusisto, arja : 2"}, {"color": "brown", "id": "yli-viitala, pirjo", "label": "yli-viitala, pirjo", "shape": "dot", "size": 2, "title": "yli-viitala, pirjo : 1"}, {"color": "yellow", "id": "lehnen, jens", "label": "lehnen, jens", "shape": "dot", "size": 2, "title": "lehnen, jens : 1"}, {"color": "yellow", "id": "schmidt, tobias sebastian", "label": "schmidt, tobias sebastian", "shape": "dot", "size": 2, "title": "schmidt, tobias sebastian : 1"}, {"color": "yellow", "id": "morrison, pamela d.", "label": "morrison, pamela d.", "shape": "dot", "size": 4, "title": "morrison, pamela d. : 2"}, {"color": "yellow", "id": "roberts, john h.", "label": "roberts, john h.", "shape": "dot", "size": 2, "title": "roberts, john h. : 1"}, {"color": "brown", "id": "mulhuijzen, max", "label": "mulhuijzen, max", "shape": "dot", "size": 2, "title": "mulhuijzen, max : 1"}, {"color": "maroon", "id": "nishikawa, hidehiko", "label": "nishikawa, hidehiko", "shape": "dot", "size": 2, "title": "nishikawa, hidehiko : 1"}, {"color": "maroon", "id": "pongtanalert, kritinee", "label": "pongtanalert, kritinee", "shape": "dot", "size": 4, "title": "pongtanalert, kritinee : 2"}, {"color": "brown", "id": "oliveira, pedro", "label": "oliveira, pedro", "shape": "dot", "size": 2, "title": "oliveira, pedro : 1"}, {"color": "yellow", "id": "pieper, thorsten", "label": "pieper, thorsten", "shape": "dot", "size": 2, "title": "pieper, thorsten : 1"}, {"color": "teal", "id": "pollok, patrick", "label": "pollok, patrick", "shape": "dot", "size": 2, "title": "pollok, patrick : 1"}, {"color": "yellow", "id": "skiba, florian", "label": "skiba, florian", "shape": "dot", "size": 2, "title": "skiba, florian : 1"}, {"color": "teal", "id": "steiner, frank", "label": "steiner, frank", "shape": "dot", "size": 2, "title": "steiner, frank : 1"}, {"color": "yellow", "id": "tietz, robert", "label": "tietz, robert", "shape": "dot", "size": 2, "title": "tietz, robert : 1"}, {"color": "yellow", "id": "tietze, frank", "label": "tietze, frank", "shape": "dot", "size": 2, "title": "tietze, frank : 1"}, {"color": "brown", "id": "euchner, jim", "label": "euchner, jim", "shape": "dot", "size": 2, "title": "euchner, jim : 1"}, {"color": "brown", "id": "katz, ralph", "label": "katz, ralph", "shape": "dot", "size": 2, "title": "katz, ralph : 1"}, {"color": "brown", "id": "kaulartz, sandro", "label": "kaulartz, sandro", "shape": "dot", "size": 2, "title": "kaulartz, sandro : 1"}, {"color": "brown", "id": "paradiso, joseph a.", "label": "paradiso, joseph a.", "shape": "dot", "size": 2, "title": "paradiso, joseph a. : 1"}, {"color": "yellow", "id": "wellner, konstantin", "label": "wellner, konstantin", "shape": "dot", "size": 2, "title": "wellner, konstantin : 1"}, {"color": "orange", "id": "west, joel", "label": "west, joel", "shape": "dot", "size": 2, "title": "west, joel : 1"}, {"color": "maroon", "id": "yu, xin", "label": "yu, xin", "shape": "dot", "size": 2, "title": "yu, xin : 1"}, {"color": "green", "id": "zaggl, michael a.", "label": "zaggl, michael a.", "shape": "dot", "size": 2, "title": "zaggl, michael a. : 1"}]);
+                  edges = new vis.DataSet([{"color": "silver", "from": "amft, andr\u00e9", "symbol": "diamond", "title": "amft, andr\u00e9,diener, kathleen,1", "to": "diener, kathleen", "value": 1, "width": 1}, {"color": "silver", "from": "amft, andr\u00e9", "symbol": "diamond", "title": "amft, andr\u00e9,l\u00fcttgens, dirk,1", "to": "l\u00fcttgens, dirk", "value": 1, "width": 1}, {"color": "silver", "from": "amft, andr\u00e9", "symbol": "cross", "title": "amft, andr\u00e9,piller, frank t.,1", "to": "piller, frank t.", "value": 1, "width": 1}, {"color": "silver", "from": "amft, andr\u00e9", "symbol": "circle", "title": "amft, andr\u00e9,pollok, patrick,1", "to": "pollok, patrick", "value": 1, "width": 1}, {"color": "silver", "from": "diener, kathleen", "symbol": "circle", "title": "diener, kathleen,l\u00fcttgens, dirk,1", "to": "l\u00fcttgens, dirk", "value": 1, "width": 1}, {"color": "silver", "from": "diener, kathleen", "symbol": "cross", "title": "diener, kathleen,piller, frank t.,1", "to": "piller, frank t.", "value": 1, "width": 1}, {"color": "silver", "from": "diener, kathleen", "symbol": "diamond", "title": "diener, kathleen,pollok, patrick,1", "to": "pollok, patrick", "value": 1, "width": 1}, {"color": "silver", "from": "l\u00fcttgens, dirk", "symbol": "circle", "title": "l\u00fcttgens, dirk,piller, frank t.,1", "to": "piller, frank t.", "value": 1, "width": 1}, {"color": "silver", "from": "l\u00fcttgens, dirk", "symbol": "diamond", "title": "l\u00fcttgens, dirk,pollok, patrick,1", "to": "pollok, patrick", "value": 1, "width": 1}, {"color": "silver", "from": "piller, frank t.", "symbol": "circle", "title": "piller, frank t.,franke, nikolaus,2", "to": "franke, nikolaus", "value": 2, "width": 2}, {"color": "silver", "from": "piller, frank t.", "symbol": "square", "title": "piller, frank t.,ihl, christoph,2", "to": "ihl, christoph", "value": 2, "width": 2}, {"color": "silver", "from": "piller, frank t.", "symbol": "cross", "title": "piller, frank t.,kleer, robin,1", "to": "kleer, robin", "value": 1, "width": 1}, {"color": "silver", "from": "piller, frank t.", "symbol": "circle", "title": "piller, frank t.,tarman, refik tarcan,1", "to": "tarman, refik tarcan", "value": 1, "width": 1}, {"color": "silver", "from": "piller, frank t.", "symbol": "square", "title": "piller, frank t.,pollok, patrick,1", "to": "pollok, patrick", "value": 1, "width": 1}, {"color": "silver", "from": "piller, frank t.", "symbol": "cross", "title": "piller, frank t.,steiner, frank,1", "to": "steiner, frank", "value": 1, "width": 1}, {"color": "silver", "from": "piller, frank t.", "symbol": "diamond", "title": "piller, frank t.,vossen, alexander,1", "to": "vossen, alexander", "value": 1, "width": 1}, {"color": "silver", "from": "baldwin, carliss", "symbol": "diamond", "title": "baldwin, carliss,hienerth, christoph,1", "to": "hienerth, christoph", "value": 1, "width": 1}, {"color": "silver", "from": "baldwin, carliss", "symbol": "square", "title": "baldwin, carliss,von hippel, eric,2", "to": "von hippel, eric", "value": 2, "width": 2}, {"color": "silver", "from": "hienerth, christoph", "symbol": "diamond", "title": "hienerth, christoph,berg jensen, morten,1", "to": "berg jensen, morten", "value": 1, "width": 1}, {"color": "silver", "from": "hienerth, christoph", "symbol": "circle", "title": "hienerth, christoph,gem\u00fcnden, hans georg,1", "to": "gem\u00fcnden, hans georg", "value": 1, "width": 1}, {"color": "silver", "from": "hienerth, christoph", "symbol": "square", "title": "hienerth, christoph,keinz, peter,1", "to": "keinz, peter", "value": 1, "width": 1}, {"color": "silver", "from": "hienerth, christoph", "symbol": "square", "title": "hienerth, christoph,killen, catherine p.,1", "to": "killen, catherine p.", "value": 1, "width": 1}, {"color": "silver", "from": "hienerth, christoph", "symbol": "square", "title": "hienerth, christoph,lettl, christopher,3", "to": "lettl, christopher", "value": 3, "width": 3}, {"color": "silver", "from": "hienerth, christoph", "symbol": "square", "title": "hienerth, christoph,sicotte, h\u00e9l\u00e8ne,1", "to": "sicotte, h\u00e9l\u00e8ne", "value": 1, "width": 1}, {"color": "silver", "from": "hienerth, christoph", "symbol": "diamond", "title": "hienerth, christoph,von hippel, eric,2", "to": "von hippel, eric", "value": 2, "width": 2}, {"color": "silver", "from": "von hippel, eric", "symbol": "diamond", "title": "von hippel, eric,chen, jin,1", "to": "chen, jin", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "cross", "title": "von hippel, eric,de jong, jeroen p.j.,1", "to": "de jong, jeroen p.j.", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "square", "title": "von hippel, eric,franke, nikolaus,2", "to": "franke, nikolaus", "value": 2, "width": 2}, {"color": "silver", "from": "von hippel, eric", "symbol": "cross", "title": "von hippel, eric,f\u00fcller, johann,1", "to": "f\u00fcller, johann", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "circle", "title": "von hippel, eric,gambardella, alfonso,2", "to": "gambardella, alfonso", "value": 2, "width": 2}, {"color": "silver", "from": "von hippel, eric", "symbol": "circle", "title": "von hippel, eric,henkel, joachim,1", "to": "henkel, joachim", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "square", "title": "von hippel, eric,herstatt, cornelius,1", "to": "herstatt, cornelius", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "diamond", "title": "von hippel, eric,lakhani, karim r.,1", "to": "lakhani, karim r.", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "cross", "title": "von hippel, eric,l\u00fcthje, christian,1", "to": "l\u00fcthje, christian", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "triangle-up", "title": "von hippel, eric,morrison, pamela d.,1", "to": "morrison, pamela d.", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "square", "title": "von hippel, eric,oliveira, pedro,1", "to": "oliveira, pedro", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "cross", "title": "von hippel, eric,raasch, christina,1", "to": "raasch, christina", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "square", "title": "von hippel, eric,roberts, john h.,1", "to": "roberts, john h.", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "circle", "title": "von hippel, eric,schroll, roland,1", "to": "schroll, roland", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "cross", "title": "von hippel, eric,stock, ruth maria,1", "to": "stock, ruth maria", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "diamond", "title": "von hippel, eric,su, yu shan,1", "to": "su, yu shan", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "cross", "title": "von hippel, eric,berg jensen, morten,1", "to": "berg jensen, morten", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "triangle-up", "title": "von hippel, eric,euchner, jim,1", "to": "euchner, jim", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "square", "title": "von hippel, eric,flowers, stephen,1", "to": "flowers, stephen", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "triangle-up", "title": "von hippel, eric,gault, fred,1", "to": "gault, fred", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "square", "title": "von hippel, eric,gillert, nils lennart,1", "to": "gillert, nils lennart", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "square", "title": "von hippel, eric,katz, ralph,1", "to": "katz, ralph", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "triangle-up", "title": "von hippel, eric,kaulartz, sandro,1", "to": "kaulartz, sandro", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "circle", "title": "von hippel, eric,kuusisto, jari,1", "to": "kuusisto, jari", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "cross", "title": "von hippel, eric,paradiso, joseph a.,1", "to": "paradiso, joseph a.", "value": 1, "width": 1}, {"color": "silver", "from": "von hippel, eric", "symbol": "circle", "title": "von hippel, eric,schreier, martin,1", "to": "schreier, martin", "value": 1, "width": 1}, {"color": "silver", "from": "balka, kerstin", "symbol": "cross", "title": "balka, kerstin,herstatt, cornelius,1", "to": "herstatt, cornelius", "value": 1, "width": 1}, {"color": "silver", "from": "balka, kerstin", "symbol": "circle", "title": "balka, kerstin,raasch, christina,1", "to": "raasch, christina", "value": 1, "width": 1}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "square", "title": "herstatt, cornelius,braun, viktor,1", "to": "braun, viktor", "value": 1, "width": 1}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "triangle-up", "title": "herstatt, cornelius,lock, phillip,1", "to": "lock, phillip", "value": 1, "width": 1}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "triangle-up", "title": "herstatt, cornelius,lehnen, jens,1", "to": "lehnen, jens", "value": 1, "width": 1}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "triangle-up", "title": "herstatt, cornelius,l\u00fcthje, christian,3", "to": "l\u00fcthje, christian", "value": 3, "width": 3}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "circle", "title": "herstatt, cornelius,morrison, pamela d.,1", "to": "morrison, pamela d.", "value": 1, "width": 1}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "diamond", "title": "herstatt, cornelius,pieper, thorsten,1", "to": "pieper, thorsten", "value": 1, "width": 1}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "cross", "title": "herstatt, cornelius,raasch, christina,3", "to": "raasch, christina", "value": 3, "width": 3}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "circle", "title": "herstatt, cornelius,schmidt, tobias sebastian,1", "to": "schmidt, tobias sebastian", "value": 1, "width": 1}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "cross", "title": "herstatt, cornelius,schweisfurth, tim g.,3", "to": "schweisfurth, tim g.", "value": 3, "width": 3}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "triangle-up", "title": "herstatt, cornelius,skiba, florian,1", "to": "skiba, florian", "value": 1, "width": 1}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "cross", "title": "herstatt, cornelius,tietz, robert,1", "to": "tietz, robert", "value": 1, "width": 1}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "diamond", "title": "herstatt, cornelius,tietze, frank,1", "to": "tietze, frank", "value": 1, "width": 1}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "circle", "title": "herstatt, cornelius,wellner, konstantin,1", "to": "wellner, konstantin", "value": 1, "width": 1}, {"color": "silver", "from": "herstatt, cornelius", "symbol": "triangle-up", "title": "herstatt, cornelius,zaggl, michael a.,1", "to": "zaggl, michael a.", "value": 1, "width": 1}, {"color": "silver", "from": "raasch, christina", "symbol": "square", "title": "raasch, christina,de jong, jeroen p.j.,1", "to": "de jong, jeroen p.j.", "value": 1, "width": 1}, {"color": "silver", "from": "raasch, christina", "symbol": "circle", "title": "raasch, christina,gambardella, alfonso,2", "to": "gambardella, alfonso", "value": 2, "width": 2}, {"color": "silver", "from": "raasch, christina", "symbol": "triangle-up", "title": "raasch, christina,gault, fred,1", "to": "gault, fred", "value": 1, "width": 1}, {"color": "silver", "from": "raasch, christina", "symbol": "cross", "title": "raasch, christina,kuusisto, jari,1", "to": "kuusisto, jari", "value": 1, "width": 1}, {"color": "silver", "from": "raasch, christina", "symbol": "diamond", "title": "raasch, christina,lock, phillip,1", "to": "lock, phillip", "value": 1, "width": 1}, {"color": "silver", "from": "raasch, christina", "symbol": "triangle-up", "title": "raasch, christina,schweisfurth, tim g.,3", "to": "schweisfurth, tim g.", "value": 3, "width": 3}, {"color": "silver", "from": "block, j\u00f6rn h.", "symbol": "circle", "title": "block, j\u00f6rn h.,henkel, joachim,1", "to": "henkel, joachim", "value": 1, "width": 1}, {"color": "silver", "from": "block, j\u00f6rn h.", "symbol": "cross", "title": "block, j\u00f6rn h.,schweisfurth, tim g.,1", "to": "schweisfurth, tim g.", "value": 1, "width": 1}, {"color": "silver", "from": "block, j\u00f6rn h.", "symbol": "circle", "title": "block, j\u00f6rn h.,stiegler, annika,1", "to": "stiegler, annika", "value": 1, "width": 1}, {"color": "silver", "from": "henkel, joachim", "symbol": "diamond", "title": "henkel, joachim,schweisfurth, tim g.,1", "to": "schweisfurth, tim g.", "value": 1, "width": 1}, {"color": "silver", "from": "henkel, joachim", "symbol": "cross", "title": "henkel, joachim,stiegler, annika,1", "to": "stiegler, annika", "value": 1, "width": 1}, {"color": "silver", "from": "schweisfurth, tim g.", "symbol": "square", "title": "schweisfurth, tim g.,stiegler, annika,1", "to": "stiegler, annika", "value": 1, "width": 1}, {"color": "silver", "from": "schweisfurth, tim g.", "symbol": "cross", "title": "schweisfurth, tim g.,zaggl, michael a.,1", "to": "zaggl, michael a.", "value": 1, "width": 1}, {"color": "silver", "from": "bradonjic, philip", "symbol": "circle", "title": "bradonjic, philip,franke, nikolaus,1", "to": "franke, nikolaus", "value": 1, "width": 1}, {"color": "silver", "from": "bradonjic, philip", "symbol": "triangle-up", "title": "bradonjic, philip,l\u00fcthje, christian,1", "to": "l\u00fcthje, christian", "value": 1, "width": 1}, {"color": "silver", "from": "franke, nikolaus", "symbol": "square", "title": "franke, nikolaus,keinz, peter,1", "to": "keinz, peter", "value": 1, "width": 1}, {"color": "silver", "from": "franke, nikolaus", "symbol": "circle", "title": "franke, nikolaus,klausberger, katharina,1", "to": "klausberger, katharina", "value": 1, "width": 1}, {"color": "silver", "from": "franke, nikolaus", "symbol": "triangle-up", "title": "franke, nikolaus,l\u00fcthje, christian,1", "to": "l\u00fcthje, christian", "value": 1, "width": 1}, {"color": "silver", "from": "franke, nikolaus", "symbol": "cross", "title": "franke, nikolaus,reinsberger, kathrin,1", "to": "reinsberger, kathrin", "value": 1, "width": 1}, {"color": "silver", "from": "franke, nikolaus", "symbol": "triangle-up", "title": "franke, nikolaus,schirg, florian,1", "to": "schirg, florian", "value": 1, "width": 1}, {"color": "silver", "from": "franke, nikolaus", "symbol": "cross", "title": "franke, nikolaus,schreier, martin,1", "to": "schreier, martin", "value": 1, "width": 1}, {"color": "silver", "from": "l\u00fcthje, christian", "symbol": "triangle-up", "title": "l\u00fcthje, christian,ebbing, tobias,1", "to": "ebbing, tobias", "value": 1, "width": 1}, {"color": "silver", "from": "l\u00fcthje, christian", "symbol": "square", "title": "l\u00fcthje, christian,goduscheit, ren\u00e9 chester,1", "to": "goduscheit, ren\u00e9 chester", "value": 1, "width": 1}, {"color": "silver", "from": "l\u00fcthje, christian", "symbol": "triangle-up", "title": "l\u00fcthje, christian,hinsch, mareike e.,1", "to": "hinsch, mareike e.", "value": 1, "width": 1}, {"color": "silver", "from": "l\u00fcthje, christian", "symbol": "square", "title": "l\u00fcthje, christian,j\u00f8rgensen, jacob h\u00f8j,1", "to": "j\u00f8rgensen, jacob h\u00f8j", "value": 1, "width": 1}, {"color": "silver", "from": "l\u00fcthje, christian", "symbol": "circle", "title": "l\u00fcthje, christian,morrison, pamela d.,1", "to": "morrison, pamela d.", "value": 1, "width": 1}, {"color": "silver", "from": "l\u00fcthje, christian", "symbol": "square", "title": "l\u00fcthje, christian,stockstrom, christoph s.,2", "to": "stockstrom, christoph s.", "value": 2, "width": 2}, {"color": "silver", "from": "l\u00fcthje, christian", "symbol": "cross", "title": "l\u00fcthje, christian,tietz, robert,1", "to": "tietz, robert", "value": 1, "width": 1}, {"color": "silver", "from": "chen, jin", "symbol": "circle", "title": "chen, jin,de jong, jeroen p.j.,1", "to": "de jong, jeroen p.j.", "value": 1, "width": 1}, {"color": "silver", "from": "chen, jin", "symbol": "circle", "title": "chen, jin,su, yu shan,1", "to": "su, yu shan", "value": 1, "width": 1}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "diamond", "title": "de jong, jeroen p.j.,flowers, stephen,2", "to": "flowers, stephen", "value": 2, "width": 2}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "circle", "title": "de jong, jeroen p.j.,gault, fred,1", "to": "gault, fred", "value": 1, "width": 1}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "circle", "title": "de jong, jeroen p.j.,gillert, nils lennart,1", "to": "gillert, nils lennart", "value": 1, "width": 1}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "square", "title": "de jong, jeroen p.j.,kuusisto, jari,1", "to": "kuusisto, jari", "value": 1, "width": 1}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "cross", "title": "de jong, jeroen p.j.,stock, ruth maria,1", "to": "stock, ruth maria", "value": 1, "width": 1}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "cross", "title": "de jong, jeroen p.j.,mulhuijzen, max,1", "to": "mulhuijzen, max", "value": 1, "width": 1}, {"color": "silver", "from": "de jong, jeroen p.j.", "symbol": "cross", "title": "de jong, jeroen p.j.,su, yu shan,1", "to": "su, yu shan", "value": 1, "width": 1}, {"color": "silver", "from": "gault, fred", "symbol": "diamond", "title": "gault, fred,kuusisto, jari,1", "to": "kuusisto, jari", "value": 1, "width": 1}, {"color": "silver", "from": "gillert, nils lennart", "symbol": "triangle-up", "title": "gillert, nils lennart,stock, ruth maria,1", "to": "stock, ruth maria", "value": 1, "width": 1}, {"color": "silver", "from": "kuusisto, jari", "symbol": "cross", "title": "kuusisto, jari,kuusisto, arja,1", "to": "kuusisto, arja", "value": 1, "width": 1}, {"color": "silver", "from": "kuusisto, jari", "symbol": "diamond", "title": "kuusisto, jari,yli-viitala, pirjo,1", "to": "yli-viitala, pirjo", "value": 1, "width": 1}, {"color": "silver", "from": "felin, teppo", "symbol": "triangle-up", "title": "felin, teppo,lakhani, karim r.,1", "to": "lakhani, karim r.", "value": 1, "width": 1}, {"color": "silver", "from": "felin, teppo", "symbol": "cross", "title": "felin, teppo,tushman, michael l.,1", "to": "tushman, michael l.", "value": 1, "width": 1}, {"color": "silver", "from": "lakhani, karim r.", "symbol": "triangle-up", "title": "lakhani, karim r.,tushman, michael l.,1", "to": "tushman, michael l.", "value": 1, "width": 1}, {"color": "silver", "from": "lakhani, karim r.", "symbol": "diamond", "title": "lakhani, karim r.,west, joel,1", "to": "west, joel", "value": 1, "width": 1}, {"color": "silver", "from": "keinz, peter", "symbol": "circle", "title": "keinz, peter,gem\u00fcnden, hans georg,1", "to": "gem\u00fcnden, hans georg", "value": 1, "width": 1}, {"color": "silver", "from": "keinz, peter", "symbol": "circle", "title": "keinz, peter,killen, catherine p.,1", "to": "killen, catherine p.", "value": 1, "width": 1}, {"color": "silver", "from": "keinz, peter", "symbol": "circle", "title": "keinz, peter,klausberger, katharina,1", "to": "klausberger, katharina", "value": 1, "width": 1}, {"color": "silver", "from": "keinz, peter", "symbol": "diamond", "title": "keinz, peter,lettl, christopher,1", "to": "lettl, christopher", "value": 1, "width": 1}, {"color": "silver", "from": "keinz, peter", "symbol": "circle", "title": "keinz, peter,sicotte, h\u00e9l\u00e8ne,1", "to": "sicotte, h\u00e9l\u00e8ne", "value": 1, "width": 1}, {"color": "silver", "from": "reinsberger, kathrin", "symbol": "cross", "title": "reinsberger, kathrin,schirg, florian,1", "to": "schirg, florian", "value": 1, "width": 1}, {"color": "silver", "from": "schreier, martin", "symbol": "triangle-up", "title": "schreier, martin,nishikawa, hidehiko,1", "to": "nishikawa, hidehiko", "value": 1, "width": 1}, {"color": "silver", "from": "schreier, martin", "symbol": "square", "title": "schreier, martin,ogawa, susumu,1", "to": "ogawa, susumu", "value": 1, "width": 1}, {"color": "silver", "from": "f\u00fcller, johann", "symbol": "square", "title": "f\u00fcller, johann,jawecki, gregor,1", "to": "jawecki, gregor", "value": 1, "width": 1}, {"color": "silver", "from": "f\u00fcller, johann", "symbol": "triangle-up", "title": "f\u00fcller, johann,matzler, kurt,1", "to": "matzler, kurt", "value": 1, "width": 1}, {"color": "silver", "from": "f\u00fcller, johann", "symbol": "square", "title": "f\u00fcller, johann,m\u00fchlbacher, hans,1", "to": "m\u00fchlbacher, hans", "value": 1, "width": 1}, {"color": "silver", "from": "f\u00fcller, johann", "symbol": "triangle-up", "title": "f\u00fcller, johann,schroll, roland,1", "to": "schroll, roland", "value": 1, "width": 1}, {"color": "silver", "from": "jawecki, gregor", "symbol": "triangle-up", "title": "jawecki, gregor,matzler, kurt,1", "to": "matzler, kurt", "value": 1, "width": 1}, {"color": "silver", "from": "jawecki, gregor", "symbol": "square", "title": "jawecki, gregor,m\u00fchlbacher, hans,1", "to": "m\u00fchlbacher, hans", "value": 1, "width": 1}, {"color": "silver", "from": "matzler, kurt", "symbol": "circle", "title": "matzler, kurt,m\u00fchlbacher, hans,1", "to": "m\u00fchlbacher, hans", "value": 1, "width": 1}, {"color": "silver", "from": "gem\u00fcnden, hans georg", "symbol": "triangle-up", "title": "gem\u00fcnden, hans georg,killen, catherine p.,1", "to": "killen, catherine p.", "value": 1, "width": 1}, {"color": "silver", "from": "gem\u00fcnden, hans georg", "symbol": "circle", "title": "gem\u00fcnden, hans georg,sicotte, h\u00e9l\u00e8ne,1", "to": "sicotte, h\u00e9l\u00e8ne", "value": 1, "width": 1}, {"color": "silver", "from": "killen, catherine p.", "symbol": "triangle-up", "title": "killen, catherine p.,sicotte, h\u00e9l\u00e8ne,1", "to": "sicotte, h\u00e9l\u00e8ne", "value": 1, "width": 1}, {"color": "silver", "from": "goduscheit, ren\u00e9 chester", "symbol": "circle", "title": "goduscheit, ren\u00e9 chester,j\u00f8rgensen, jacob h\u00f8j,1", "to": "j\u00f8rgensen, jacob h\u00f8j", "value": 1, "width": 1}, {"color": "silver", "from": "goduscheit, ren\u00e9 chester", "symbol": "circle", "title": "goduscheit, ren\u00e9 chester,stockstrom, christoph s.,1", "to": "stockstrom, christoph s.", "value": 1, "width": 1}, {"color": "silver", "from": "j\u00f8rgensen, jacob h\u00f8j", "symbol": "cross", "title": "j\u00f8rgensen, jacob h\u00f8j,stockstrom, christoph s.,1", "to": "stockstrom, christoph s.", "value": 1, "width": 1}, {"color": "silver", "from": "haefliger, stefan", "symbol": "circle", "title": "haefliger, stefan,j\u00e4ger, peter,1", "to": "j\u00e4ger, peter", "value": 1, "width": 1}, {"color": "silver", "from": "haefliger, stefan", "symbol": "square", "title": "haefliger, stefan,von krogh, georg,1", "to": "von krogh, georg", "value": 1, "width": 1}, {"color": "silver", "from": "j\u00e4ger, peter", "symbol": "diamond", "title": "j\u00e4ger, peter,von krogh, georg,1", "to": "von krogh, georg", "value": 1, "width": 1}, {"color": "silver", "from": "hinsch, mareike e.", "symbol": "triangle-up", "title": "hinsch, mareike e.,stockstrom, christoph s.,1", "to": "stockstrom, christoph s.", "value": 1, "width": 1}, {"color": "silver", "from": "hopper, lydia m.", "symbol": "circle", "title": "hopper, lydia m.,torrance, andrew w.,1", "to": "torrance, andrew w.", "value": 1, "width": 1}, {"color": "silver", "from": "ihl, christoph", "symbol": "square", "title": "ihl, christoph,tarman, refik tarcan,1", "to": "tarman, refik tarcan", "value": 1, "width": 1}, {"color": "silver", "from": "ihl, christoph", "symbol": "triangle-up", "title": "ihl, christoph,vossen, alexander,1", "to": "vossen, alexander", "value": 1, "width": 1}, {"color": "silver", "from": "ihl, christoph", "symbol": "cross", "title": "ihl, christoph,steiner, frank,1", "to": "steiner, frank", "value": 1, "width": 1}, {"color": "silver", "from": "tarman, refik tarcan", "symbol": "diamond", "title": "tarman, refik tarcan,steiner, frank,1", "to": "steiner, frank", "value": 1, "width": 1}, {"color": "silver", "from": "jeppesen, lars bo", "symbol": "square", "title": "jeppesen, lars bo,frederiksen, lars,1", "to": "frederiksen, lars", "value": 1, "width": 1}, {"color": "silver", "from": "kohlbacher, florian", "symbol": "circle", "title": "kohlbacher, florian,ogawa, susumu,1", "to": "ogawa, susumu", "value": 1, "width": 1}, {"color": "silver", "from": "kohlbacher, florian", "symbol": "circle", "title": "kohlbacher, florian,yu, xin,1", "to": "yu, xin", "value": 1, "width": 1}, {"color": "silver", "from": "ogawa, susumu", "symbol": "circle", "title": "ogawa, susumu,nishikawa, hidehiko,1", "to": "nishikawa, hidehiko", "value": 1, "width": 1}, {"color": "silver", "from": "ogawa, susumu", "symbol": "square", "title": "ogawa, susumu,pongtanalert, kritinee,1", "to": "pongtanalert, kritinee", "value": 1, "width": 1}, {"color": "silver", "from": "ogawa, susumu", "symbol": "triangle-up", "title": "ogawa, susumu,yu, xin,1", "to": "yu, xin", "value": 1, "width": 1}, {"color": "silver", "from": "kuusisto, arja", "symbol": "diamond", "title": "kuusisto, arja,yli-viitala, pirjo,1", "to": "yli-viitala, pirjo", "value": 1, "width": 1}, {"color": "silver", "from": "lehnen, jens", "symbol": "diamond", "title": "lehnen, jens,schmidt, tobias sebastian,1", "to": "schmidt, tobias sebastian", "value": 1, "width": 1}, {"color": "silver", "from": "morrison, pamela d.", "symbol": "square", "title": "morrison, pamela d.,roberts, john h.,1", "to": "roberts, john h.", "value": 1, "width": 1}, {"color": "silver", "from": "morrison, pamela d.", "symbol": "diamond", "title": "morrison, pamela d.,tietz, robert,1", "to": "tietz, robert", "value": 1, "width": 1}, {"color": "silver", "from": "pieper, thorsten", "symbol": "triangle-up", "title": "pieper, thorsten,tietze, frank,1", "to": "tietze, frank", "value": 1, "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

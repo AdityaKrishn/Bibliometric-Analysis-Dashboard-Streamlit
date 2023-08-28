@@ -1,0 +1,349 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 1000px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "maroon", "id": "age", "label": "age", "shape": "dot", "size": 1, "title": "age : 1"}, {"color": "maroon", "id": "determinant", "label": "determinant", "shape": "dot", "size": 1, "title": "determinant : 1"}, {"color": "teal", "id": "lead user", "label": "lead user", "shape": "dot", "size": 4, "title": "lead user : 4"}, {"color": "maroon", "id": "product knowledge", "label": "product knowledge", "shape": "dot", "size": 1, "title": "product knowledge : 1"}, {"color": "maroon", "id": "silver market", "label": "silver market", "shape": "dot", "size": 1, "title": "silver market : 1"}, {"color": "maroon", "id": "technical expertise", "label": "technical expertise", "shape": "dot", "size": 1, "title": "technical expertise : 1"}, {"color": "maroon", "id": "use experience", "label": "use experience", "shape": "dot", "size": 2, "title": "use experience : 2"}, {"color": "maroon", "id": "user innovation", "label": "user innovation", "shape": "dot", "size": 4, "title": "user innovation : 4.0"}, {"color": "teal", "id": "agile project management", "label": "agile project management", "shape": "dot", "size": 1, "title": "agile project management : 1"}, {"color": "teal", "id": "agile/stage-gate hybrid", "label": "agile/stage-gate hybrid", "shape": "dot", "size": 1, "title": "agile/stage-gate hybrid : 1"}, {"color": "gold", "id": "innovation management", "label": "innovation management", "shape": "dot", "size": 2, "title": "innovation management : 2"}, {"color": "teal", "id": "new product development", "label": "new product development", "shape": "dot", "size": 1, "title": "new product development : 1"}, {"color": "teal", "id": "scrum", "label": "scrum", "shape": "dot", "size": 1, "title": "scrum : 1"}, {"color": "teal", "id": "stage-gate proce", "label": "stage-gate proce", "shape": "dot", "size": 1, "title": "stage-gate proce : 1"}, {"color": "gold", "id": "collaboration", "label": "collaboration", "shape": "dot", "size": 1, "title": "collaboration : 1"}, {"color": "gold", "id": "crowdsourcing", "label": "crowdsourcing", "shape": "dot", "size": 1, "title": "crowdsourcing : 1"}, {"color": "gold", "id": "dynamic", "label": "dynamic", "shape": "dot", "size": 1, "title": "dynamic : 1"}, {"color": "gold", "id": "entrepreneurship", "label": "entrepreneurship", "shape": "dot", "size": 1, "title": "entrepreneurship : 1"}, {"color": "gold", "id": "open source software", "label": "open source software", "shape": "dot", "size": 1, "title": "open source software : 1"}, {"color": "gold", "id": "organization", "label": "organization", "shape": "dot", "size": 1, "title": "organization : 1"}, {"color": "gold", "id": "organizational aspect", "label": "organizational aspect", "shape": "dot", "size": 1, "title": "organizational aspect : 1"}, {"color": "gold", "id": "research and development management", "label": "research and development management", "shape": "dot", "size": 1, "title": "research and development management : 1"}, {"color": "gold", "id": "technology management", "label": "technology management", "shape": "dot", "size": 1, "title": "technology management : 1"}, {"color": "gold", "id": "user-generated content", "label": "user-generated content", "shape": "dot", "size": 1, "title": "user-generated content : 1"}, {"color": "gold", "id": "virtual group", "label": "virtual group", "shape": "dot", "size": 1, "title": "virtual group : 1"}, {"color": "teal", "id": "innovation in consumer market", "label": "innovation in consumer market", "shape": "dot", "size": 1, "title": "innovation in consumer market : 1"}, {"color": "teal", "id": "innovation proce", "label": "innovation proce", "shape": "dot", "size": 1, "title": "innovation proce : 1"}, {"color": "teal", "id": "radical innovation", "label": "radical innovation", "shape": "dot", "size": 1, "title": "radical innovation : 1"}, {"color": "teal", "id": "service innovation", "label": "service innovation", "shape": "dot", "size": 1, "title": "service innovation : 1"}, {"color": "teal", "id": "service lead user", "label": "service lead user", "shape": "dot", "size": 1, "title": "service lead user : 1"}, {"color": "teal", "id": "user integration", "label": "user integration", "shape": "dot", "size": 1, "title": "user integration : 1"}, {"color": "maroon", "id": "locus of innovation", "label": "locus of innovation", "shape": "dot", "size": 1, "title": "locus of innovation : 1"}, {"color": "maroon", "id": "sources of innovation", "label": "sources of innovation", "shape": "dot", "size": 1, "title": "sources of innovation : 1"}, {"color": "maroon", "id": "property rights theory", "label": "property rights theory", "shape": "dot", "size": 1, "title": "property rights theory : 1"}, {"color": "maroon", "id": "separation of ownership and control", "label": "separation of ownership and control", "shape": "dot", "size": 1, "title": "separation of ownership and control : 1"}, {"color": "maroon", "id": "user innovation barrier", "label": "user innovation barrier", "shape": "dot", "size": 1, "title": "user innovation barrier : 1"}]);
+                  edges = new vis.DataSet([{"color": "silver", "from": "age", "symbol": "triangle-up", "title": "age,determinant,1", "to": "determinant", "value": 1, "width": 1}, {"color": "silver", "from": "age", "symbol": "diamond", "title": "age,lead user,1", "to": "lead user", "value": 1, "width": 1}, {"color": "silver", "from": "age", "symbol": "circle", "title": "age,product knowledge,1", "to": "product knowledge", "value": 1, "width": 1}, {"color": "silver", "from": "age", "symbol": "square", "title": "age,silver market,1", "to": "silver market", "value": 1, "width": 1}, {"color": "silver", "from": "age", "symbol": "square", "title": "age,technical expertise,1", "to": "technical expertise", "value": 1, "width": 1}, {"color": "silver", "from": "age", "symbol": "diamond", "title": "age,use experience,1", "to": "use experience", "value": 1, "width": 1}, {"color": "silver", "from": "age", "symbol": "cross", "title": "age,user innovation,1", "to": "user innovation", "value": 1, "width": 1}, {"color": "silver", "from": "determinant", "symbol": "square", "title": "determinant,lead user,1", "to": "lead user", "value": 1, "width": 1}, {"color": "silver", "from": "determinant", "symbol": "cross", "title": "determinant,product knowledge,1", "to": "product knowledge", "value": 1, "width": 1}, {"color": "silver", "from": "determinant", "symbol": "triangle-up", "title": "determinant,silver market,1", "to": "silver market", "value": 1, "width": 1}, {"color": "silver", "from": "determinant", "symbol": "triangle-up", "title": "determinant,technical expertise,1", "to": "technical expertise", "value": 1, "width": 1}, {"color": "silver", "from": "determinant", "symbol": "cross", "title": "determinant,use experience,1", "to": "use experience", "value": 1, "width": 1}, {"color": "silver", "from": "determinant", "symbol": "circle", "title": "determinant,user innovation,1", "to": "user innovation", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": "lead user,agile project management,1", "to": "agile project management", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "square", "title": "lead user,agile/stage-gate hybrid,1", "to": "agile/stage-gate hybrid", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "triangle-up", "title": "lead user,innovation in consumer market,1", "to": "innovation in consumer market", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "triangle-up", "title": "lead user,innovation management,1", "to": "innovation management", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "diamond", "title": "lead user,innovation proce,1", "to": "innovation proce", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "cross", "title": "lead user,new product development,1", "to": "new product development", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "square", "title": "lead user,product knowledge,1", "to": "product knowledge", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "diamond", "title": "lead user,radical innovation,1", "to": "radical innovation", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "triangle-up", "title": "lead user,scrum,1", "to": "scrum", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "triangle-up", "title": "lead user,service innovation,1", "to": "service innovation", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "cross", "title": "lead user,service lead user,1", "to": "service lead user", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "cross", "title": "lead user,silver market,1", "to": "silver market", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "cross", "title": "lead user,stage-gate proce,1", "to": "stage-gate proce", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": "lead user,technical expertise,1", "to": "technical expertise", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "square", "title": "lead user,use experience,1", "to": "use experience", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "cross", "title": "lead user,user innovation,3", "to": "user innovation", "value": 3, "width": 3}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": "lead user,user integration,1", "to": "user integration", "value": 1, "width": 1}, {"color": "silver", "from": "product knowledge", "symbol": "cross", "title": "product knowledge,silver market,1", "to": "silver market", "value": 1, "width": 1}, {"color": "silver", "from": "product knowledge", "symbol": "circle", "title": "product knowledge,technical expertise,1", "to": "technical expertise", "value": 1, "width": 1}, {"color": "silver", "from": "product knowledge", "symbol": "circle", "title": "product knowledge,use experience,1", "to": "use experience", "value": 1, "width": 1}, {"color": "silver", "from": "product knowledge", "symbol": "cross", "title": "product knowledge,user innovation,1", "to": "user innovation", "value": 1, "width": 1}, {"color": "silver", "from": "silver market", "symbol": "cross", "title": "silver market,technical expertise,1", "to": "technical expertise", "value": 1, "width": 1}, {"color": "silver", "from": "silver market", "symbol": "circle", "title": "silver market,use experience,1", "to": "use experience", "value": 1, "width": 1}, {"color": "silver", "from": "silver market", "symbol": "cross", "title": "silver market,user innovation,1", "to": "user innovation", "value": 1, "width": 1}, {"color": "silver", "from": "technical expertise", "symbol": "circle", "title": "technical expertise,use experience,1", "to": "use experience", "value": 1, "width": 1}, {"color": "silver", "from": "technical expertise", "symbol": "cross", "title": "technical expertise,user innovation,1", "to": "user innovation", "value": 1, "width": 1}, {"color": "silver", "from": "use experience", "symbol": "cross", "title": "use experience,property rights theory,1", "to": "property rights theory", "value": 1, "width": 1}, {"color": "silver", "from": "use experience", "symbol": "cross", "title": "use experience,separation of ownership and control,1", "to": "separation of ownership and control", "value": 1, "width": 1}, {"color": "silver", "from": "use experience", "symbol": "cross", "title": "use experience,user innovation,1", "to": "user innovation", "value": 1, "width": 1}, {"color": "silver", "from": "use experience", "symbol": "diamond", "title": "use experience,user innovation barrier,1", "to": "user innovation barrier", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": "user innovation,agile project management,1", "to": "agile project management", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": "user innovation,agile/stage-gate hybrid,1", "to": "agile/stage-gate hybrid", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": "user innovation,innovation in consumer market,1", "to": "innovation in consumer market", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": "user innovation,innovation management,1", "to": "innovation management", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": "user innovation,innovation proce,1", "to": "innovation proce", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": "user innovation,locus of innovation,1", "to": "locus of innovation", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": "user innovation,new product development,1", "to": "new product development", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,scrum,1", "to": "scrum", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": "user innovation,sources of innovation,1", "to": "sources of innovation", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": "user innovation,stage-gate proce,1", "to": "stage-gate proce", "value": 1, "width": 1}, {"color": "silver", "from": "agile project management", "symbol": "circle", "title": "agile project management,agile/stage-gate hybrid,1", "to": "agile/stage-gate hybrid", "value": 1, "width": 1}, {"color": "silver", "from": "agile project management", "symbol": "triangle-up", "title": "agile project management,innovation management,1", "to": "innovation management", "value": 1, "width": 1}, {"color": "silver", "from": "agile project management", "symbol": "triangle-up", "title": "agile project management,new product development,1", "to": "new product development", "value": 1, "width": 1}, {"color": "silver", "from": "agile project management", "symbol": "cross", "title": "agile project management,scrum,1", "to": "scrum", "value": 1, "width": 1}, {"color": "silver", "from": "agile project management", "symbol": "square", "title": "agile project management,stage-gate proce,1", "to": "stage-gate proce", "value": 1, "width": 1}, {"color": "silver", "from": "agile/stage-gate hybrid", "symbol": "circle", "title": "agile/stage-gate hybrid,innovation management,1", "to": "innovation management", "value": 1, "width": 1}, {"color": "silver", "from": "agile/stage-gate hybrid", "symbol": "circle", "title": "agile/stage-gate hybrid,new product development,1", "to": "new product development", "value": 1, "width": 1}, {"color": "silver", "from": "agile/stage-gate hybrid", "symbol": "diamond", "title": "agile/stage-gate hybrid,scrum,1", "to": "scrum", "value": 1, "width": 1}, {"color": "silver", "from": "agile/stage-gate hybrid", "symbol": "cross", "title": "agile/stage-gate hybrid,stage-gate proce,1", "to": "stage-gate proce", "value": 1, "width": 1}, {"color": "silver", "from": "innovation management", "symbol": "circle", "title": "innovation management,collaboration,1", "to": "collaboration", "value": 1, "width": 1}, {"color": "silver", "from": "innovation management", "symbol": "circle", "title": "innovation management,crowdsourcing,1", "to": "crowdsourcing", "value": 1, "width": 1}, {"color": "silver", "from": "innovation management", "symbol": "circle", "title": "innovation management,dynamic,1", "to": "dynamic", "value": 1, "width": 1}, {"color": "silver", "from": "innovation management", "symbol": "triangle-up", "title": "innovation management,entrepreneurship,1", "to": "entrepreneurship", "value": 1, "width": 1}, {"color": "silver", "from": "innovation management", "symbol": "circle", "title": "innovation management,new product development,1", "to": "new product development", "value": 1, "width": 1}, {"color": "silver", "from": "innovation management", "symbol": "diamond", "title": "innovation management,open source software,1", "to": "open source software", "value": 1, "width": 1}, {"color": "silver", "from": "innovation management", "symbol": "circle", "title": "innovation management,organization,1", "to": "organization", "value": 1, "width": 1}, {"color": "silver", "from": "innovation management", "symbol": "circle", "title": "innovation management,organizational aspect,1", "to": "organizational aspect", "value": 1, "width": 1}, {"color": "silver", "from": "innovation management", "symbol": "square", "title": "innovation management,research and development management,1", "to": "research and development management", "value": 1, "width": 1}, {"color": "silver", "from": "innovation management", "symbol": "diamond", "title": "innovation management,scrum,1", "to": "scrum", "value": 1, "width": 1}, {"color": "silver", "from": "innovation management", "symbol": "square", "title": "innovation management,stage-gate proce,1", "to": "stage-gate proce", "value": 1, "width": 1}, {"color": "silver", "from": "innovation management", "symbol": "triangle-up", "title": "innovation management,technology management,1", "to": "technology management", "value": 1, "width": 1}, {"color": "silver", "from": "innovation management", "symbol": "circle", "title": "innovation management,user-generated content,1", "to": "user-generated content", "value": 1, "width": 1}, {"color": "silver", "from": "innovation management", "symbol": "circle", "title": "innovation management,virtual group,1", "to": "virtual group", "value": 1, "width": 1}, {"color": "silver", "from": "new product development", "symbol": "diamond", "title": "new product development,scrum,1", "to": "scrum", "value": 1, "width": 1}, {"color": "silver", "from": "new product development", "symbol": "triangle-up", "title": "new product development,stage-gate proce,1", "to": "stage-gate proce", "value": 1, "width": 1}, {"color": "silver", "from": "scrum", "symbol": "triangle-up", "title": "scrum,stage-gate proce,1", "to": "stage-gate proce", "value": 1, "width": 1}, {"color": "silver", "from": "collaboration", "symbol": "diamond", "title": "collaboration,crowdsourcing,1", "to": "crowdsourcing", "value": 1, "width": 1}, {"color": "silver", "from": "collaboration", "symbol": "cross", "title": "collaboration,dynamic,1", "to": "dynamic", "value": 1, "width": 1}, {"color": "silver", "from": "collaboration", "symbol": "triangle-up", "title": "collaboration,entrepreneurship,1", "to": "entrepreneurship", "value": 1, "width": 1}, {"color": "silver", "from": "collaboration", "symbol": "diamond", "title": "collaboration,open source software,1", "to": "open source software", "value": 1, "width": 1}, {"color": "silver", "from": "collaboration", "symbol": "square", "title": "collaboration,organization,1", "to": "organization", "value": 1, "width": 1}, {"color": "silver", "from": "collaboration", "symbol": "triangle-up", "title": "collaboration,organizational aspect,1", "to": "organizational aspect", "value": 1, "width": 1}, {"color": "silver", "from": "collaboration", "symbol": "cross", "title": "collaboration,research and development management,1", "to": "research and development management", "value": 1, "width": 1}, {"color": "silver", "from": "collaboration", "symbol": "square", "title": "collaboration,technology management,1", "to": "technology management", "value": 1, "width": 1}, {"color": "silver", "from": "collaboration", "symbol": "circle", "title": "collaboration,user-generated content,1", "to": "user-generated content", "value": 1, "width": 1}, {"color": "silver", "from": "collaboration", "symbol": "cross", "title": "collaboration,virtual group,1", "to": "virtual group", "value": 1, "width": 1}, {"color": "silver", "from": "crowdsourcing", "symbol": "cross", "title": "crowdsourcing,dynamic,1", "to": "dynamic", "value": 1, "width": 1}, {"color": "silver", "from": "crowdsourcing", "symbol": "triangle-up", "title": "crowdsourcing,entrepreneurship,1", "to": "entrepreneurship", "value": 1, "width": 1}, {"color": "silver", "from": "crowdsourcing", "symbol": "circle", "title": "crowdsourcing,open source software,1", "to": "open source software", "value": 1, "width": 1}, {"color": "silver", "from": "crowdsourcing", "symbol": "cross", "title": "crowdsourcing,organization,1", "to": "organization", "value": 1, "width": 1}, {"color": "silver", "from": "crowdsourcing", "symbol": "diamond", "title": "crowdsourcing,organizational aspect,1", "to": "organizational aspect", "value": 1, "width": 1}, {"color": "silver", "from": "crowdsourcing", "symbol": "diamond", "title": "crowdsourcing,research and development management,1", "to": "research and development management", "value": 1, "width": 1}, {"color": "silver", "from": "crowdsourcing", "symbol": "circle", "title": "crowdsourcing,technology management,1", "to": "technology management", "value": 1, "width": 1}, {"color": "silver", "from": "crowdsourcing", "symbol": "diamond", "title": "crowdsourcing,user-generated content,1", "to": "user-generated content", "value": 1, "width": 1}, {"color": "silver", "from": "crowdsourcing", "symbol": "cross", "title": "crowdsourcing,virtual group,1", "to": "virtual group", "value": 1, "width": 1}, {"color": "silver", "from": "dynamic", "symbol": "cross", "title": "dynamic,entrepreneurship,1", "to": "entrepreneurship", "value": 1, "width": 1}, {"color": "silver", "from": "dynamic", "symbol": "square", "title": "dynamic,open source software,1", "to": "open source software", "value": 1, "width": 1}, {"color": "silver", "from": "dynamic", "symbol": "diamond", "title": "dynamic,organization,1", "to": "organization", "value": 1, "width": 1}, {"color": "silver", "from": "dynamic", "symbol": "circle", "title": "dynamic,organizational aspect,1", "to": "organizational aspect", "value": 1, "width": 1}, {"color": "silver", "from": "dynamic", "symbol": "circle", "title": "dynamic,research and development management,1", "to": "research and development management", "value": 1, "width": 1}, {"color": "silver", "from": "dynamic", "symbol": "diamond", "title": "dynamic,technology management,1", "to": "technology management", "value": 1, "width": 1}, {"color": "silver", "from": "dynamic", "symbol": "square", "title": "dynamic,user-generated content,1", "to": "user-generated content", "value": 1, "width": 1}, {"color": "silver", "from": "dynamic", "symbol": "triangle-up", "title": "dynamic,virtual group,1", "to": "virtual group", "value": 1, "width": 1}, {"color": "silver", "from": "entrepreneurship", "symbol": "cross", "title": "entrepreneurship,open source software,1", "to": "open source software", "value": 1, "width": 1}, {"color": "silver", "from": "entrepreneurship", "symbol": "cross", "title": "entrepreneurship,organization,1", "to": "organization", "value": 1, "width": 1}, {"color": "silver", "from": "entrepreneurship", "symbol": "diamond", "title": "entrepreneurship,organizational aspect,1", "to": "organizational aspect", "value": 1, "width": 1}, {"color": "silver", "from": "entrepreneurship", "symbol": "diamond", "title": "entrepreneurship,research and development management,1", "to": "research and development management", "value": 1, "width": 1}, {"color": "silver", "from": "entrepreneurship", "symbol": "square", "title": "entrepreneurship,technology management,1", "to": "technology management", "value": 1, "width": 1}, {"color": "silver", "from": "entrepreneurship", "symbol": "cross", "title": "entrepreneurship,user-generated content,1", "to": "user-generated content", "value": 1, "width": 1}, {"color": "silver", "from": "entrepreneurship", "symbol": "circle", "title": "entrepreneurship,virtual group,1", "to": "virtual group", "value": 1, "width": 1}, {"color": "silver", "from": "open source software", "symbol": "circle", "title": "open source software,organization,1", "to": "organization", "value": 1, "width": 1}, {"color": "silver", "from": "open source software", "symbol": "cross", "title": "open source software,organizational aspect,1", "to": "organizational aspect", "value": 1, "width": 1}, {"color": "silver", "from": "open source software", "symbol": "circle", "title": "open source software,research and development management,1", "to": "research and development management", "value": 1, "width": 1}, {"color": "silver", "from": "open source software", "symbol": "square", "title": "open source software,technology management,1", "to": "technology management", "value": 1, "width": 1}, {"color": "silver", "from": "open source software", "symbol": "circle", "title": "open source software,user-generated content,1", "to": "user-generated content", "value": 1, "width": 1}, {"color": "silver", "from": "open source software", "symbol": "cross", "title": "open source software,virtual group,1", "to": "virtual group", "value": 1, "width": 1}, {"color": "silver", "from": "organization", "symbol": "square", "title": "organization,research and development management,1", "to": "research and development management", "value": 1, "width": 1}, {"color": "silver", "from": "organization", "symbol": "diamond", "title": "organization,technology management,1", "to": "technology management", "value": 1, "width": 1}, {"color": "silver", "from": "organization", "symbol": "circle", "title": "organization,user-generated content,1", "to": "user-generated content", "value": 1, "width": 1}, {"color": "silver", "from": "organization", "symbol": "circle", "title": "organization,virtual group,1", "to": "virtual group", "value": 1, "width": 1}, {"color": "silver", "from": "organization", "symbol": "diamond", "title": "organization,organizational aspect,1", "to": "organizational aspect", "value": 1, "width": 1}, {"color": "silver", "from": "organizational aspect", "symbol": "triangle-up", "title": "organizational aspect,research and development management,1", "to": "research and development management", "value": 1, "width": 1}, {"color": "silver", "from": "organizational aspect", "symbol": "circle", "title": "organizational aspect,technology management,1", "to": "technology management", "value": 1, "width": 1}, {"color": "silver", "from": "organizational aspect", "symbol": "triangle-up", "title": "organizational aspect,user-generated content,1", "to": "user-generated content", "value": 1, "width": 1}, {"color": "silver", "from": "organizational aspect", "symbol": "circle", "title": "organizational aspect,virtual group,1", "to": "virtual group", "value": 1, "width": 1}, {"color": "silver", "from": "research and development management", "symbol": "diamond", "title": "research and development management,technology management,1", "to": "technology management", "value": 1, "width": 1}, {"color": "silver", "from": "research and development management", "symbol": "cross", "title": "research and development management,user-generated content,1", "to": "user-generated content", "value": 1, "width": 1}, {"color": "silver", "from": "research and development management", "symbol": "triangle-up", "title": "research and development management,virtual group,1", "to": "virtual group", "value": 1, "width": 1}, {"color": "silver", "from": "technology management", "symbol": "cross", "title": "technology management,user-generated content,1", "to": "user-generated content", "value": 1, "width": 1}, {"color": "silver", "from": "technology management", "symbol": "diamond", "title": "technology management,virtual group,1", "to": "virtual group", "value": 1, "width": 1}, {"color": "silver", "from": "user-generated content", "symbol": "square", "title": "user-generated content,virtual group,1", "to": "virtual group", "value": 1, "width": 1}, {"color": "silver", "from": "innovation in consumer market", "symbol": "triangle-up", "title": "innovation in consumer market,innovation proce,1", "to": "innovation proce", "value": 1, "width": 1}, {"color": "silver", "from": "radical innovation", "symbol": "circle", "title": "radical innovation,service innovation,1", "to": "service innovation", "value": 1, "width": 1}, {"color": "silver", "from": "radical innovation", "symbol": "square", "title": "radical innovation,service lead user,1", "to": "service lead user", "value": 1, "width": 1}, {"color": "silver", "from": "radical innovation", "symbol": "cross", "title": "radical innovation,user integration,1", "to": "user integration", "value": 1, "width": 1}, {"color": "silver", "from": "service innovation", "symbol": "square", "title": "service innovation,service lead user,1", "to": "service lead user", "value": 1, "width": 1}, {"color": "silver", "from": "service innovation", "symbol": "circle", "title": "service innovation,user integration,1", "to": "user integration", "value": 1, "width": 1}, {"color": "silver", "from": "service lead user", "symbol": "diamond", "title": "service lead user,user integration,1", "to": "user integration", "value": 1, "width": 1}, {"color": "silver", "from": "locus of innovation", "symbol": "cross", "title": "locus of innovation,sources of innovation,1", "to": "sources of innovation", "value": 1, "width": 1}, {"color": "silver", "from": "property rights theory", "symbol": "cross", "title": "property rights theory,separation of ownership and control,1", "to": "separation of ownership and control", "value": 1, "width": 1}, {"color": "silver", "from": "property rights theory", "symbol": "diamond", "title": "property rights theory,user innovation barrier,1", "to": "user innovation barrier", "value": 1, "width": 1}, {"color": "silver", "from": "separation of ownership and control", "symbol": "square", "title": "separation of ownership and control,user innovation barrier,1", "to": "user innovation barrier", "value": 1, "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
