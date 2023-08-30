@@ -103,7 +103,7 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
     with st.container():   
             st.subheader("Co-occurrence Keyword Network of combined OUI Elders and their Citers") 
             st.info("Scientific collaboration network(keyword type) is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")   
-            filters_option1 = [ 5, 2, 1]   
+            filters_option1 = [5,4,3,2,1]   
             filter_option1 = st.selectbox('Select the filter option', filters_option1, key='filter_option1')
             filter_option1 = str(filter_option1)
             st.info("The filter option is the minimum number of times a keyword should occur in the publications to be considered for the graph.")
@@ -127,7 +127,7 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
     with st.container():   
             st.subheader("Co-authorship Network of combined OUI Elders and their Citers")
             st.info("Scientific collaboration network(author type) is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)")  
-            filters_option2 = [5, 2, 1]   
+            filters_option2 = [5,4,3,2,1]   
             filter_option2 = st.selectbox('Select the filter option', filters_option2, key='filter_option2')
             filter_option2 = str(filter_option2)  
             st.info("The filter option is the minimum number of publications an author should have to be added in the graph.") 
@@ -153,7 +153,7 @@ elif option_3 == 'OUI Elders publications only':
             
             st.subheader("Co-occurrence Keyword Network of OUI Elder Papers")
             st.info("Scientific collaboration network(keyword type) is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")
-            filters_option3 = [5, 2, 1]   
+            filters_option3 = [5,4,3,2,1]   
             filter_option3 = st.selectbox('Select the filter option', filters_option3, key='filter_option3')
             filter_option3 = str(filter_option3)
             st.info("The filter option is the minimum number of times a keyword should occur in the publications to be considered for the graph.")
@@ -178,7 +178,7 @@ elif option_3 == 'OUI Elders publications only':
 
             st.subheader("Co-authorship Network of OUI Elders")
             st.info("Scientific collaboration network(author type) is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)")
-            filters_option4 = [5, 2, 1]   
+            filters_option4 = [5,4,3,2,1]   
             filter_option4 = st.selectbox('Select the filter option', filters_option4, key='filter_option4')
             filter_option4 = str(filter_option4)
             st.info("The filter option is the minimum number of publications an author should have to be added in the graph.") 
@@ -204,7 +204,7 @@ else:
     with st.container():   
             st.subheader("Co-occurrence Keyword Network of OUI Elders Citers Papers")
             st.info("Scientific collaboration network(keyword type) is a network where nodes are keywords and links are co-occurence of the respective keywords in the same paper")    
-            filters_option5 = [ 5, 2, 1]   
+            filters_option5 = [5,4,3,2,1]   
             filter_option5 = st.selectbox('Select the filter option', filters_option5, key='filter_option5')
             filter_option5 = str(filter_option5)
             st.info("The filter option is the minimum number of times a keyword should occur in the publications to be considered for the graph.")
@@ -228,7 +228,7 @@ else:
     with st.container():   
             st.subheader("Co-authorship Network of OUI Elders Citers")    
             st.info("Scientific collaboration network(author type) is a network where nodes are authors and links are co-authorships as the latter is one of the most well-documented forms of scientific collaboration (Glanzel, 2004)") 
-            filters_option6 = [5, 2, 1]   
+            filters_option6 = [5,4,3,2,1]   
             filter_option6 = st.selectbox('Select the filter option', filters_option6, key='filter_option6')
             filter_option6 = str(filter_option6)
             st.info("The filter option is the minimum number of publications an author should have to be added in the graph.") 
@@ -254,7 +254,7 @@ else:
 with st.container():   
     st.subheader("Bibliographic coupling Network of Publication Journals")   
     st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
-    filters_option7 = [5, 2, 1]   
+    filters_option7 = [5,4,3,2,1]   
     filter_option7 = st.selectbox('Select the filter option', filters_option7, key='filter_option7')
     filter_option7 = str(filter_option7)
     st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 

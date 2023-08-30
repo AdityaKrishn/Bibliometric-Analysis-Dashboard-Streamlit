@@ -283,7 +283,7 @@ function highlightFilter(filter) {
 
                   // parsing and collecting nodes and edges from the python
                   nodes = new vis.DataSet([{"color": "maroon", "id": "agostini, lara", "label": "agostini, lara", "shape": "dot", "size": 1, "title": "agostini, lara : 1"}, {"color": "maroon", "id": "filippini, roberto", "label": "filippini, roberto", "shape": "dot", "size": 1, "title": "filippini, roberto : 1"}, {"color": "maroon", "id": "nosella, anna", "label": "nosella, anna", "shape": "dot", "size": 1, "title": "nosella, anna : 1"}]);
-                  edges = new vis.DataSet([{"color": "silver", "from": "agostini, lara", "symbol": "cross", "title": "agostini, lara,filippini, roberto,1", "to": "filippini, roberto", "value": 1, "width": 1}, {"color": "silver", "from": "agostini, lara", "symbol": "square", "title": "agostini, lara,nosella, anna,1", "to": "nosella, anna", "value": 1, "width": 1}, {"color": "silver", "from": "filippini, roberto", "symbol": "square", "title": "filippini, roberto,nosella, anna,1", "to": "nosella, anna", "value": 1, "width": 1}]);
+                  edges = new vis.DataSet([{"color": "silver", "from": "agostini, lara", "symbol": "square", "title": "agostini, lara,filippini, roberto,1", "to": "filippini, roberto", "value": 1, "width": 1}, {"color": "silver", "from": "agostini, lara", "symbol": "circle", "title": "agostini, lara,nosella, anna,1", "to": "nosella, anna", "value": 1, "width": 1}, {"color": "silver", "from": "filippini, roberto", "symbol": "cross", "title": "filippini, roberto,nosella, anna,1", "to": "nosella, anna", "value": 1, "width": 1}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
