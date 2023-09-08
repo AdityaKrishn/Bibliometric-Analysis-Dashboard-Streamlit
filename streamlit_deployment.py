@@ -313,13 +313,13 @@ all_keywords = ['All'] + sorted(author_keywords)
 #     return df
 def filter_author_db(df, authors, years, journals, keywords):
     if authors != ['All']:
-        df = df[df['author_names'].apply(lambda x: any(item in x for item in authors))]
+        df = df[df['author_names'].apply(lambda x: authors in x)]
     if years != ['All']:
         df = df[df['cover_year'].isin(years)]
     if journals != ['All']:
         df = df[df['publicationName'].isin(journals)]
     if keywords != ['All']:
-        df = df[df['authkeywords'].apply(lambda x: any(item in x for item in keywords))]
+        df = df[df['authkeywords'].apply(lambda x: keywords in x)]
     return df
 
 
@@ -329,9 +329,9 @@ with st.container():
     with col1:
         author_filter1 = st.selectbox('Filter by Author', all_authors, key='author_filter1')
     with col2:
-        year_filter1 = st.multiselect('Filter by Year', all_years, key='year_filter1')
+        year_filter1 = st.multiselect('Filter by Year', all_years, key='year_filter1', default=['All'])
     with col3:
-        journal_filter1 = st.selectbox('Filter by Journal', all_journals, key='journal_filter1')
+        journal_filter1 = st.multiselect('Filter by Journal', all_journals, key='journal_filter1', default=['All'])
     with col4:
         keyword_filter1 = st.selectbox('Filter by Keyword', all_keywords, key='keyword_filter1')
 
