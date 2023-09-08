@@ -317,7 +317,7 @@ with st.container():
     st.subheader("Below are the details of publications authored/co-authored by the OUI Elders")
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        author_filter1 = st.selectbox('Filter by Author', all_authors, key='author_filter1')
+        author_filter1 = st.multiselect('Filter by Author', all_authors, key='author_filter1')
     with col2:
         year_filter1 = st.selectbox('Filter by Year', all_years, key='year_filter1')
     with col3:
