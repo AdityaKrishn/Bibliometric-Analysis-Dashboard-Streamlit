@@ -302,15 +302,15 @@ all_keywords = ['All'] + sorted(author_keywords)
 #create select boxes for Author name, year, journal, keywords to filter the above dataframes, also add All as an option to the select boxes and if all is selected, show all the data
 
 def filter_author_db(df, author, year, journal, keyword):
-    if ~author.isin(['All']):
+    if ['All'] not in author:
         df = df[df['author_names'].apply(lambda x: author in x)]
-    if ~year.isin(['All']):
+    if ['All'] not in year:
         #df = df[df['cover_year'] == year]
         df = df[df['cover_year'].isin(year)]
-    if ~journal.isin(['All']):
+    if ['All'] not in journal:
         #df = df[df['publicationName'] == journal]
         df = df[df['publicationName'].isin(journal)]
-    if ~keyword.isin(['All']):
+    if ['All'] not in keyword:
         df = df[df['authkeywords'].apply(lambda x: keyword in x)]
     return df
 
