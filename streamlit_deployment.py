@@ -302,14 +302,15 @@ all_keywords = ['All'] + sorted(author_keywords)
 #create select boxes for Author name, year, journal, keywords to filter the above dataframes, also add All as an option to the select boxes and if all is selected, show all the data
 
 def filter_author_db(df, author, year, journal, keyword):
-    if author != 'All':
+    if ~author.isin(['All']):
         df = df[df['author_names'].apply(lambda x: author in x)]
-    if year != ['All']:
+    if ~year.isin(['All']):
         #df = df[df['cover_year'] == year]
         df = df[df['cover_year'].isin(year)]
-    if journal != 'All':
-        df = df[df['publicationName'] == journal]
-    if keyword != 'All':
+    if ~journal.isin(['All']):
+        #df = df[df['publicationName'] == journal]
+        df = df[df['publicationName'].isin(journal)]
+    if ~keyword.isin(['All']):
         df = df[df['authkeywords'].apply(lambda x: keyword in x)]
     return df
 
@@ -322,9 +323,10 @@ with st.container():
         author_filter1 = st.selectbox('Filter by Author', all_authors, key='author_filter1')
     with col2:
         #year_filter1 = st.selectbox('Filter by Year', all_years, key='year_filter1')
-        year_filter1 = st.multiselect('Filter by Year', all_years, key='year_filter1')
+        year_filter1 = st.multiselect('Filter by Year', all_years, key='year_filter1', default='All')
     with col3:
-        journal_filter1 = st.selectbox('Filter by Journal', all_journals, key='journal_filter1')
+        #journal_filter1 = st.selectbox('Filter by Journal', all_journals, key='journal_filter1')
+        journal_filter1 = st.multiselect('Filter by Journal', all_journals, key='journal_filter1', default='All')
     with col4:
         keyword_filter1 = st.selectbox('Filter by Keyword', all_keywords, key='keyword_filter1')
 
@@ -354,9 +356,9 @@ with st.container():
     with col1:
         author_filter2 = st.selectbox('Filter by Author', all_authors, key='author_filter2')
     with col2:
-        year_filter2 = st.selectbox('Filter by Year', all_years, key='year_filter2')
+        year_filter2 = st.multiselect('Filter by Year', all_years, key='year_filter2', default='All')
     with col3:
-        journal_filter2 = st.selectbox('Filter by Journal', all_journals, key='journal_filter2')
+        journal_filter2 = st.multiselect('Filter by Journal', all_journals, key='journal_filter2', default='All')
     with col4:
         keyword_filter2 = st.selectbox('Filter by Keyword', all_keywords, key='keyword_filter2')
 
