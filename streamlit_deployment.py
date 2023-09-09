@@ -303,7 +303,8 @@ all_keywords = ['All'] + sorted(author_keywords)
 
 def filter_author_db(df, author, year, journal, keyword):
     if 'All' not in author:
-        df = df[df['author_names'].apply(lambda x: author in x)]
+        #df = df[df['author_names'].apply(lambda x: author in x)]
+        df = df[df['author_names'].apply(lambda x: set(author).issubset(x))]
     if 'All' not in year:
         #df = df[df['cover_year'] == year]
         df = df[df['cover_year'].isin(year)]
@@ -311,7 +312,8 @@ def filter_author_db(df, author, year, journal, keyword):
         #df = df[df['publicationName'] == journal]
         df = df[df['publicationName'].isin(journal)]
     if 'All' not in keyword:
-        df = df[df['authkeywords'].apply(lambda x: keyword in x)]
+        #df = df[df['authkeywords'].apply(lambda x: keyword in x)]
+        df = df[df['authkeywords'].apply(lambda x: set(keyword).issubset(x))]
     return df
 
 
