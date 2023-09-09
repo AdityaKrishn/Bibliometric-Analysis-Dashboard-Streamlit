@@ -304,7 +304,7 @@ all_keywords = ['All'] + sorted(author_keywords)
 def filter_author_db(df, author, year, journal, keyword):
     if author != 'All':
         df = df[df['author_names'].apply(lambda x: author in x)]
-    if year != 'All':
+    if year != ['All']:
         #df = df[df['cover_year'] == year]
         df = df[df['cover_year'].isin(year)]
     if journal != 'All':
