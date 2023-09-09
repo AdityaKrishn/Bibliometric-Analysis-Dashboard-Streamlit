@@ -305,7 +305,8 @@ def filter_author_db(df, author, year, journal, keyword):
     if author != 'All':
         df = df[df['author_names'].apply(lambda x: author in x)]
     if year != 'All':
-        df = df[df['cover_year'] == year]
+        #df = df[df['cover_year'] == year]
+        df = df[df['cover_year'].isin(year)]
     if journal != 'All':
         df = df[df['publicationName'] == journal]
     if keyword != 'All':
@@ -320,7 +321,8 @@ with st.container():
     with col1:
         author_filter1 = st.selectbox('Filter by Author', all_authors, key='author_filter1')
     with col2:
-        year_filter1 = st.selectbox('Filter by Year', all_years, key='year_filter1')
+        #year_filter1 = st.selectbox('Filter by Year', all_years, key='year_filter1')
+        year_filter1 = st.multiselect('Filter by Year', all_years, key='year_filter1')
     with col3:
         journal_filter1 = st.selectbox('Filter by Journal', all_journals, key='journal_filter1')
     with col4:
