@@ -338,7 +338,9 @@ with st.container():
         filtered_author_db = filter_author_db(top5_papers_author_db,author_filter1, year_filter1, journal_filter1, keyword_filter1)
     filtered_author_db = filtered_author_db.rename(columns={'cover_year': 'Year', 'citedby_count': 'Citations', 'authkeywords': 'Keywords', 'publicationName': 'Journal', 'author_names': 'Authors', 'affilname': 'Affiliations', 'title': 'Title', 'doi': 'DOI', 'description': 'Abstract'})
     filtered_author_db = filtered_author_db[['DOI', 'Title', 'Authors', 'Year', 'Journal', 'Keywords', 'Citations', 'Abstract']]
+    st.info("Note: To see the full text of a particular cell, double click on that particular cell.")
     st.dataframe(filtered_author_db, hide_index=True)
+    st.write("Number of papers authored/co-authored by the OUI Elders: ", filtered_author_db.shape[0])
 
 
 authors = list(set([item for sublist in top5_papers_citation_db.author_names.tolist() for item in sublist]))
@@ -370,9 +372,10 @@ with st.container():
         filtered_citation_db = filter_author_db(top5_papers_citation_db,author_filter2, year_filter2, journal_filter2, keyword_filter2)
     filtered_citation_db = filtered_citation_db.rename(columns={'cover_year': 'Year', 'citedby_count': 'Citations', 'authkeywords': 'Keywords', 'publicationName': 'Journal', 'author_names': 'Authors', 'affilname': 'Affiliations', 'title': 'Title', 'doi': 'DOI', 'description': 'Abstract'})
     filtered_citation_db = filtered_citation_db[['DOI', 'Title', 'Authors', 'Year', 'Journal', 'Keywords', 'Citations', 'Abstract']]
+    st.info("Note: To see the full text of a particular cell, double click on that particular cell.")
     st.dataframe(filtered_citation_db, hide_index=True)
 
-
+    st.write("Number of papers authored/co-authored by the OUI Elders' citers: ", filtered_citation_db.shape[0])
 # @st.cache(allow_output_mutation=True)
 # def biblio_graph():
 #     path = '/Scopus Iteration'
