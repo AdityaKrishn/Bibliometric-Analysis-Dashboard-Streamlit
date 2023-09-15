@@ -304,7 +304,8 @@ all_keywords = ['All'] + sorted(author_keywords)
 def filter_author_db(df, author, year, journal, keyword):
     if 'All' not in author:
         #df = df[df['author_names'].apply(lambda x: author in x)]
-        df = df[df['author_names'].apply(lambda x: set(author).issubset(x))]
+        #df = df[df['author_names'].apply(lambda x: set(author).issubset(x))]
+        df = df[df['author_names'].apply(lambda x: set(author).union(x) == x)]
     if 'All' not in year:
         #df = df[df['cover_year'] == year]
         df = df[df['cover_year'].isin(year)]
@@ -313,7 +314,8 @@ def filter_author_db(df, author, year, journal, keyword):
         df = df[df['publicationName'].isin(journal)]
     if 'All' not in keyword:
         #df = df[df['authkeywords'].apply(lambda x: keyword in x)]
-        df = df[df['authkeywords'].apply(lambda x: set(keyword).issubset(x))]
+        #df = df[df['authkeywords'].apply(lambda x: set(keyword).issubset(x))]
+        df = df[df['authkeywords'].apply(lambda x: set(author).union(x) == x)]
     return df
 
 
@@ -325,7 +327,8 @@ with st.container():
         author_filter1 = st.multiselect('Filter by Author', all_authors, key='author_filter1', default='All')
     with col2:
         #year_filter1 = st.selectbox('Filter by Year', all_years, key='year_filter1')
-        year_filter1 = st.multiselect('Filter by Year', all_years, key='year_filter1', default='All')
+        # year_filter1 = st.multiselect('Filter by Year', all_years, key='year_filter1', default='All')
+        year_filter1 = st.select_slider('Filter by Year', all_years, value = (min(all_years),max(all_years)), key='year_filter1')
     with col3:
         #journal_filter1 = st.selectbox('Filter by Journal', all_journals, key='journal_filter1')
         journal_filter1 = st.multiselect('Filter by Journal', all_journals, key='journal_filter1', default='All')
@@ -346,7 +349,8 @@ with st.container():
 authors = list(set([item for sublist in top5_papers_citation_db.author_names.tolist() for item in sublist]))
 authors = [x for x in authors if x != '']
 all_authors = ['All'] + sorted(authors)
-all_years = ['All'] + sorted(top5_papers_citation_db['cover_year'].unique().tolist())
+# all_years = ['All'] + sorted(top5_papers_citation_db['cover_year'].unique().tolist())
+all_years = sorted(top5_papers_citation_db['cover_year'].unique().tolist())
 all_journals = ['All'] + sorted(top5_papers_citation_db['publicationName'].unique().tolist())
 citation_keywords = list(set([item for sublist in top5_papers_citation_db.authkeywords.tolist() for item in sublist]))
 citation_keywords = [x for x in citation_keywords if x != '']
@@ -360,7 +364,8 @@ with st.container():
     with col1:
         author_filter2 = st.multiselect('Filter by Author', all_authors, key='author_filter2', default='All')
     with col2:
-        year_filter2 = st.multiselect('Filter by Year', all_years, key='year_filter2', default='All')
+        # year_filter2 = st.select_slider('Filter by Year', all_years, key='year_filter2', default='All')
+        year_filter2 = st.select_slider('Filter by Year', all_years, value = (min(all_years),max(all_years)), key='year_filter2')
     with col3:
         journal_filter2 = st.multiselect('Filter by Journal', all_journals, key='journal_filter2', default='All')
     with col4:
