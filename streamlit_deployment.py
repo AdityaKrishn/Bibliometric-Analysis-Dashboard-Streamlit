@@ -292,7 +292,8 @@ top5_papers_citation_db['cover_year'] = top5_papers_citation_db['cover_year'].as
 authors = list(set([item for sublist in top5_papers_author_db.author_names.tolist() for item in sublist]))
 authors = [x for x in authors if x != '']
 all_authors = ['All'] + sorted(authors)
-all_years = ['All'] + sorted(top5_papers_author_db['cover_year'].unique().tolist())
+# all_years = ['All'] + sorted(top5_papers_author_db['cover_year'].unique().tolist())
+all_years = sorted(top5_papers_author_db['cover_year'].unique().tolist())
 all_journals = ['All'] + sorted(top5_papers_author_db['publicationName'].unique().tolist())
 author_keywords = list(set([item for sublist in top5_papers_author_db.authkeywords.tolist() for item in sublist]))
 author_keywords = [x for x in author_keywords if x != '']
@@ -305,17 +306,17 @@ def filter_author_db(df, author, year, journal, keyword):
     if 'All' not in author:
         #df = df[df['author_names'].apply(lambda x: author in x)]
         #df = df[df['author_names'].apply(lambda x: set(author).issubset(x))]
-        df = df[df['author_names'].apply(lambda x: set(author).union(x) == x)]
+        df = df[df['author_names'].apply(lambda x: any(item in x for item in author))]
     if 'All' not in year:
         #df = df[df['cover_year'] == year]
-        df = df[df['cover_year'].isin(year)]
+        df = df[(df['cover_year'] >= year[0]) & (df['cover_year'] <= year[1])]
     if 'All' not in journal:
         #df = df[df['publicationName'] == journal]
         df = df[df['publicationName'].isin(journal)]
     if 'All' not in keyword:
         #df = df[df['authkeywords'].apply(lambda x: keyword in x)]
         #df = df[df['authkeywords'].apply(lambda x: set(keyword).issubset(x))]
-        df = df[df['authkeywords'].apply(lambda x: set(author).union(x) == x)]
+        df = df[df['authkeywords'].apply(lambda x: any(item in x for item in keyword))]
     return df
 
 
