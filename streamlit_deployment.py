@@ -327,14 +327,14 @@ with st.container():
     with col1:
         author_filter1 = st.multiselect('Filter by Author', all_authors, key='author_filter1', default='All')
     with col2:
-        #year_filter1 = st.selectbox('Filter by Year', all_years, key='year_filter1')
-        # year_filter1 = st.multiselect('Filter by Year', all_years, key='year_filter1', default='All')
-        year_filter1 = st.select_slider('Filter by Year', all_years, value = (min(all_years),max(all_years)), key='year_filter1')
+        keyword_filter1 = st.multiselect('Filter by Keyword', all_keywords, key='keyword_filter1', default='All')
     with col3:
         #journal_filter1 = st.selectbox('Filter by Journal', all_journals, key='journal_filter1')
         journal_filter1 = st.multiselect('Filter by Journal', all_journals, key='journal_filter1', default='All')
     with col4:
-        keyword_filter1 = st.multiselect('Filter by Keyword', all_keywords, key='keyword_filter1', default='All')
+        #year_filter1 = st.selectbox('Filter by Year', all_years, key='year_filter1')
+        # year_filter1 = st.multiselect('Filter by Year', all_years, key='year_filter1', default='All')
+        year_filter1 = st.select_slider('Filter by Year', all_years, value = (min(all_years),max(all_years)), key='year_filter1')
 
     if author_filter1 == 'All' and year_filter1 == 'All' and journal_filter1 == 'All' and keyword_filter1 == 'All':
         filtered_author_db = top5_papers_author_db
@@ -365,12 +365,12 @@ with st.container():
     with col1:
         author_filter2 = st.multiselect('Filter by Author', all_authors, key='author_filter2', default='All')
     with col2:
-        # year_filter2 = st.select_slider('Filter by Year', all_years, key='year_filter2', default='All')
-        year_filter2 = st.select_slider('Filter by Year', all_years, value = (min(all_years),max(all_years)), key='year_filter2')
+        keyword_filter2 = st.multiselect('Filter by Keyword', all_keywords, key='keyword_filter2', default='All')
     with col3:
         journal_filter2 = st.multiselect('Filter by Journal', all_journals, key='journal_filter2', default='All')
     with col4:
-        keyword_filter2 = st.multiselect('Filter by Keyword', all_keywords, key='keyword_filter2', default='All')
+        # year_filter2 = st.select_slider('Filter by Year', all_years, key='year_filter2', default='All')
+        year_filter2 = st.select_slider('Filter by Year', all_years, value = (min(all_years),max(all_years)), key='year_filter2')
 
     if author_filter2 == 'All' and year_filter2 == 'All' and journal_filter2 == 'All' and keyword_filter2== 'All':
         filtered_citation_db = top5_papers_citation_db
