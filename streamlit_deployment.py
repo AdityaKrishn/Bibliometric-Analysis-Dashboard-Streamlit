@@ -288,6 +288,7 @@ with st.container():
 
 
 top5_papers_author_db = dict['top5_papers_author_db']
+print(top5_papers_author_db.columns)
 top5_papers_citation_db = dict['top5_papers_citation_db']
 
 #change datatype of cover_year to string in both dataframes
