@@ -1,6 +1,4 @@
-maroon,teal
-consumer innovation,crowdsourcing
-free innovation,innovation
-user innovation,new product development
-user community,open innovation
-,lead user
+teal,maroon,gold
+consumer innovation,crowdsourcing,innovation
+free innovation,open innovation,lead user
+user innovation,,user community

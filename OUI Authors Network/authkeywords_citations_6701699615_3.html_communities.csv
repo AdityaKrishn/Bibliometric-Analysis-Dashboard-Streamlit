@@ -1,11 +1,8 @@
-maroon,teal,gold,orange
+maroon,teal,orange,gold
 3d printing,user innovation,crowdsourcing,innovation
-co-creation,lead user theory,lead user,collaboration
-motivation,user entrepreneurship,social medium,community
-online community,open source,diffusion,consumer innovation
-user innovation community,,,new product development
-,,,open innovation
-,,,toolkit
-,,,user
-,,,living lab
-,,,user involvement
+co-creation,diffusion,new product development,collaboration
+motivation,living lab,open innovation,community
+online community,lead user theory,toolkit,consumer innovation
+user innovation community,user entrepreneurship,lead user,user
+,open source,social medium,
+,,user involvement,

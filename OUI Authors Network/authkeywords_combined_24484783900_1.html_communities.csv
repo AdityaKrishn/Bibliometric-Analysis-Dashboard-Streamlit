@@ -1,14 +1,15 @@
-maroon,yellow,gold,orange,blue,purple,green,red,teal
-behavioral innovation,user innovation,business model innovation,collaboration,consumer innovation,open innovation,cooperation,crowdfunding platform,employee user
-feminist economic,diffusion,dynamic capability,commercial diffusion,community innovation,end-user,front end,human capital,ethnography
-household sector innovation,innovation ecosystem,supply chain business model,innovation policy,daily practice,policy,lead user,self-determination theory,hiding practice
-innovation diffusion,service ecosystem,tea supply chain,makerspace,innovation behavior,policymaker,user-manufacturer interaction,social capital,military
-technique innovation,sustainability,user-driven innovation,general value,russium,sustainable innovation,creativity,user entrepreneurship,polouse
-finland,firm-user collaboration,customer integration,market failure,diffusion of innovation,improvisation,embedded lead user,digital technology,
-firm-level,innovation management,management tool,peer-to-peer diffusion,online innovation community,knowledge acquisition,idea quality,odds-ratio,
-innovation transfer,innovation strategy,new service development,diffusion failure,renewable energy,knowledge utilization,internal lead user,social venture,
-survey,review,,nurse innovation,,user generated content,,end user entrepreneur,
-,innovative work behavior,,do-it-yourself,,,,entrepreneurial consumer,
-,job autonomy,,enabling technology,,,,entrepreneurship proce,
-,self-efficacy,,product innovation,,,,,
-,work process-related lead userne,,social innovation,,,,,
+maroon,gold,orange,green,red,teal,yellow,blue,purple
+behavioral innovation,user innovation,business model innovation,collaboration,consumer innovation,open innovation,cooperation,crowdfunding platform,firm-user collaboration
+feminist economic,diffusion,dynamic capability,commercial diffusion,community innovation,end-user,front end,human capital,innovation management
+household sector innovation,innovation ecosystem,supply chain business model,innovation policy,daily practice,policy,lead user,self-determination theory,innovation strategy
+innovation diffusion,service ecosystem,tea supply chain,makerspace,innovation behavior,policymaker,user-manufacturer interaction,social capital,review
+technique innovation,sustainability,user-driven innovation,general value,russium,sustainable innovation,creativity,user entrepreneurship,
+finland,employee user,customer integration,market failure,diffusion of innovation,improvisation,embedded lead user,digital technology,
+firm-level,ethnography,management tool,peer-to-peer diffusion,online innovation community,knowledge acquisition,idea quality,odds-ratio,
+innovation transfer,hiding practice,new service development,diffusion failure,renewable energy,knowledge utilization,internal lead user,social venture,
+survey,military,,nurse innovation,,user generated content,,end user entrepreneur,
+,polouse,,do-it-yourself,,,,entrepreneurial consumer,
+,innovative work behavior,,enabling technology,,,,entrepreneurship proce,
+,job autonomy,,product innovation,,,,,
+,self-efficacy,,social innovation,,,,,
+,work process-related lead userne,,,,,,,

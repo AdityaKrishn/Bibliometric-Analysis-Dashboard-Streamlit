@@ -1,19 +1,17 @@
-maroon,gold,orange,yellow,green,teal
-3d printing,platform,adoption,case study,crowdsourcing,innovation
-co-creation,user innovation,compatibility,innovation policy,collaboration,open innovation
-motivation,product development,diffusion,user involvement,community,living lab
-online community,cocreation,open source software,commercial diffusion,new product development,sustainability
-lead user,creative consumer,user design,consumer innovation,software development,post-adoptive behavior
-netnography,distributed innovation,complementarity,diffusion of innovation,toolkit,service
-social medium,knowledge sharing,open source,household sector innovation,user,service innovation
-web 2.0,entrepreneurship,innovation ecosystem,problem-solving,,literature review
-user innovation community,evolutionary approach,product architecture,renewable energy,,
-user idea,innovation diffusion,modularity,,,
-,innovation measurement,user community,,,
-,patent,,,,
-,sticky information,,,,
-,lead user theory,,,,
-,mass customization,,,,
+teal,yellow,gold,maroon,orange,green
+3d printing,platform,adoption,diffusion,case study,community
+co-creation,user innovation,compatibility,innovation,innovation policy,user
+motivation,product development,open source software,open innovation,user involvement,entrepreneurship
+online community,cocreation,user design,innovation ecosystem,commercial diffusion,evolutionary approach
+lead user,creative consumer,complementarity,living lab,consumer innovation,
+crowdsourcing,distributed innovation,open source,sustainability,diffusion of innovation,
+collaboration,knowledge sharing,product architecture,post-adoptive behavior,household sector innovation,
+new product development,innovation diffusion,modularity,service,problem-solving,
+software development,innovation measurement,user community,service innovation,renewable energy,
+toolkit,patent,,literature review,,
+netnography,sticky information,,user innovation community,,
+social medium,lead user theory,,user idea,,
+web 2.0,mass customization,,,,
 ,user entrepreneurship,,,,
 ,local information,,,,
 ,second life,,,,
