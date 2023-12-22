@@ -257,32 +257,119 @@ else:
                 print(sys.exc_info()[0])
 
 
-with st.container():   
-    st.subheader("Bibliographic coupling Network of Publication Journals")   
-    st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
-    filters_option7 = [5,4,3,2,1]   
-    filter_option7 = st.selectbox('Select the filter option', filters_option7, key='filter_option7')
-    filter_option7 = str(filter_option7)
-    st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
-    try:
-        path = '/Scopus Iteration'
-        # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
-        HtmlFile7 = open(os.getcwd()+r"/publicationJournalBibliographiccoupling_" + filter_option7 + r".html", 'r')  
-        components.html(HtmlFile7.read(), height=700) 
-        
-    except:
-        st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
-        
-    try:
-        df_html7 = pd.read_csv(os.getcwd()+r'/publicationJournalBibliographiccoupling_' + filter_option7 + r'.html_communities.csv')
-        # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
-        df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
-        df_html7 = df_html7.dropna(how='all')
-        df_html7 = df_html7.fillna('')
-        st.dataframe(df_html7, hide_index=True)
-    except:
+if option_3 == 'Combination of OUI Elders and their Citers publications combined':
 
-        print(sys.exc_info()[0])
+    with st.container():   
+        st.subheader("Bibliographic coupling Network of Publication Journals")   
+        st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
+        filters_option8 = [10,5,3]   
+        filter_option8 = st.selectbox('Select the filter option', filters_option8, key='filter_option8')
+        filter_option8 = str(filter_option8)
+        st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
+        try:
+            path = '/Scopus Iteration'
+            # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
+            HtmlFile7 = open(os.getcwd()+r"/publicationJournal_BiblioCoupling_combined_" + filter_option8 + r".html", 'r')  
+            components.html(HtmlFile7.read(), height=700) 
+            
+        except:
+            st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
+            
+        try:
+            df_html7 = pd.read_csv(os.getcwd()+r'/publicationJournal_BiblioCoupling_combined_' + filter_option8 + r'.html_communities.csv')
+            # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+            df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+            df_html7 = df_html7.dropna(how='all')
+            df_html7 = df_html7.fillna('')
+            st.dataframe(df_html7, hide_index=True)
+        except:
+
+            print(sys.exc_info()[0])
+
+elif option_3 == 'OUI Elders publications only':  
+
+    with st.container():   
+        st.subheader("Bibliographic coupling Network of Publication Journals")   
+        st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
+        filters_option8 = [10,5,3]   
+        filter_option8 = st.selectbox('Select the filter option', filters_option8, key='filter_option8')
+        filter_option8 = str(filter_option8)
+        st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
+        try:
+            path = '/Scopus Iteration'
+            # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
+            HtmlFile7 = open(os.getcwd()+r"/publicationJournal_BiblioCoupling_OUI_" + filter_option8 + r".html", 'r')  
+            components.html(HtmlFile7.read(), height=700) 
+            
+        except:
+            st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
+            
+        try:
+            df_html7 = pd.read_csv(os.getcwd()+r'/publicationJournal_BiblioCoupling_OUI_' + filter_option8 + r'.html_communities.csv')
+            # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+            df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+            df_html7 = df_html7.dropna(how='all')
+            df_html7 = df_html7.fillna('')
+            st.dataframe(df_html7, hide_index=True)
+        except:
+
+            print(sys.exc_info()[0])
+
+else:   
+
+    with st.container():   
+        st.subheader("Bibliographic coupling Network of Publication Journals")   
+        st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
+        filters_option8 = [10,5,3]   
+        filter_option8 = st.selectbox('Select the filter option', filters_option8, key='filter_option8')
+        filter_option8 = str(filter_option8)
+        st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
+        try:
+            path = '/Scopus Iteration'
+            # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
+            HtmlFile7 = open(os.getcwd()+r"/publicationJournal_BiblioCoupling_citation_" + filter_option8 + r".html", 'r')  
+            components.html(HtmlFile7.read(), height=700) 
+            
+        except:
+            st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
+            
+        try:
+            df_html7 = pd.read_csv(os.getcwd()+r'/publicationJournal_BiblioCoupling_citation_' + filter_option8 + r'.html_communities.csv')
+            # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+            df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+            df_html7 = df_html7.dropna(how='all')
+            df_html7 = df_html7.fillna('')
+            st.dataframe(df_html7, hide_index=True)
+        except:
+
+            print(sys.exc_info()[0])
+
+# with st.container():   
+#     st.subheader("Bibliographic coupling Network of Publication Journals")   
+#     st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
+#     filters_option7 = [5,4,3,2,1]   
+#     filter_option7 = st.selectbox('Select the filter option', filters_option7, key='filter_option7')
+#     filter_option7 = str(filter_option7)
+#     st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
+#     try:
+#         path = '/Scopus Iteration'
+#         # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
+#         HtmlFile7 = open(os.getcwd()+r"/publicationJournalBibliographiccoupling_" + filter_option7 + r".html", 'r')  
+#         components.html(HtmlFile7.read(), height=700) 
+        
+#     except:
+#         st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
+        
+#     try:
+#         df_html7 = pd.read_csv(os.getcwd()+r'/publicationJournalBibliographiccoupling_' + filter_option7 + r'.html_communities.csv')
+#         # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+#         df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+#         df_html7 = df_html7.dropna(how='all')
+#         df_html7 = df_html7.fillna('')
+#         st.dataframe(df_html7, hide_index=True)
+#     except:
+
+#         print(sys.exc_info()[0])
 
 
 
