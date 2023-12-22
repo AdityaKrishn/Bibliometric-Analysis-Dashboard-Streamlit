@@ -1,17 +1,18 @@
-maroon,teal,gold,orange,yellow,green
-benefit,user innovation,boundary spanner,collective invention,complementarity,embedded lead user
-community-based innovation,case study,identification,commons-based peer production,division of innovative labor,market information processing
-consistency,driver,innovation,comparative analysi,externality,organizational behavior
-contingency factor,dynamic analysi,job satisfaction,crowdsourcing,social welfare,organizational boundary
-cost,impediment,,distributed innovation,user innovation paradigm,sticky knowledge
-innovation effect,user community,,free revealing of information,user-producer interaction,
-innovation management,commercial diffusion,,innovation model,,
-manufacturer strategy,general value,,open source,,
-marketing effect,market failure,,user innovation network,,
-open innovation,peer-to-peer diffusion,,,,
-,diffusion failure,,,,
-,makerspace,,,,
-,nurse innovation,,,,
+maroon,teal,gold,orange,green,yellow
+benefit,user innovation,boundary spanner,collective invention,commercial diffusion,complementarity
+community-based innovation,case study,identification,commons-based peer production,general value,division of innovative labor
+consistency,driver,innovation,comparative analysi,market failure,externality
+contingency factor,dynamic analysi,job satisfaction,crowdsourcing,peer-to-peer diffusion,social welfare
+cost,impediment,,distributed innovation,,user innovation paradigm
+innovation effect,user community,,free revealing of information,,user-producer interaction
+innovation management,diffusion failure,,innovation model,,
+manufacturer strategy,makerspace,,open source,,
+marketing effect,nurse innovation,,user innovation network,,
+open innovation,embedded lead user,,,,
+,market information processing,,,,
+,organizational behavior,,,,
+,organizational boundary,,,,
+,sticky knowledge,,,,
 ,innovative work behavior,,,,
 ,job autonomy,,,,
 ,self-efficacy,,,,

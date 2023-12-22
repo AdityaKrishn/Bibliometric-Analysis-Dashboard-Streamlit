@@ -1,12 +1,17 @@
-maroon,teal,gold,orange,green,red,yellow
-3d printing,co-creation,collaboration,diffusion,user innovation,lead user,product development
-motivation,crowdsourcing,open source software,adoption,user community,open innovation,toolkit
-online community,customer integration,case study,consumer innovation,community-based innovation,online user innovation community,lead user theory
-user entrepreneurship,new product development,innovation management,free innovation,consumer innovator,social medium,mass customization
-sources of innovation,user design,innovation policy,household sector innovation,complementarity,embedded lead user,
-user innovation community,idea competition,user involvement,innovation diffusion,open source,service innovation,
-,innovation contest,innovation,,distributed innovation,sticky information,
-,,community,,living lab,,
-,,entrepreneurship,,,,
-,,makerspace,,,,
-,,user,,,,
+gold,teal,orange,maroon
+3d printing,co-creation,collaboration,diffusion
+motivation,online community,case study,adoption
+user entrepreneurship,open source software,innovation management,consumer innovation
+user innovation,crowdsourcing,innovation policy,free innovation
+product development,customer integration,user community,lead user
+complementarity,new product development,user involvement,household sector innovation
+open source,open innovation,innovation,innovation diffusion
+distributed innovation,sources of innovation,community,
+sticky information,user design,entrepreneurship,
+lead user theory,idea competition,makerspace,
+mass customization,toolkit,user,
+,innovation contest,community-based innovation,
+,online user innovation community,consumer innovator,
+,social medium,living lab,
+,embedded lead user,service innovation,
+,user innovation community,,

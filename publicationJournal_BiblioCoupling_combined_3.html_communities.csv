@@ -1,28 +1,31 @@
-maroon,orange,gold,teal
-academy of management annals,academy of management perspectives,advances in consumer research,human relations
-research in the sociology of organizations,business strategy and the environment,long range planning,international journal of research in marketing
-strategic organization,ecological economics,organization studies,journal of marketing theory and practice
-american economic review,harvard business manager,energy policy,advances in international marketing
-advances in strategic management,international journal of innovation and sustainable development,mis quarterly executive,journal of advertising
-economics letters,international small business journal,ieee transactions on engineering management,journal of intellectual capital
-international journal of industrial organization,journal of cleaner production,international journal of technology management,business horizons
-journal of industrial economics,economic journal,journal of interactive marketing,international marketing review
-small business economics,economics of innovation and new technology,journal of management information systems,journal of economic psychology
-california management review,journal of manufacturing technology management,production and operations management,journal of operations management
-european management journal,r&d management,electronic commerce research,journal of retailing
-harvard business review,service industries journal,international journal of information management,marketing theory
-organizational dynamics,international entrepreneurship and management journal,international journal of technology marketing,mckinsey quarterly
-science,journal of services marketing,journal of business strategy,american psychologist
-econometrica,management decision,journal of knowledge management,journal of consumer behaviour
-human resource management,technovation,journal of organizational behavior,journal of macromarketing
-journal of applied psychology,decision sciences,marketing letters,journal of consumer marketing
-mit sloan management review,international journal of innovation management,creativity and innovation management,journal of consumer psychology
-organizational behavior and human decision processes,international journal of production research,european journal of innovation management,journal of marketing management
-personnel psychology,journal of business and psychology,industrial marketing management,journal of the academy of marketing science
-research in organizational behavior,journal of business research,international journal of innovation and technology management,australasian marketing journal
-journal of management and governance,journal of service management,organizational research methods,journal of consumer research
-journal of political economy,international journal of entrepreneurship and innovation management,technological forecasting and social change,journal of marketing
-journal of economic behavior and organization,management science,information and organization,marketing science
-organization science,,,european journal of marketing
-,,,international journal of product development
-,,,journal of marketing research
+orange,maroon,gold,green,teal
+academy of management annals,academy of management perspectives,advances in consumer research,harvard business manager,european management journal
+research in the sociology of organizations,business strategy and the environment,human relations,international small business journal,journal of organizational behavior
+strategic organization,ecological economics,international journal of research in marketing,journal of marketing theory and practice,journal of the academy of marketing science
+american economic review,international journal of innovation and sustainable development,long range planning,advances in international marketing,decision sciences
+advances in strategic management,journal of cleaner production,organization studies,journal of advertising,international journal of innovation management
+economic journal,energy policy,mis quarterly executive,journal of intellectual capital,international journal of production research
+economics letters,journal of consumer psychology,business horizons,international journal of technology management,journal of applied psychology
+economics of innovation and new technology,management decision,ieee transactions on engineering management,international marketing review,journal of business and psychology
+international journal of industrial organization,technological forecasting and social change,journal of interactive marketing,journal of economic psychology,journal of service management
+journal of industrial economics,information and organization,journal of management information systems,journal of manufacturing technology management,organizational research methods
+small business economics,,marketing theory,journal of operations management,
+service industries journal,,production and operations management,journal of retailing,
+california management review,,electronic commerce research,mckinsey quarterly,
+harvard business review,,international journal of information management,american psychologist,
+organizational dynamics,,international journal of technology marketing,journal of consumer behaviour,
+science,,journal of business strategy,r&d management,
+econometrica,,journal of knowledge management,international entrepreneurship and management journal,
+human resource management,,journal of macromarketing,journal of consumer marketing,
+mit sloan management review,,marketing letters,journal of marketing management,
+organizational behavior and human decision processes,,creativity and innovation management,journal of services marketing,
+personnel psychology,,european journal of innovation management,technovation,
+research in organizational behavior,,industrial marketing management,australasian marketing journal,
+journal of management and governance,,international journal of innovation and technology management,journal of business research,
+journal of political economy,,,journal of consumer research,
+journal of economic behavior and organization,,,journal of marketing,
+management science,,,marketing science,
+organization science,,,international journal of entrepreneurship and innovation management,
+,,,european journal of marketing,
+,,,international journal of product development,
+,,,journal of marketing research,

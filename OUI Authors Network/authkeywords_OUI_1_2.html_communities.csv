@@ -1,15 +1,10 @@
-maroon,gold,orange,teal
-case study,co-creation,consumer innovation,toolkit
-user community,crowdsourcing,diffusion,product development
-user innovation,customer integration,free innovation,local information
-community-based innovation,new product development,household sector innovation,mass customization
-consumer innovator,open innovation,market failure,sticky information
-innovation,innovation management,measurement,
-identification,open source,,
-lead user,open source software,,
-user characteristic,innovation community,,
-innovation diffusion,,,
-innovation transfer,,,
-service innovation,,,
-use experience,,,
-social welfare,,,
+maroon,teal,gold,orange,green
+case study,user innovation,co-creation,consumer innovation,toolkit
+user community,identification,crowdsourcing,diffusion,product development
+community-based innovation,lead user,customer integration,free innovation,local information
+consumer innovator,innovation diffusion,new product development,household sector innovation,mass customization
+innovation,innovation transfer,open innovation,market failure,sticky information
+user characteristic,service innovation,innovation management,measurement,
+,use experience,open source,,
+,social welfare,open source software,,
+,,innovation community,,
