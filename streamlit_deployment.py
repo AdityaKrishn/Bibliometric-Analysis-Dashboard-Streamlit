@@ -256,7 +256,7 @@ else:
 
                 print(sys.exc_info()[0])
 
-
+###############Bibliographic Coupling Analysis#####################
 if option_3 == 'Combination of OUI Elders and their Citers publications combined':
 
     with st.container():   
@@ -335,6 +335,94 @@ else:
             
         try:
             df_html7 = pd.read_csv(os.getcwd()+r'/publicationJournal_BiblioCoupling_citation_' + filter_option8 + r'.html_communities.csv')
+            # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+            df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+            df_html7 = df_html7.dropna(how='all')
+            df_html7 = df_html7.fillna('')
+            st.dataframe(df_html7, hide_index=True)
+        except:
+
+            print(sys.exc_info()[0])
+
+########### Citation Analysis ######################
+if option_3 == 'Combination of OUI Elders and their Citers publications combined':
+
+    with st.container():   
+        st.subheader("Citation Analysis Network of Publication Journals")   
+        st.info("A citation analysis graph is constructed by connecting two journals if they cite each other at least once.")  
+        filters_option9 = [10,5,3]   
+        filter_option9= st.selectbox('Select the filter option', filters_option9, key='filter_option9')
+        filter_option9 = str(filter_option9)
+        st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
+        try:
+            path = '/Scopus Iteration'
+            # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
+            HtmlFile7 = open(os.getcwd()+r"/publicationJournal_citationanalysis_combined_" + filter_option9 + r".html", 'r')  
+            components.html(HtmlFile7.read(), height=700) 
+            
+        except:
+            st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
+            
+        try:
+            df_html7 = pd.read_csv(os.getcwd()+r'/publicationJournal_citationanalysis_combined_' + filter_option9 + r'.html_communities.csv')
+            # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+            df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+            df_html7 = df_html7.dropna(how='all')
+            df_html7 = df_html7.fillna('')
+            st.dataframe(df_html7, hide_index=True)
+        except:
+
+            print(sys.exc_info()[0])
+
+elif option_3 == 'OUI Elders publications only':  
+
+    with st.container():   
+        st.subheader("Citation Analysis Network of Publication Journals")   
+        st.info("A citation analysis graph is constructed by connecting two journals if they cite each other at least once.")  
+        filters_option9 = [10,5,3]   
+        filter_option9= st.selectbox('Select the filter option', filters_option9, key='filter_option9')
+        filter_option9 = str(filter_option9)
+        st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
+        try:
+            path = '/Scopus Iteration'
+            # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
+            HtmlFile7 = open(os.getcwd()+r"/publicationJournal_citationanalysis_OUI_" + filter_option9 + r".html", 'r')  
+            components.html(HtmlFile7.read(), height=700) 
+            
+        except:
+            st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
+            
+        try:
+            df_html7 = pd.read_csv(os.getcwd()+r'/publicationJournal_citationanalysis_OUI_' + filter_option9 + r'.html_communities.csv')
+            # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+            df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+            df_html7 = df_html7.dropna(how='all')
+            df_html7 = df_html7.fillna('')
+            st.dataframe(df_html7, hide_index=True)
+        except:
+
+            print(sys.exc_info()[0])
+
+else:   
+
+    with st.container():   
+        st.subheader("Citation Analysis Network of Publication Journals")   
+        st.info("A citation analysis graph is constructed by connecting two journals if they cite each other at least once.")  
+        filters_option9 = [10,5,3]   
+        filter_option9= st.selectbox('Select the filter option', filters_option9, key='filter_option9')
+        filter_option9 = str(filter_option9)
+        st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
+        try:
+            path = '/Scopus Iteration'
+            # HtmlFile2 = open(os.getcwd()+r"\Scopus Iteration\citers_names_with_all_ranking.html", 'r')
+            HtmlFile7 = open(os.getcwd()+r"/publicationJournal_citationanalysis_citation_" + filter_option9 + r".html", 'r')  
+            components.html(HtmlFile7.read(), height=700) 
+            
+        except:
+            st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
+            
+        try:
+            df_html7 = pd.read_csv(os.getcwd()+r'/publicationJournal_citationanalysis_citation_' + filter_option9 + r'.html_communities.csv')
             # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
             df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
             df_html7 = df_html7.dropna(how='all')
