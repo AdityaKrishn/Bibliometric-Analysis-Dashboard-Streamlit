@@ -1,0 +1,357 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 1000px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "maroon", "id": "american economic review", "label": "american economic review", "shape": "dot", "size": 11.899999999999999, "title": "american economic review : 17"}, {"color": "maroon", "id": "harvard business review", "label": "harvard business review", "shape": "dot", "size": 23.099999999999998, "title": "harvard business review : 33"}, {"color": "maroon", "id": "international journal of technology management", "label": "international journal of technology management", "shape": "dot", "size": 11.899999999999999, "title": "international journal of technology management : 17"}, {"color": "maroon", "id": "journal of interactive marketing", "label": "journal of interactive marketing", "shape": "dot", "size": 11.899999999999999, "title": "journal of interactive marketing : 17"}, {"color": "maroon", "id": "journal of management information systems", "label": "journal of management information systems", "shape": "dot", "size": 11.2, "title": "journal of management information systems : 16"}, {"color": "maroon", "id": "journal of marketing", "label": "journal of marketing", "shape": "dot", "size": 26.599999999999998, "title": "journal of marketing : 38"}, {"color": "maroon", "id": "journal of marketing research", "label": "journal of marketing research", "shape": "dot", "size": 22.4, "title": "journal of marketing research : 32"}, {"color": "maroon", "id": "long range planning", "label": "long range planning", "shape": "dot", "size": 12.6, "title": "long range planning : 18"}, {"color": "maroon", "id": "technological forecasting and social change", "label": "technological forecasting and social change", "shape": "dot", "size": 19.599999999999998, "title": "technological forecasting and social change : 28"}, {"color": "maroon", "id": "california management review", "label": "california management review", "shape": "dot", "size": 28.0, "title": "california management review : 40"}, {"color": "maroon", "id": "creativity and innovation management", "label": "creativity and innovation management", "shape": "dot", "size": 34.3, "title": "creativity and innovation management : 49"}, {"color": "maroon", "id": "european journal of innovation management", "label": "european journal of innovation management", "shape": "dot", "size": 11.2, "title": "european journal of innovation management : 16"}, {"color": "maroon", "id": "journal of consumer research", "label": "journal of consumer research", "shape": "dot", "size": 18.9, "title": "journal of consumer research : 27"}, {"color": "maroon", "id": "industrial marketing management", "label": "industrial marketing management", "shape": "dot", "size": 17.5, "title": "industrial marketing management : 25"}, {"color": "maroon", "id": "mit sloan management review", "label": "mit sloan management review", "shape": "dot", "size": 21.0, "title": "mit sloan management review : 30"}, {"color": "maroon", "id": "technovation", "label": "technovation", "shape": "dot", "size": 33.599999999999994, "title": "technovation : 48"}, {"color": "maroon", "id": "international journal of innovation management", "label": "international journal of innovation management", "shape": "dot", "size": 24.5, "title": "international journal of innovation management : 35"}, {"color": "maroon", "id": "international journal of research in marketing", "label": "international journal of research in marketing", "shape": "dot", "size": 10.5, "title": "international journal of research in marketing : 15"}, {"color": "maroon", "id": "journal of business research", "label": "journal of business research", "shape": "dot", "size": 32.9, "title": "journal of business research : 47"}, {"color": "maroon", "id": "journal of the academy of marketing science", "label": "journal of the academy of marketing science", "shape": "dot", "size": 12.6, "title": "journal of the academy of marketing science : 18"}, {"color": "maroon", "id": "management science", "label": "management science", "shape": "dot", "size": 70.0, "title": "management science : 100"}, {"color": "maroon", "id": "organization science", "label": "organization science", "shape": "dot", "size": 60.9, "title": "organization science : 87"}]);
+                  edges = new vis.DataSet([{"color": "silver", "from": "american economic review", "symbol": "cross", "title": "american economic review,harvard business review,2", "to": "harvard business review", "value": 2, "width": 2}, {"color": "silver", "from": "american economic review", "symbol": "triangle-up", "title": "american economic review,international journal of technology management,2", "to": "international journal of technology management", "value": 2, "width": 2}, {"color": "silver", "from": "american economic review", "symbol": "diamond", "title": "american economic review,journal of interactive marketing,1", "to": "journal of interactive marketing", "value": 1, "width": 1}, {"color": "silver", "from": "american economic review", "symbol": "cross", "title": "american economic review,journal of management information systems,1", "to": "journal of management information systems", "value": 1, "width": 1}, {"color": "silver", "from": "american economic review", "symbol": "cross", "title": "american economic review,journal of marketing,1", "to": "journal of marketing", "value": 1, "width": 1}, {"color": "silver", "from": "american economic review", "symbol": "triangle-up", "title": "american economic review,journal of marketing research,2", "to": "journal of marketing research", "value": 2, "width": 2}, {"color": "silver", "from": "american economic review", "symbol": "cross", "title": "american economic review,long range planning,2", "to": "long range planning", "value": 2, "width": 2}, {"color": "silver", "from": "american economic review", "symbol": "circle", "title": "american economic review,technological forecasting and social change,5", "to": "technological forecasting and social change", "value": 5, "width": 5}, {"color": "silver", "from": "american economic review", "symbol": "diamond", "title": "american economic review,california management review,3", "to": "california management review", "value": 3, "width": 3}, {"color": "silver", "from": "american economic review", "symbol": "triangle-up", "title": "american economic review,industrial marketing management,3", "to": "industrial marketing management", "value": 3, "width": 3}, {"color": "silver", "from": "american economic review", "symbol": "square", "title": "american economic review,international journal of innovation management,1", "to": "international journal of innovation management", "value": 1, "width": 1}, {"color": "silver", "from": "american economic review", "symbol": "diamond", "title": "american economic review,international journal of research in marketing,3", "to": "international journal of research in marketing", "value": 3, "width": 3}, {"color": "silver", "from": "american economic review", "symbol": "square", "title": "american economic review,journal of business research,3", "to": "journal of business research", "value": 3, "width": 3}, {"color": "silver", "from": "american economic review", "symbol": "cross", "title": "american economic review,journal of the academy of marketing science,2", "to": "journal of the academy of marketing science", "value": 2, "width": 2}, {"color": "silver", "from": "american economic review", "symbol": "square", "title": "american economic review,management science,13", "to": "management science", "value": 13, "width": 13}, {"color": "silver", "from": "american economic review", "symbol": "triangle-up", "title": "american economic review,mit sloan management review,5", "to": "mit sloan management review", "value": 5, "width": 5}, {"color": "silver", "from": "american economic review", "symbol": "circle", "title": "american economic review,organization science,11", "to": "organization science", "value": 11, "width": 11}, {"color": "silver", "from": "american economic review", "symbol": "cross", "title": "american economic review,technovation,1", "to": "technovation", "value": 1, "width": 1}, {"color": "silver", "from": "harvard business review", "symbol": "triangle-up", "title": "harvard business review,california management review,10", "to": "california management review", "value": 10, "width": 10}, {"color": "silver", "from": "harvard business review", "symbol": "triangle-up", "title": "harvard business review,creativity and innovation management,8", "to": "creativity and innovation management", "value": 8, "width": 8}, {"color": "silver", "from": "harvard business review", "symbol": "cross", "title": "harvard business review,european journal of innovation management,4", "to": "european journal of innovation management", "value": 4, "width": 4}, {"color": "silver", "from": "harvard business review", "symbol": "cross", "title": "harvard business review,international journal of technology management,7", "to": "international journal of technology management", "value": 7, "width": 7}, {"color": "silver", "from": "harvard business review", "symbol": "square", "title": "harvard business review,journal of consumer research,5", "to": "journal of consumer research", "value": 5, "width": 5}, {"color": "silver", "from": "harvard business review", "symbol": "square", "title": "harvard business review,journal of interactive marketing,6", "to": "journal of interactive marketing", "value": 6, "width": 6}, {"color": "silver", "from": "harvard business review", "symbol": "square", "title": "harvard business review,journal of management information systems,5", "to": "journal of management information systems", "value": 5, "width": 5}, {"color": "silver", "from": "harvard business review", "symbol": "cross", "title": "harvard business review,long range planning,6", "to": "long range planning", "value": 6, "width": 6}, {"color": "silver", "from": "harvard business review", "symbol": "triangle-up", "title": "harvard business review,technological forecasting and social change,1", "to": "technological forecasting and social change", "value": 1, "width": 1}, {"color": "silver", "from": "harvard business review", "symbol": "circle", "title": "harvard business review,industrial marketing management,7", "to": "industrial marketing management", "value": 7, "width": 7}, {"color": "silver", "from": "harvard business review", "symbol": "triangle-up", "title": "harvard business review,international journal of innovation management,8", "to": "international journal of innovation management", "value": 8, "width": 8}, {"color": "silver", "from": "harvard business review", "symbol": "triangle-up", "title": "harvard business review,international journal of research in marketing,4", "to": "international journal of research in marketing", "value": 4, "width": 4}, {"color": "silver", "from": "harvard business review", "symbol": "cross", "title": "harvard business review,journal of business research,7", "to": "journal of business research", "value": 7, "width": 7}, {"color": "silver", "from": "harvard business review", "symbol": "circle", "title": "harvard business review,journal of marketing,8", "to": "journal of marketing", "value": 8, "width": 8}, {"color": "silver", "from": "harvard business review", "symbol": "cross", "title": "harvard business review,journal of marketing research,6", "to": "journal of marketing research", "value": 6, "width": 6}, {"color": "silver", "from": "harvard business review", "symbol": "cross", "title": "harvard business review,journal of the academy of marketing science,3", "to": "journal of the academy of marketing science", "value": 3, "width": 3}, {"color": "silver", "from": "harvard business review", "symbol": "circle", "title": "harvard business review,management science,24", "to": "management science", "value": 24, "width": 24}, {"color": "silver", "from": "harvard business review", "symbol": "triangle-up", "title": "harvard business review,mit sloan management review,13", "to": "mit sloan management review", "value": 13, "width": 13}, {"color": "silver", "from": "harvard business review", "symbol": "circle", "title": "harvard business review,organization science,16", "to": "organization science", "value": 16, "width": 16}, {"color": "silver", "from": "harvard business review", "symbol": "cross", "title": "harvard business review,technovation,8", "to": "technovation", "value": 8, "width": 8}, {"color": "silver", "from": "international journal of technology management", "symbol": "diamond", "title": "international journal of technology management,california management review,5", "to": "california management review", "value": 5, "width": 5}, {"color": "silver", "from": "international journal of technology management", "symbol": "triangle-up", "title": "international journal of technology management,creativity and innovation management,10", "to": "creativity and innovation management", "value": 10, "width": 10}, {"color": "silver", "from": "international journal of technology management", "symbol": "diamond", "title": "international journal of technology management,european journal of innovation management,3", "to": "european journal of innovation management", "value": 3, "width": 3}, {"color": "silver", "from": "international journal of technology management", "symbol": "diamond", "title": "international journal of technology management,industrial marketing management,3", "to": "industrial marketing management", "value": 3, "width": 3}, {"color": "silver", "from": "international journal of technology management", "symbol": "cross", "title": "international journal of technology management,international journal of innovation management,5", "to": "international journal of innovation management", "value": 5, "width": 5}, {"color": "silver", "from": "international journal of technology management", "symbol": "square", "title": "international journal of technology management,international journal of research in marketing,1", "to": "international journal of research in marketing", "value": 1, "width": 1}, {"color": "silver", "from": "international journal of technology management", "symbol": "diamond", "title": "international journal of technology management,journal of business research,1", "to": "journal of business research", "value": 1, "width": 1}, {"color": "silver", "from": "international journal of technology management", "symbol": "circle", "title": "international journal of technology management,journal of consumer research,3", "to": "journal of consumer research", "value": 3, "width": 3}, {"color": "silver", "from": "international journal of technology management", "symbol": "triangle-up", "title": "international journal of technology management,journal of interactive marketing,2", "to": "journal of interactive marketing", "value": 2, "width": 2}, {"color": "silver", "from": "international journal of technology management", "symbol": "triangle-up", "title": "international journal of technology management,journal of management information systems,1", "to": "journal of management information systems", "value": 1, "width": 1}, {"color": "silver", "from": "international journal of technology management", "symbol": "diamond", "title": "international journal of technology management,journal of marketing,6", "to": "journal of marketing", "value": 6, "width": 6}, {"color": "silver", "from": "international journal of technology management", "symbol": "diamond", "title": "international journal of technology management,journal of marketing research,6", "to": "journal of marketing research", "value": 6, "width": 6}, {"color": "silver", "from": "international journal of technology management", "symbol": "square", "title": "international journal of technology management,journal of the academy of marketing science,1", "to": "journal of the academy of marketing science", "value": 1, "width": 1}, {"color": "silver", "from": "international journal of technology management", "symbol": "circle", "title": "international journal of technology management,long range planning,6", "to": "long range planning", "value": 6, "width": 6}, {"color": "silver", "from": "international journal of technology management", "symbol": "cross", "title": "international journal of technology management,management science,13", "to": "management science", "value": 13, "width": 13}, {"color": "silver", "from": "international journal of technology management", "symbol": "diamond", "title": "international journal of technology management,mit sloan management review,5", "to": "mit sloan management review", "value": 5, "width": 5}, {"color": "silver", "from": "international journal of technology management", "symbol": "square", "title": "international journal of technology management,organization science,11", "to": "organization science", "value": 11, "width": 11}, {"color": "silver", "from": "international journal of technology management", "symbol": "triangle-up", "title": "international journal of technology management,technological forecasting and social change,4", "to": "technological forecasting and social change", "value": 4, "width": 4}, {"color": "silver", "from": "international journal of technology management", "symbol": "square", "title": "international journal of technology management,technovation,4", "to": "technovation", "value": 4, "width": 4}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "diamond", "title": "journal of interactive marketing,california management review,7", "to": "california management review", "value": 7, "width": 7}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "diamond", "title": "journal of interactive marketing,creativity and innovation management,7", "to": "creativity and innovation management", "value": 7, "width": 7}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "diamond", "title": "journal of interactive marketing,european journal of innovation management,3", "to": "european journal of innovation management", "value": 3, "width": 3}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "square", "title": "journal of interactive marketing,industrial marketing management,3", "to": "industrial marketing management", "value": 3, "width": 3}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "diamond", "title": "journal of interactive marketing,international journal of innovation management,5", "to": "international journal of innovation management", "value": 5, "width": 5}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "square", "title": "journal of interactive marketing,international journal of research in marketing,5", "to": "international journal of research in marketing", "value": 5, "width": 5}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "square", "title": "journal of interactive marketing,journal of business research,9", "to": "journal of business research", "value": 9, "width": 9}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "circle", "title": "journal of interactive marketing,journal of consumer research,4", "to": "journal of consumer research", "value": 4, "width": 4}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "circle", "title": "journal of interactive marketing,journal of management information systems,4", "to": "journal of management information systems", "value": 4, "width": 4}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "diamond", "title": "journal of interactive marketing,journal of marketing,5", "to": "journal of marketing", "value": 5, "width": 5}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "diamond", "title": "journal of interactive marketing,journal of marketing research,8", "to": "journal of marketing research", "value": 8, "width": 8}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "circle", "title": "journal of interactive marketing,journal of the academy of marketing science,3", "to": "journal of the academy of marketing science", "value": 3, "width": 3}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "triangle-up", "title": "journal of interactive marketing,long range planning,2", "to": "long range planning", "value": 2, "width": 2}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "circle", "title": "journal of interactive marketing,management science,12", "to": "management science", "value": 12, "width": 12}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "triangle-up", "title": "journal of interactive marketing,mit sloan management review,3", "to": "mit sloan management review", "value": 3, "width": 3}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "cross", "title": "journal of interactive marketing,organization science,7", "to": "organization science", "value": 7, "width": 7}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "cross", "title": "journal of interactive marketing,technological forecasting and social change,5", "to": "technological forecasting and social change", "value": 5, "width": 5}, {"color": "silver", "from": "journal of interactive marketing", "symbol": "circle", "title": "journal of interactive marketing,technovation,7", "to": "technovation", "value": 7, "width": 7}, {"color": "silver", "from": "journal of management information systems", "symbol": "diamond", "title": "journal of management information systems,california management review,6", "to": "california management review", "value": 6, "width": 6}, {"color": "silver", "from": "journal of management information systems", "symbol": "square", "title": "journal of management information systems,creativity and innovation management,7", "to": "creativity and innovation management", "value": 7, "width": 7}, {"color": "silver", "from": "journal of management information systems", "symbol": "circle", "title": "journal of management information systems,european journal of innovation management,3", "to": "european journal of innovation management", "value": 3, "width": 3}, {"color": "silver", "from": "journal of management information systems", "symbol": "circle", "title": "journal of management information systems,industrial marketing management,2", "to": "industrial marketing management", "value": 2, "width": 2}, {"color": "silver", "from": "journal of management information systems", "symbol": "square", "title": "journal of management information systems,international journal of innovation management,5", "to": "international journal of innovation management", "value": 5, "width": 5}, {"color": "silver", "from": "journal of management information systems", "symbol": "cross", "title": "journal of management information systems,international journal of research in marketing,1", "to": "international journal of research in marketing", "value": 1, "width": 1}, {"color": "silver", "from": "journal of management information systems", "symbol": "circle", "title": "journal of management information systems,journal of business research,5", "to": "journal of business research", "value": 5, "width": 5}, {"color": "silver", "from": "journal of management information systems", "symbol": "triangle-up", "title": "journal of management information systems,journal of consumer research,2", "to": "journal of consumer research", "value": 2, "width": 2}, {"color": "silver", "from": "journal of management information systems", "symbol": "triangle-up", "title": "journal of management information systems,journal of marketing,5", "to": "journal of marketing", "value": 5, "width": 5}, {"color": "silver", "from": "journal of management information systems", "symbol": "square", "title": "journal of management information systems,journal of marketing research,4", "to": "journal of marketing research", "value": 4, "width": 4}, {"color": "silver", "from": "journal of management information systems", "symbol": "diamond", "title": "journal of management information systems,journal of the academy of marketing science,4", "to": "journal of the academy of marketing science", "value": 4, "width": 4}, {"color": "silver", "from": "journal of management information systems", "symbol": "square", "title": "journal of management information systems,long range planning,1", "to": "long range planning", "value": 1, "width": 1}, {"color": "silver", "from": "journal of management information systems", "symbol": "circle", "title": "journal of management information systems,management science,15", "to": "management science", "value": 15, "width": 15}, {"color": "silver", "from": "journal of management information systems", "symbol": "circle", "title": "journal of management information systems,mit sloan management review,3", "to": "mit sloan management review", "value": 3, "width": 3}, {"color": "silver", "from": "journal of management information systems", "symbol": "diamond", "title": "journal of management information systems,organization science,8", "to": "organization science", "value": 8, "width": 8}, {"color": "silver", "from": "journal of management information systems", "symbol": "cross", "title": "journal of management information systems,technological forecasting and social change,3", "to": "technological forecasting and social change", "value": 3, "width": 3}, {"color": "silver", "from": "journal of management information systems", "symbol": "triangle-up", "title": "journal of management information systems,technovation,6", "to": "technovation", "value": 6, "width": 6}, {"color": "silver", "from": "journal of marketing", "symbol": "triangle-up", "title": "journal of marketing,california management review,14", "to": "california management review", "value": 14, "width": 14}, {"color": "silver", "from": "journal of marketing", "symbol": "square", "title": "journal of marketing,creativity and innovation management,13", "to": "creativity and innovation management", "value": 13, "width": 13}, {"color": "silver", "from": "journal of marketing", "symbol": "square", "title": "journal of marketing,industrial marketing management,8", "to": "industrial marketing management", "value": 8, "width": 8}, {"color": "silver", "from": "journal of marketing", "symbol": "diamond", "title": "journal of marketing,international journal of innovation management,8", "to": "international journal of innovation management", "value": 8, "width": 8}, {"color": "silver", "from": "journal of marketing", "symbol": "triangle-up", "title": "journal of marketing,international journal of research in marketing,7", "to": "international journal of research in marketing", "value": 7, "width": 7}, {"color": "silver", "from": "journal of marketing", "symbol": "circle", "title": "journal of marketing,journal of business research,18", "to": "journal of business research", "value": 18, "width": 18}, {"color": "silver", "from": "journal of marketing", "symbol": "square", "title": "journal of marketing,european journal of innovation management,4", "to": "european journal of innovation management", "value": 4, "width": 4}, {"color": "silver", "from": "journal of marketing", "symbol": "diamond", "title": "journal of marketing,journal of consumer research,16", "to": "journal of consumer research", "value": 16, "width": 16}, {"color": "silver", "from": "journal of marketing", "symbol": "triangle-up", "title": "journal of marketing,long range planning,4", "to": "long range planning", "value": 4, "width": 4}, {"color": "silver", "from": "journal of marketing", "symbol": "cross", "title": "journal of marketing,technological forecasting and social change,7", "to": "technological forecasting and social change", "value": 7, "width": 7}, {"color": "silver", "from": "journal of marketing", "symbol": "cross", "title": "journal of marketing,journal of marketing research,18", "to": "journal of marketing research", "value": 18, "width": 18}, {"color": "silver", "from": "journal of marketing", "symbol": "cross", "title": "journal of marketing,journal of the academy of marketing science,8", "to": "journal of the academy of marketing science", "value": 8, "width": 8}, {"color": "silver", "from": "journal of marketing", "symbol": "square", "title": "journal of marketing,management science,28", "to": "management science", "value": 28, "width": 28}, {"color": "silver", "from": "journal of marketing", "symbol": "triangle-up", "title": "journal of marketing,mit sloan management review,5", "to": "mit sloan management review", "value": 5, "width": 5}, {"color": "silver", "from": "journal of marketing", "symbol": "circle", "title": "journal of marketing,organization science,19", "to": "organization science", "value": 19, "width": 19}, {"color": "silver", "from": "journal of marketing", "symbol": "square", "title": "journal of marketing,technovation,16", "to": "technovation", "value": 16, "width": 16}, {"color": "silver", "from": "journal of marketing research", "symbol": "triangle-up", "title": "journal of marketing research,california management review,9", "to": "california management review", "value": 9, "width": 9}, {"color": "silver", "from": "journal of marketing research", "symbol": "circle", "title": "journal of marketing research,creativity and innovation management,15", "to": "creativity and innovation management", "value": 15, "width": 15}, {"color": "silver", "from": "journal of marketing research", "symbol": "square", "title": "journal of marketing research,industrial marketing management,5", "to": "industrial marketing management", "value": 5, "width": 5}, {"color": "silver", "from": "journal of marketing research", "symbol": "diamond", "title": "journal of marketing research,international journal of innovation management,9", "to": "international journal of innovation management", "value": 9, "width": 9}, {"color": "silver", "from": "journal of marketing research", "symbol": "square", "title": "journal of marketing research,international journal of research in marketing,6", "to": "international journal of research in marketing", "value": 6, "width": 6}, {"color": "silver", "from": "journal of marketing research", "symbol": "cross", "title": "journal of marketing research,journal of business research,17", "to": "journal of business research", "value": 17, "width": 17}, {"color": "silver", "from": "journal of marketing research", "symbol": "circle", "title": "journal of marketing research,european journal of innovation management,3", "to": "european journal of innovation management", "value": 3, "width": 3}, {"color": "silver", "from": "journal of marketing research", "symbol": "triangle-up", "title": "journal of marketing research,journal of consumer research,14", "to": "journal of consumer research", "value": 14, "width": 14}, {"color": "silver", "from": "journal of marketing research", "symbol": "diamond", "title": "journal of marketing research,long range planning,3", "to": "long range planning", "value": 3, "width": 3}, {"color": "silver", "from": "journal of marketing research", "symbol": "diamond", "title": "journal of marketing research,technological forecasting and social change,7", "to": "technological forecasting and social change", "value": 7, "width": 7}, {"color": "silver", "from": "journal of marketing research", "symbol": "circle", "title": "journal of marketing research,journal of the academy of marketing science,8", "to": "journal of the academy of marketing science", "value": 8, "width": 8}, {"color": "silver", "from": "journal of marketing research", "symbol": "diamond", "title": "journal of marketing research,management science,24", "to": "management science", "value": 24, "width": 24}, {"color": "silver", "from": "journal of marketing research", "symbol": "diamond", "title": "journal of marketing research,mit sloan management review,5", "to": "mit sloan management review", "value": 5, "width": 5}, {"color": "silver", "from": "journal of marketing research", "symbol": "cross", "title": "journal of marketing research,organization science,17", "to": "organization science", "value": 17, "width": 17}, {"color": "silver", "from": "journal of marketing research", "symbol": "cross", "title": "journal of marketing research,technovation,14", "to": "technovation", "value": 14, "width": 14}, {"color": "silver", "from": "long range planning", "symbol": "diamond", "title": "long range planning,california management review,2", "to": "california management review", "value": 2, "width": 2}, {"color": "silver", "from": "long range planning", "symbol": "triangle-up", "title": "long range planning,creativity and innovation management,8", "to": "creativity and innovation management", "value": 8, "width": 8}, {"color": "silver", "from": "long range planning", "symbol": "cross", "title": "long range planning,european journal of innovation management,3", "to": "european journal of innovation management", "value": 3, "width": 3}, {"color": "silver", "from": "long range planning", "symbol": "triangle-up", "title": "long range planning,industrial marketing management,4", "to": "industrial marketing management", "value": 4, "width": 4}, {"color": "silver", "from": "long range planning", "symbol": "square", "title": "long range planning,international journal of innovation management,4", "to": "international journal of innovation management", "value": 4, "width": 4}, {"color": "silver", "from": "long range planning", "symbol": "diamond", "title": "long range planning,journal of business research,7", "to": "journal of business research", "value": 7, "width": 7}, {"color": "silver", "from": "long range planning", "symbol": "triangle-up", "title": "long range planning,journal of consumer research,1", "to": "journal of consumer research", "value": 1, "width": 1}, {"color": "silver", "from": "long range planning", "symbol": "square", "title": "long range planning,technological forecasting and social change,5", "to": "technological forecasting and social change", "value": 5, "width": 5}, {"color": "silver", "from": "long range planning", "symbol": "square", "title": "long range planning,management science,12", "to": "management science", "value": 12, "width": 12}, {"color": "silver", "from": "long range planning", "symbol": "cross", "title": "long range planning,mit sloan management review,5", "to": "mit sloan management review", "value": 5, "width": 5}, {"color": "silver", "from": "long range planning", "symbol": "circle", "title": "long range planning,organization science,14", "to": "organization science", "value": 14, "width": 14}, {"color": "silver", "from": "long range planning", "symbol": "triangle-up", "title": "long range planning,technovation,7", "to": "technovation", "value": 7, "width": 7}, {"color": "silver", "from": "technological forecasting and social change", "symbol": "square", "title": "technological forecasting and social change,california management review,9", "to": "california management review", "value": 9, "width": 9}, {"color": "silver", "from": "technological forecasting and social change", "symbol": "diamond", "title": "technological forecasting and social change,creativity and innovation management,12", "to": "creativity and innovation management", "value": 12, "width": 12}, {"color": "silver", "from": "technological forecasting and social change", "symbol": "diamond", "title": "technological forecasting and social change,european journal of innovation management,3", "to": "european journal of innovation management", "value": 3, "width": 3}, {"color": "silver", "from": "technological forecasting and social change", "symbol": "circle", "title": "technological forecasting and social change,industrial marketing management,4", "to": "industrial marketing management", "value": 4, "width": 4}, {"color": "silver", "from": "technological forecasting and social change", "symbol": "diamond", "title": "technological forecasting and social change,international journal of innovation management,8", "to": "international journal of innovation management", "value": 8, "width": 8}, {"color": "silver", "from": "technological forecasting and social change", "symbol": "cross", "title": "technological forecasting and social change,international journal of research in marketing,1", "to": "international journal of research in marketing", "value": 1, "width": 1}, {"color": "silver", "from": "technological forecasting and social change", "symbol": "square", "title": "technological forecasting and social change,journal of business research,12", "to": "journal of business research", "value": 12, "width": 12}, {"color": "silver", "from": "technological forecasting and social change", "symbol": "cross", "title": "technological forecasting and social change,journal of the academy of marketing science,5", "to": "journal of the academy of marketing science", "value": 5, "width": 5}, {"color": "silver", "from": "technological forecasting and social change", "symbol": "square", "title": "technological forecasting and social change,management science,16", "to": "management science", "value": 16, "width": 16}, {"color": "silver", "from": "technological forecasting and social change", "symbol": "diamond", "title": "technological forecasting and social change,mit sloan management review,3", "to": "mit sloan management review", "value": 3, "width": 3}, {"color": "silver", "from": "technological forecasting and social change", "symbol": "diamond", "title": "technological forecasting and social change,organization science,14", "to": "organization science", "value": 14, "width": 14}, {"color": "silver", "from": "technological forecasting and social change", "symbol": "diamond", "title": "technological forecasting and social change,journal of consumer research,2", "to": "journal of consumer research", "value": 2, "width": 2}, {"color": "silver", "from": "technological forecasting and social change", "symbol": "triangle-up", "title": "technological forecasting and social change,technovation,9", "to": "technovation", "value": 9, "width": 9}, {"color": "silver", "from": "california management review", "symbol": "diamond", "title": "california management review,creativity and innovation management,16", "to": "creativity and innovation management", "value": 16, "width": 16}, {"color": "silver", "from": "california management review", "symbol": "triangle-up", "title": "california management review,european journal of innovation management,5", "to": "european journal of innovation management", "value": 5, "width": 5}, {"color": "silver", "from": "california management review", "symbol": "cross", "title": "california management review,journal of consumer research,6", "to": "journal of consumer research", "value": 6, "width": 6}, {"color": "silver", "from": "california management review", "symbol": "cross", "title": "california management review,industrial marketing management,8", "to": "industrial marketing management", "value": 8, "width": 8}, {"color": "silver", "from": "california management review", "symbol": "triangle-up", "title": "california management review,international journal of innovation management,12", "to": "international journal of innovation management", "value": 12, "width": 12}, {"color": "silver", "from": "california management review", "symbol": "diamond", "title": "california management review,international journal of research in marketing,4", "to": "international journal of research in marketing", "value": 4, "width": 4}, {"color": "silver", "from": "california management review", "symbol": "cross", "title": "california management review,journal of business research,16", "to": "journal of business research", "value": 16, "width": 16}, {"color": "silver", "from": "california management review", "symbol": "circle", "title": "california management review,journal of the academy of marketing science,6", "to": "journal of the academy of marketing science", "value": 6, "width": 6}, {"color": "silver", "from": "california management review", "symbol": "circle", "title": "california management review,management science,25", "to": "management science", "value": 25, "width": 25}, {"color": "silver", "from": "california management review", "symbol": "triangle-up", "title": "california management review,mit sloan management review,5", "to": "mit sloan management review", "value": 5, "width": 5}, {"color": "silver", "from": "california management review", "symbol": "triangle-up", "title": "california management review,organization science,23", "to": "organization science", "value": 23, "width": 23}, {"color": "silver", "from": "california management review", "symbol": "circle", "title": "california management review,technovation,14", "to": "technovation", "value": 14, "width": 14}, {"color": "silver", "from": "creativity and innovation management", "symbol": "triangle-up", "title": "creativity and innovation management,european journal of innovation management,10", "to": "european journal of innovation management", "value": 10, "width": 10}, {"color": "silver", "from": "creativity and innovation management", "symbol": "triangle-up", "title": "creativity and innovation management,journal of consumer research,7", "to": "journal of consumer research", "value": 7, "width": 7}, {"color": "silver", "from": "creativity and innovation management", "symbol": "triangle-up", "title": "creativity and innovation management,industrial marketing management,9", "to": "industrial marketing management", "value": 9, "width": 9}, {"color": "silver", "from": "creativity and innovation management", "symbol": "triangle-up", "title": "creativity and innovation management,international journal of innovation management,16", "to": "international journal of innovation management", "value": 16, "width": 16}, {"color": "silver", "from": "creativity and innovation management", "symbol": "triangle-up", "title": "creativity and innovation management,international journal of research in marketing,4", "to": "international journal of research in marketing", "value": 4, "width": 4}, {"color": "silver", "from": "creativity and innovation management", "symbol": "triangle-up", "title": "creativity and innovation management,journal of business research,14", "to": "journal of business research", "value": 14, "width": 14}, {"color": "silver", "from": "creativity and innovation management", "symbol": "cross", "title": "creativity and innovation management,journal of the academy of marketing science,4", "to": "journal of the academy of marketing science", "value": 4, "width": 4}, {"color": "silver", "from": "creativity and innovation management", "symbol": "circle", "title": "creativity and innovation management,management science,32", "to": "management science", "value": 32, "width": 32}, {"color": "silver", "from": "creativity and innovation management", "symbol": "triangle-up", "title": "creativity and innovation management,mit sloan management review,8", "to": "mit sloan management review", "value": 8, "width": 8}, {"color": "silver", "from": "creativity and innovation management", "symbol": "diamond", "title": "creativity and innovation management,organization science,28", "to": "organization science", "value": 28, "width": 28}, {"color": "silver", "from": "creativity and innovation management", "symbol": "cross", "title": "creativity and innovation management,technovation,20", "to": "technovation", "value": 20, "width": 20}, {"color": "silver", "from": "european journal of innovation management", "symbol": "diamond", "title": "european journal of innovation management,journal of consumer research,1", "to": "journal of consumer research", "value": 1, "width": 1}, {"color": "silver", "from": "european journal of innovation management", "symbol": "cross", "title": "european journal of innovation management,industrial marketing management,3", "to": "industrial marketing management", "value": 3, "width": 3}, {"color": "silver", "from": "european journal of innovation management", "symbol": "cross", "title": "european journal of innovation management,international journal of innovation management,2", "to": "international journal of innovation management", "value": 2, "width": 2}, {"color": "silver", "from": "european journal of innovation management", "symbol": "square", "title": "european journal of innovation management,international journal of research in marketing,1", "to": "international journal of research in marketing", "value": 1, "width": 1}, {"color": "silver", "from": "european journal of innovation management", "symbol": "circle", "title": "european journal of innovation management,journal of business research,6", "to": "journal of business research", "value": 6, "width": 6}, {"color": "silver", "from": "european journal of innovation management", "symbol": "square", "title": "european journal of innovation management,journal of the academy of marketing science,1", "to": "journal of the academy of marketing science", "value": 1, "width": 1}, {"color": "silver", "from": "european journal of innovation management", "symbol": "circle", "title": "european journal of innovation management,management science,10", "to": "management science", "value": 10, "width": 10}, {"color": "silver", "from": "european journal of innovation management", "symbol": "square", "title": "european journal of innovation management,mit sloan management review,4", "to": "mit sloan management review", "value": 4, "width": 4}, {"color": "silver", "from": "european journal of innovation management", "symbol": "triangle-up", "title": "european journal of innovation management,organization science,6", "to": "organization science", "value": 6, "width": 6}, {"color": "silver", "from": "european journal of innovation management", "symbol": "diamond", "title": "european journal of innovation management,technovation,5", "to": "technovation", "value": 5, "width": 5}, {"color": "silver", "from": "journal of consumer research", "symbol": "triangle-up", "title": "journal of consumer research,industrial marketing management,4", "to": "industrial marketing management", "value": 4, "width": 4}, {"color": "silver", "from": "journal of consumer research", "symbol": "cross", "title": "journal of consumer research,international journal of innovation management,6", "to": "international journal of innovation management", "value": 6, "width": 6}, {"color": "silver", "from": "journal of consumer research", "symbol": "circle", "title": "journal of consumer research,international journal of research in marketing,7", "to": "international journal of research in marketing", "value": 7, "width": 7}, {"color": "silver", "from": "journal of consumer research", "symbol": "square", "title": "journal of consumer research,journal of business research,14", "to": "journal of business research", "value": 14, "width": 14}, {"color": "silver", "from": "journal of consumer research", "symbol": "diamond", "title": "journal of consumer research,journal of the academy of marketing science,6", "to": "journal of the academy of marketing science", "value": 6, "width": 6}, {"color": "silver", "from": "journal of consumer research", "symbol": "triangle-up", "title": "journal of consumer research,management science,21", "to": "management science", "value": 21, "width": 21}, {"color": "silver", "from": "journal of consumer research", "symbol": "square", "title": "journal of consumer research,mit sloan management review,6", "to": "mit sloan management review", "value": 6, "width": 6}, {"color": "silver", "from": "journal of consumer research", "symbol": "circle", "title": "journal of consumer research,organization science,11", "to": "organization science", "value": 11, "width": 11}, {"color": "silver", "from": "journal of consumer research", "symbol": "square", "title": "journal of consumer research,technovation,15", "to": "technovation", "value": 15, "width": 15}, {"color": "silver", "from": "industrial marketing management", "symbol": "triangle-up", "title": "industrial marketing management,mit sloan management review,6", "to": "mit sloan management review", "value": 6, "width": 6}, {"color": "silver", "from": "industrial marketing management", "symbol": "diamond", "title": "industrial marketing management,technovation,10", "to": "technovation", "value": 10, "width": 10}, {"color": "silver", "from": "industrial marketing management", "symbol": "cross", "title": "industrial marketing management,international journal of innovation management,5", "to": "international journal of innovation management", "value": 5, "width": 5}, {"color": "silver", "from": "industrial marketing management", "symbol": "diamond", "title": "industrial marketing management,international journal of research in marketing,3", "to": "international journal of research in marketing", "value": 3, "width": 3}, {"color": "silver", "from": "industrial marketing management", "symbol": "cross", "title": "industrial marketing management,journal of business research,14", "to": "journal of business research", "value": 14, "width": 14}, {"color": "silver", "from": "industrial marketing management", "symbol": "triangle-up", "title": "industrial marketing management,journal of the academy of marketing science,5", "to": "journal of the academy of marketing science", "value": 5, "width": 5}, {"color": "silver", "from": "industrial marketing management", "symbol": "cross", "title": "industrial marketing management,management science,8", "to": "management science", "value": 8, "width": 8}, {"color": "silver", "from": "industrial marketing management", "symbol": "triangle-up", "title": "industrial marketing management,organization science,17", "to": "organization science", "value": 17, "width": 17}, {"color": "silver", "from": "mit sloan management review", "symbol": "square", "title": "mit sloan management review,international journal of innovation management,5", "to": "international journal of innovation management", "value": 5, "width": 5}, {"color": "silver", "from": "mit sloan management review", "symbol": "cross", "title": "mit sloan management review,international journal of research in marketing,3", "to": "international journal of research in marketing", "value": 3, "width": 3}, {"color": "silver", "from": "mit sloan management review", "symbol": "circle", "title": "mit sloan management review,journal of business research,9", "to": "journal of business research", "value": 9, "width": 9}, {"color": "silver", "from": "mit sloan management review", "symbol": "triangle-up", "title": "mit sloan management review,journal of the academy of marketing science,4", "to": "journal of the academy of marketing science", "value": 4, "width": 4}, {"color": "silver", "from": "mit sloan management review", "symbol": "square", "title": "mit sloan management review,management science,19", "to": "management science", "value": 19, "width": 19}, {"color": "silver", "from": "mit sloan management review", "symbol": "diamond", "title": "mit sloan management review,technovation,10", "to": "technovation", "value": 10, "width": 10}, {"color": "silver", "from": "mit sloan management review", "symbol": "cross", "title": "mit sloan management review,organization science,15", "to": "organization science", "value": 15, "width": 15}, {"color": "silver", "from": "technovation", "symbol": "triangle-up", "title": "technovation,international journal of innovation management,16", "to": "international journal of innovation management", "value": 16, "width": 16}, {"color": "silver", "from": "technovation", "symbol": "cross", "title": "technovation,international journal of research in marketing,4", "to": "international journal of research in marketing", "value": 4, "width": 4}, {"color": "silver", "from": "technovation", "symbol": "square", "title": "technovation,journal of business research,23", "to": "journal of business research", "value": 23, "width": 23}, {"color": "silver", "from": "technovation", "symbol": "circle", "title": "technovation,journal of the academy of marketing science,6", "to": "journal of the academy of marketing science", "value": 6, "width": 6}, {"color": "silver", "from": "technovation", "symbol": "square", "title": "technovation,management science,34", "to": "management science", "value": 34, "width": 34}, {"color": "silver", "from": "technovation", "symbol": "circle", "title": "technovation,organization science,28", "to": "organization science", "value": 28, "width": 28}, {"color": "silver", "from": "international journal of innovation management", "symbol": "cross", "title": "international journal of innovation management,international journal of research in marketing,3", "to": "international journal of research in marketing", "value": 3, "width": 3}, {"color": "silver", "from": "international journal of innovation management", "symbol": "square", "title": "international journal of innovation management,journal of business research,13", "to": "journal of business research", "value": 13, "width": 13}, {"color": "silver", "from": "international journal of innovation management", "symbol": "cross", "title": "international journal of innovation management,journal of the academy of marketing science,5", "to": "journal of the academy of marketing science", "value": 5, "width": 5}, {"color": "silver", "from": "international journal of innovation management", "symbol": "square", "title": "international journal of innovation management,management science,20", "to": "management science", "value": 20, "width": 20}, {"color": "silver", "from": "international journal of innovation management", "symbol": "triangle-up", "title": "international journal of innovation management,organization science,16", "to": "organization science", "value": 16, "width": 16}, {"color": "silver", "from": "international journal of research in marketing", "symbol": "triangle-up", "title": "international journal of research in marketing,journal of business research,8", "to": "journal of business research", "value": 8, "width": 8}, {"color": "silver", "from": "international journal of research in marketing", "symbol": "circle", "title": "international journal of research in marketing,management science,10", "to": "management science", "value": 10, "width": 10}, {"color": "silver", "from": "international journal of research in marketing", "symbol": "cross", "title": "international journal of research in marketing,organization science,7", "to": "organization science", "value": 7, "width": 7}, {"color": "silver", "from": "journal of business research", "symbol": "triangle-up", "title": "journal of business research,journal of the academy of marketing science,11", "to": "journal of the academy of marketing science", "value": 11, "width": 11}, {"color": "silver", "from": "journal of business research", "symbol": "diamond", "title": "journal of business research,management science,26", "to": "management science", "value": 26, "width": 26}, {"color": "silver", "from": "journal of business research", "symbol": "square", "title": "journal of business research,organization science,25", "to": "organization science", "value": 25, "width": 25}, {"color": "silver", "from": "journal of the academy of marketing science", "symbol": "circle", "title": "journal of the academy of marketing science,management science,11", "to": "management science", "value": 11, "width": 11}, {"color": "silver", "from": "journal of the academy of marketing science", "symbol": "square", "title": "journal of the academy of marketing science,organization science,5", "to": "organization science", "value": 5, "width": 5}, {"color": "silver", "from": "management science", "symbol": "triangle-up", "title": "management science,organization science,55", "to": "organization science", "value": 55, "width": 55}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "repulsion": {
+            "centralGravity": 0.2,
+            "damping": 0.09,
+            "nodeDistance": 100,
+            "springConstant": 0.05,
+            "springLength": 200
+        },
+        "solver": "repulsion",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

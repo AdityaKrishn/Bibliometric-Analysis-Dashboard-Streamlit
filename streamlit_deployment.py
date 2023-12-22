@@ -262,7 +262,7 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
     with st.container():   
         st.subheader("Bibliographic coupling Network of Publication Journals")   
         st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
-        filters_option8 = [10,5,3]   
+        filters_option8 = [20,15,10,5]   
         filter_option8 = st.selectbox('Select the filter option', filters_option8, key='filter_option8')
         filter_option8 = str(filter_option8)
         st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
@@ -291,7 +291,7 @@ elif option_3 == 'OUI Elders publications only':
     with st.container():   
         st.subheader("Bibliographic coupling Network of Publication Journals")   
         st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
-        filters_option8 = [10,5,3]   
+        filters_option8 = [20,15,10,5] 
         filter_option8 = st.selectbox('Select the filter option', filters_option8, key='filter_option8')
         filter_option8 = str(filter_option8)
         st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
@@ -320,7 +320,7 @@ else:
     with st.container():   
         st.subheader("Bibliographic coupling Network of Publication Journals")   
         st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
-        filters_option8 = [10,5,3]   
+        filters_option8 = [20,15,10,5]   
         filter_option8 = st.selectbox('Select the filter option', filters_option8, key='filter_option8')
         filter_option8 = str(filter_option8)
         st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
@@ -350,7 +350,7 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
     with st.container():   
         st.subheader("Citation Analysis Network of Publication Journals")   
         st.info("A citation analysis graph is constructed by connecting two journals if they cite each other at least once.")  
-        filters_option9 = [10,5,3]   
+        filters_option9 = [20,15,10,5]   
         filter_option9= st.selectbox('Select the filter option', filters_option9, key='filter_option9')
         filter_option9 = str(filter_option9)
         st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
@@ -379,7 +379,7 @@ elif option_3 == 'OUI Elders publications only':
     with st.container():   
         st.subheader("Citation Analysis Network of Publication Journals")   
         st.info("A citation analysis graph is constructed by connecting two journals if they cite each other at least once.")  
-        filters_option9 = [10,5,3]   
+        filters_option9 = [20,15,10,5]   
         filter_option9= st.selectbox('Select the filter option', filters_option9, key='filter_option9')
         filter_option9 = str(filter_option9)
         st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
@@ -408,7 +408,7 @@ else:
     with st.container():   
         st.subheader("Citation Analysis Network of Publication Journals")   
         st.info("A citation analysis graph is constructed by connecting two journals if they cite each other at least once.")  
-        filters_option9 = [10,5,3]   
+        filters_option9 = [20,15,10,5]   
         filter_option9= st.selectbox('Select the filter option', filters_option9, key='filter_option9')
         filter_option9 = str(filter_option9)
         st.info("The filter option is the minimum number of publications a journal should have to be added in the graph.") 
