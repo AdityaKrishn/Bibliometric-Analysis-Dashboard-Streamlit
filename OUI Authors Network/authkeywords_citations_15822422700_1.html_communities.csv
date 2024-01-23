@@ -1,25 +1,23 @@
-maroon,teal,gold,orange,green,red,purple,indigo,yellow,blue,pink,brown
-3d community,user innovation,application market,asymmetric equilibrium,attention,canon,clinician,co-creation,creativity,crowdfunding,customer-perceived value,firm-user collaboration
-3d printing,articulation,business model,compatibility choice,ideation,critical management study,healthcare,customization toolkit,embedded lead user,crowdfunding platform,opinion mining,innovation management
-collaboration,domestication,motivation,network effect,opennes,critical performativity,innovation,knowledge,idea quality,crowdsourcing,structural equation model,innovation strategy
-diffusion,script,release strategy,open innovation,social medium,critique,innovation policy,leading edge statu,internal lead user,entrepreneurship,technology assessment,review
-ideal type,use knowledge,smartphone operating system,open standard,success bia,subversive functionalism,makerspace,personalization,lead user,user community,technology strategy,
-user entrepreneurship,copyright,,open-source software,suggestion,,do-it-yourself,social networking service,innovation diffusion proces,user entrepreneur,economics of i,
-,derivative work,,openness choice,,,enabling technology,sources of innovation,opinion leadership,,it policy and management,
-,dōjinshi,,spillover,,,product innovation,theory,source of innovation,,open source software,
-,developing country,,consumer policy,,,social innovation,,lead user method,,productivity of it,
-,mobile banking service,,moab model,,,facilitation,,lead user workshop,,,
-,technology diffusion,,sustainable innovation,,,organisational support mechanism,,online brand community,,,
-,direct and indirect effect,,user,,,public hospital,,toolkit,,,
-,education,,end-user,,,,,user involvement,,,
-,gender,,policy,,,,,video game industry,,,
-,personality,,policymaker,,,,,,,,
-,survey datum,,,,,,,,,,
-,employee user,,,,,,,,,,
-,ethnography,,,,,,,,,,
-,hiding practice,,,,,,,,,,
-,military,,,,,,,,,,
-,polouse,,,,,,,,,,
-,interaction,,,,,,,,,,
-,network,,,,,,,,,,
-,product development,,,,,,,,,,
+maroon,blue,gold,orange,cyan,green,red,indigo,teal,yellow,purple,pink,brown,magenta
+3d community,user innovation,application market,articulation,asymmetric equilibrium,attention,canon,co-creation,creativity,crowdfunding,customer-perceived value,direct and indirect effect,employee user,firm-user collaboration
+3d printing,clinician,business model,domestication,compatibility choice,ideation,critical management study,customization toolkit,embedded lead user,crowdfunding platform,opinion mining,education,ethnography,innovation management
+collaboration,healthcare,motivation,script,network effect,opennes,critical performativity,knowledge,idea quality,crowdsourcing,structural equation model,gender,hiding practice,innovation strategy
+diffusion,innovation,release strategy,use knowledge,open innovation,social medium,critique,leading edge statu,internal lead user,entrepreneurship,technology assessment,personality,military,review
+ideal type,innovation policy,smartphone operating system,,open standard,success bia,subversive functionalism,personalization,lead user,user community,technology strategy,survey datum,polouse,
+user entrepreneurship,makerspace,,,open-source software,suggestion,,social networking service,innovation diffusion proces,user entrepreneur,economics of i,,,
+,copyright,,,openness choice,,,sources of innovation,opinion leadership,,it policy and management,,,
+,derivative work,,,spillover,,,theory,source of innovation,,open source software,,,
+,dōjinshi,,,consumer policy,,,,lead user method,,productivity of it,,,
+,developing country,,,moab model,,,,lead user workshop,,,,,
+,mobile banking service,,,sustainable innovation,,,,online brand community,,,,,
+,technology diffusion,,,user,,,,toolkit,,,,,
+,do-it-yourself,,,end-user,,,,user involvement,,,,,
+,enabling technology,,,policy,,,,video game industry,,,,,
+,product innovation,,,policymaker,,,,,,,,,
+,social innovation,,,,,,,,,,,,
+,facilitation,,,,,,,,,,,,
+,organisational support mechanism,,,,,,,,,,,,
+,public hospital,,,,,,,,,,,,
+,interaction,,,,,,,,,,,,
+,network,,,,,,,,,,,,
+,product development,,,,,,,,,,,,

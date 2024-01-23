@@ -1,19 +1,15 @@
-maroon,teal,gold,orange,green,yellow
-benefit,user innovation,boundary spanner,collective invention,commercial diffusion,complementarity
-community-based innovation,case study,identification,commons-based peer production,general value,division of innovative labor
-consistency,driver,innovation,comparative analysi,market failure,externality
-contingency factor,dynamic analysi,job satisfaction,crowdsourcing,peer-to-peer diffusion,social welfare
-cost,impediment,,distributed innovation,,user innovation paradigm
-innovation effect,user community,,free revealing of information,,user-producer interaction
-innovation management,diffusion failure,,innovation model,,
-manufacturer strategy,makerspace,,open source,,
-marketing effect,nurse innovation,,user innovation network,,
-open innovation,embedded lead user,,,,
-,market information processing,,,,
-,organizational behavior,,,,
-,organizational boundary,,,,
-,sticky knowledge,,,,
-,innovative work behavior,,,,
-,job autonomy,,,,
-,self-efficacy,,,,
-,work process-related lead usernes,,,,
+maroon,teal,gold,orange,green,yellow,red,blue
+appropriability regime,benefit,boundary spanner,case study,collective invention,commercial diffusion,complementarity,innovative work behavior
+disruptive innovation,community-based innovation,identification,driver,commons-based peer production,general value,division of innovative labor,job autonomy
+environmental turbulence,consistency,innovation,dynamic analysi,comparative analysi,market failure,externality,self-efficacy
+functional novelty,contingency factor,job satisfaction,impediment,crowdsourcing,peer-to-peer diffusion,social welfare,work process-related lead usernes
+radical innovation,cost,,user community,distributed innovation,,user innovation paradigm,
+user innovation,innovation effect,,diffusion,free revealing of information,,user-producer interaction,
+diffusion failure,innovation management,,professionalism,innovation model,,,
+makerspace,manufacturer strategy,,social network,open source,,,
+nurse innovation,marketing effect,,,user innovation network,,,
+embedded lead user,open innovation,,,,,,
+market information processing,,,,,,,
+organizational behavior,,,,,,,
+organizational boundary,,,,,,,
+sticky knowledge,,,,,,,

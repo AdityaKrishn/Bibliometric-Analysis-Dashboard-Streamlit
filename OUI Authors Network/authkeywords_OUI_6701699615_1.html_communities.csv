@@ -1,16 +1,20 @@
-maroon,purple,orange,green,yellow,teal,blue,gold,red
-brand value,user innovation,community,complementarity,consumer innovation,free revealing,heterogeneous market,innovative work behavior,intrinsic motivation
-innovation community,collaborative innovation,dominant design,division of innovative labor,diffusion,innovation diffusion,local information,job autonomy,open source software
-product diffusion,modularity,industry evolution,externality,household sector innovation,innovation measurement,mass customization,self-efficacy,user support
-user-generated brand,open innovation,real option,social welfare,measurement,innovation transfer,specialization in problem solving,work process-related lead usernes,virtual community
-,commercial diffusion,,user innovation paradigm,need-solution pair,,sticky information,,product development
-,general value,,user-producer interaction,personality,,task partitioning,,toolkit
-,market failure,,,problem-solving,,,,need heterogeneity
-,peer-to-peer diffusion,,,product solution,,,,
-,diffusion failure,,,research and development,,,,
-,makerspace,,,free innovation,,,,
-,nurse innovation,,,,,,,
-,efficiency measurement,,,,,,,
-,industry development,,,,,,,
+maroon,teal,gold,orange,green,yellow,red,purple,blue
+appropriability regime,user innovation,brand value,commercial diffusion,community,complementarity,consumer innovation,heterogeneous market,intrinsic motivation
+disruptive innovation,collaborative innovation,innovation community,general value,dominant design,division of innovative labor,diffusion,local information,open source software
+environmental turbulence,modularity,product diffusion,market failure,industry evolution,externality,household sector innovation,mass customization,user support
+functional novelty,open innovation,user-generated brand,peer-to-peer diffusion,real option,social welfare,measurement,specialization in problem solving,virtual community
+radical innovation,diffusion failure,,,,user innovation paradigm,need-solution pair,sticky information,product development
+,makerspace,,,,user-producer interaction,personality,task partitioning,toolkit
+,nurse innovation,,,,,problem-solving,,need heterogeneity
+,efficiency measurement,,,,,product solution,,
+,industry development,,,,,research and development,,
+,free revealing,,,,,professionalism,,
+,innovation diffusion,,,,,social network,,
+,innovation measurement,,,,,user community,,
+,innovation transfer,,,,,free innovation,,
+,innovative work behavior,,,,,,,
+,job autonomy,,,,,,,
+,self-efficacy,,,,,,,
+,work process-related lead usernes,,,,,,,
 ,service development,,,,,,,
 ,service innovation,,,,,,,

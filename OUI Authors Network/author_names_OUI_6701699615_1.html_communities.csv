@@ -1,18 +1,17 @@
-maroon,teal,gold,orange
-"altman, elizabeth j.","baldwin, carliss","von hippel, eric","chen, jin"
-"szulanski, gabriel","hienerth, christoph","franke, nikolaus","de jong, jeroen p.j."
-"friedmann, jens christian","berg jensen, morten","schreier, martin","su, yu shan"
-"wu, nety",,"füller, johann","flowers, stephen"
-,,"schroll, roland","gault, fred"
-,,"herstatt, cornelius","kuusisto, jari"
-,,"lakhani, karim r.","raasch, christina"
-,,"lüthje, christian","gambardella, alfonso"
-,,"morrison, pamela d.",
-,,"roberts, john h.",
-,,"oliveira, pedro",
-,,"stock, ruth maria",
-,,"gillert, nils lennart",
-,,"euchner, jim",
-,,"katz, ralph",
-,,"kaulartz, sandro",
-,,"paradiso, joseph a.",
+maroon,gold,orange,green,teal
+"altman, elizabeth j.","baldwin, carliss","chen, jin","herstatt, cornelius","morrison, pamela d."
+"szulanski, gabriel","hienerth, christoph","de jong, jeroen p.j.","lüthje, christian","roberts, john h."
+"friedmann, jens christian","von hippel, eric","su, yu shan",,
+"wu, nety","franke, nikolaus","flowers, stephen",,
+,"schreier, martin","gault, fred",,
+,"füller, johann","kuusisto, jari",,
+,"schroll, roland","raasch, christina",,
+,"berg jensen, morten","gambardella, alfonso",,
+,"lakhani, karim r.",,,
+,"oliveira, pedro",,,
+,"stock, ruth maria",,,
+,"gillert, nils lennart",,,
+,"euchner, jim",,,
+,"katz, ralph",,,
+,"kaulartz, sandro",,,
+,"paradiso, joseph a.",,,

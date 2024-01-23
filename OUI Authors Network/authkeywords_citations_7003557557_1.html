@@ -1,0 +1,349 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 1000px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "maroon", "id": "absorptive capacity", "label": "absorptive capacity", "shape": "dot", "size": 2, "title": "absorptive capacity : 2"}, {"color": "maroon", "id": "online community", "label": "online community", "shape": "dot", "size": 3, "title": "online community : 3"}, {"color": "maroon", "id": "open innovation", "label": "open innovation", "shape": "dot", "size": 5, "title": "open innovation : 5"}, {"color": "maroon", "id": "organizational adoption", "label": "organizational adoption", "shape": "dot", "size": 2, "title": "organizational adoption : 2"}, {"color": "maroon", "id": "sources of innovation", "label": "sources of innovation", "shape": "dot", "size": 2, "title": "sources of innovation : 2"}, {"color": "maroon", "id": "user innovation community", "label": "user innovation community", "shape": "dot", "size": 3, "title": "user innovation community : 3"}, {"color": "teal", "id": "adoption", "label": "adoption", "shape": "dot", "size": 1, "title": "adoption : 1"}, {"color": "teal", "id": "compatibility", "label": "compatibility", "shape": "dot", "size": 1, "title": "compatibility : 1"}, {"color": "teal", "id": "open source software", "label": "open source software", "shape": "dot", "size": 1, "title": "open source software : 1"}, {"color": "teal", "id": "toolkits for innovation", "label": "toolkits for innovation", "shape": "dot", "size": 1, "title": "toolkits for innovation : 1"}, {"color": "blue", "id": "co-creation", "label": "co-creation", "shape": "dot", "size": 1, "title": "co-creation : 1"}, {"color": "blue", "id": "customization toolkit", "label": "customization toolkit", "shape": "dot", "size": 1, "title": "customization toolkit : 1"}, {"color": "blue", "id": "leading edge statu", "label": "leading edge statu", "shape": "dot", "size": 1, "title": "leading edge statu : 1"}, {"color": "blue", "id": "personalization", "label": "personalization", "shape": "dot", "size": 1, "title": "personalization : 1"}, {"color": "blue", "id": "social networking service", "label": "social networking service", "shape": "dot", "size": 1, "title": "social networking service : 1"}, {"color": "blue", "id": "user innovation", "label": "user innovation", "shape": "dot", "size": 17, "title": "user innovation : 17.0"}, {"color": "orange", "id": "collective intelligence", "label": "collective intelligence", "shape": "dot", "size": 1, "title": "collective intelligence : 1"}, {"color": "orange", "id": "human powered boat", "label": "human powered boat", "shape": "dot", "size": 1, "title": "human powered boat : 1"}, {"color": "orange", "id": "modularity", "label": "modularity", "shape": "dot", "size": 1, "title": "modularity : 1"}, {"color": "orange", "id": "open manufacturing", "label": "open manufacturing", "shape": "dot", "size": 1, "title": "open manufacturing : 1"}, {"color": "orange", "id": "open source", "label": "open source", "shape": "dot", "size": 3, "title": "open source : 3"}, {"color": "orange", "id": "product architecture", "label": "product architecture", "shape": "dot", "size": 2, "title": "product architecture : 2"}, {"color": "orange", "id": "user community", "label": "user community", "shape": "dot", "size": 1, "title": "user community : 1"}, {"color": "yellow", "id": "combinatory search", "label": "combinatory search", "shape": "dot", "size": 1, "title": "combinatory search : 1"}, {"color": "yellow", "id": "implicit referral", "label": "implicit referral", "shape": "dot", "size": 1, "title": "implicit referral : 1"}, {"color": "yellow", "id": "inexact referral", "label": "inexact referral", "shape": "dot", "size": 1, "title": "inexact referral : 1"}, {"color": "yellow", "id": "intermediate referral", "label": "intermediate referral", "shape": "dot", "size": 1, "title": "intermediate referral : 1"}, {"color": "yellow", "id": "lead user", "label": "lead user", "shape": "dot", "size": 9, "title": "lead user : 9"}, {"color": "yellow", "id": "network search", "label": "network search", "shape": "dot", "size": 1, "title": "network search : 1"}, {"color": "yellow", "id": "pyramiding", "label": "pyramiding", "shape": "dot", "size": 1, "title": "pyramiding : 1"}, {"color": "yellow", "id": "rare research subject", "label": "rare research subject", "shape": "dot", "size": 1, "title": "rare research subject : 1"}, {"color": "red", "id": "communication", "label": "communication", "shape": "dot", "size": 2, "title": "communication : 2"}, {"color": "red", "id": "innovation", "label": "innovation", "shape": "dot", "size": 4, "title": "innovation : 4"}, {"color": "red", "id": "toolkit", "label": "toolkit", "shape": "dot", "size": 2, "title": "toolkit : 2"}, {"color": "red", "id": "web 2.0", "label": "web 2.0", "shape": "dot", "size": 2, "title": "web 2.0 : 2"}, {"color": "blue", "id": "creative consumer", "label": "creative consumer", "shape": "dot", "size": 1, "title": "creative consumer : 1"}, {"color": "blue", "id": "living lab", "label": "living lab", "shape": "dot", "size": 1, "title": "living lab : 1"}, {"color": "blue", "id": "radical innovation", "label": "radical innovation", "shape": "dot", "size": 1, "title": "radical innovation : 1"}, {"color": "blue", "id": "role theory", "label": "role theory", "shape": "dot", "size": 1, "title": "role theory : 1"}, {"color": "yellow", "id": "crowdsourcing", "label": "crowdsourcing", "shape": "dot", "size": 1, "title": "crowdsourcing : 1"}, {"color": "yellow", "id": "netnography", "label": "netnography", "shape": "dot", "size": 1, "title": "netnography : 1"}, {"color": "yellow", "id": "social medium", "label": "social medium", "shape": "dot", "size": 2, "title": "social medium : 2"}, {"color": "maroon", "id": "customer integration", "label": "customer integration", "shape": "dot", "size": 1, "title": "customer integration : 1"}, {"color": "maroon", "id": "learning strategy", "label": "learning strategy", "shape": "dot", "size": 1, "title": "learning strategy : 1"}, {"color": "maroon", "id": "new product development", "label": "new product development", "shape": "dot", "size": 2, "title": "new product development : 2"}, {"color": "gold", "id": "customer-active paradigm", "label": "customer-active paradigm", "shape": "dot", "size": 2, "title": "customer-active paradigm : 2"}, {"color": "gold", "id": "literature review", "label": "literature review", "shape": "dot", "size": 2, "title": "literature review : 2"}, {"color": "gold", "id": "user toolkits for innovation", "label": "user toolkits for innovation", "shape": "dot", "size": 2, "title": "user toolkits for innovation : 2"}, {"color": "blue", "id": "customercentered innovation", "label": "customercentered innovation", "shape": "dot", "size": 1, "title": "customercentered innovation : 1"}, {"color": "blue", "id": "lead-user research", "label": "lead-user research", "shape": "dot", "size": 1, "title": "lead-user research : 1"}, {"color": "blue", "id": "diffusion", "label": "diffusion", "shape": "dot", "size": 1, "title": "diffusion : 1"}, {"color": "blue", "id": "innovation ecosystem", "label": "innovation ecosystem", "shape": "dot", "size": 1, "title": "innovation ecosystem : 1"}, {"color": "blue", "id": "service ecosystem", "label": "service ecosystem", "shape": "dot", "size": 1, "title": "service ecosystem : 1"}, {"color": "blue", "id": "sustainability", "label": "sustainability", "shape": "dot", "size": 1, "title": "sustainability : 1"}, {"color": "orange", "id": "front loading", "label": "front loading", "shape": "dot", "size": 2, "title": "front loading : 2"}, {"color": "orange", "id": "problem solving", "label": "problem solving", "shape": "dot", "size": 2, "title": "problem solving : 2"}, {"color": "orange", "id": "software development", "label": "software development", "shape": "dot", "size": 2, "title": "software development : 2"}, {"color": "blue", "id": "incorporated user", "label": "incorporated user", "shape": "dot", "size": 1, "title": "incorporated user : 1"}, {"color": "blue", "id": "medical technology", "label": "medical technology", "shape": "dot", "size": 1, "title": "medical technology : 1"}, {"color": "blue", "id": "roles in innovation", "label": "roles in innovation", "shape": "dot", "size": 1, "title": "roles in innovation : 1"}, {"color": "blue", "id": "social network analysi", "label": "social network analysi", "shape": "dot", "size": 1, "title": "social network analysi : 1"}, {"color": "red", "id": "post-adoptive behavior", "label": "post-adoptive behavior", "shape": "dot", "size": 3, "title": "post-adoptive behavior : 3"}, {"color": "red", "id": "software engineer", "label": "software engineer", "shape": "dot", "size": 2, "title": "software engineer : 2"}, {"color": "red", "id": "technology artifact", "label": "technology artifact", "shape": "dot", "size": 2, "title": "technology artifact : 2"}, {"color": "yellow", "id": "innovation diffusion proces", "label": "innovation diffusion proces", "shape": "dot", "size": 1, "title": "innovation diffusion proces : 1"}, {"color": "yellow", "id": "opinion leadership", "label": "opinion leadership", "shape": "dot", "size": 1, "title": "opinion leadership : 1"}, {"color": "yellow", "id": "source of innovation", "label": "source of innovation", "shape": "dot", "size": 1, "title": "source of innovation : 1"}, {"color": "green", "id": "innovation proces", "label": "innovation proces", "shape": "dot", "size": 1, "title": "innovation proces : 1"}, {"color": "green", "id": "key user", "label": "key user", "shape": "dot", "size": 1, "title": "key user : 1"}, {"color": "green", "id": "modularisation", "label": "modularisation", "shape": "dot", "size": 1, "title": "modularisation : 1"}, {"color": "green", "id": "project management", "label": "project management", "shape": "dot", "size": 1, "title": "project management : 1"}, {"color": "green", "id": "software", "label": "software", "shape": "dot", "size": 1, "title": "software : 1"}, {"color": "maroon", "id": "innovation rarenes", "label": "innovation rarenes", "shape": "dot", "size": 1, "title": "innovation rarenes : 1"}, {"color": "maroon", "id": "user innovation evaluation", "label": "user innovation evaluation", "shape": "dot", "size": 1, "title": "user innovation evaluation : 1"}, {"color": "yellow", "id": "lead user method", "label": "lead user method", "shape": "dot", "size": 1, "title": "lead user method : 1"}, {"color": "yellow", "id": "lead user workshop", "label": "lead user workshop", "shape": "dot", "size": 2, "title": "lead user workshop : 2"}, {"color": "yellow", "id": "open innovation accelerator", "label": "open innovation accelerator", "shape": "dot", "size": 1, "title": "open innovation accelerator : 1"}, {"color": "yellow", "id": "user involvement", "label": "user involvement", "shape": "dot", "size": 1, "title": "user involvement : 1"}, {"color": "red", "id": "life science", "label": "life science", "shape": "dot", "size": 1, "title": "life science : 1"}, {"color": "red", "id": "research solution", "label": "research solution", "shape": "dot", "size": 1, "title": "research solution : 1"}, {"color": "maroon", "id": "role of user", "label": "role of user", "shape": "dot", "size": 1, "title": "role of user : 1"}]);
+                  edges = new vis.DataSet([{"color": "silver", "from": "absorptive capacity", "symbol": "triangle-up", "title": "absorptive capacity,online community,2", "to": "online community", "value": 2, "width": 2}, {"color": "silver", "from": "absorptive capacity", "symbol": "circle", "title": "absorptive capacity,open innovation,2", "to": "open innovation", "value": 2, "width": 2}, {"color": "silver", "from": "absorptive capacity", "symbol": "diamond", "title": "absorptive capacity,organizational adoption,2", "to": "organizational adoption", "value": 2, "width": 2}, {"color": "silver", "from": "absorptive capacity", "symbol": "triangle-up", "title": "absorptive capacity,sources of innovation,2", "to": "sources of innovation", "value": 2, "width": 2}, {"color": "silver", "from": "absorptive capacity", "symbol": "square", "title": "absorptive capacity,user innovation community,2", "to": "user innovation community", "value": 2, "width": 2}, {"color": "silver", "from": "online community", "symbol": "triangle-up", "title": "online community,new product development,1", "to": "new product development", "value": 1, "width": 1}, {"color": "silver", "from": "online community", "symbol": "square", "title": "online community,open innovation,2", "to": "open innovation", "value": 2, "width": 2}, {"color": "silver", "from": "online community", "symbol": "cross", "title": "online community,organizational adoption,2", "to": "organizational adoption", "value": 2, "width": 2}, {"color": "silver", "from": "online community", "symbol": "triangle-up", "title": "online community,role of user,1", "to": "role of user", "value": 1, "width": 1}, {"color": "silver", "from": "online community", "symbol": "circle", "title": "online community,sources of innovation,2", "to": "sources of innovation", "value": 2, "width": 2}, {"color": "silver", "from": "online community", "symbol": "diamond", "title": "online community,user innovation,1", "to": "user innovation", "value": 1, "width": 1}, {"color": "silver", "from": "online community", "symbol": "circle", "title": "online community,user innovation community,2", "to": "user innovation community", "value": 2, "width": 2}, {"color": "silver", "from": "open innovation", "symbol": "square", "title": "open innovation,customer integration,1", "to": "customer integration", "value": 1, "width": 1}, {"color": "silver", "from": "open innovation", "symbol": "circle", "title": "open innovation,innovation rarenes,1", "to": "innovation rarenes", "value": 1, "width": 1}, {"color": "silver", "from": "open innovation", "symbol": "diamond", "title": "open innovation,lead user,1", "to": "lead user", "value": 1, "width": 1}, {"color": "silver", "from": "open innovation", "symbol": "square", "title": "open innovation,learning strategy,1", "to": "learning strategy", "value": 1, "width": 1}, {"color": "silver", "from": "open innovation", "symbol": "diamond", "title": "open innovation,new product development,1", "to": "new product development", "value": 1, "width": 1}, {"color": "silver", "from": "open innovation", "symbol": "square", "title": "open innovation,organizational adoption,2", "to": "organizational adoption", "value": 2, "width": 2}, {"color": "silver", "from": "open innovation", "symbol": "circle", "title": "open innovation,social medium,1", "to": "social medium", "value": 1, "width": 1}, {"color": "silver", "from": "open innovation", "symbol": "triangle-up", "title": "open innovation,sources of innovation,2", "to": "sources of innovation", "value": 2, "width": 2}, {"color": "silver", "from": "open innovation", "symbol": "diamond", "title": "open innovation,user innovation,2", "to": "user innovation", "value": 2, "width": 2}, {"color": "silver", "from": "open innovation", "symbol": "cross", "title": "open innovation,user innovation community,3", "to": "user innovation community", "value": 3, "width": 3}, {"color": "silver", "from": "open innovation", "symbol": "diamond", "title": "open innovation,user innovation evaluation,1", "to": "user innovation evaluation", "value": 1, "width": 1}, {"color": "silver", "from": "organizational adoption", "symbol": "square", "title": "organizational adoption,sources of innovation,2", "to": "sources of innovation", "value": 2, "width": 2}, {"color": "silver", "from": "organizational adoption", "symbol": "square", "title": "organizational adoption,user innovation community,2", "to": "user innovation community", "value": 2, "width": 2}, {"color": "silver", "from": "sources of innovation", "symbol": "circle", "title": "sources of innovation,user innovation community,2", "to": "user innovation community", "value": 2, "width": 2}, {"color": "silver", "from": "user innovation community", "symbol": "diamond", "title": "user innovation community,innovation rarenes,1", "to": "innovation rarenes", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation community", "symbol": "square", "title": "user innovation community,user innovation evaluation,1", "to": "user innovation evaluation", "value": 1, "width": 1}, {"color": "silver", "from": "adoption", "symbol": "circle", "title": "adoption,compatibility,1", "to": "compatibility", "value": 1, "width": 1}, {"color": "silver", "from": "adoption", "symbol": "cross", "title": "adoption,open source software,1", "to": "open source software", "value": 1, "width": 1}, {"color": "silver", "from": "adoption", "symbol": "circle", "title": "adoption,toolkits for innovation,1", "to": "toolkits for innovation", "value": 1, "width": 1}, {"color": "silver", "from": "compatibility", "symbol": "circle", "title": "compatibility,open source software,1", "to": "open source software", "value": 1, "width": 1}, {"color": "silver", "from": "compatibility", "symbol": "cross", "title": "compatibility,toolkits for innovation,1", "to": "toolkits for innovation", "value": 1, "width": 1}, {"color": "silver", "from": "open source software", "symbol": "square", "title": "open source software,toolkits for innovation,1", "to": "toolkits for innovation", "value": 1, "width": 1}, {"color": "silver", "from": "co-creation", "symbol": "triangle-up", "title": "co-creation,customization toolkit,1", "to": "customization toolkit", "value": 1, "width": 1}, {"color": "silver", "from": "co-creation", "symbol": "cross", "title": "co-creation,leading edge statu,1", "to": "leading edge statu", "value": 1, "width": 1}, {"color": "silver", "from": "co-creation", "symbol": "circle", "title": "co-creation,personalization,1", "to": "personalization", "value": 1, "width": 1}, {"color": "silver", "from": "co-creation", "symbol": "square", "title": "co-creation,social networking service,1", "to": "social networking service", "value": 1, "width": 1}, {"color": "silver", "from": "co-creation", "symbol": "cross", "title": "co-creation,user innovation,1", "to": "user innovation", "value": 1, "width": 1}, {"color": "silver", "from": "customization toolkit", "symbol": "cross", "title": "customization toolkit,leading edge statu,1", "to": "leading edge statu", "value": 1, "width": 1}, {"color": "silver", "from": "customization toolkit", "symbol": "square", "title": "customization toolkit,personalization,1", "to": "personalization", "value": 1, "width": 1}, {"color": "silver", "from": "customization toolkit", "symbol": "triangle-up", "title": "customization toolkit,social networking service,1", "to": "social networking service", "value": 1, "width": 1}, {"color": "silver", "from": "customization toolkit", "symbol": "triangle-up", "title": "customization toolkit,user innovation,1", "to": "user innovation", "value": 1, "width": 1}, {"color": "silver", "from": "leading edge statu", "symbol": "cross", "title": "leading edge statu,personalization,1", "to": "personalization", "value": 1, "width": 1}, {"color": "silver", "from": "leading edge statu", "symbol": "cross", "title": "leading edge statu,social networking service,1", "to": "social networking service", "value": 1, "width": 1}, {"color": "silver", "from": "leading edge statu", "symbol": "circle", "title": "leading edge statu,user innovation,1", "to": "user innovation", "value": 1, "width": 1}, {"color": "silver", "from": "personalization", "symbol": "triangle-up", "title": "personalization,social networking service,1", "to": "social networking service", "value": 1, "width": 1}, {"color": "silver", "from": "personalization", "symbol": "circle", "title": "personalization,user innovation,1", "to": "user innovation", "value": 1, "width": 1}, {"color": "silver", "from": "social networking service", "symbol": "diamond", "title": "social networking service,user innovation,1", "to": "user innovation", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": "user innovation,collective intelligence,1", "to": "collective intelligence", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": "user innovation,combinatory search,1", "to": "combinatory search", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": "user innovation,creative consumer,1", "to": "creative consumer", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,crowdsourcing,1", "to": "crowdsourcing", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": "user innovation,customer integration,1", "to": "customer integration", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": "user innovation,customercentered innovation,1", "to": "customercentered innovation", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,diffusion,1", "to": "diffusion", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,front loading,2", "to": "front loading", "value": 2, "width": 2}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,human powered boat,1", "to": "human powered boat", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": "user innovation,implicit referral,1", "to": "implicit referral", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,incorporated user,1", "to": "incorporated user", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": "user innovation,inexact referral,1", "to": "inexact referral", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": "user innovation,innovation ecosystem,1", "to": "innovation ecosystem", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,innovation proces,1", "to": "innovation proces", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": "user innovation,intermediate referral,1", "to": "intermediate referral", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": "user innovation,key user,1", "to": "key user", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": "user innovation,lead user,6", "to": "lead user", "value": 6, "width": 6}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": "user innovation,lead user method,1", "to": "lead user method", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": "user innovation,lead user workshop,2", "to": "lead user workshop", "value": 2, "width": 2}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": "user innovation,lead-user research,1", "to": "lead-user research", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": "user innovation,learning strategy,1", "to": "learning strategy", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": "user innovation,life science,1", "to": "life science", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": "user innovation,living lab,1", "to": "living lab", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,medical technology,1", "to": "medical technology", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": "user innovation,modularisation,1", "to": "modularisation", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,modularity,1", "to": "modularity", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,netnography,1", "to": "netnography", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": "user innovation,network search,1", "to": "network search", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": "user innovation,new product development,2", "to": "new product development", "value": 2, "width": 2}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": "user innovation,open innovation accelerator,1", "to": "open innovation accelerator", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": "user innovation,open manufacturing,1", "to": "open manufacturing", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": "user innovation,open source,3", "to": "open source", "value": 3, "width": 3}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": "user innovation,post-adoptive behavior,1", "to": "post-adoptive behavior", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": "user innovation,problem solving,2", "to": "problem solving", "value": 2, "width": 2}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,product architecture,2", "to": "product architecture", "value": 2, "width": 2}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,project management,1", "to": "project management", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": "user innovation,pyramiding,1", "to": "pyramiding", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": "user innovation,radical innovation,1", "to": "radical innovation", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "triangle-up", "title": "user innovation,rare research subject,1", "to": "rare research subject", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": "user innovation,research solution,1", "to": "research solution", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": "user innovation,role of user,1", "to": "role of user", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": "user innovation,role theory,1", "to": "role theory", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "diamond", "title": "user innovation,roles in innovation,1", "to": "roles in innovation", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,service ecosystem,1", "to": "service ecosystem", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,social medium,2", "to": "social medium", "value": 2, "width": 2}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": "user innovation,social network analysi,1", "to": "social network analysi", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "circle", "title": "user innovation,software,1", "to": "software", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,software development,2", "to": "software development", "value": 2, "width": 2}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,sustainability,1", "to": "sustainability", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "cross", "title": "user innovation,user community,1", "to": "user community", "value": 1, "width": 1}, {"color": "silver", "from": "user innovation", "symbol": "square", "title": "user innovation,user involvement,1", "to": "user involvement", "value": 1, "width": 1}, {"color": "silver", "from": "collective intelligence", "symbol": "triangle-up", "title": "collective intelligence,human powered boat,1", "to": "human powered boat", "value": 1, "width": 1}, {"color": "silver", "from": "collective intelligence", "symbol": "square", "title": "collective intelligence,modularity,1", "to": "modularity", "value": 1, "width": 1}, {"color": "silver", "from": "collective intelligence", "symbol": "triangle-up", "title": "collective intelligence,open manufacturing,1", "to": "open manufacturing", "value": 1, "width": 1}, {"color": "silver", "from": "collective intelligence", "symbol": "diamond", "title": "collective intelligence,open source,1", "to": "open source", "value": 1, "width": 1}, {"color": "silver", "from": "collective intelligence", "symbol": "circle", "title": "collective intelligence,product architecture,1", "to": "product architecture", "value": 1, "width": 1}, {"color": "silver", "from": "collective intelligence", "symbol": "circle", "title": "collective intelligence,user community,1", "to": "user community", "value": 1, "width": 1}, {"color": "silver", "from": "human powered boat", "symbol": "cross", "title": "human powered boat,modularity,1", "to": "modularity", "value": 1, "width": 1}, {"color": "silver", "from": "human powered boat", "symbol": "circle", "title": "human powered boat,open manufacturing,1", "to": "open manufacturing", "value": 1, "width": 1}, {"color": "silver", "from": "human powered boat", "symbol": "square", "title": "human powered boat,open source,1", "to": "open source", "value": 1, "width": 1}, {"color": "silver", "from": "human powered boat", "symbol": "square", "title": "human powered boat,product architecture,1", "to": "product architecture", "value": 1, "width": 1}, {"color": "silver", "from": "human powered boat", "symbol": "circle", "title": "human powered boat,user community,1", "to": "user community", "value": 1, "width": 1}, {"color": "silver", "from": "modularity", "symbol": "cross", "title": "modularity,open manufacturing,1", "to": "open manufacturing", "value": 1, "width": 1}, {"color": "silver", "from": "modularity", "symbol": "square", "title": "modularity,open source,1", "to": "open source", "value": 1, "width": 1}, {"color": "silver", "from": "modularity", "symbol": "triangle-up", "title": "modularity,product architecture,1", "to": "product architecture", "value": 1, "width": 1}, {"color": "silver", "from": "modularity", "symbol": "square", "title": "modularity,user community,1", "to": "user community", "value": 1, "width": 1}, {"color": "silver", "from": "open manufacturing", "symbol": "triangle-up", "title": "open manufacturing,open source,1", "to": "open source", "value": 1, "width": 1}, {"color": "silver", "from": "open manufacturing", "symbol": "diamond", "title": "open manufacturing,product architecture,1", "to": "product architecture", "value": 1, "width": 1}, {"color": "silver", "from": "open manufacturing", "symbol": "circle", "title": "open manufacturing,user community,1", "to": "user community", "value": 1, "width": 1}, {"color": "silver", "from": "open source", "symbol": "square", "title": "open source,front loading,2", "to": "front loading", "value": 2, "width": 2}, {"color": "silver", "from": "open source", "symbol": "circle", "title": "open source,problem solving,2", "to": "problem solving", "value": 2, "width": 2}, {"color": "silver", "from": "open source", "symbol": "cross", "title": "open source,product architecture,1", "to": "product architecture", "value": 1, "width": 1}, {"color": "silver", "from": "open source", "symbol": "diamond", "title": "open source,software development,2", "to": "software development", "value": 2, "width": 2}, {"color": "silver", "from": "open source", "symbol": "circle", "title": "open source,user community,1", "to": "user community", "value": 1, "width": 1}, {"color": "silver", "from": "product architecture", "symbol": "diamond", "title": "product architecture,innovation proces,1", "to": "innovation proces", "value": 1, "width": 1}, {"color": "silver", "from": "product architecture", "symbol": "triangle-up", "title": "product architecture,key user,1", "to": "key user", "value": 1, "width": 1}, {"color": "silver", "from": "product architecture", "symbol": "circle", "title": "product architecture,lead user,1", "to": "lead user", "value": 1, "width": 1}, {"color": "silver", "from": "product architecture", "symbol": "cross", "title": "product architecture,modularisation,1", "to": "modularisation", "value": 1, "width": 1}, {"color": "silver", "from": "product architecture", "symbol": "cross", "title": "product architecture,project management,1", "to": "project management", "value": 1, "width": 1}, {"color": "silver", "from": "product architecture", "symbol": "triangle-up", "title": "product architecture,software,1", "to": "software", "value": 1, "width": 1}, {"color": "silver", "from": "product architecture", "symbol": "circle", "title": "product architecture,user community,1", "to": "user community", "value": 1, "width": 1}, {"color": "silver", "from": "combinatory search", "symbol": "square", "title": "combinatory search,implicit referral,1", "to": "implicit referral", "value": 1, "width": 1}, {"color": "silver", "from": "combinatory search", "symbol": "triangle-up", "title": "combinatory search,inexact referral,1", "to": "inexact referral", "value": 1, "width": 1}, {"color": "silver", "from": "combinatory search", "symbol": "square", "title": "combinatory search,intermediate referral,1", "to": "intermediate referral", "value": 1, "width": 1}, {"color": "silver", "from": "combinatory search", "symbol": "triangle-up", "title": "combinatory search,lead user,1", "to": "lead user", "value": 1, "width": 1}, {"color": "silver", "from": "combinatory search", "symbol": "circle", "title": "combinatory search,network search,1", "to": "network search", "value": 1, "width": 1}, {"color": "silver", "from": "combinatory search", "symbol": "circle", "title": "combinatory search,pyramiding,1", "to": "pyramiding", "value": 1, "width": 1}, {"color": "silver", "from": "combinatory search", "symbol": "triangle-up", "title": "combinatory search,rare research subject,1", "to": "rare research subject", "value": 1, "width": 1}, {"color": "silver", "from": "implicit referral", "symbol": "square", "title": "implicit referral,inexact referral,1", "to": "inexact referral", "value": 1, "width": 1}, {"color": "silver", "from": "implicit referral", "symbol": "square", "title": "implicit referral,intermediate referral,1", "to": "intermediate referral", "value": 1, "width": 1}, {"color": "silver", "from": "implicit referral", "symbol": "triangle-up", "title": "implicit referral,lead user,1", "to": "lead user", "value": 1, "width": 1}, {"color": "silver", "from": "implicit referral", "symbol": "cross", "title": "implicit referral,network search,1", "to": "network search", "value": 1, "width": 1}, {"color": "silver", "from": "implicit referral", "symbol": "diamond", "title": "implicit referral,pyramiding,1", "to": "pyramiding", "value": 1, "width": 1}, {"color": "silver", "from": "implicit referral", "symbol": "cross", "title": "implicit referral,rare research subject,1", "to": "rare research subject", "value": 1, "width": 1}, {"color": "silver", "from": "inexact referral", "symbol": "circle", "title": "inexact referral,intermediate referral,1", "to": "intermediate referral", "value": 1, "width": 1}, {"color": "silver", "from": "inexact referral", "symbol": "triangle-up", "title": "inexact referral,lead user,1", "to": "lead user", "value": 1, "width": 1}, {"color": "silver", "from": "inexact referral", "symbol": "square", "title": "inexact referral,network search,1", "to": "network search", "value": 1, "width": 1}, {"color": "silver", "from": "inexact referral", "symbol": "square", "title": "inexact referral,pyramiding,1", "to": "pyramiding", "value": 1, "width": 1}, {"color": "silver", "from": "inexact referral", "symbol": "square", "title": "inexact referral,rare research subject,1", "to": "rare research subject", "value": 1, "width": 1}, {"color": "silver", "from": "intermediate referral", "symbol": "cross", "title": "intermediate referral,lead user,1", "to": "lead user", "value": 1, "width": 1}, {"color": "silver", "from": "intermediate referral", "symbol": "circle", "title": "intermediate referral,network search,1", "to": "network search", "value": 1, "width": 1}, {"color": "silver", "from": "intermediate referral", "symbol": "cross", "title": "intermediate referral,pyramiding,1", "to": "pyramiding", "value": 1, "width": 1}, {"color": "silver", "from": "intermediate referral", "symbol": "square", "title": "intermediate referral,rare research subject,1", "to": "rare research subject", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "square", "title": "lead user,communication,2", "to": "communication", "value": 2, "width": 2}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": "lead user,crowdsourcing,1", "to": "crowdsourcing", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "triangle-up", "title": "lead user,innovation,2", "to": "innovation", "value": 2, "width": 2}, {"color": "silver", "from": "lead user", "symbol": "square", "title": "lead user,innovation diffusion proces,1", "to": "innovation diffusion proces", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "square", "title": "lead user,innovation proces,1", "to": "innovation proces", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "cross", "title": "lead user,key user,1", "to": "key user", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "diamond", "title": "lead user,lead user method,1", "to": "lead user method", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": "lead user,lead user workshop,2", "to": "lead user workshop", "value": 2, "width": 2}, {"color": "silver", "from": "lead user", "symbol": "diamond", "title": "lead user,modularisation,1", "to": "modularisation", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": "lead user,netnography,1", "to": "netnography", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": "lead user,network search,1", "to": "network search", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": "lead user,open innovation accelerator,1", "to": "open innovation accelerator", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": "lead user,opinion leadership,1", "to": "opinion leadership", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": "lead user,project management,1", "to": "project management", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "square", "title": "lead user,pyramiding,1", "to": "pyramiding", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "cross", "title": "lead user,rare research subject,1", "to": "rare research subject", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": "lead user,social medium,2", "to": "social medium", "value": 2, "width": 2}, {"color": "silver", "from": "lead user", "symbol": "diamond", "title": "lead user,software,1", "to": "software", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "triangle-up", "title": "lead user,source of innovation,1", "to": "source of innovation", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": "lead user,toolkit,2", "to": "toolkit", "value": 2, "width": 2}, {"color": "silver", "from": "lead user", "symbol": "triangle-up", "title": "lead user,user involvement,1", "to": "user involvement", "value": 1, "width": 1}, {"color": "silver", "from": "lead user", "symbol": "circle", "title": "lead user,web 2.0,2", "to": "web 2.0", "value": 2, "width": 2}, {"color": "silver", "from": "network search", "symbol": "square", "title": "network search,pyramiding,1", "to": "pyramiding", "value": 1, "width": 1}, {"color": "silver", "from": "network search", "symbol": "cross", "title": "network search,rare research subject,1", "to": "rare research subject", "value": 1, "width": 1}, {"color": "silver", "from": "pyramiding", "symbol": "cross", "title": "pyramiding,rare research subject,1", "to": "rare research subject", "value": 1, "width": 1}, {"color": "silver", "from": "communication", "symbol": "triangle-up", "title": "communication,innovation,2", "to": "innovation", "value": 2, "width": 2}, {"color": "silver", "from": "communication", "symbol": "square", "title": "communication,toolkit,2", "to": "toolkit", "value": 2, "width": 2}, {"color": "silver", "from": "communication", "symbol": "circle", "title": "communication,web 2.0,2", "to": "web 2.0", "value": 2, "width": 2}, {"color": "silver", "from": "innovation", "symbol": "diamond", "title": "innovation,post-adoptive behavior,2", "to": "post-adoptive behavior", "value": 2, "width": 2}, {"color": "silver", "from": "innovation", "symbol": "cross", "title": "innovation,software engineer,2", "to": "software engineer", "value": 2, "width": 2}, {"color": "silver", "from": "innovation", "symbol": "square", "title": "innovation,technology artifact,2", "to": "technology artifact", "value": 2, "width": 2}, {"color": "silver", "from": "innovation", "symbol": "cross", "title": "innovation,toolkit,2", "to": "toolkit", "value": 2, "width": 2}, {"color": "silver", "from": "innovation", "symbol": "square", "title": "innovation,web 2.0,2", "to": "web 2.0", "value": 2, "width": 2}, {"color": "silver", "from": "toolkit", "symbol": "triangle-up", "title": "toolkit,web 2.0,2", "to": "web 2.0", "value": 2, "width": 2}, {"color": "silver", "from": "creative consumer", "symbol": "cross", "title": "creative consumer,living lab,1", "to": "living lab", "value": 1, "width": 1}, {"color": "silver", "from": "creative consumer", "symbol": "diamond", "title": "creative consumer,radical innovation,1", "to": "radical innovation", "value": 1, "width": 1}, {"color": "silver", "from": "creative consumer", "symbol": "diamond", "title": "creative consumer,role theory,1", "to": "role theory", "value": 1, "width": 1}, {"color": "silver", "from": "living lab", "symbol": "cross", "title": "living lab,radical innovation,1", "to": "radical innovation", "value": 1, "width": 1}, {"color": "silver", "from": "living lab", "symbol": "diamond", "title": "living lab,role theory,1", "to": "role theory", "value": 1, "width": 1}, {"color": "silver", "from": "radical innovation", "symbol": "diamond", "title": "radical innovation,role theory,1", "to": "role theory", "value": 1, "width": 1}, {"color": "silver", "from": "crowdsourcing", "symbol": "square", "title": "crowdsourcing,netnography,1", "to": "netnography", "value": 1, "width": 1}, {"color": "silver", "from": "crowdsourcing", "symbol": "circle", "title": "crowdsourcing,social medium,1", "to": "social medium", "value": 1, "width": 1}, {"color": "silver", "from": "netnography", "symbol": "cross", "title": "netnography,social medium,1", "to": "social medium", "value": 1, "width": 1}, {"color": "silver", "from": "customer integration", "symbol": "triangle-up", "title": "customer integration,learning strategy,1", "to": "learning strategy", "value": 1, "width": 1}, {"color": "silver", "from": "customer integration", "symbol": "circle", "title": "customer integration,new product development,1", "to": "new product development", "value": 1, "width": 1}, {"color": "silver", "from": "learning strategy", "symbol": "cross", "title": "learning strategy,new product development,1", "to": "new product development", "value": 1, "width": 1}, {"color": "silver", "from": "new product development", "symbol": "diamond", "title": "new product development,role of user,1", "to": "role of user", "value": 1, "width": 1}, {"color": "silver", "from": "customer-active paradigm", "symbol": "cross", "title": "customer-active paradigm,literature review,2", "to": "literature review", "value": 2, "width": 2}, {"color": "silver", "from": "customer-active paradigm", "symbol": "square", "title": "customer-active paradigm,user toolkits for innovation,2", "to": "user toolkits for innovation", "value": 2, "width": 2}, {"color": "silver", "from": "literature review", "symbol": "square", "title": "literature review,user toolkits for innovation,2", "to": "user toolkits for innovation", "value": 2, "width": 2}, {"color": "silver", "from": "customercentered innovation", "symbol": "triangle-up", "title": "customercentered innovation,lead-user research,1", "to": "lead-user research", "value": 1, "width": 1}, {"color": "silver", "from": "diffusion", "symbol": "diamond", "title": "diffusion,innovation ecosystem,1", "to": "innovation ecosystem", "value": 1, "width": 1}, {"color": "silver", "from": "diffusion", "symbol": "diamond", "title": "diffusion,service ecosystem,1", "to": "service ecosystem", "value": 1, "width": 1}, {"color": "silver", "from": "diffusion", "symbol": "diamond", "title": "diffusion,sustainability,1", "to": "sustainability", "value": 1, "width": 1}, {"color": "silver", "from": "innovation ecosystem", "symbol": "triangle-up", "title": "innovation ecosystem,service ecosystem,1", "to": "service ecosystem", "value": 1, "width": 1}, {"color": "silver", "from": "innovation ecosystem", "symbol": "square", "title": "innovation ecosystem,sustainability,1", "to": "sustainability", "value": 1, "width": 1}, {"color": "silver", "from": "service ecosystem", "symbol": "cross", "title": "service ecosystem,sustainability,1", "to": "sustainability", "value": 1, "width": 1}, {"color": "silver", "from": "front loading", "symbol": "cross", "title": "front loading,problem solving,2", "to": "problem solving", "value": 2, "width": 2}, {"color": "silver", "from": "front loading", "symbol": "diamond", "title": "front loading,software development,2", "to": "software development", "value": 2, "width": 2}, {"color": "silver", "from": "problem solving", "symbol": "triangle-up", "title": "problem solving,software development,2", "to": "software development", "value": 2, "width": 2}, {"color": "silver", "from": "incorporated user", "symbol": "triangle-up", "title": "incorporated user,medical technology,1", "to": "medical technology", "value": 1, "width": 1}, {"color": "silver", "from": "incorporated user", "symbol": "square", "title": "incorporated user,roles in innovation,1", "to": "roles in innovation", "value": 1, "width": 1}, {"color": "silver", "from": "incorporated user", "symbol": "square", "title": "incorporated user,social network analysi,1", "to": "social network analysi", "value": 1, "width": 1}, {"color": "silver", "from": "medical technology", "symbol": "square", "title": "medical technology,roles in innovation,1", "to": "roles in innovation", "value": 1, "width": 1}, {"color": "silver", "from": "medical technology", "symbol": "triangle-up", "title": "medical technology,social network analysi,1", "to": "social network analysi", "value": 1, "width": 1}, {"color": "silver", "from": "roles in innovation", "symbol": "diamond", "title": "roles in innovation,social network analysi,1", "to": "social network analysi", "value": 1, "width": 1}, {"color": "silver", "from": "post-adoptive behavior", "symbol": "circle", "title": "post-adoptive behavior,life science,1", "to": "life science", "value": 1, "width": 1}, {"color": "silver", "from": "post-adoptive behavior", "symbol": "circle", "title": "post-adoptive behavior,research solution,1", "to": "research solution", "value": 1, "width": 1}, {"color": "silver", "from": "post-adoptive behavior", "symbol": "cross", "title": "post-adoptive behavior,software engineer,2", "to": "software engineer", "value": 2, "width": 2}, {"color": "silver", "from": "post-adoptive behavior", "symbol": "square", "title": "post-adoptive behavior,technology artifact,2", "to": "technology artifact", "value": 2, "width": 2}, {"color": "silver", "from": "software engineer", "symbol": "cross", "title": "software engineer,technology artifact,2", "to": "technology artifact", "value": 2, "width": 2}, {"color": "silver", "from": "innovation diffusion proces", "symbol": "diamond", "title": "innovation diffusion proces,opinion leadership,1", "to": "opinion leadership", "value": 1, "width": 1}, {"color": "silver", "from": "innovation diffusion proces", "symbol": "square", "title": "innovation diffusion proces,source of innovation,1", "to": "source of innovation", "value": 1, "width": 1}, {"color": "silver", "from": "opinion leadership", "symbol": "square", "title": "opinion leadership,source of innovation,1", "to": "source of innovation", "value": 1, "width": 1}, {"color": "silver", "from": "innovation proces", "symbol": "circle", "title": "innovation proces,key user,1", "to": "key user", "value": 1, "width": 1}, {"color": "silver", "from": "innovation proces", "symbol": "square", "title": "innovation proces,modularisation,1", "to": "modularisation", "value": 1, "width": 1}, {"color": "silver", "from": "innovation proces", "symbol": "cross", "title": "innovation proces,project management,1", "to": "project management", "value": 1, "width": 1}, {"color": "silver", "from": "innovation proces", "symbol": "square", "title": "innovation proces,software,1", "to": "software", "value": 1, "width": 1}, {"color": "silver", "from": "key user", "symbol": "cross", "title": "key user,modularisation,1", "to": "modularisation", "value": 1, "width": 1}, {"color": "silver", "from": "key user", "symbol": "square", "title": "key user,project management,1", "to": "project management", "value": 1, "width": 1}, {"color": "silver", "from": "key user", "symbol": "diamond", "title": "key user,software,1", "to": "software", "value": 1, "width": 1}, {"color": "silver", "from": "modularisation", "symbol": "triangle-up", "title": "modularisation,project management,1", "to": "project management", "value": 1, "width": 1}, {"color": "silver", "from": "modularisation", "symbol": "cross", "title": "modularisation,software,1", "to": "software", "value": 1, "width": 1}, {"color": "silver", "from": "project management", "symbol": "cross", "title": "project management,software,1", "to": "software", "value": 1, "width": 1}, {"color": "silver", "from": "innovation rarenes", "symbol": "square", "title": "innovation rarenes,user innovation evaluation,1", "to": "user innovation evaluation", "value": 1, "width": 1}, {"color": "silver", "from": "lead user method", "symbol": "triangle-up", "title": "lead user method,lead user workshop,1", "to": "lead user workshop", "value": 1, "width": 1}, {"color": "silver", "from": "lead user method", "symbol": "diamond", "title": "lead user method,user involvement,1", "to": "user involvement", "value": 1, "width": 1}, {"color": "silver", "from": "lead user workshop", "symbol": "circle", "title": "lead user workshop,open innovation accelerator,1", "to": "open innovation accelerator", "value": 1, "width": 1}, {"color": "silver", "from": "lead user workshop", "symbol": "cross", "title": "lead user workshop,user involvement,1", "to": "user involvement", "value": 1, "width": 1}, {"color": "silver", "from": "life science", "symbol": "diamond", "title": "life science,research solution,1", "to": "research solution", "value": 1, "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

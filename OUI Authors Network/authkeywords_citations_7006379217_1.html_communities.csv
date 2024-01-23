@@ -1,10 +1,10 @@
-maroon,purple,teal,orange,green,yellow,red,blue,pink,brown,indigo,cyan,magenta,gold
-3d printing,motivation,user innovation,crowdsourcing,boundary management,canon,case study,commercial diffusion,creativity,differential game,direct and indirect effect,economics of i,employee user,framing
-digital remixing,application market,articulation,attention,community,critical management study,company,consumer innovation,embedded lead user,firm-sponsored online user innovation community,education,it policy and management,ethnography,grand challenge
-innovation diffusion theory,business model,domestication,ideation,dilemma,critical performativity,comparative study,makerspace,idea quality,heterogeneous product user,gender,open source software,hiding practice,moral emotion
-online community,release strategy,script,open innovation,firm-community collaboration,critique,innovation management,community innovation,internal lead user,incentive reward,personality,productivity of it,military,responsible innovation
-online innovation community,smartphone operating system,use knowledge,opennes,paradox,subversive functionalism,innovation policy,daily practice,lead user,product improvement,survey datum,technology strategy,polouse,serendipity
-remixing,compatibility,creativity and ideation,social medium,systems theory,,marketing research,innovation behavior,meta-analysi,,,,,
+maroon,purple,gold,orange,green,yellow,red,blue,pink,brown,indigo,cyan,magenta,teal
+3d printing,motivation,user innovation,crowdsourcing,boundary management,canon,case study,commercial diffusion,creativity,differential game,direct and indirect effect,employee user,end user entrepreneur,framing
+digital remixing,application market,articulation,attention,community,critical management study,company,consumer innovation,embedded lead user,firm-sponsored online user innovation community,education,ethnography,entrepreneurial consumer,grand challenge
+innovation diffusion theory,business model,domestication,ideation,dilemma,critical performativity,comparative study,makerspace,idea quality,heterogeneous product user,gender,hiding practice,entrepreneurship proces,moral emotion
+online community,release strategy,script,open innovation,firm-community collaboration,critique,innovation management,community innovation,internal lead user,incentive reward,personality,military,user entrepreneurship,responsible innovation
+online innovation community,smartphone operating system,use knowledge,opennes,paradox,subversive functionalism,innovation policy,daily practice,lead user,product improvement,survey datum,polouse,lead user theory,serendipity
+remixing,compatibility,creativity and ideation,social medium,systems theory,,marketing research,innovation behavior,meta-analysi,,,,sme,open social innovation
 user-generated content,complementarity,design cognition,success bia,tension,,participatory design,russium,moderating effect,,,,,
 and phrases: online user innovation community,open source,exaptation,suggestion,,,user centred design,,innovation proces,,,,,
 co-creation,value capture,problem-solving,collaboration,,,user driven innovation,,key user,,,,,
@@ -14,14 +14,15 @@ knowledge,smart home,textuality,r&amp;d,,,enabling technology,,project managemen
 sources of innovation,system of use,distributed innovation,software development,,,product innovation,,software,,,,,
 theory,diffusion,knowledge sharing,toolkit,,,social innovation,,online brand community,,,,,
 ,service ecosystem,performance of oss project,corporate venture capital,,,,,video game industry,,,,,
-,sustainability,end user entrepreneur,innovation,,,,,,,,,,
-,netnography,entrepreneurial consumer,technology entrepreneurship,,,,,,,,,,
-,,entrepreneurship proces,customer integration,,,,,,,,,,
-,,user entrepreneurship,learning strategy,,,,,,,,,,
-,,entrepreneurship,improvisation,,,,,,,,,,
-,,evolutionary approach,knowledge acquisition,,,,,,,,,,
-,,spinout,knowledge utilization,,,,,,,,,,
-,,strategy and firm performance,user generated content,,,,,,,,,,
+,sustainability,economics of i,innovation,,,,,,,,,,
+,netnography,it policy and management,technology entrepreneurship,,,,,,,,,,
+,,open source software,customer integration,,,,,,,,,,
+,,productivity of it,learning strategy,,,,,,,,,,
+,,technology strategy,improvisation,,,,,,,,,,
+,,entrepreneurship,knowledge acquisition,,,,,,,,,,
+,,evolutionary approach,knowledge utilization,,,,,,,,,,
+,,spinout,user generated content,,,,,,,,,,
+,,strategy and firm performance,,,,,,,,,,,
 ,,facilitation,,,,,,,,,,,
 ,,healthcare,,,,,,,,,,,
 ,,organisational support mechanism,,,,,,,,,,,
@@ -29,8 +30,6 @@ theory,diffusion,knowledge sharing,toolkit,,,social innovation,,online brand com
 ,,interaction,,,,,,,,,,,
 ,,network,,,,,,,,,,,
 ,,product development,,,,,,,,,,,
-,,lead user theory,,,,,,,,,,,
-,,sme,,,,,,,,,,,
 ,,moderation,,,,,,,,,,,
 ,,organisational context,,,,,,,,,,,
 ,,radical innovation performance,,,,,,,,,,,

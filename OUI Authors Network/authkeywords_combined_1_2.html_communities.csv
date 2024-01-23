@@ -1,26 +1,27 @@
-maroon,teal,gold,green,yellow,red,orange
-3d printing,collaboration,diffusion,user innovation,compatibility,user involvement,innovation
-co-creation,user-generated content,online innovation community,case study,business model,product development,community
-mass customisation,open source software,adoption,innovation policy,complementarity,toolkit,network
-motivation,innovation management,consumer innovation,marketing research,open source,distributed innovation,user
-online community,user community,free innovation,commercial diffusion,value creation,strategy,external knowledge
-platform,crowdsourcing,lead user,makerspace,social welfare,knowledge sharing,identification
-user entrepreneurship,new product development,market failure,household sector innovation,innovation community,lead user workshop,pyramiding
-customer integration,user design,opinion leadership,problem-solving,innovation proce,sticky information,post-adoptive behavior
-knowledge,user-generated product,open innovation,do-it-yourself,product architecture,video game industry,sustainable innovation
-sources of innovation,entrepreneurship,cocreation,product innovation,modularity,mass customization,
-configuration,idea competition,creative consumer,evolutionary approach,,local information,
-netnography,software development,innovation ecosystem,healthcare,,,
-online user innovation community,technology management,diffusion of innovation,innovation diffusion,,,
-social medium,community-based innovation,measurement,user characteristic,,,
-user-driven innovation,consumer innovator,personality,innovation measurement,,,
-idea adoption,crowdfunding,renewable energy,innovation transfer,,,
-web 2.0,crowdfunding platform,living lab,patent,,,
-lead user theory,user entrepreneur,radical innovation,technology strategy,,,
-user innovation community,innovation contest,sustainability,,,,
-user idea,,embedded lead user,,,,
-second life,,idea quality,,,,
-virtual world,,service,,,,
-,,service innovation,,,,
-,,use experience,,,,
-,,literature review,,,,
+yellow,teal,gold,orange,maroon,green,blue,red
+3d printing,co-creation,collaboration,diffusion,user innovation,lead user,user community,cocreation
+motivation,mass customisation,case study,online innovation community,compatibility,user involvement,entrepreneurship,creative consumer
+online community,user-generated content,innovation policy,adoption,business model,strategy,community-based innovation,living lab
+platform,open source software,marketing research,consumer innovation,complementarity,embedded lead user,consumer innovator,radical innovation
+user entrepreneurship,innovation management,innovation,free innovation,open source,idea quality,crowdfunding,sustainability
+knowledge,crowdsourcing,commercial diffusion,market failure,value creation,external knowledge,crowdfunding platform,service
+sources of innovation,customer integration,community,new product,innovation ecosystem,identification,user entrepreneur,service innovation
+netnography,idea generation,makerspace,opinion leadership,social welfare,pyramiding,evolutionary approach,literature review
+web 2.0,new product development,network,diffusion of innovation,grand challenge,lead user workshop,,
+lead user theory,open innovation,user,household sector innovation,innovation diffusion,use experience,,
+user innovation community,product development,do-it-yourself,measurement,innovation community,video game industry,,
+user idea,user design,product innovation,personality,innovation measurement,,,
+second life,user-generated product,healthcare,problem-solving,innovation transfer,,,
+virtual world,idea competition,post-adoptive behavior,renewable energy,patent,,,
+,software development,user characteristic,,innovation proce,,,
+,technology management,sustainable innovation,,product architecture,,,
+,toolkit,,,sticky information,,,
+,configuration,,,mass customization,,,
+,distributed innovation,,,local information,,,
+,innovation contest,,,modularity,,,
+,online user innovation community,,,technology diffusion,,,
+,social medium,,,,,,
+,user-driven innovation,,,,,,
+,knowledge sharing,,,,,,
+,idea adoption,,,,,,
+,technology strategy,,,,,,

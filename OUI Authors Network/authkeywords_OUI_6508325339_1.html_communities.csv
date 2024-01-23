@@ -1,21 +1,14 @@
-maroon,gold,orange,green,teal
-age,innovation management,case study,crowdsourcing,radical innovation
-determinant,collaboration,driver,collective invention,service innovation
-lead user,dynamic,dynamic analysi,commons-based peer production,service lead user
-product knowledge,entrepreneurship,impediment,comparative analysi,user integration
-silver market,open source software,user community,distributed innovation,
-technical expertise,organization,,free revealing of information,
-use experience,organizational aspect,,innovation model,
-user innovation,research and development management,,open source,
-agile project management,technology management,,user innovation network,
-agile/stage-gate hybrid,user-generated content,,,
-new product development,virtual group,,,
-scrum,,,,
-stage-gate proces,,,,
-innovation in consumer market,,,,
-innovation proces,,,,
-local information,,,,
-sticky information,,,,
-property rights theory,,,,
-separation of ownership and control,,,,
-user innovation barrier,,,,
+maroon,teal,orange,green,gold
+age,user innovation,innovation management,appropriability regime,collective invention
+determinant,agile project management,collaboration,disruptive innovation,commons-based peer production
+lead user,agile/stage-gate hybrid,crowdsourcing,environmental turbulence,comparative analysi
+product knowledge,new product development,dynamic,functional novelty,distributed innovation
+silver market,scrum,entrepreneurship,radical innovation,free revealing of information
+technical expertise,stage-gate proces,open source software,service innovation,innovation model
+use experience,case study,organization,service lead user,open source
+innovation in consumer market,driver,organizational aspect,user integration,user innovation network
+innovation proces,dynamic analysi,research and development management,,
+property rights theory,impediment,technology management,,
+separation of ownership and control,user community,user-generated content,,
+user innovation barrier,local information,virtual group,,
+,sticky information,,,

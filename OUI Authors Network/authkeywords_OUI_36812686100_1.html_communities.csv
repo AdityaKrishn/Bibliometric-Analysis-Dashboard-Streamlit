@@ -1,9 +1,11 @@
-maroon,teal
-co-creation,user innovation
-crowdsourcing,community-based innovation
-customer integration,consumer innovator
-idea generation,user community
-market performance,diffusion failure
-new product development,makerspace
-user design,nurse innovation
-user-generated product,
+maroon,teal,gold
+appropriability regime,user innovation,co-creation
+disruptive innovation,community-based innovation,crowdsourcing
+environmental turbulence,consumer innovator,customer integration
+functional novelty,user community,idea generation
+radical innovation,diffusion,market performance
+,professionalism,new product development
+,social network,user design
+,diffusion failure,user-generated product
+,makerspace,
+,nurse innovation,
