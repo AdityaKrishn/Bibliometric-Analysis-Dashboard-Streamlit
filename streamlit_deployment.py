@@ -66,11 +66,11 @@ with st.container():
     col1, col2 = st.columns(2, gap="large")
     with col1:
         st.subheader("Top 15 keywords in all publications(combined view)")
-        st.altair_chart(alt.Chart(dict['keywords']).mark_bar().encode(x=alt.X('keyword', sort=None), y='count'), use_container_width=True)
+        combined_keywords = dict['keywords']
+        st.altair_chart(alt.Chart(combined_keywords.head(15)).mark_bar().encode(x=alt.X('keyword', sort=None), y='count'), use_container_width=True)
     with col2:
         st.subheader("Papers published each year - All publications(combined view)")
-        combined_db_grouped = dict['combined_db_grouped']
-        st.bar_chart(combined_db_grouped.head(15), x = 'year', y = 'counts')
+        st.bar_chart(dict['combined_db_grouped'], x = 'year', y = 'counts')
 
 
 
