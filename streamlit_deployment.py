@@ -65,6 +65,18 @@ with st.container():
      #create bar chart for top 30 keywords in author_keywords and citers_keywords in two columns
     col1, col2 = st.columns(2, gap="large")
     with col1:
+        st.subheader("Top 15 keywords in all publications(combined view)")
+        st.altair_chart(alt.Chart(dict['keywords']).mark_bar().encode(x=alt.X('keyword', sort=None), y='count'), use_container_width=True)
+    with col2:
+        st.subheader("Papers published each year - All publications(combined view)")
+        st.bar_chart(dict['combined_db_grouped'], x = 'year', y = 'counts')
+
+
+
+with st.container():
+     #create bar chart for top 30 keywords in author_keywords and citers_keywords in two columns
+    col1, col2 = st.columns(2, gap="large")
+    with col1:
         st.subheader("Papers published each year - OUI Elders' publications")
         st.bar_chart(dict['author_db_grouped'], x = 'year', y = 'counts')
     with col2:
