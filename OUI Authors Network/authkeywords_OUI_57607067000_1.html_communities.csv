@@ -1,10 +1,11 @@
-maroon,yellow,gold,green,orange,teal
-adoption,diffusion,user innovation,appropriability regime,free revealing,innovative work behavior
-consumer innovation,knowledge transfer,diffusion failure,disruptive innovation,innovation diffusion,job autonomy
-free innovation,product development,makerspace,environmental turbulence,innovation measurement,self-efficacy
-market failure,professionalism,nurse innovation,functional novelty,innovation transfer,work process-related lead usernes
-commercial diffusion,small firm,do-it-yourself,radical innovation,,
-general value,social network,household sector innovation,,,
-peer-to-peer diffusion,user community,prosumption,,,
-measurement,,,,,
-research and development,,,,,
+gold,teal,orange,green,maroon
+adoption,diffusion,user innovation,appropriability regime,diffusion failure
+consumer innovation,knowledge transfer,do-it-yourself,disruptive innovation,effort to sell
+free innovation,product development,household sector innovation,environmental turbulence,eudaimonic motivation
+market failure,professionalism,prosumption,functional novelty,free revealing
+commercial diffusion,small firm,innovative work behavior,radical innovation,identity perspective
+general value,social network,job autonomy,,makerspace
+peer-to-peer diffusion,user community,self-efficacy,,nurse innovation
+measurement,,work process-related lead usernes,,innovation diffusion
+research and development,,,,innovation measurement
+,,,,innovation transfer

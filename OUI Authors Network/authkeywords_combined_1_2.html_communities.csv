@@ -1,27 +1,23 @@
-yellow,teal,gold,orange,maroon,green,blue,red
-3d printing,co-creation,collaboration,diffusion,user innovation,lead user,user community,cocreation
-motivation,mass customisation,case study,online innovation community,compatibility,user involvement,entrepreneurship,creative consumer
-online community,user-generated content,innovation policy,adoption,business model,strategy,community-based innovation,living lab
-platform,open source software,marketing research,consumer innovation,complementarity,embedded lead user,consumer innovator,radical innovation
-user entrepreneurship,innovation management,innovation,free innovation,open source,idea quality,crowdfunding,sustainability
-knowledge,crowdsourcing,commercial diffusion,market failure,value creation,external knowledge,crowdfunding platform,service
-sources of innovation,customer integration,community,new product,innovation ecosystem,identification,user entrepreneur,service innovation
-netnography,idea generation,makerspace,opinion leadership,social welfare,pyramiding,evolutionary approach,literature review
-web 2.0,new product development,network,diffusion of innovation,grand challenge,lead user workshop,,
-lead user theory,open innovation,user,household sector innovation,innovation diffusion,use experience,,
-user innovation community,product development,do-it-yourself,measurement,innovation community,video game industry,,
-user idea,user design,product innovation,personality,innovation measurement,,,
-second life,user-generated product,healthcare,problem-solving,innovation transfer,,,
-virtual world,idea competition,post-adoptive behavior,renewable energy,patent,,,
-,software development,user characteristic,,innovation proce,,,
-,technology management,sustainable innovation,,product architecture,,,
-,toolkit,,,sticky information,,,
-,configuration,,,mass customization,,,
-,distributed innovation,,,local information,,,
-,innovation contest,,,modularity,,,
-,online user innovation community,,,technology diffusion,,,
-,social medium,,,,,,
-,user-driven innovation,,,,,,
-,knowledge sharing,,,,,,
-,idea adoption,,,,,,
-,technology strategy,,,,,,
+maroon,teal,gold,green,yellow,red,blue,purple,orange
+3d printing,collaboration,diffusion,online innovation community,user innovation,user-generated content,compatibility,product development,co-innovation
+co-creation,case study,adoption,consumer innovation,cocreation,open source software,business model,distributed innovation,social medium
+mass customisation,innovation policy,free innovation,open innovation,creative consumer,innovation management,complementarity,knowledge sharing,user-driven innovation
+motivation,marketing research,lead user,idea competition,innovation ecosystem,user community,open source,sticky information,online user innovation community
+online community,user involvement,market failure,software development,household sector innovation,crowdsourcing,value creation,mass customization,idea adoption
+platform,innovation,new product,diffusion of innovation,problem-solving,entrepreneurship,social welfare,local information,user idea
+user entrepreneurship,commercial diffusion,opinion leadership,measurement,living lab,technology management,innovation community,,
+customer integration,community,embedded lead user,personality,radical innovation,community-based innovation,innovation proce,,
+idea generation,makerspace,idea quality,renewable energy,sustainability,consumer innovator,product architecture,,
+knowledge,network,external knowledge,innovation contest,diffusion failure,crowdfunding,modularity,,
+new product development,toolkit,identification,sustainable innovation,free revealing,crowdfunding platform,,,
+sources of innovation,user,pyramiding,,do-it-yourself,user entrepreneur,,,
+user design,configuration,use experience,,product innovation,evolutionary approach,,,
+user-generated product,strategy,,,innovation diffusion,technology strategy,,,
+netnography,healthcare,,,innovation measurement,,,,
+web 2.0,post-adoptive behavior,,,innovation transfer,,,,
+lead user theory,user characteristic,,,grand challenge,,,,
+user innovation community,lead user workshop,,,service,,,,
+second life,video game industry,,,service innovation,,,,
+virtual world,,,,patent,,,,
+,,,,literature review,,,,
+,,,,technology diffusion,,,,

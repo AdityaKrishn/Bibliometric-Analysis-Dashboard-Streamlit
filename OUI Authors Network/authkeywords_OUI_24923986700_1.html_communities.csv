@@ -1,15 +1,14 @@
-maroon,teal,gold,orange,green,yellow,red,blue
-appropriability regime,benefit,boundary spanner,case study,collective invention,commercial diffusion,complementarity,innovative work behavior
-disruptive innovation,community-based innovation,identification,driver,commons-based peer production,general value,division of innovative labor,job autonomy
-environmental turbulence,consistency,innovation,dynamic analysi,comparative analysi,market failure,externality,self-efficacy
-functional novelty,contingency factor,job satisfaction,impediment,crowdsourcing,peer-to-peer diffusion,social welfare,work process-related lead usernes
-radical innovation,cost,,user community,distributed innovation,,user innovation paradigm,
-user innovation,innovation effect,,diffusion,free revealing of information,,user-producer interaction,
-diffusion failure,innovation management,,professionalism,innovation model,,,
-makerspace,manufacturer strategy,,social network,open source,,,
-nurse innovation,marketing effect,,,user innovation network,,,
-embedded lead user,open innovation,,,,,,
-market information processing,,,,,,,
-organizational behavior,,,,,,,
-organizational boundary,,,,,,,
-sticky knowledge,,,,,,,
+maroon,teal,gold,blue,green,red,orange,yellow
+appropriability regime,user innovation,benefit,case study,collective invention,complementarity,diffusion failure,embedded lead user
+disruptive innovation,boundary spanner,community-based innovation,driver,commons-based peer production,division of innovative labor,effort to sell,market information processing
+environmental turbulence,identification,consistency,dynamic analysi,comparative analysi,externality,eudaimonic motivation,organizational behavior
+functional novelty,innovation,contingency factor,impediment,crowdsourcing,social welfare,free revealing,organizational boundary
+radical innovation,job satisfaction,cost,user community,distributed innovation,user innovation paradigm,identity perspective,sticky knowledge
+,commercial diffusion,innovation effect,diffusion,free revealing of information,user-producer interaction,makerspace,
+,general value,innovation management,professionalism,innovation model,,nurse innovation,
+,market failure,manufacturer strategy,social network,open source,,,
+,peer-to-peer diffusion,marketing effect,,user innovation network,,,
+,innovative work behavior,open innovation,,,,,
+,job autonomy,,,,,,
+,self-efficacy,,,,,,
+,work process-related lead usernes,,,,,,

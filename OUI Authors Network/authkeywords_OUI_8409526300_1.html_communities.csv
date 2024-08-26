@@ -1,7 +1,8 @@
-maroon,orange,gold,teal
-adoption,diffusion,user innovation,innovative work behavior
-consumer innovation,personality,diffusion failure,job autonomy
-free innovation,product solution,makerspace,self-efficacy
-market failure,professionalism,nurse innovation,work process-related lead usernes
-,social network,,
-,user community,,
+maroon,teal,gold,orange
+adoption,user innovation,professionalism,diffusion failure
+consumer innovation,innovative work behavior,social network,effort to sell
+diffusion,job autonomy,user community,eudaimonic motivation
+free innovation,self-efficacy,,free revealing
+market failure,work process-related lead usernes,,identity perspective
+personality,,,makerspace
+product solution,,,nurse innovation

@@ -1,6 +1,8 @@
-green,gold,red,maroon,teal,orange,yellow
-appropriability regime,user innovation,commercial diffusion,customer integration,diffusion,finland,innovative work behavior
-disruptive innovation,diffusion failure,general value,management tool,professionalism,firm-level,job autonomy
-environmental turbulence,makerspace,market failure,new service development,social network,innovation diffusion,self-efficacy
-functional novelty,nurse innovation,peer-to-peer diffusion,user-driven innovation,user community,innovation transfer,work process-related lead usernes
-radical innovation,,,,,survey,
+maroon,teal,gold,orange,yellow,red,green
+appropriability regime,user innovation,commercial diffusion,diffusion,diffusion failure,finland,innovative work behavior
+disruptive innovation,customer integration,general value,professionalism,effort to sell,firm-level,job autonomy
+environmental turbulence,management tool,market failure,social network,eudaimonic motivation,innovation diffusion,self-efficacy
+functional novelty,new service development,peer-to-peer diffusion,user community,free revealing,innovation transfer,work process-related lead usernes
+radical innovation,user-driven innovation,,,identity perspective,survey,
+,,,,makerspace,,
+,,,,nurse innovation,,

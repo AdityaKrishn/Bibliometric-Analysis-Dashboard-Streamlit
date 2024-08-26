@@ -282,8 +282,8 @@ function highlightFilter(filter) {
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": "maroon", "id": "crowdsourcing", "label": "crowdsourcing", "shape": "dot", "size": 2, "title": "crowdsourcing : 2"}, {"color": "maroon", "id": "open innovation", "label": "open innovation", "shape": "dot", "size": 3, "title": "open innovation : 3"}]);
-                  edges = new vis.DataSet([{"color": "silver", "from": "crowdsourcing", "symbol": "square", "title": "crowdsourcing,open innovation,2", "to": "open innovation", "value": 2, "width": 2}]);
+                  nodes = new vis.DataSet([{"color": "maroon", "id": "crowdsourcing", "label": "crowdsourcing", "shape": "dot", "size": 2, "title": "crowdsourcing : 2"}, {"color": "maroon", "id": "open innovation", "label": "open innovation", "shape": "dot", "size": 3, "title": "open innovation : 3"}, {"color": "maroon", "id": "user innovation", "label": "user innovation", "shape": "dot", "size": 2, "title": "user innovation : 2.0"}]);
+                  edges = new vis.DataSet([{"color": "silver", "from": "crowdsourcing", "symbol": "triangle-up", "title": "crowdsourcing,open innovation,2", "to": "open innovation", "value": 2, "width": 2}, {"color": "silver", "from": "open innovation", "symbol": "cross", "title": "open innovation,user innovation,1", "to": "user innovation", "value": 1, "width": 1}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });

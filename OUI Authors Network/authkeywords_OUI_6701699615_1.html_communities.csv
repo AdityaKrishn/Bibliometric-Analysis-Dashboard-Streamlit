@@ -1,20 +1,14 @@
-maroon,teal,gold,orange,green,yellow,red,purple,blue
-appropriability regime,user innovation,brand value,commercial diffusion,community,complementarity,consumer innovation,heterogeneous market,intrinsic motivation
-disruptive innovation,collaborative innovation,innovation community,general value,dominant design,division of innovative labor,diffusion,local information,open source software
-environmental turbulence,modularity,product diffusion,market failure,industry evolution,externality,household sector innovation,mass customization,user support
-functional novelty,open innovation,user-generated brand,peer-to-peer diffusion,real option,social welfare,measurement,specialization in problem solving,virtual community
-radical innovation,diffusion failure,,,,user innovation paradigm,need-solution pair,sticky information,product development
-,makerspace,,,,user-producer interaction,personality,task partitioning,toolkit
-,nurse innovation,,,,,problem-solving,,need heterogeneity
-,efficiency measurement,,,,,product solution,,
-,industry development,,,,,research and development,,
-,free revealing,,,,,professionalism,,
-,innovation diffusion,,,,,social network,,
-,innovation measurement,,,,,user community,,
-,innovation transfer,,,,,free innovation,,
-,innovative work behavior,,,,,,,
-,job autonomy,,,,,,,
-,self-efficacy,,,,,,,
-,work process-related lead usernes,,,,,,,
-,service development,,,,,,,
-,service innovation,,,,,,,
+maroon,teal,gold,orange,green,red,blue,purple,pink,yellow
+appropriability regime,user innovation,commercial diffusion,community,complementarity,consumer innovation,diffusion failure,heterogeneous market,innovative work behavior,intrinsic motivation
+disruptive innovation,brand value,general value,dominant design,division of innovative labor,diffusion,effort to sell,local information,job autonomy,open source software
+environmental turbulence,innovation community,market failure,industry evolution,externality,household sector innovation,eudaimonic motivation,mass customization,self-efficacy,user support
+functional novelty,product diffusion,peer-to-peer diffusion,real option,social welfare,measurement,free revealing,specialization in problem solving,work process-related lead usernes,virtual community
+radical innovation,user-generated brand,,,user innovation paradigm,need-solution pair,identity perspective,sticky information,,product development
+,collaborative innovation,,,user-producer interaction,personality,makerspace,task partitioning,,toolkit
+,modularity,,,,problem-solving,nurse innovation,,,need heterogeneity
+,open innovation,,,,product solution,innovation diffusion,,,
+,efficiency measurement,,,,research and development,innovation measurement,,,
+,industry development,,,,professionalism,innovation transfer,,,
+,service development,,,,social network,,,,
+,service innovation,,,,user community,,,,
+,,,,,free innovation,,,,

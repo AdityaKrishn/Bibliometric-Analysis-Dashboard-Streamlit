@@ -1,20 +1,15 @@
-maroon,teal
-academy of management perspectives,long range planning
-american economic review,creativity and innovation management
-business horizons,european journal of innovation management
-ieee transactions on engineering management,industrial marketing management
-international journal of technology management,international journal of innovation management
-journal of industrial economics,journal of applied psychology
-journal of retailing,journal of business research
-r&d management,journal of marketing
-california management review,mit sloan management review
-harvard business review,organizational behavior and human decision processes
-journal of the academy of marketing science,technological forecasting and social change
-journal of consumer research,
-marketing science,
-technovation,
-european journal of marketing,
-journal of economic behavior and organization,
-journal of marketing research,
-management science,
-organization science,
+maroon,gold,teal
+academy of management perspectives,long range planning,american economic review
+journal of industrial economics,creativity and innovation management,business horizons
+harvard business review,european journal of innovation management,ieee transactions on engineering management
+journal of economic behavior and organization,industrial marketing management,international journal of technology management
+management science,international journal of innovation management,journal of retailing
+organization science,journal of applied psychology,r&d management
+,journal of business research,california management review
+,mit sloan management review,journal of the academy of marketing science
+,organizational behavior and human decision processes,journal of consumer research
+,technological forecasting and social change,journal of marketing
+,,marketing science
+,,technovation
+,,european journal of marketing
+,,journal of marketing research
