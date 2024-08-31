@@ -46,9 +46,11 @@ with st.container():
     col1, col2 = st.columns(2, gap="large")
     with col1:
         st.subheader("Top 15 authors by number of papers listed in OUI Elder's publications")
+        st.info("Only publications where the author is listed as the first author are considered.")
         st.altair_chart(alt.Chart(dict['top_authors']).mark_bar().encode(x=alt.X('creator', sort=None), y='count'), use_container_width=True)
     with col2:
         st.subheader("Top 15 citers by number of papers listed in OUI Elder's citations")
+        st.info("Only publications where the author is listed as the first author are considered.")
         st.altair_chart(alt.Chart(dict['top_citers']).mark_bar().encode(x=alt.X('creator', sort=None), y='count'), use_container_width=True)
 
 with st.container():
