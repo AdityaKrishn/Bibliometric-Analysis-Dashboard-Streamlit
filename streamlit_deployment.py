@@ -540,6 +540,8 @@ with st.container():
     filtered_author_db = filtered_author_db.rename(columns={'cover_year': 'Year', 'citedby_count': 'Citations', 'authkeywords': 'Keywords', 'publicationName': 'Journal', 'author_names': 'Authors', 'affilname': 'Affiliations', 'title': 'Title', 'doi': 'DOI', 'description': 'Abstract'})
     # filtered_author_db = filtered_author_db[['DOI', 'Title', 'Authors', 'Year', 'Journal', 'Keywords', 'Citations', 'Abstract']]
     filtered_author_db = filtered_author_db[['DOI', 'Title', 'Authors', 'Email', 'Year', 'Journal', 'Keywords', 'Abstract']]
+    #sort filtered_author_db by Title 
+    filtered_author_db = filtered_author_db.sort_values(by='Title')
     st.info("Note: To see the full text of a particular cell, double click on that particular cell.")
     st.dataframe(filtered_author_db, hide_index=True)
     st.write("Number of papers authored/co-authored by the OUI Elders: ", filtered_author_db.shape[0])
@@ -577,6 +579,8 @@ with st.container():
     filtered_citation_db = filtered_citation_db.rename(columns={'cover_year': 'Year', 'citedby_count': 'Citations', 'authkeywords': 'Keywords', 'publicationName': 'Journal', 'author_names': 'Authors', 'affilname': 'Affiliations', 'title': 'Title', 'doi': 'DOI', 'description': 'Abstract'})
     # filtered_citation_db = filtered_citation_db[['DOI', 'Title', 'Authors', 'Year', 'Journal', 'Keywords', 'Citations', 'Abstract']]
     filtered_citation_db = filtered_citation_db[['DOI', 'Title', 'Authors', 'Email', 'Year', 'Journal', 'Keywords', 'Abstract']]
+    #sort filtered_citation_db by Title
+    filtered_citation_db = filtered_citation_db.sort_values(by='Title')
     st.info("Note: To see the full text of a particular cell, double click on that particular cell.")
     st.dataframe(filtered_citation_db, hide_index=True)
 
