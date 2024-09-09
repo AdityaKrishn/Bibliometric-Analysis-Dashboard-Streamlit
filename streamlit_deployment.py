@@ -598,10 +598,10 @@ with st.container():
     
     # Move filters to the sidebar
     with st.sidebar:
-        author_filter2 = st.multiselect('Filter by Author', all_authors, key='author_filter2', default=['All'])
-        keyword_filter2 = st.multiselect('Filter by Keyword', all_keywords, key='keyword_filter2', default=['All'])
-        journal_filter2 = st.multiselect('Filter by Journal', all_journals, key='journal_filter2', default=['All'])
-        year_filter2 = st.select_slider('Filter by Year', all_years, value=(min(all_years), max(all_years)), key='year_filter2')
+        author_filter2 = st.multiselect('Filter by Author', all_authors, key='author_filter3', default=['All'])
+        keyword_filter2 = st.multiselect('Filter by Keyword', all_keywords, key='keyword_filter3', default=['All'])
+        journal_filter2 = st.multiselect('Filter by Journal', all_journals, key='journal_filter3', default=['All'])
+        year_filter2 = st.select_slider('Filter by Year', all_years, value=(min(all_years), max(all_years)), key='year_filter3')
 
     # Apply filters
     if author_filter2 == ['All'] and year_filter2 == (min(all_years), max(all_years)) and journal_filter2 == ['All'] and keyword_filter2 == ['All']:
