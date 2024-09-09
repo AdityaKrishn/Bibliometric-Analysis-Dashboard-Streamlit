@@ -587,53 +587,6 @@ with st.container():
     st.write("Number of papers authored/co-authored by the OUI Elders' citers: ", filtered_citation_db.shape[0])
     
     
-####################################
-
-
-
-# Assuming all_authors, all_keywords, all_journals, all_years, top5_papers_citation_db, and filter_author_db are defined elsewhere
-
-with st.container():
-    st.subheader("Below are the details of publications authored/co-authored by the OUI Elder's Citers")
-    
-    # Move filters to the sidebar
-    with st.sidebar:
-        author_filter2 = st.multiselect('Filter by Author', all_authors, key='author_filter3', default=['All'])
-        keyword_filter2 = st.multiselect('Filter by Keyword', all_keywords, key='keyword_filter3', default=['All'])
-        journal_filter2 = st.multiselect('Filter by Journal', all_journals, key='journal_filter3', default=['All'])
-        year_filter2 = st.select_slider('Filter by Year', all_years, value=(min(all_years), max(all_years)), key='year_filter3')
-
-    # Apply filters
-    if author_filter2 == ['All'] and year_filter2 == (min(all_years), max(all_years)) and journal_filter2 == ['All'] and keyword_filter2 == ['All']:
-        filtered_citation_db = top5_papers_citation_db
-    else:
-        filtered_citation_db = filter_author_db(top5_papers_citation_db, author_filter2, year_filter2, journal_filter2, keyword_filter2)
-    
-    # Rename columns
-    filtered_citation_db = filtered_citation_db.rename(columns={
-        'cover_year': 'Year',
-        'citedby_count': 'Citations',
-        'authkeywords': 'Keywords',
-        'publicationName': 'Journal',
-        'author_names': 'Authors',
-        'affilname': 'Affiliations',
-        'title': 'Title',
-        'doi': 'DOI',
-        'description': 'Abstract'
-    })
-    
-    # Select relevant columns
-    filtered_citation_db = filtered_citation_db[['DOI', 'Title', 'Authors', 'Email', 'Year', 'Journal', 'Keywords', 'Abstract']]
-    
-    # Sort by Title
-    filtered_citation_db = filtered_citation_db.sort_values(by='Title')
-    
-    # Display information and dataframe
-    st.info("Note: To see the full text of a particular cell, double click on that particular cell.")
-    st.dataframe(filtered_citation_db, hide_index=True)
-    
-    st.write("Number of papers authored/co-authored by the OUI Elders' citers: ", filtered_citation_db.shape[0])
-
 
 # @st.cache(allow_output_mutation=True)
 # def biblio_graph():
