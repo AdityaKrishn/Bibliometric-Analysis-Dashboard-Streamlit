@@ -435,43 +435,17 @@ else:
             
         except:
             st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
-        with st.expander("Click here to view the communities"):    
-            try:
-                df_html7 = pd.read_csv(os.getcwd()+r'/publicationJournal_citationanalysis_citation_' + filter_option9 + r'.html_communities.csv')
-                # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
-                df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
-                df_html7 = df_html7.dropna(how='all')
-                df_html7 = df_html7.fillna('')
-                st.dataframe(df_html7, hide_index=True)
-            except:
+ 
+        try:
+            df_html7 = pd.read_csv(os.getcwd()+r'/publicationJournal_citationanalysis_citation_' + filter_option9 + r'.html_communities.csv')
+            # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+            df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+            df_html7 = df_html7.dropna(how='all')
+            df_html7 = df_html7.fillna('')
+            st.dataframe(df_html7, hide_index=True)
+        except:
 
-                print(sys.exc_info()[0])
-                
-
-
-            with st.expander("Click here to view the communities"):
-                try:
-                    file_path = os.path.join(os.getcwd(), f'publicationJournal_citationanalysis_citation_{filter_option9}.html_communities.csv')
-                    df_html7 = pd.read_csv(file_path)
-                    
-                    # Rename columns
-                    df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
-                    
-                    # Drop rows where all elements are NaN
-                    df_html7 = df_html7.dropna(how='all')
-                    
-                    # Fill NaN values with empty strings
-                    df_html7 = df_html7.fillna('')
-                    
-                    # Display the dataframe
-                    st.dataframe(df_html7, hide_index=True)
-                except FileNotFoundError:
-                    st.error(f"File not found: {file_path}")
-                except pd.errors.EmptyDataError:
-                    st.error(f"No data: {file_path} is empty or corrupted")
-                except Exception as e:
-                    st.error(f"An error occurred: {e}")
-                    print(sys.exc_info()[0])
+            print(sys.exc_info()[0])
 
 # with st.container():   
 #     st.subheader("Bibliographic coupling Network of Publication Journals")   
