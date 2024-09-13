@@ -438,6 +438,9 @@ else:
  
         # Your existing code wrapped in an expander
         with st.expander("Show DataFrame", expanded=False):
+            st.write("Dataframe is shown below:")
+            st.write("This is inside the expander")
+            st.dataframe(pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]}))
             try:
                 df_html7 = pd.read_csv(os.getcwd() + r'/publicationJournal_citationanalysis_citation_' + filter_option9 + r'.html_communities.csv')
                 # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
@@ -445,8 +448,10 @@ else:
                 df_html7 = df_html7.dropna(how='all')
                 df_html7 = df_html7.fillna('')
                 st.dataframe(df_html7, hide_index=True)
-            except:
-                print(sys.exc_info()[0])
+            except FileNotFoundError as e:
+                st.error(f"File not found: {str(e)}.")
+            except Exception as e:
+                st.error(f"An error occurred while loading the DataFrame: {str(e)}.")
 # with st.container():   
 #     st.subheader("Bibliographic coupling Network of Publication Journals")   
 #     st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
