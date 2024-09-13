@@ -437,7 +437,7 @@ else:
             st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
  
         # Your existing code wrapped in an expander
-        with st.expander("Show DataFrame"):
+        with st.expander("Show DataFrame", expanded=False):
             try:
                 df_html7 = pd.read_csv(os.getcwd() + r'/publicationJournal_citationanalysis_citation_' + filter_option9 + r'.html_communities.csv')
                 # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
