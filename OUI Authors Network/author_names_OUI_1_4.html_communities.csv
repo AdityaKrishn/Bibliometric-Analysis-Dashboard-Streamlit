@@ -1,17 +1,19 @@
-purple,teal,red,green,pink,gold,brown,maroon,orange,yellow,blue
-"altman, elizabeth j.","amft, andré","baldwin, carliss","balka, kerstin","raasch, christina","bradonjic, philip","lüthje, christian","felin, teppo","füller, johann","haefliger, stefan","jeppesen, lars bo"
-"szulanski, gabriel","diener, kathleen","hienerth, christoph","herstatt, cornelius","de jong, jeroen p.j.","franke, nikolaus","ebbing, tobias","lakhani, karim r.","jawecki, gregor","jäger, peter","frederiksen, lars"
-"von hippel, eric","lüttgens, dirk","keinz, peter","block, jörn h.","flowers, stephen","klausberger, katharina","goduscheit, rené chester","tushman, michael l.","matzler, kurt","von krogh, georg",
-"chen, jin","piller, frank t.","gemünden, hans georg","henkel, joachim","gault, fred","reinsberger, kathrin","jørgensen, jacob høj","west, joel","mühlbacher, hans",,
-"su, yu shan","ihl, christoph","killen, catherine p.","schweisfurth, tim g.","gillert, nils lennart","schirg, florian","hinsch, mareike e.",,"schroll, roland",,
-"friedmann, jens christian","vossen, alexander","sicotte, hélène","stiegler, annika","kuusisto, jari","schreier, martin","stockstrom, christoph s.",,,,
-"wu, nety","kleer, robin","berg jensen, morten","lock, phillip","poldervaart, sabrine","nishikawa, hidehiko","morrison, pamela d.",,,,
-"oliveira, pedro","pollok, patrick","lettl, christopher","lehnen, jens","rigtering, coen","ogawa, susumu","roberts, john h.",,,,
-"euchner, jim",,,"schmidt, tobias sebastian","spaans, lara","pongtanalert, kritinee","tietz, robert",,,,
-"katz, ralph",,,"pieper, thorsten","stock, ruth maria",,,,,,
-"kaulartz, sandro",,,"preißner, stephanie","gambardella, alfonso",,,,,,
-"paradiso, joseph a.",,,"skiba, florian","kuusisto, arja",,,,,,
-,,,"tietze, frank","yli-viitala, pirjo",,,,,,
-,,,"wellner, konstantin","mulhuijzen, max",,,,,,
-,,,"zaggl, michael a.","wu, chia huei",,,,,,
-,,,,"yu, xin",,,,,,
+orange,pink,gold,yellow,green,purple,maroon,teal,red,blue,brown
+"altman, elizabeth j.","amft, andré","baldwin, carliss*","balka, kerstin","bradonjic, philip","lüthje, christian*","chen, jin","felin, teppo","füller, johann*","haefliger, stefan","jeppesen, lars bo*"
+"szulanski, gabriel","diener, kathleen","hienerth, christoph*","herstatt, cornelius*","franke, nikolaus*","ebbing, tobias","de jong, jeroen p.j.*","lakhani, karim r.*","jawecki, gregor","jäger, peter","frederiksen, lars"
+"von hippel, eric*","lüttgens, dirk","keinz, peter","raasch, christina*","klausberger, katharina","goduscheit, rené chester","su, yu shan","tushman, michael l.","matzler, kurt","von krogh, georg*",
+"gillert, nils lennart","piller, frank t.*","gemünden, hans georg","block, jörn h.","reinsberger, kathrin","jørgensen, jacob høj","flowers, stephen","west, joel","mühlbacher, hans",,
+"stock, ruth maria*","ihl, christoph","killen, catherine p.","henkel, joachim*","schirg, florian","hinsch, mareike e.","gault, fred*",,"schroll, roland",,
+"friedmann, jens christian","vossen, alexander","sicotte, hélène","schweisfurth, tim g.","schreier, martin","stockstrom, christoph s.","kuusisto, jari*",,,,
+"wu, nety","kleer, robin","berg jensen, morten","stiegler, annika","nishikawa, hidehiko","morrison, pamela d.","poldervaart, sabrine",,,,
+"oliveira, pedro","pollok, patrick","lettl, christopher*","gambardella, alfonso","ogawa, susumu*","roberts, john h.","rigtering, coen",,,,
+"euchner, jim",,,"von hippel, eric","pongtanalert, kritinee","tietz, robert","spaans, lara",,,,
+"katz, ralph",,,"lock, phillip",,,"kuusisto, arja",,,,
+"kaulartz, sandro",,,"lehnen, jens",,,"yli-viitala, pirjo",,,,
+"paradiso, joseph a.",,,"schmidt, tobias sebastian",,,"mulhuijzen, max",,,,
+,,,"pieper, thorsten",,,"wu, chia huei",,,,
+,,,"preißner, stephanie",,,"yu, xin",,,,
+,,,"skiba, florian",,,,,,,
+,,,"tietze, frank",,,,,,,
+,,,"wellner, konstantin",,,,,,,
+,,,"zaggl, michael a.",,,,,,,

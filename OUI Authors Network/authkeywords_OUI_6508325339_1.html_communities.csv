@@ -1,14 +1,13 @@
-teal,maroon,orange,green,gold
-age,user innovation,innovation management,appropriability regime,collective invention
-determinant,agile project management,collaboration,disruptive innovation,commons-based peer production
-lead user,agile/stage-gate hybrid,crowdsourcing,environmental turbulence,comparative analysi
-product knowledge,new product development,dynamic,functional novelty,distributed innovation
-silver market,scrum,entrepreneurship,radical innovation,free revealing of information
-technical expertise,stage-gate proces,open source software,service innovation,innovation model
-use experience,case study,organization,service lead user,open source
-innovation in consumer market,driver,organizational aspect,user integration,user innovation network
-innovation proces,dynamic analysi,research and development management,,
-property rights theory,impediment,technology management,,
-separation of ownership and control,user community,user-generated content,,
-user innovation barrier,local information,virtual group,,
-,sticky information,,,
+maroon,teal,gold,orange,green,yellow
+age,user innovation,agile project management,innovation management,appropriability regime,collective invention
+determinant,case study,agile/stage-gate hybrid,collaboration,disruptive innovation,commons-based peer production
+lead user,driver,new product development,crowdsourcing,environmental turbulence,comparative analysi
+product knowledge,dynamic analysi,scrum,dynamic,functional novelty,distributed innovation
+silver market,impediment,stage-gate proces,entrepreneurship,radical innovation,free revealing of information
+technical expertise,user community,,open source software,service innovation,innovation model
+use experience,innovation in consumer market,,organization,service lead user,open source
+property rights theory,innovation proces,,organizational aspect,user integration,user innovation network
+separation of ownership and control,local information,,research and development management,,
+user innovation barrier,sticky information,,technology management,,
+,,,user-generated content,,
+,,,virtual group,,

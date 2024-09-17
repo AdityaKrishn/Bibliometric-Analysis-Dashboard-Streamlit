@@ -1,29 +1,28 @@
-maroon,purple,gold,orange,green,yellow,red,blue,pink,brown,indigo,cyan,magenta,lime,teal
-3d printing,motivation,user innovation,altruism,crowdsourcing,boundary management,case study,commercial diffusion,creativity,differential game,direct and indirect effect,economics of i,end user entrepreneur,entrepreneurship,framing
-digital remixing,application market,articulation,chinese large-scale survey,attention,community,company,consumer innovation,embedded lead user,firm-sponsored online user innovation community,education,it policy and management,entrepreneurial consumer,evolutionary approach,grand challenge
-innovation diffusion theory,business model,domestication,household sector user innovation,ideation,dilemma,comparative study,makerspace,idea quality,heterogeneous product user,gender,open source software,entrepreneurship proces,spinout,moral emotion
-online community,release strategy,script,intrinsic self-reward,open innovation,firm-community collaboration,innovation management,community innovation,internal lead user,incentive reward,personality,productivity of it,user entrepreneurship,strategy and firm performance,responsible innovation
-online innovation community,smartphone operating system,use knowledge,partnership,opennes,paradox,innovation policy,daily practice,lead user,product improvement,survey datum,technology strategy,lead user theory,,serendipity
-remixing,compatibility,canon,,social medium,systems theory,marketing research,innovation behavior,meta-analysi,,,,sme,,open social innovation
-user-generated content,complementarity,critical management study,,success bia,tension,participatory design,russium,moderating effect,,,,,,
-and phrases: online user innovation community,open source,critical performativity,,suggestion,,user centred design,,innovation proces,,,,,,
-co-creation,value capture,critique,,collaboration,,user driven innovation,,key user,,,,,,
-employee innovativenes,value creation,subversive functionalism,,idea competition,,user involvement,,modularisation,,,,,,
-online ideation,innovation ecosystem,creativity and ideation,,new product development,,do-it-yourself,,product architecture,,,,,,
-knowledge,smart home,design cognition,,r&amp;d,,enabling technology,,project management,,,,,,
-sources of innovation,system of use,exaptation,,software development,,product innovation,,software,,,,,,
-theory,diffusion,problem-solving,,toolkit,,social innovation,,online brand community,,,,,,
-,service ecosystem,discourse,,corporate venture capital,,,,video game industry,,,,,,
-,sustainability,open source software development,,innovation,,,,,,,,,,
-,netnography,textuality,,technology entrepreneurship,,,,,,,,,,
-,,distributed innovation,,customer integration,,,,,,,,,,
-,,knowledge sharing,,learning strategy,,,,,,,,,,
-,,performance of oss project,,improvisation,,,,,,,,,,
-,,employee user,,knowledge acquisition,,,,,,,,,,
-,,ethnography,,knowledge utilization,,,,,,,,,,
-,,hiding practice,,user generated content,,,,,,,,,,
-,,military,,,,,,,,,,,,
-,,polouse,,,,,,,,,,,,
+cyan,maroon,blue,green,purple,pink,brown,indigo,magenta,teal,gold,orange,yellow,red,lime
+3d printing,motivation,user innovation,altruism,crowdsourcing,boundary management,canon,case study,commercial diffusion,creativity,creativity and ideation,differential game,economics of i,employee user,framing
+digital remixing,application market,articulation,chinese large-scale survey,attention,community,critical management study,company,consumer innovation,embedded lead user,design cognition,firm-sponsored online user innovation community,it policy and management,ethnography,grand challenge
+innovation diffusion theory,business model,domestication,household sector user innovation,ideation,dilemma,critical performativity,comparative study,makerspace,idea quality,exaptation,heterogeneous product user,open source software,hiding practice,moral emotion
+online community,release strategy,script,intrinsic self-reward,open innovation,firm-community collaboration,critique,innovation management,community innovation,internal lead user,problem-solving,incentive reward,productivity of it,military,responsible innovation
+online innovation community,smartphone operating system,use knowledge,partnership,opennes,paradox,subversive functionalism,innovation policy,daily practice,lead user,,product improvement,technology strategy,polouse,serendipity
+remixing,compatibility,direct and indirect effect,,social medium,systems theory,,marketing research,innovation behavior,meta-analysi,,,,,open social innovation
+user-generated content,complementarity,education,,success bia,tension,,participatory design,russium,moderating effect,,,,,
+and phrases: online user innovation community,open source,gender,,suggestion,,,user centred design,,innovation proces,,,,,
+co-creation,value capture,personality,,collaboration,,,user driven innovation,,key user,,,,,
+employee innovativenes,value creation,survey datum,,idea competition,,,user involvement,,modularisation,,,,,
+online ideation,innovation ecosystem,discourse,,new product development,,,do-it-yourself,,product architecture,,,,,
+knowledge,smart home,open source software development,,r&amp;d,,,enabling technology,,project management,,,,,
+sources of innovation,system of use,textuality,,software development,,,product innovation,,software,,,,,
+theory,diffusion,distributed innovation,,toolkit,,,social innovation,,online brand community,,,,,
+,service ecosystem,knowledge sharing,,corporate venture capital,,,,,video game industry,,,,,
+,sustainability,performance of oss project,,innovation,,,,,,,,,,
+,netnography,end user entrepreneur,,technology entrepreneurship,,,,,,,,,,
+,,entrepreneurial consumer,,customer integration,,,,,,,,,,
+,,entrepreneurship proces,,learning strategy,,,,,,,,,,
+,,user entrepreneurship,,improvisation,,,,,,,,,,
+,,entrepreneurship,,knowledge acquisition,,,,,,,,,,
+,,evolutionary approach,,knowledge utilization,,,,,,,,,,
+,,spinout,,user generated content,,,,,,,,,,
+,,strategy and firm performance,,,,,,,,,,,,
 ,,facilitation,,,,,,,,,,,,
 ,,healthcare,,,,,,,,,,,,
 ,,organisational support mechanism,,,,,,,,,,,,
@@ -31,6 +30,8 @@ theory,diffusion,problem-solving,,toolkit,,social innovation,,online brand commu
 ,,interaction,,,,,,,,,,,,
 ,,network,,,,,,,,,,,,
 ,,product development,,,,,,,,,,,,
+,,lead user theory,,,,,,,,,,,,
+,,sme,,,,,,,,,,,,
 ,,moderation,,,,,,,,,,,,
 ,,organisational context,,,,,,,,,,,,
 ,,radical innovation performance,,,,,,,,,,,,

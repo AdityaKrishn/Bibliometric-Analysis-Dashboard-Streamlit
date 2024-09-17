@@ -1,32 +1,27 @@
-purple,teal,gold,green,orange,blue,pink,maroon,yellow,red,brown,indigo
-3d community,user innovation,application market,articulation,asymmetric equilibrium,canon,clinician,co-creation,creativity,crowdfunding,customer-perceived value,employee user
-3d printing,appropriability regime,business model,domestication,compatibility choice,critical management study,healthcare,customization toolkit,embedded lead user,crowdfunding platform,opinion mining,ethnography
-collaboration,disruptive innovation,motivation,script,network effect,critical performativity,innovation,knowledge,idea quality,crowdsourcing,structural equation model,hiding practice
-diffusion,environmental turbulence,release strategy,use knowledge,open innovation,critique,innovation policy,leading edge statu,internal lead user,entrepreneurship,technology assessment,military
-ideal type,functional novelty,smartphone operating system,,open standard,subversive functionalism,makerspace,personalization,lead user,user community,technology strategy,polouse
-user entrepreneurship,radical innovation,,,open-source software,,diffusion failure,social networking service,innovation diffusion proce,user entrepreneur,economics of i,
-case study,copyright,,,openness choice,,effort to sell,sources of innovation,opinion leadership,professionalism,it policy and management,
-commercialization of user innovation,derivative work,,,spillover,,eudaimonic motivation,theory,source of innovation,social network,open source software,
-vertical diversification,dōjinshi,,,attention,,free revealing,,lead user method,,productivity of it,
-,developing country,,,ideation,,identity perspective,,lead user workshop,,,
-,mobile banking service,,,openne,,nurse innovation,,online brand community,,,
-,technology diffusion,,,social medium,,do-it-yourself,,toolkit,,,
-,direct and indirect effect,,,success bium,,enabling technology,,user involvement,,,
-,education,,,suggestion,,product innovation,,video game industry,,,
-,gender,,,consumer policy,,social innovation,,,,,
-,personality,,,moab model,,facilitation,,,,,
-,survey datum,,,sustainable innovation,,organisational support mechanism,,,,,
-,firm-user collaboration,,,user,,public hospital,,,,,
-,innovation management,,,end-user,,,,,,,
-,innovation strategy,,,policy,,,,,,,
-,review,,,policymaker,,,,,,,
-,inefficiency,,,,,,,,,,
-,product diversity,,,,,,,,,,
-,social welfare,,,,,,,,,,
-,innovative work behavior,,,,,,,,,,
-,job autonomy,,,,,,,,,,
-,self-efficacy,,,,,,,,,,
-,work process-related lead userne,,,,,,,,,,
-,interaction,,,,,,,,,,
-,network,,,,,,,,,,
-,product development,,,,,,,,,,
+maroon,teal,gold,orange,green,yellow,blue,brown,cyan,red,pink,purple,indigo
+3d community,user innovation,application market,appropriability regime,articulation,asymmetric equilibrium,canon,clinician,co-creation,creativity,crowdfunding,customer-perceived value,direct and indirect effect
+3d printing,copyright,business model,disruptive innovation,domestication,compatibility choice,critical management study,healthcare,customization toolkit,embedded lead user,crowdfunding platform,opinion mining,education
+collaboration,derivative work,motivation,environmental turbulence,script,network effect,critical performativity,innovation,knowledge,idea quality,crowdsourcing,structural equation model,gender
+diffusion,dōjinshi,release strategy,functional novelty,use knowledge,open innovation,critique,innovation policy,leading edge statu,internal lead user,entrepreneurship,technology assessment,personality
+ideal type,developing country,smartphone operating system,radical innovation,,open standard,subversive functionalism,makerspace,personalization,lead user,user community,technology strategy,survey datum
+user entrepreneurship,mobile banking service,,,,open-source software,,diffusion failure,social networking service,innovation diffusion proce,user entrepreneur,economics of i,
+case study,technology diffusion,,,,openness choice,,effort to sell,sources of innovation,opinion leadership,professionalism,it policy and management,
+commercialization of user innovation,employee user,,,,spillover,,eudaimonic motivation,theory,source of innovation,social network,open source software,
+vertical diversification,ethnography,,,,attention,,free revealing,,lead user method,,productivity of it,
+,hiding practice,,,,ideation,,identity perspective,,lead user workshop,,,
+,military,,,,openne,,nurse innovation,,online brand community,,,
+,polouse,,,,social medium,,do-it-yourself,,toolkit,,,
+,firm-user collaboration,,,,success bium,,enabling technology,,user involvement,,,
+,innovation management,,,,suggestion,,product innovation,,video game industry,,,
+,innovation strategy,,,,consumer policy,,social innovation,,,,,
+,review,,,,moab model,,facilitation,,,,,
+,inefficiency,,,,sustainable innovation,,organisational support mechanism,,,,,
+,product diversity,,,,user,,public hospital,,,,,
+,social welfare,,,,end-user,,,,,,,
+,innovative work behavior,,,,policy,,,,,,,
+,job autonomy,,,,policymaker,,,,,,,
+,self-efficacy,,,,,,,,,,,
+,work process-related lead userne,,,,,,,,,,,
+,interaction,,,,,,,,,,,
+,network,,,,,,,,,,,
+,product development,,,,,,,,,,,

@@ -1,13 +1,13 @@
-blue,gold,orange,green,red,maroon,yellow,teal
-3d printing,altruism,behavioral innovation,clinician,creative maker,creativity,crowdfunding platform,diffusion
-digital remixing,chinese large-scale survey,feminist economic,healthcare,economic incentive,embedded lead user,human capital,innovation ecosystem
-motivation,household sector user innovation,household sector innovation,innovation,entrepreneurial maker,idea quality,self-determination theory,service ecosystem
-online community,intrinsic self-reward,innovation diffusion,innovation policy,product popularity,internal lead user,social capital,sustainability
+teal,gold,orange,green,red,blue,maroon,yellow
+3d printing,altruism,behavioral innovation,clinician,creative maker,creativity,crowdfunding platform,firm-user collaboration
+digital remixing,chinese large-scale survey,feminist economic,healthcare,economic incentive,embedded lead user,human capital,innovation management
+motivation,household sector user innovation,household sector innovation,innovation,entrepreneurial maker,idea quality,self-determination theory,innovation strategy
+online community,intrinsic self-reward,innovation diffusion,innovation policy,product popularity,internal lead user,social capital,review
 user innovation,partnership,technique innovation,makerspace,product productivity,lead user,user entrepreneurship,
-firm-user collaboration,,,collaboration,social incentive,crowdsourcing,digital technology,
-innovation management,,,commercial diffusion,,netnography,odds-ratio,
-innovation strategy,,,consumer innovation,,social medium,social venture,
-review,,,community innovation,,,lead user theory,
+diffusion,,,collaboration,social incentive,crowdsourcing,digital technology,
+innovation ecosystem,,,commercial diffusion,,netnography,odds-ratio,
+service ecosystem,,,consumer innovation,,social medium,social venture,
+sustainability,,,community innovation,,,lead user theory,
 grand challenge,,,daily practice,,,sme,
 open social innovation,,,innovation behavior,,,,
 market entry strategy,,,russium,,,,

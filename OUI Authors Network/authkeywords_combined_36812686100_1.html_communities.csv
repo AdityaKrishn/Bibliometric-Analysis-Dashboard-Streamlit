@@ -1,27 +1,26 @@
-maroon,teal,blue,orange,green,purple,pink,red,gold,yellow,brown
-acquisition mechanism,crowdsourcing,user innovation,altruism,appropriability regime,collaboration,consumer innovation,community-based innovation,crowdfunding platform,customer-active paradigm,evolutionary approach
-idea competition,co-creation,handicraft,chinese large-scale survey,disruptive innovation,commercial diffusion,community innovation,consumer innovator,human capital,literature review,knowledge-based view
-innovation contest,customer integration,product development,household sector user innovation,environmental turbulence,innovation policy,daily practice,user community,self-determination theory,user toolkits for innovation,patents and intellectual property right
-innovation tournament,idea generation,cocreation,intrinsic self-reward,functional novelty,makerspace,innovation behavior,diffusion,social capital,,technology and innovation management
-intelligence,innovation,fashion,partnership,radical innovation,diffusion failure,russium,innovation ecosystem,user entrepreneurship,,
-open innovation,knowledge,luxury brand,,,effort to sell,diffusion of innovation,professionalism,,,
-public relation,market performance,social comparison,,,eudaimonic motivation,online innovation community,service ecosystem,,,
-external knowledge,new product development,entrepreneurship,,,free revealing,renewable energy,social network,,,
-innovation performance,product design,equity crowdfunding,,,identity perspective,,sustainability,,,
-interaction method,sources of innovation,randomized field experiment,,,nurse innovation,,,,,
-user involvement,theory,statistical discrimination,,,do-it-yourself,,,,,
-open evaluation,user design,financial software innovation,,,enabling technology,,,,,
-innovation rarene,user-generated product,impulse response function (irf) analysi,,,product innovation,,,,,
-user innovation community,competition,knowledge sourcing,,,social innovation,,,,,
-user innovation evaluation,contest,vector autoregressive (var) model,,,,,,,,
-market entry strategy,new product,flow,,,,,,,,
-user-designed product,consumer preference,motivation,,,,,,,,
+blue,maroon,red,orange,pink,purple,brown,teal,gold,green,yellow
+acquisition mechanism,crowdsourcing,user innovation,altruism,collaboration,consumer innovation,community-based innovation,crowdfunding platform,customer-active paradigm,entrepreneurship,evolutionary approach
+idea competition,co-creation,appropriability regime,chinese large-scale survey,commercial diffusion,community innovation,consumer innovator,human capital,literature review,equity crowdfunding,knowledge-based view
+innovation contest,customer integration,disruptive innovation,household sector user innovation,innovation policy,daily practice,user community,self-determination theory,user toolkits for innovation,randomized field experiment,patents and intellectual property right
+innovation tournament,handicraft,environmental turbulence,intrinsic self-reward,makerspace,innovation behavior,diffusion,social capital,,statistical discrimination,technology and innovation management
+intelligence,idea generation,functional novelty,partnership,diffusion failure,russium,innovation ecosystem,user entrepreneurship,,,
+open innovation,innovation,radical innovation,,effort to sell,diffusion of innovation,professionalism,,,,
+public relation,knowledge,cocreation,,eudaimonic motivation,online innovation community,service ecosystem,,,,
+external knowledge,market performance,fashion,,free revealing,renewable energy,social network,,,,
+innovation performance,new product development,luxury brand,,identity perspective,,sustainability,,,,
+interaction method,product design,social comparison,,nurse innovation,,,,,,
+user involvement,product development,lead user,,do-it-yourself,,,,,,
+open evaluation,sources of innovation,netnography,,enabling technology,,,,,,
+innovation rarene,theory,social medium,,product innovation,,,,,,
+user innovation community,user design,financial software innovation,,social innovation,,,,,,
+user innovation evaluation,user-generated product,impulse response function (irf) analysi,,,,,,,,
+market entry strategy,competition,knowledge sourcing,,,,,,,,
+user-designed product,contest,vector autoregressive (var) model,,,,,,,,
+,new product,flow,,,,,,,,
+,consumer preference,motivation,,,,,,,,
 ,corporate association,online community,,,,,,,,
 ,open source software,web 2.0,,,,,,,,
 ,social identity,innovation measurement,,,,,,,,
 ,corporate venture capital,patent,,,,,,,,
 ,technology entrepreneurship,sectoral system,,,,,,,,
-,lead user,semiconductor industry,,,,,,,,
-,netnography,,,,,,,,,
-,social medium,,,,,,,,,
-,learning strategy,,,,,,,,,
+,learning strategy,semiconductor industry,,,,,,,,

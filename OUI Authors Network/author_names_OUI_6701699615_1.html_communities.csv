@@ -1,16 +1,16 @@
-maroon,gold,green,orange,teal
-"altman, elizabeth j.","baldwin, carliss","chen, jin","herstatt, cornelius","stock, ruth maria"
-"szulanski, gabriel","hienerth, christoph","de jong, jeroen p.j.","lüthje, christian","gillert, nils lennart"
-"friedmann, jens christian","von hippel, eric","su, yu shan",,
-"wu, nety","franke, nikolaus","flowers, stephen",,
-,"schreier, martin","gault, fred",,
-,"füller, johann","kuusisto, jari",,
-,"schroll, roland","raasch, christina",,
-,"berg jensen, morten","gambardella, alfonso",,
-,"lakhani, karim r.",,,
-,"morrison, pamela d.",,,
+maroon,gold,orange,teal,green
+"altman, elizabeth j.","baldwin, carliss*","chen, jin","franke, nikolaus*","füller, johann*"
+"szulanski, gabriel","hienerth, christoph*","de jong, jeroen p.j.*","schreier, martin","schroll, roland"
+"friedmann, jens christian","von hippel, eric*","su, yu shan",,
+"wu, nety","herstatt, cornelius*","flowers, stephen",,
+,"berg jensen, morten","gault, fred*",,
+,"lakhani, karim r.*","kuusisto, jari*",,
+,"lüthje, christian*","raasch, christina*",,
+,"morrison, pamela d.","gambardella, alfonso",,
 ,"roberts, john h.",,,
 ,"oliveira, pedro",,,
+,"stock, ruth maria*",,,
+,"gillert, nils lennart",,,
 ,"euchner, jim",,,
 ,"katz, ralph",,,
 ,"kaulartz, sandro",,,
