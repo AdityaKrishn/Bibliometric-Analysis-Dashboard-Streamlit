@@ -158,7 +158,7 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
             except:
                 st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")    
             try:
-                st.info("Note: OUI Elders are marked with * to make them more identifiable.")
+                st.info("Note: OUI Elders are marked with '*' to make them more identifiable.")
                 df_html3 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_combined_' + option +r"_"+filter_option2+ r'.html_communities.csv')
                 # df_html3 = df_html3.reindex(sorted(df_html3.columns), axis=1)
                 df_html3.columns = ['cluster ' + str(col) for col in df_html3.columns]
@@ -211,7 +211,7 @@ elif option_3 == 'OUI Elders publications only':
             except:
                 st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
             try:
-                st.info("Note: OUI Elders are marked with * to make them more identifiable.")
+                st.info("Note: OUI Elders are marked with '*' to make them more identifiable.")
                 df_html1 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_OUI_' + option +r"_"+filter_option4+ r'.html_communities.csv')
                 # df_html1 = df_html1.reindex(sorted(df_html1.columns), axis=1)
                 df_html1.columns = ['cluster ' + str(col) for col in df_html1.columns]
@@ -263,7 +263,7 @@ else:
             except:
                 st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
             try:
-                st.info("Note: OUI Elders are marked with * to make them more identifiable.")
+                st.info("Note: OUI Elders are marked with '*' to make them more identifiable.")
                 df_html2 = pd.read_csv(os.getcwd()+r'/OUI Authors Network/author_names_citation_' + option +r"_"+filter_option6+ r'.html_communities.csv')
                 # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
                 df_html2.columns = ['cluster ' + str(col) for col in df_html2.columns]
