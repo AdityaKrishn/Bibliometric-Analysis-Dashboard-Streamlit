@@ -141,7 +141,8 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
                 df_html6.columns = ['cluster ' + str(col) for col in df_html6.columns]
                 df_html6 = df_html6.dropna(how='all')
                 df_html6 = df_html6.fillna('')
-                st.dataframe(df_html6, hide_index=True)
+                with st.expander("Show Cluster", expanded=False):
+                    st.dataframe(df_html6, hide_index=True)
             except:
                 print(sys.exc_info()[0])
 
@@ -164,7 +165,8 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
                 df_html3.columns = ['cluster ' + str(col) for col in df_html3.columns]
                 df_html3 = df_html3.dropna(how='all')
                 df_html3 = df_html3.fillna('')
-                st.dataframe(df_html3, hide_index=True)
+                with st.expander("Show Cluster", expanded=False):
+                    st.dataframe(df_html3, hide_index=True)
             except:
 
                 print(sys.exc_info()[0])
@@ -191,7 +193,8 @@ elif option_3 == 'OUI Elders publications only':
                 df_html4.columns = ['cluster ' + str(col) for col in df_html4.columns]
                 df_html4 = df_html4.dropna(how='all')
                 df_html4 = df_html4.fillna('')
-                st.dataframe(df_html4, hide_index=True)
+                with st.expander("Show Cluster", expanded=False):
+                    st.dataframe(df_html4, hide_index=True)
             except:
 
                 print(sys.exc_info()[0])
@@ -217,7 +220,8 @@ elif option_3 == 'OUI Elders publications only':
                 df_html1.columns = ['cluster ' + str(col) for col in df_html1.columns]
                 df_html1 = df_html1.dropna(how='all')
                 df_html1 = df_html1.fillna('')
-                st.dataframe(df_html1, hide_index=True)
+                with st.expander("Show Cluster", expanded=False):
+                    st.dataframe(df_html1, hide_index=True)
             except:
 
                 print(sys.exc_info()[0])
@@ -243,7 +247,8 @@ else:
                 df_html5.columns = ['cluster ' + str(col) for col in df_html5.columns]
                 df_html5 = df_html5.dropna(how='all')
                 df_html5 = df_html5.fillna('')
-                st.dataframe(df_html5, hide_index=True)
+                with st.expander("Show Cluster", expanded=False):
+                    st.dataframe(df_html5, hide_index=True)
             except:
 
                 print(sys.exc_info()[0])
@@ -269,7 +274,8 @@ else:
                 df_html2.columns = ['cluster ' + str(col) for col in df_html2.columns]
                 df_html2 = df_html2.dropna(how='all')
                 df_html2 = df_html2.fillna('')
-                st.dataframe(df_html2, hide_index=True)
+                with st.expander("Show Cluster", expanded=False):
+                    st.dataframe(df_html2, hide_index=True)
             except:
 
                 print(sys.exc_info()[0])
@@ -299,7 +305,8 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
             df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
             df_html7 = df_html7.dropna(how='all')
             df_html7 = df_html7.fillna('')
-            st.dataframe(df_html7, hide_index=True)
+            with st.expander("Show Cluster", expanded=False):
+                st.dataframe(df_html7, hide_index=True)
         except:
 
             print(sys.exc_info()[0])
@@ -328,7 +335,8 @@ elif option_3 == 'OUI Elders publications only':
             df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
             df_html7 = df_html7.dropna(how='all')
             df_html7 = df_html7.fillna('')
-            st.dataframe(df_html7, hide_index=True)
+            with st.expander("Show Cluster", expanded=False):
+                st.dataframe(df_html7, hide_index=True)
         except:
 
             print(sys.exc_info()[0])
@@ -357,7 +365,8 @@ else:
             df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
             df_html7 = df_html7.dropna(how='all')
             df_html7 = df_html7.fillna('')
-            st.dataframe(df_html7, hide_index=True)
+            with st.expander("Show Cluster", expanded=False):
+                st.dataframe(df_html7, hide_index=True)
         except:
 
             print(sys.exc_info()[0])
@@ -387,7 +396,8 @@ if option_3 == 'Combination of OUI Elders and their Citers publications combined
             df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
             df_html7 = df_html7.dropna(how='all')
             df_html7 = df_html7.fillna('')
-            st.dataframe(df_html7, hide_index=True)
+            with st.expander("Show Cluster", expanded=False):
+                st.dataframe(df_html7, hide_index=True)
         except:
 
             print(sys.exc_info()[0])
@@ -416,7 +426,8 @@ elif option_3 == 'OUI Elders publications only':
             df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
             df_html7 = df_html7.dropna(how='all')
             df_html7 = df_html7.fillna('')
-            st.dataframe(df_html7, hide_index=True)
+            with st.expander("Show Cluster", expanded=False):
+                st.dataframe(df_html7, hide_index=True)
         except:
 
             print(sys.exc_info()[0])
@@ -450,7 +461,8 @@ else:
             df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
             df_html7 = df_html7.dropna(how='all')
             df_html7 = df_html7.fillna('')
-            st.dataframe(df_html7, hide_index=True)
+            with st.expander("Show Cluster", expanded=False):
+                st.dataframe(df_html7, hide_index=True)
         except FileNotFoundError as e:
             st.error(f"File not found: {str(e)}.")
         except Exception as e:
@@ -567,7 +579,7 @@ all_keywords = ['All'] + sorted(citation_keywords)
 
 
 
-with st.expander("OUI Elders Citers Publications", expanded=False):
+with st.container():
     st.subheader("Below are the details of publications authored/co-authored by the OUI Elder's Citers")
     col1, col2, col3, col4 = st.columns(4)
     with col1:
