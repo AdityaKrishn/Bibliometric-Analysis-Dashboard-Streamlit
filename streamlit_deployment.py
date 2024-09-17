@@ -439,22 +439,22 @@ else:
         except:
             st.text("Due to insufficient data points for the selected option, graph could not be generated. Please select a different filter option.")
  
-        # Your existing code wrapped in an expander
-        with st.expander("Show DataFrame", expanded=False):
-            st.write("Dataframe is shown below:")
-            st.write("This is inside the expander")
-            st.dataframe(pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]}))
-            try:
-                df_html7 = pd.read_csv(os.getcwd() + r'/publicationJournal_citationanalysis_citation_' + filter_option9 + r'.html_communities.csv')
-                # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
-                df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
-                df_html7 = df_html7.dropna(how='all')
-                df_html7 = df_html7.fillna('')
-                st.dataframe(df_html7, hide_index=True)
-            except FileNotFoundError as e:
-                st.error(f"File not found: {str(e)}.")
-            except Exception as e:
-                st.error(f"An error occurred while loading the DataFrame: {str(e)}.")
+        # # Your existing code wrapped in an expander
+        # with st.expander("Show DataFrame", expanded=False):
+        #     st.write("Dataframe is shown below:")
+        #     st.write("This is inside the expander")
+        #     st.dataframe(pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]}))
+        try:
+            df_html7 = pd.read_csv(os.getcwd() + r'/publicationJournal_citationanalysis_citation_' + filter_option9 + r'.html_communities.csv')
+            # df_html2 = df_html2.reindex(sorted(df_html2.columns), axis=1)
+            df_html7.columns = ['cluster ' + str(col) for col in df_html7.columns]
+            df_html7 = df_html7.dropna(how='all')
+            df_html7 = df_html7.fillna('')
+            st.dataframe(df_html7, hide_index=True)
+        except FileNotFoundError as e:
+            st.error(f"File not found: {str(e)}.")
+        except Exception as e:
+            st.error(f"An error occurred while loading the DataFrame: {str(e)}.")
 # with st.container():   
 #     st.subheader("Bibliographic coupling Network of Publication Journals")   
 #     st.info("Two articles are said to be bibliographically coupled if at least one cited source appears in the bibliographies or reference lists of both articles (Kessler, 1963)")  
@@ -567,7 +567,7 @@ all_keywords = ['All'] + sorted(citation_keywords)
 
 
 
-with st.container():
+with st.expander("OUI Elders Citers Publications", expanded=False):
     st.subheader("Below are the details of publications authored/co-authored by the OUI Elder's Citers")
     col1, col2, col3, col4 = st.columns(4)
     with col1:
