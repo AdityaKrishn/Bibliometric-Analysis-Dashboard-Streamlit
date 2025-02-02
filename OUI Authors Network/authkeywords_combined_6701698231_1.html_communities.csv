@@ -1,12 +1,17 @@
-maroon,gold,orange,green,purple,blue,pink,teal,yellow,red
-altruism,behavioral innovation,user innovation,collaboration,consumer innovation,configurational movement,open innovation,cooperation,crowdfunding platform,employee user
-chinese large-scale survey,feminist economic,diffusion,commercial diffusion,community innovation,energy transition,end-user,front end,human capital,ethnography
-household sector user innovation,household sector innovation,innovation ecosystem,innovation policy,daily practice,generalization proce,policy,lead user,self-determination theory,hiding practice
-intrinsic self-reward,innovation diffusion,service ecosystem,makerspace,innovation behavior,heat pump,policymaker,user-manufacturer interaction,social capital,military
-partnership,technique innovation,sustainability,general value,russium,technology diffusion,sustainable innovation,creativity,user entrepreneurship,polouse
-,,firm-user collaboration,market failure,diffusion of innovation,,improvisation,embedded lead user,digital technology,
-,,innovation management,peer-to-peer diffusion,online innovation community,,knowledge acquisition,idea quality,odds-ratio,
-,,innovation strategy,do-it-yourself,renewable energy,,knowledge utilization,internal lead user,social venture,
-,,review,enabling technology,,,user generated content,,end user entrepreneur,
-,,,product innovation,,,,,entrepreneurial consumer,
-,,,social innovation,,,,,entrepreneurship proce,
+maroon,teal,green,orange,yellow,blue,pink,purple,gold,red
+altruism,behavioral innovation,user innovation,consumer innovation,configurational movement,open innovation,cooperation,crowdfunding platform,diffusion,employee user
+chinese large-scale survey,feminist economic,collaboration,community innovation,energy transition,end-user,front end,human capital,innovation ecosystem,ethnography
+household sector user innovation,household sector innovation,commercial diffusion,daily practice,generalization proce,policy,lead user,self-determination theory,service ecosystem,hiding practice
+intrinsic self-reward,innovation diffusion,innovation policy,innovation behavior,heat pump,policymaker,user-manufacturer interaction,social capital,sustainability,military
+partnership,technique innovation,makerspace,russium,technology diffusion,sustainable innovation,creativity,user entrepreneurship,,polouse
+,,general value,diffusion of innovation,,improvisation,embedded lead user,digital technology,,
+,,market failure,online innovation community,,knowledge acquisition,idea quality,odds-ratio,,
+,,peer-to-peer diffusion,renewable energy,,knowledge utilization,internal lead user,social venture,,
+,,do-it-yourself,,,user generated content,,end user entrepreneur,,
+,,enabling technology,,,,,entrepreneurial consumer,,
+,,product innovation,,,,,entrepreneurship proce,,
+,,social innovation,,,,,,,
+,,firm-user collaboration,,,,,,,
+,,innovation management,,,,,,,
+,,innovation strategy,,,,,,,
+,,review,,,,,,,

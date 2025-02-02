@@ -1,12 +1,11 @@
-maroon,teal,orange,gold
-3d printing,collaboration,innovation management,product development
-co-creation,diffusion,user community,open source software
-motivation,user entrepreneurship,crowdsourcing,toolkit
-online community,case study,innovation,
-user innovation,consumer innovation,new product development,
-,,open innovation,
-,,entrepreneurship,
-,,user,
-,,lead user,
-,,open source,
-,,social medium,
+maroon,teal,gold
+3d printing,co-creation,collaboration
+diffusion,crowdsourcing,innovation management
+motivation,innovation,entrepreneurship
+online community,new product development,open source software
+user entrepreneurship,open innovation,user
+user innovation,product development,
+case study,toolkit,
+user community,lead user,
+consumer innovation,social medium,
+open source,,

@@ -1,28 +1,27 @@
-maroon,teal,gold,orange,green,yellow,red,blue,purple,brown,indigo,cyan,magenta,lime,olive,pink
-3d printing,motivation,user innovation,altruism,crowdsourcing,boundary management,canon,case study,commercial diffusion,creativity,differential game,dominant design,economics of i,employee user,end user entrepreneur,framing
-digital remixing,application market,adopters’ creative thinking,chinese large-scale survey,attention,community,critical management study,company,consumer innovation,embedded lead user,firm-sponsored online user innovation community,opinion dynamic,it policy and management,ethnography,entrepreneurial consumer,grand challenge
-innovation diffusion theory,business model,counter-learning communication,household sector user innovation,ideation,dilemma,critical performativity,comparative study,makerspace,idea quality,heterogeneous product user,user interaction,open source software,hiding practice,entrepreneurship proces,moral emotion
-online community,release strategy,mass market adoption,intrinsic self-reward,open innovation,firm-community collaboration,critique,innovation management,community innovation,internal lead user,incentive reward,user-driven,productivity of it,military,user entrepreneurship,responsible innovation
-online innovation community,smartphone operating system,articulation,partnership,opennes,paradox,subversive functionalism,innovation policy,daily practice,lead user,product improvement,open innovation platform,technology strategy,polouse,lead user theory,serendipity
-remixing,compatibility,domestication,,social medium,systems theory,,marketing research,innovation behavior,meta-analysi,,spillover effect,interaction,,sme,open social innovation
+maroon,teal,gold,orange,green,yellow,red,blue,purple,brown,indigo,cyan,lime,olive,pink,magenta
+3d printing,motivation,user innovation,altruism,crowdsourcing,boundary management,canon,case study,commercial diffusion,creativity,differential game,direct and indirect effect,economics of i,employee user,end user entrepreneur,framing
+digital remixing,application market,adopters’ creative thinking,chinese large-scale survey,attention,community,critical management study,company,consumer innovation,embedded lead user,firm-sponsored online user innovation community,education,it policy and management,ethnography,entrepreneurial consumer,grand challenge
+innovation diffusion theory,business model,counter-learning communication,household sector user innovation,ideation,dilemma,critical performativity,comparative study,makerspace,idea quality,heterogeneous product user,gender,open source software,hiding practice,entrepreneurship proces,moral emotion
+online community,release strategy,mass market adoption,intrinsic self-reward,open innovation,firm-community collaboration,critique,innovation management,community innovation,internal lead user,incentive reward,personality,productivity of it,military,user entrepreneurship,responsible innovation
+online innovation community,smartphone operating system,articulation,partnership,opennes,paradox,subversive functionalism,innovation policy,daily practice,lead user,product improvement,survey datum,technology strategy,polouse,lead user theory,serendipity
+remixing,compatibility,domestication,,social medium,systems theory,,marketing research,innovation behavior,meta-analysi,,,interaction,,sme,open social innovation
 user-generated content,complementarity,script,,success bia,tension,,participatory design,russium,moderating effect,,,network,,,
 and phrases: online user innovation community,open source,use knowledge,,suggestion,,,user centred design,,innovation proces,,,product development,,,
 co-creation,value capture,creativity and ideation,,collaboration,,,user driven innovation,,key user,,,r&amp;d efficiency,,,
 employee innovativenes,value creation,design cognition,,idea competition,,,user involvement,,modularisation,,,research quotient,,,
 online ideation,innovation ecosystem,exaptation,,new product development,,,do-it-yourself,,product architecture,,,,,,
 knowledge,smart home,problem-solving,,r&amp;d,,,enabling technology,,project management,,,,,,
-sources of innovation,system of use,direct and indirect effect,,software development,,,product innovation,,software,,,,,,
-theory,diffusion,education,,toolkit,,,social innovation,,online brand community,,,,,,
-,service ecosystem,gender,,corporate venture capital,,,,,video game industry,,,,,,
-,sustainability,personality,,innovation,,,,,,,,,,,
-,innovating with it,survey datum,,technology entrepreneurship,,,,,,,,,,,
-,innovative behavior,discourse,,customer integration,,,,,,,,,,,
-,innovative it use,open source software development,,learning strategy,,,,,,,,,,,
-,slack resource,textuality,,improvisation,,,,,,,,,,,
-,netnography,distributed innovation,,knowledge acquisition,,,,,,,,,,,
-,,knowledge sharing,,knowledge utilization,,,,,,,,,,,
-,,performance of oss project,,user generated content,,,,,,,,,,,
-,,entrepreneurship,,,,,,,,,,,,,
+sources of innovation,system of use,discourse,,software development,,,product innovation,,software,,,,,,
+theory,diffusion,open source software development,,toolkit,,,social innovation,,online brand community,,,,,,
+,service ecosystem,textuality,,corporate venture capital,,,,,video game industry,,,,,,
+,sustainability,distributed innovation,,innovation,,,,,,,,,,,
+,innovating with it,knowledge sharing,,technology entrepreneurship,,,,,,,,,,,
+,innovative behavior,performance of oss project,,customer integration,,,,,,,,,,,
+,innovative it use,dominant design,,learning strategy,,,,,,,,,,,
+,slack resource,opinion dynamic,,improvisation,,,,,,,,,,,
+,netnography,user interaction,,knowledge acquisition,,,,,,,,,,,
+,,user-driven,,knowledge utilization,,,,,,,,,,,
+,,entrepreneurship,,user generated content,,,,,,,,,,,
 ,,evolutionary approach,,,,,,,,,,,,,
 ,,spinout,,,,,,,,,,,,,
 ,,strategy and firm performance,,,,,,,,,,,,,
@@ -33,6 +32,8 @@ theory,diffusion,education,,toolkit,,,social innovation,,online brand community,
 ,,moderation,,,,,,,,,,,,,
 ,,organisational context,,,,,,,,,,,,,
 ,,radical innovation performance,,,,,,,,,,,,,
+,,open innovation platform,,,,,,,,,,,,,
+,,spillover effect,,,,,,,,,,,,,
 ,,reasoned action,,,,,,,,,,,,,
 ,,user community,,,,,,,,,,,,,
 ,,user innovator,,,,,,,,,,,,,

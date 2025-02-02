@@ -1,9 +1,7 @@
-maroon,teal,gold
-co-creation,crowdsourcing,innovation
-online community,open innovation,community
-product development,lead user,user
-user innovation,new product development,
-consumer innovation,open source software,
-diffusion,toolkit,
-motivation,,
-user entrepreneurship,,
+orange,teal,gold,maroon
+co-creation,crowdsourcing,innovation,consumer innovation
+online community,new product development,community,diffusion
+product development,open source software,user,open innovation
+user innovation,toolkit,,lead user
+motivation,,,
+user entrepreneurship,,,
