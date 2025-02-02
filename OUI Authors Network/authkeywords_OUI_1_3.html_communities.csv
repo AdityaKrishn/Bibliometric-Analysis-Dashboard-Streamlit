@@ -1,8 +1,9 @@
-teal,gold,maroon
-community-based innovation,user innovation,crowdsourcing
-consumer innovator,consumer innovation,customer integration
-innovation management,diffusion,new product development
-open innovation,free innovation,open source software
-user community,household sector innovation,toolkit
-innovation,product development,
-lead user,,
+maroon,teal,gold
+community-based innovation,innovation management,user innovation
+consumer innovator,open innovation,consumer innovation
+user community,crowdsourcing,diffusion
+innovation,customer integration,free innovation
+,new product development,household sector innovation
+,open source software,product development
+,toolkit,innovation diffusion
+,lead user,

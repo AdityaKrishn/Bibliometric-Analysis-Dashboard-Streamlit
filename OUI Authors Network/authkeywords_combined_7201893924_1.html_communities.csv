@@ -1,31 +1,33 @@
-pink,teal,gold,orange,green,yellow,red,blue,purple,indigo,brown,cyan,magenta,maroon
-3d community,user innovation,co-creation,altruism,appropriability regime,innovation,business model,business model innovation,canon,clinician,co-innovation,consumer innovation,product architecture,firm innovation
-3d printing,agent-based social simulation,mass customisation,chinese large-scale survey,disruptive innovation,competitivene,compatibility,dynamic capability,critical management study,healthcare,crowdsourcing,open innovation,combinatory search,industrial robot
-collaboration,community,platform,household sector user innovation,environmental turbulence,development,complementarity,supply chain business model,critical performativity,innovation policy,online collaboration platform,diffusion of innovation,implicit referral,mediating effect
-diffusion,articulation,knowledge,intrinsic self-reward,functional novelty,empirical analysi,open source,tea supply chain,critique,makerspace,social medium,online innovation community,inexact referral,sustainability-oriented innovation
-ideal type,domestication,sources of innovation,partnership,radical innovation,free,value capture,user-driven innovation,subversive functionalism,commercial diffusion,user community,renewable energy,intermediate referral,unconventional source of innovation
-user entrepreneurship,script,theory,,creative consumer,integration,value creation,,,diffusion failure,crowdfunding,digital health,lead user,
-biography of artifact,use knowledge,ownership,,living lab,open,collaborative innovation,,,effort to sell,crowdfunding platform,digital transformation,network search,
-bricolage,dominant design,second life,,role theory,revealing,modularity,,,eudaimonic motivation,entrepreneurship,e-healthcare,pyramiding,
-configuration,industry evolution,virtual world,,,sustainable,collective intelligence,,,free revealing,latent dirichlet allocation,telemedicine,rare research subject,
-innofusion,real option,,,,user,human powered boat,,,identity perspective,topic modelling,user-centered design,cooperation,
-peer production,developing country,,,,,open manufacturing,,,nurse innovation,user entrepreneur,end-user,front end,
-user practice,mobile banking service,,,,,innovation ecosystem,,,facilitation,equity crowdfunding,policy,user-manufacturer interaction,
-end user entrepreneur,technology diffusion,,,,,smart home,,,organisational support mechanism,evolutionary approach,policymaker,innovation proce,
-entrepreneurial consumer,direct and indirect effect,,,,,system of use,,,public hospital,randomized field experiment,sustainable innovation,key user,
-entrepreneurship proce,education,,,,,service ecosystem,,,,spinout,external knowledge,modularisation,
-,gender,,,,,sustainability,,,,statistical discrimination,innovation performance,project management,
-,personality,,,,,,,,,strategy and firm performance,interaction method,software,
-,survey datum,,,,,,,,,knowledge-based view,user involvement,,
-,economics of i,,,,,,,,,patents and intellectual property right,innovation rarene,,
-,it policy and management,,,,,,,,,technology and innovation management,user innovation community,,
-,open source software,,,,,,,,,reasoned action,user innovation evaluation,,
-,productivity of it,,,,,,,,,user innovator,lead user method,,
-,technology strategy,,,,,,,,,,lead user workshop,,
-,entry strategy,,,,,,,,,,small-scale energy technology,,
-,nascent industry,,,,,,,,,,user-innovation,,
-,pre-entry experience,,,,,,,,,,,,
-,product portfolio,,,,,,,,,,,,
+maroon,teal,gold,orange,green,yellow,indigo,blue,magenta,pink,brown,cyan,purple,red
+3d community,user innovation,co-creation,altruism,articulation,innovation,business model,business model innovation,co-innovation,consumer innovation,product architecture,economics of i,entry strategy,firm innovation
+3d printing,adopters’ creative thinking,mass customisation,chinese large-scale survey,domestication,clinician,compatibility,dynamic capability,crowdsourcing,open innovation,combinatory search,it policy and management,nascent industry,industrial robot
+collaboration,counter-learning communication,platform,household sector user innovation,script,healthcare,complementarity,supply chain business model,online collaboration platform,diffusion of innovation,implicit referral,open source software,pre-entry experience,mediating effect
+diffusion,mass market adoption,knowledge,intrinsic self-reward,use knowledge,innovation policy,open source,tea supply chain,social medium,online innovation community,inexact referral,productivity of it,product portfolio,sustainability-oriented innovation
+ideal type,agent-based social simulation,sources of innovation,partnership,,makerspace,value capture,user-driven innovation,crowdfunding,renewable energy,intermediate referral,technology strategy,,unconventional source of innovation
+user entrepreneurship,community,theory,,,commercial diffusion,value creation,,crowdfunding platform,digital health,lead user,product development,,
+biography of artifact,canon,ownership,,,competitivene,collaborative innovation,,entrepreneurship,digital transformation,network search,r&amp;d efficiency,,
+bricolage,critical management study,second life,,,development,modularity,,latent dirichlet allocation,e-healthcare,pyramiding,research quotient,,
+configuration,critical performativity,virtual world,,,empirical analysi,collective intelligence,,topic modelling,telemedicine,rare research subject,,,
+innofusion,critique,,,,free,human powered boat,,user entrepreneur,user-centered design,cooperation,,,
+peer production,subversive functionalism,,,,integration,open manufacturing,,equity crowdfunding,end-user,front end,,,
+user practice,dominant design,,,,open,user community,,evolutionary approach,policy,user-manufacturer interaction,,,
+end user entrepreneur,industry evolution,,,,revealing,innovation ecosystem,,randomized field experiment,policymaker,innovation proce,,,
+entrepreneurial consumer,real option,,,,sustainable,smart home,,spinout,sustainable innovation,key user,,,
+entrepreneurship proce,creative consumer,,,,user,system of use,,statistical discrimination,external knowledge,modularisation,,,
+,living lab,,,,facilitation,service ecosystem,,strategy and firm performance,innovation performance,project management,,,
+,radical innovation,,,,organisational support mechanism,sustainability,,knowledge-based view,interaction method,software,,,
+,role theory,,,,public hospital,reasoned action,,patents and intellectual property right,user involvement,,,,
+,developing country,,,,,user innovator,,technology and innovation management,innovation rarene,,,,
+,mobile banking service,,,,,,,,user innovation community,,,,
+,technology diffusion,,,,,,,,user innovation evaluation,,,,
+,direct and indirect effect,,,,,,,,lead user method,,,,
+,education,,,,,,,,lead user workshop,,,,
+,gender,,,,,,,,small-scale energy technology,,,,
+,personality,,,,,,,,user-innovation,,,,
+,survey datum,,,,,,,,,,,,
+,opinion dynamic,,,,,,,,,,,,
+,user interaction,,,,,,,,,,,,
+,user-driven,,,,,,,,,,,,
 ,financial software innovation,,,,,,,,,,,,
 ,impulse response function (irf) analysi,,,,,,,,,,,,
 ,knowledge sourcing,,,,,,,,,,,,

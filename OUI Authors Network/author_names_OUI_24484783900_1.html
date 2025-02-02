@@ -283,7 +283,7 @@ function highlightFilter(filter) {
 
                   // parsing and collecting nodes and edges from the python
                   nodes = new vis.DataSet([{"color": "maroon", "id": "kuusisto, arja", "label": "kuusisto, arja", "shape": "dot", "size": 2, "title": "kuusisto, arja : 2"}, {"color": "maroon", "id": "kuusisto, jari*", "label": "kuusisto, jari*", "shape": "dot", "size": 2, "title": "kuusisto, jari* : 2"}, {"color": "maroon", "id": "yli-viitala, pirjo", "label": "yli-viitala, pirjo", "shape": "dot", "size": 1, "title": "yli-viitala, pirjo : 1"}]);
-                  edges = new vis.DataSet([{"color": "silver", "from": "kuusisto, arja", "symbol": "diamond", "title": "kuusisto, arja,kuusisto, jari*,1", "to": "kuusisto, jari*", "value": 1, "width": 1}, {"color": "silver", "from": "kuusisto, arja", "symbol": "circle", "title": "kuusisto, arja,yli-viitala, pirjo,1", "to": "yli-viitala, pirjo", "value": 1, "width": 1}, {"color": "silver", "from": "kuusisto, jari*", "symbol": "square", "title": "kuusisto, jari*,yli-viitala, pirjo,1", "to": "yli-viitala, pirjo", "value": 1, "width": 1}]);
+                  edges = new vis.DataSet([{"color": "silver", "from": "kuusisto, arja", "symbol": "triangle-up", "title": "kuusisto, arja,kuusisto, jari*,1", "to": "kuusisto, jari*", "value": 1, "width": 1}, {"color": "silver", "from": "kuusisto, arja", "symbol": "cross", "title": "kuusisto, arja,yli-viitala, pirjo,1", "to": "yli-viitala, pirjo", "value": 1, "width": 1}, {"color": "silver", "from": "kuusisto, jari*", "symbol": "circle", "title": "kuusisto, jari*,yli-viitala, pirjo,1", "to": "yli-viitala, pirjo", "value": 1, "width": 1}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });

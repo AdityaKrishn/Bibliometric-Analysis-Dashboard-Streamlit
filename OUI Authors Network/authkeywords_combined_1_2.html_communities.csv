@@ -1,29 +1,31 @@
-maroon,orange,gold,green,teal,yellow
-3d printing,diffusion,motivation,user innovation,case study,user community
-co-creation,online innovation community,online community,compatibility,innovation policy,entrepreneurship
-collaboration,adoption,sources of innovation,business model,marketing research,community-based innovation
-mass customisation,consumer innovation,co-innovation,complementarity,user involvement,consumer innovator
-platform,free innovation,social medium,open source,innovation,crowdfunding
-user entrepreneurship,lead user,user-driven innovation,value creation,commercial diffusion,crowdfunding platform
-user-generated content,market failure,netnography,knowledge,community,user entrepreneur
-open source software,new product,online user innovation community,product development,makerspace,evolutionary approach
-innovation management,opinion leadership,idea adoption,social welfare,network,
-crowdsourcing,open innovation,web 2.0,distributed innovation,user,
-customer integration,cocreation,user innovation community,diffusion failure,strategy,
-idea generation,creative consumer,user idea,free revealing,do-it-yourself,
-new product development,innovation ecosystem,,knowledge sharing,product innovation,
-user design,diffusion of innovation,,innovation diffusion,external knowledge,
-user-generated product,household sector innovation,,innovation measurement,identification,
-idea competition,measurement,,innovation transfer,pyramiding,
-software development,personality,,grand challenge,healthcare,
-technology management,problem-solving,,innovation community,post-adoptive behavior,
-toolkit,renewable energy,,patent,user characteristic,
-configuration,living lab,,innovation proce,lead user workshop,
-innovation contest,radical innovation,,product architecture,video game industry,
-second life,sustainability,,lead user theory,sustainable innovation,
-virtual world,embedded lead user,,sticky information,,
-,idea quality,,mass customization,,
-,service,,local information,,
-,service innovation,,modularity,,
-,use experience,,technology strategy,,
-,literature review,,technology diffusion,,
+orange,teal,gold,green,yellow,purple,blue,maroon,red
+3d printing,co-creation,collaboration,diffusion,online innovation community,user innovation,compatibility,user community,diffusion failure
+motivation,mass customisation,user-generated content,adoption,open innovation,lead user,business model,entrepreneurship,free revealing
+online community,open source software,case study,consumer innovation,co-innovation,innovation,complementarity,community-based innovation,innovation diffusion
+platform,crowdsourcing,innovation management,free innovation,social medium,cocreation,open source,consumer innovator,innovation measurement
+user entrepreneurship,customer integration,innovation policy,market failure,user-driven innovation,creative consumer,value creation,crowdfunding,innovation transfer
+knowledge,idea generation,marketing research,new product,innovation ecosystem,community,social welfare,crowdfunding platform,patent
+sources of innovation,new product development,product innovation,opinion leadership,diffusion of innovation,network,distributed innovation,user entrepreneur,
+netnography,product development,user involvement,household sector innovation,renewable energy,user,knowledge sharing,evolutionary approach,
+web 2.0,user design,commercial diffusion,measurement,online user innovation community,dominant design,innovation community,,
+lead user theory,user-generated product,makerspace,personality,sustainability,living lab,innovation proce,,
+user innovation community,idea competition,technology management,problem-solving,idea adoption,radical innovation,product architecture,,
+second life,software development,do-it-yourself,,literature review,user interaction,modularity,,
+virtual world,toolkit,healthcare,,user idea,embedded lead user,,,
+,configuration,,,,idea quality,,,
+,innovation contest,,,,external knowledge,,,
+,strategy,,,,identification,,,
+,video game industry,,,,pyramiding,,,
+,,,,,grand challenge,,,
+,,,,,post-adoptive behavior,,,
+,,,,,service,,,
+,,,,,service innovation,,,
+,,,,,user characteristic,,,
+,,,,,lead user workshop,,,
+,,,,,sticky information,,,
+,,,,,use experience,,,
+,,,,,mass customization,,,
+,,,,,local information,,,
+,,,,,sustainable innovation,,,
+,,,,,technology strategy,,,
+,,,,,technology diffusion,,,

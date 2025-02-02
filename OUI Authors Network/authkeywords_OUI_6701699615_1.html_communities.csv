@@ -1,16 +1,13 @@
-maroon,teal,gold,orange,green,yellow,blue,purple,pink,red
-appropriability regime,user innovation,brand value,commercial diffusion,community,complementarity,consumer innovation,diffusion failure,heterogeneous market,innovative work behavior
-disruptive innovation,collaborative innovation,innovation community,general value,dominant design,division of innovative labor,diffusion,effort to sell,local information,job autonomy
-environmental turbulence,modularity,product diffusion,market failure,industry evolution,externality,household sector innovation,eudaimonic motivation,mass customization,self-efficacy
-functional novelty,open innovation,user-generated brand,peer-to-peer diffusion,real option,social welfare,measurement,free revealing,specialization in problem solving,work process-related lead usernes
-radical innovation,efficiency measurement,,,,user innovation paradigm,need-solution pair,identity perspective,sticky information,
-,industry development,,,,user-producer interaction,personality,makerspace,task partitioning,
-,intrinsic motivation,,,,,problem-solving,nurse innovation,,
-,open source software,,,,,product solution,innovation diffusion,,
-,user support,,,,,research and development,innovation measurement,,
-,virtual community,,,,,professionalism,innovation transfer,,
-,product development,,,,,social network,,,
-,toolkit,,,,,user community,,,
-,need heterogeneity,,,,,free innovation,,,
-,service development,,,,,,,,
-,service innovation,,,,,,,,
+maroon,blue,teal,green,yellow,gold,orange,red
+brand value,user innovation,commercial diffusion,complementarity,consumer innovation,free revealing,heterogeneous market,intrinsic motivation
+innovation community,collaborative innovation,general value,division of innovative labor,diffusion,innovation diffusion,local information,open source software
+product diffusion,modularity,market failure,externality,household sector innovation,innovation measurement,mass customization,user support
+user-generated brand,open innovation,peer-to-peer diffusion,social welfare,measurement,innovation transfer,specialization in problem solving,virtual community
+,community,,user innovation paradigm,need-solution pair,,sticky information,product development
+,dominant design,,user-producer interaction,personality,,task partitioning,toolkit
+,industry evolution,,,problem-solving,,,need heterogeneity
+,real option,,,product solution,,,
+,efficiency measurement,,,research and development,,,
+,industry development,,,free innovation,,,
+,service development,,,,,,
+,service innovation,,,,,,

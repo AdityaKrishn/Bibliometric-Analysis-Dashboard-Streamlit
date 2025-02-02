@@ -1,24 +1,19 @@
-maroon,yellow,gold,orange,red,green,teal
-3d printing,collaboration,diffusion,online innovation community,compatibility,innovation,co-innovation
-co-creation,crowdsourcing,adoption,case study,business model,product development,social medium
-motivation,idea competition,lead user,innovation management,complementarity,community,user-driven innovation
-online community,new product development,new product,innovation policy,open source,network,online user innovation community
-platform,software development,opinion leadership,user involvement,value creation,open innovation,idea adoption
-user entrepreneurship,toolkit,embedded lead user,consumer innovation,innovation ecosystem,user,user idea
-user innovation,crowdfunding,idea quality,makerspace,,living lab,
-open source software,crowdfunding platform,,diffusion of innovation,,sustainability,
-knowledge,entrepreneurship,,renewable energy,,distributed innovation,
-sources of innovation,user community,,healthcare,,knowledge sharing,
-user design,innovation contest,,product innovation,,post-adoptive behavior,
-cocreation,evolutionary approach,,lead user workshop,,service,
-creative consumer,product architecture,,video game industry,,literature review,
-netnography,,,,,sustainable innovation,
-grand challenge,,,,,,
-web 2.0,,,,,,
-lead user theory,,,,,,
-user innovation community,,,,,,
-technology strategy,,,,,,
-patent,,,,,,
-second life,,,,,,
-virtual world,,,,,,
-technology diffusion,,,,,,
+green,teal,gold,orange,yellow,blue,maroon,red
+3d printing,collaboration,diffusion,online innovation community,user innovation,compatibility,case study,innovation
+co-creation,crowdsourcing,adoption,consumer innovation,open source software,business model,innovation management,community
+motivation,co-innovation,lead user,diffusion of innovation,product development,complementarity,innovation policy,makerspace
+online community,social medium,new product,renewable energy,user design,open source,product innovation,network
+platform,user-driven innovation,opinion leadership,,cocreation,value creation,user involvement,user
+user entrepreneurship,idea competition,embedded lead user,,creative consumer,crowdfunding,lead user workshop,healthcare
+knowledge,new product development,idea quality,,innovation ecosystem,crowdfunding platform,video game industry,post-adoptive behavior
+sources of innovation,open innovation,,,living lab,entrepreneurship,,sustainable innovation
+netnography,software development,,,sustainability,user community,,
+web 2.0,toolkit,,,distributed innovation,evolutionary approach,,
+lead user theory,innovation contest,,,knowledge sharing,product architecture,,
+user innovation community,online user innovation community,,,grand challenge,,,
+second life,idea adoption,,,service,,,
+virtual world,user idea,,,literature review,,,
+,,,,technology strategy,,,
+,,,,patent,,,
+,,,,technology diffusion,,,
+,,,,user interaction,,,

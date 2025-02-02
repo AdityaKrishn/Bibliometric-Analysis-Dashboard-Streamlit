@@ -1,18 +1,15 @@
-green,teal,gold,yellow,orange,maroon
-3d printing,motivation,adoption,case study,innovation,consumer innovation
-co-creation,online community,compatibility,innovation policy,collaboration,open innovation
-platform,lead user,diffusion,user involvement,community,diffusion of innovation
-user innovation,crowdsourcing,open source software,,new product development,renewable energy
-product development,co-innovation,user design,,software development,living lab
-cocreation,social medium,complementarity,,toolkit,sustainability
-creative consumer,user-driven innovation,open source,,user,service
-distributed innovation,netnography,innovation ecosystem,,post-adoptive behavior,literature review
-knowledge sharing,web 2.0,product architecture,,,
-entrepreneurship,user innovation community,user community,,,
-evolutionary approach,user idea,,,,
-grand challenge,,,,,
-lead user theory,,,,,
-user entrepreneurship,,,,,
-patent,,,,,
-second life,,,,,
-virtual world,,,,,
+maroon,green,gold,teal,orange
+3d printing,platform,adoption,innovation,product development
+co-creation,user innovation,compatibility,collaboration,consumer innovation
+motivation,case study,diffusion,community,open innovation
+online community,innovation policy,open source software,new product development,diffusion of innovation
+lead user,product innovation,complementarity,software development,renewable energy
+crowdsourcing,user involvement,open source,toolkit,living lab
+user design,cocreation,innovation ecosystem,user,sustainability
+co-innovation,creative consumer,product architecture,entrepreneurship,distributed innovation
+social medium,grand challenge,user community,evolutionary approach,knowledge sharing
+user-driven innovation,lead user theory,,post-adoptive behavior,service
+netnography,user entrepreneurship,,,literature review
+web 2.0,patent,,,user innovation community
+,second life,,,user idea
+,virtual world,,,
